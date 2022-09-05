@@ -45,6 +45,20 @@ public class SaleService {
 		return new SaleDTO(entity);
 	}
 	
-	
+	@Transactional
+	public SaleDTO update(Long id, SaleDTO dto) {
+		try {
+			Sale entity = repository.getOne(id);
+			entity.setDate(dto.getDate());
+			entity.setVisited(dto.getVisited());
+			entity.setDeals(dto.getDeals());
+			entity.setAmount(dto.getAmount());
+			entity = repository.save(entity);
+			return new SaleDTO(entity);
+		}
+		catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Entity not Found " + id);
+		}
+	}
 	
 }
