@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.devsuperior.ControleDeVendas.dto.SaleDTO;
 import com.devsuperior.ControleDeVendas.entities.Sale;
 import com.devsuperior.ControleDeVendas.repositories.SaleRepository;
+import com.devsuperior.ControleDeVendas.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class SaleService {
@@ -29,7 +30,11 @@ public class SaleService {
 	@Transactional(readOnly = true)
 	public SaleDTO findById(Long id) {
 		Optional<Sale> obj = repository.findById(id);
-		Sale entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity Not Found"));
+		Sale entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity Not Found"));
 		return new SaleDTO(entity);
 	}
+	
+	
+	
+	
 }
