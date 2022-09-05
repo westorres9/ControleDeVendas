@@ -1,5 +1,9 @@
 package com.devsuperior.ControleDeVendas.services;
 
+import java.util.Optional;
+
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,5 +24,12 @@ public class SaleService {
 	public Page<SaleDTO> findAllPaged(Pageable pageable) {
 		Page<Sale> page = repository.findAll(pageable);
 		return page.map(x -> new SaleDTO(x));
+	}
+	
+	@Transactional(readOnly = true)
+	public SaleDTO findById(Long id) {
+		Optional<Sale> obj = repository.findById(id);
+		Sale entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity Not Found"));
+		return new SaleDTO(entity);
 	}
 }
