@@ -3,6 +3,8 @@ package com.devsuperior.ControleDeVendas.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import com.devsuperior.ControleDeVendas.entities.Sale;
+
 public class SaleDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -23,6 +25,14 @@ public class SaleDTO implements Serializable{
 		this.deals = deals;
 		this.visited = visited;
 		this.amount = amount;
+	}
+	
+	public SaleDTO(Sale entity) {
+		this.id = entity.getId();
+		this.date = entity.getDate();
+		this.deals = entity.getDeals();
+		this.visited = entity.getVisited();
+		this.amount = entity.getAmount();
 	}
 
 
