@@ -34,6 +34,16 @@ public class SaleService {
 		return new SaleDTO(entity);
 	}
 	
+	@Transactional
+	public SaleDTO insert(SaleDTO dto) {
+		Sale entity = new Sale();
+		entity.setDate(dto.getDate());
+		entity.setVisited(dto.getVisited());
+		entity.setDeals(dto.getDeals());
+		entity.setAmount(dto.getAmount());
+		entity = repository.save(entity);
+		return new SaleDTO(entity);
+	}
 	
 	
 	
