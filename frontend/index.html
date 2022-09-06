@@ -9,10 +9,42 @@
 </head>
 <body ng-controller="mainController">
     <div id="main">
+        <nav class="navbar navbar-expand-md bg-primary main-nav navbar-dark">
+            <div class="container-fluid">
+                <a class="nav-logo-text" href="#home">
+                    <h4>DSVendas</h4>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#dsvendas" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="dsvendas">
+                    <ul class="navbar-nav offset-md-2 main-menu">
+                        <li>
+                            <a href="#home" class="active">Home</a>
+                        </li>
+                        <li>
+                            <a href="#users" >Users</a>
+                        </li>
+                        <li>
+                            <a href="#teams" >Teams</a>
+                        </li>
+                        <li>
+                            <a href="#sales" >sales</a>
+                        </li>
+                        <li>
+                            <a href="#login">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <div ng-view></div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/node_modules/bootstrap/js/src/collapse.js"></script>
     <script src="/app.js"></script>
     <script src="/js/route.js"></script>
     <script src="/js/mainController.js"></script>

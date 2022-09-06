@@ -30,4 +30,5 @@ vendasApp.config(function($routeProvider) {
         controller: 'LoginController',
         controllerAs: 'vm'
     })
+    .otherwise('/login');
 })
