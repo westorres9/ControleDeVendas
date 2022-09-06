@@ -29,7 +29,9 @@ public class UserDTO implements Serializable{
 		this.name = entity.getName();
 		this.email = entity.getEmail();
 		entity.getRoles().forEach(role -> new RoleDTO(role));
+
 	}
+	
 
 	public Long getId() {
 		return id;
