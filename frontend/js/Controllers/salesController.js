@@ -3,6 +3,15 @@ vendasApp.controller('salesController', function(SaleService) {
     vm.title = 'salesController'
     vm.message = 'SalesController'
     vm.GetAllSales = GetAllSales;
+    vm.InsertSale = InsertSale;
+    vm.SelectSale = SelectSale;
+
+    function SelectSale(sale) {
+        vm.sale = sale;
+        console.log(vm.sale)
+        return vm.sale;
+        
+    }
 
     function GetAllSales () {
         var getAllSales = SaleService.getSales();
@@ -16,4 +25,15 @@ vendasApp.controller('salesController', function(SaleService) {
     }
 
     GetAllSales();
+
+    function InsertSale () {
+        var sale = vm.sale;
+        var InsertSale = SaleService.InsertSale(sale);
+        InsertSale.then(function(response) {
+            vm.sales = response.data.content;
+            GetAllSales();
+        }).catch(function(error) {
+            console.log('ERROR: ' + error.status, error);
+        });
+    }
 })

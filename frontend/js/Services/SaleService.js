@@ -4,6 +4,19 @@ vendasApp.service('SaleService', function($http) {
     this.getSales = function() {
         return $http.get(url)
     }
+
+    this.insert = function (sale) {
+        var request = $http(
+            {
+                method: 'post',
+                url: url,
+                data: sale
+            }
+        )
+        return request;
+    }
+
+    
     
         
 })
