@@ -17,8 +17,6 @@ public class SaleDTO implements Serializable{
 	public SaleDTO() {
 	}
 	
-	
-
 	public SaleDTO(Long id, LocalDate date, Integer deals, Integer visited, Double amount) {
 		this.id = id;
 		this.date = date;
