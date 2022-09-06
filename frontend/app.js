@@ -1,0 +1,1 @@
+var vendasApp = angular.module('vendasApp', ['ngRoute']);
