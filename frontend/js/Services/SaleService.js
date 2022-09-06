@@ -30,11 +30,5 @@ vendasApp.service('SaleService', function($http) {
     this.delete = function (sale) {
         var request = $http.delete(url + `/${sale.id}`);
         return request;
-    }
-
-
-
-    
-    
-        
+    }     
 })
