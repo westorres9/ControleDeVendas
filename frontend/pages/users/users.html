@@ -1,3 +1,62 @@
-<h1>Users</h1>
+<div class="users-container" id="dsvendas-container">
+    <h2>Vendas</h2>
+    <div class="users-card">
+        <div class="users-content-container">
+            <table class="dsvendas-users-table table">
+                <thead>
+                    {{vm.message}}
+                </thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Nome
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                </tr>
+                <tr ng-repeat="user in vm.users">
+                    <td>{{user.id}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>
+                        <button href="#" class="btn btn-warning">
+                            Selecionar
+                        </button>
+                        
+                    </td>
+                </tr>
+            </table>
+                <div class="formulario">
+                    <div class="form">
+                        <label for="">Nome Vendedor</label>
+                        <input type="text" ng-model="vm.user.name" placeholder="Nome usuario">
+                    </div>
+                    <div class="form">
+                        <label for="">Email</label>
+                        <input type="text" ng-model="vm.user.email" placeholder="Email">
+                    </div>
 
-<h2>{{vm.message}}</h2>
+                    <div class="form">
+                        <label for="">Total</label>
+                        <input type="text" ng-model="vm.sale.amount" placeholder="Total">
+                    </div>
+                    
+                    
+                </div>
+                <div>
+                    <button href="#" class="btn btn-success" >
+                        Nova Venda
+                    </button>
+                    <button href="#" class="btn btn-primary" >
+                        Atualizar
+                    </button>
+                    <button href="#" class="btn btn-danger" >
+                        Apagar
+                    </button>
+                </div>
+        </div>
+    </div>
+</div>
