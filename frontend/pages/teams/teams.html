@@ -18,7 +18,7 @@
                     <td>{{team.id}}</td>
                     <td>{{team.name}}</td>
                     <td>
-                        <button href="#" class="btn btn-warning" ng-click="vm.SelectTeam(sale)">
+                        <button href="#" class="btn btn-warning" ng-click="vm.SelectTeam(team)">
                             Selecionar
                         </button>
                         
@@ -38,13 +38,13 @@
                     
                 </div>
                 <div>
-                    <button href="#" class="btn btn-success" ng-click="vm.InsertSale(sale)">
+                    <button href="#" class="btn btn-success" ng-click="vm.InsertTeam(vm.team)">
                         Nova Venda
                     </button>
-                    <button href="#" class="btn btn-primary" ng-click="vm.UpdateSale(sale)">
+                    <button href="#" class="btn btn-primary" ng-click="vm.UpdateTeam(vm.team)">
                         Atualizar
                     </button>
-                    <button href="#" class="btn btn-danger" ng-click="vm.DeleteSale(vm.sale)">
+                    <button href="#" class="btn btn-danger" ng-click="vm.DeleteTeam(vm.team)">
                         Apagar
                     </button>
                 </div>

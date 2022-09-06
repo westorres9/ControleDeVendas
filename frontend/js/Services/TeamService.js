@@ -5,7 +5,7 @@ vendasApp.service('TeamService', function($http) {
         return $http.get(url)
     }
 
-    this.insertTeam = function(team) {
+    this.insert = function(team) {
         var request = $http(
             {
                 method: 'post',
@@ -13,9 +13,10 @@ vendasApp.service('TeamService', function($http) {
                 data: team
             }
         )
+        return request;
     }
 
-    this.updateTeam = function (team) {
+    this.update = function (team) {
         var request = $http(
             {
                 method: 'put',
@@ -23,12 +24,14 @@ vendasApp.service('TeamService', function($http) {
                 data: team
             }
         )
+        return request;
     }
 
-    this.deleteTeam = function (team) {
+    this.delete = function (team) {
         var request = $http({
             method: 'delete',
                 url: url + `/${team.id}`
         })
+        return request;
     }
 })
