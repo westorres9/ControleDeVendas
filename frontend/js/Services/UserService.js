@@ -5,7 +5,7 @@ vendasApp.service('UserService', function ($http) {
         return $http.get(url)
     }
 
-    this.insertUser = function (user) {
+    this.insert = function (user) {
         var request = $http(
             {
                 method: 'post',
@@ -15,4 +15,28 @@ vendasApp.service('UserService', function ($http) {
         )
         return request;
     }
+
+    this.update = function(user) {
+        var request = $http(
+            {
+                method: 'put',
+                url: url + `/${user.id}`,
+                data: user
+            }
+        )
+        return request;
+    }
+
+    this.delete = function(user) {
+        var request = $http(
+            {
+                method: 'delete',
+                url: url + `/${user.id}`,
+                data: user
+            }
+        )
+        return request;
+    }
+
+
 });
