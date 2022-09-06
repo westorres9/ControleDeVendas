@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.devsuperior.ControleDeVendas.entities.Role;
 import com.devsuperior.ControleDeVendas.entities.User;
 
 public class UserDTO implements Serializable{
@@ -28,8 +29,11 @@ public class UserDTO implements Serializable{
 		this.id = entity.getId();
 		this.name = entity.getName();
 		this.email = entity.getEmail();
-		entity.getRoles().forEach(role -> new RoleDTO(role));
-
+	}
+	
+	public UserDTO(User entity, Set<Role> roles) {
+		this(entity);
+		roles.forEach(role -> this.roles.add(new RoleDTO(role)));
 	}
 	
 
