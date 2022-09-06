@@ -33,9 +33,32 @@
                         <button href="#" class="btn btn-primary" ng-click="vm.SelectSale(sale)">
                             Selecionar
                         </button>
+                        <button href="#" class="btn btn-warning" ng-click="vm.UpdateSale(sale)">
+                            Atualizar
+                        </button>
                     </td>
                 </tr>
             </table>
+            <tr>
+                <td>
+                    <input type="text" ng-model="vm.sale.date" placeholder="Data Venda">
+                </td>
+                <td>
+                    <input type="text" ng-model="vm.sale.visited" placeholder="Visitas">
+                </td>
+                <td>
+                    <input type="text" ng-model="vm.sale.deals" placeholder="Qtde Vendas">
+                </td>
+                <td>
+                    <input type="text" ng-model="vm.sale.amount" placeholder="Total">
+                </td>
+                <td>
+                    <button href="#" class="btn btn-success" ng-click="vm.InsertSale(sale)">
+                        Nova Venda
+                    </button>
+                    
+                </td>
+            </tr>
         </div>
     </div>
 </div>

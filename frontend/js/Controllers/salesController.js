@@ -4,6 +4,7 @@ vendasApp.controller('salesController', function(SaleService) {
     vm.message = 'SalesController'
     vm.GetAllSales = GetAllSales;
     vm.InsertSale = InsertSale;
+    vm.UpdateSale = UpdateSale;
     vm.SelectSale = SelectSale;
 
     function SelectSale(sale) {
@@ -28,8 +29,19 @@ vendasApp.controller('salesController', function(SaleService) {
 
     function InsertSale () {
         var sale = vm.sale;
-        var InsertSale = SaleService.InsertSale(sale);
-        InsertSale.then(function(response) {
+        var insertSale = SaleService.insert(sale);
+        insertSale.then(function(response) {
+            vm.sales = response.data.content;
+            GetAllSales();
+        }).catch(function(error) {
+            console.log('ERROR: ' + error.status, error);
+        });
+    }
+
+    function UpdateSale () {
+        var sale = vm.sale;
+        var updateSale = SaleService.update(sale);
+        updateSale.then(function(response) {
             vm.sales = response.data.content;
             GetAllSales();
         }).catch(function(error) {

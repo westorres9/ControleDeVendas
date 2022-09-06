@@ -16,6 +16,19 @@ vendasApp.service('SaleService', function($http) {
         return request;
     }
 
+    this.update = function (sale) {
+        var request = $http(
+            {
+                method: 'put',
+                url: url + `/${sale.id}`,
+                data: sale
+            }
+        )
+        return request;
+    }
+
+
+
     
     
         
