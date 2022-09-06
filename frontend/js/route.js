@@ -20,4 +20,14 @@ vendasApp.config(function($routeProvider) {
         controller: 'teamsController',
         controllerAs: 'vm'
     })
+    .when('/users', {
+        templateUrl: 'pages/users/users.html',
+        controller: 'UserController',
+        controllerAs: 'vm'
+    })
+    .when('/login', {
+        templateUrl: 'pages/login/login.html',
+        controller: 'LoginController',
+        controllerAs: 'vm'
+    })
 })
