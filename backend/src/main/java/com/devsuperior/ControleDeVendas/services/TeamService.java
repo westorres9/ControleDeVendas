@@ -39,7 +39,6 @@ public class TeamService {
 	@Transactional
 	public TeamDTO insert(TeamDTO dto) {
 		Team entity = new Team();
-		entity.setId(dto.getId());
 		entity.setName(dto.getName());
 		entity = repository.save(entity);
 		return new TeamDTO(entity);
@@ -49,7 +48,6 @@ public class TeamService {
 	public TeamDTO update(Long id, TeamDTO dto) {
 		try {
 			Team entity = repository.getOne(id);
-			entity.setId(dto.getId());
 			entity.setName(dto.getName());
 			entity = repository.save(entity);
 			return new TeamDTO(entity);

@@ -1,29 +1,22 @@
 package com.devsuperior.ControleDeVendas.entities;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-@Entity
-@Table(name = "tb_team")
-public class Team implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class User {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	private String email;
+	private String password;
 	
-	public Team() {
+	public User() {
 	}
-	
-	public Team(Long id, String name) {
+
+	public User(Long id, String name, String email, String password) {
 		this.id = id;
 		this.name = name;
+		this.email = email;
+		this.password = password;
 	}
 
 	public Long getId() {
@@ -42,6 +35,22 @@ public class Team implements Serializable {
 		this.name = name;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -55,9 +64,10 @@ public class Team implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Team other = (Team) obj;
+		User other = (User) obj;
 		return Objects.equals(id, other.id);
 	}
+	
 	
 	
 	
