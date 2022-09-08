@@ -17,7 +17,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
-import com.devsuperior.salesmanager.components.JwtTokenEnhancer;
+import com.devsuperior.ControleDeVendas.components.JwtTokenEnhancer;
 
 @Configuration
 @EnableAuthorizationServer
