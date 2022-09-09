@@ -1,11 +1,12 @@
 package com.devsuperior.ControleDeVendas.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.persistence.Column;
@@ -17,6 +18,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -35,6 +38,12 @@ public class User implements Serializable, UserDetails {
 	@Column(unique = true)
 	private String email;
 	private String password;
+	
+	@OneToMany(mappedBy = "seller")
+    private List<Sale> sales = new ArrayList<>();
+
+    @OneToOne(mappedBy = "manager")
+    private Team team;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_user_role",
@@ -83,6 +92,19 @@ public class User implements Serializable, UserDetails {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+    
+    public List<Sale> getSales() {
+        return sales;
+    }
+
 	
 	public Set<Role> getRoles() {
 		return roles;
