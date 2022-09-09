@@ -1,6 +1,8 @@
 package com.devsuperior.ControleDeVendas.dto;
 
+import com.devsuperior.ControleDeVendas.services.validations.UserInsertValid;
 
+@UserInsertValid
 public class UserInsertDTO extends UserDTO{
     private static final long serialVersionUID = 1L;
 
