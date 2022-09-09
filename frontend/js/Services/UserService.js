@@ -1,8 +1,6 @@
 vendasApp.service('UserService', function ($http) {
     var url = 'http://localhost:8080/users';
 
-    var urlRoles = 'http://localhost:8080/roles';
-
     this.getUsers = function () {
         return $http.get(url)
     }
@@ -38,10 +36,6 @@ vendasApp.service('UserService', function ($http) {
             }
         )
         return request;
-    }
-
-    this.getRoles = function() {
-        return $http.get(urlRoles)
     }
 
 
