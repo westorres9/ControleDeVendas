@@ -5,6 +5,24 @@ vendasApp.controller('UserController', function(UserService) {
     vm.GetAllUsers = GetAllUsers;
     vm.InsertUser = InsertUser;
     vm.SelectUser = SelectUser;
+    vm.UpdateUser = UpdateUser;
+    var user = {
+        id: 0,
+        name: '',
+        email: '',
+        password: '',
+        roles: {
+            id: 0,
+            authority: ''   
+        }
+    }
+
+    var role = [
+        {
+            id: 0,
+            authority: ''
+        }
+    ]
 
     function SelectUser (user) {
         vm.user = user
@@ -14,7 +32,6 @@ vendasApp.controller('UserController', function(UserService) {
 
     function GetAllUsers () {
         var getAllUsers = UserService.getUsers();
-
         getAllUsers.then(function(response) {
             vm.users = response.data.content;
             console.log(response.data.content);
@@ -32,9 +49,24 @@ vendasApp.controller('UserController', function(UserService) {
         insertUser.then(function(response) {
             vm.users = response.data.content;
             console.log(response.data.content);
+            GetAllUsers();
         }).catch(function(error) {
             console.log('ERROR: ' + error.status, error);
         })
+    }
+
+    function UpdateUser() {
+        var user = vm.user;
+
+        var insertUser = UserService.update(user);
+        insertUser.then(function(response) {
+            vm.users = response.data;
+            console.log(response.data);
+            GetAllUsers();
+        }).catch(function(error) {
+            console.log('ERROR: ' + error.status, error);
+        })
+        
     }
 
     
