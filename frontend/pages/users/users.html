@@ -25,6 +25,7 @@
                     <td>{{user.name}}</td>
                     <td>{{user.email}}</td>
                     <td>{{user.password}}</td>
+                    <td>{{user.roles}}</td>
                     <td>
                         <button href="#" class="btn btn-warning" ng-click="vm.SelectUser(user)">
                             Selecionar
@@ -49,7 +50,7 @@
                     </div>
                     <div>
                         <label for="">Roles</label>
-                        <select name="" id="" ng-repeat="role in vm.user.roles">
+                        <select name="" id="" ng-repeat="role in vm.user.roles[role]">
 
                         </select>
                     </div>
@@ -57,10 +58,10 @@
                     
                 </div>
                 <div>
-                    <button href="#" class="btn btn-success" >
+                    <button href="#" class="btn btn-success" ng-click="vm.InsertUser(user)">
                         Nova Venda
                     </button>
-                    <button href="#" class="btn btn-primary" >
+                    <button href="#" class="btn btn-primary" ng-click="vm.UpdateUser(user)">
                         Atualizar
                     </button>
                     <button href="#" class="btn btn-danger" >
