@@ -6,6 +6,7 @@ vendasApp.controller('UserController', function(UserService) {
     vm.InsertUser = InsertUser;
     vm.SelectUser = SelectUser;
     vm.UpdateUser = UpdateUser;
+    vm.DeleteUser = DeleteUser;
     var user = {
         id: 0,
         name: '',
@@ -60,6 +61,20 @@ vendasApp.controller('UserController', function(UserService) {
 
         var insertUser = UserService.update(user);
         insertUser.then(function(response) {
+            vm.users = response.data;
+            console.log(response.data);
+            GetAllUsers();
+        }).catch(function(error) {
+            console.log('ERROR: ' + error.status, error);
+        })
+        
+    }
+
+    function DeleteUser() {
+        var user = vm.user;
+
+        var deleteUser = UserService.delete(user);
+        deleteUser.then(function(response) {
             vm.users = response.data;
             console.log(response.data);
             GetAllUsers();
