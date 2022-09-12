@@ -17,6 +17,10 @@
     
 }
 
+.form{
+    display: block;
+}
+
 label {
     justify-content: right;
 }
