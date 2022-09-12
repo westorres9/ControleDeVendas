@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -34,6 +35,9 @@ public class User implements Serializable, UserDetails {
 	@Column(unique = true)
 	private String email;
 	private String password;
+	
+	@OneToOne(mappedBy = "manager")
+    private Team team;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_user_role",
@@ -82,6 +86,14 @@ public class User implements Serializable, UserDetails {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 	
 	public Set<Role> getRoles() {
 		return roles;

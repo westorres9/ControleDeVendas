@@ -13,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.ControleDeVendas.dto.TeamDTO;
 import com.devsuperior.ControleDeVendas.entities.Team;
+import com.devsuperior.ControleDeVendas.entities.User;
 import com.devsuperior.ControleDeVendas.repositories.TeamRepository;
+import com.devsuperior.ControleDeVendas.repositories.UserRepository;
 import com.devsuperior.ControleDeVendas.services.exceptions.DatabaseException;
 import com.devsuperior.ControleDeVendas.services.exceptions.ResourceNotFoundException;
 
@@ -22,6 +24,9 @@ public class TeamService {
 	
 	@Autowired
 	private TeamRepository repository;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Transactional(readOnly = true)
 	public Page<TeamDTO> findAllPaged(Pageable pageable) {
@@ -40,6 +45,8 @@ public class TeamService {
 	public TeamDTO insert(TeamDTO dto) {
 		Team entity = new Team();
 		entity.setName(dto.getName());
+		User user = userRepository.getOne(dto.getManagerId());
+		entity.setManager(user);
 		entity = repository.save(entity);
 		return new TeamDTO(entity);
 	}
@@ -49,6 +56,7 @@ public class TeamService {
 		try {
 			Team entity = repository.getOne(id);
 			entity.setName(dto.getName());
+			entity.setManager(userRepository.getOne(entity.getManager().getId()));
 			entity = repository.save(entity);
 			return new TeamDTO(entity);
 		}

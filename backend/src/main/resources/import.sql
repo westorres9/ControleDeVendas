@@ -15,9 +15,9 @@ INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 3);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (4, 1);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (5, 2);
 
-INSERT INTO tb_team (name) VALUES ('Bradesco');
-INSERT INTO tb_team (name) VALUES ('Santander');
-INSERT INTO tb_team (name) VALUES ('Picpay');
+INSERT INTO tb_team (name,  manager_id) VALUES ('Bradesco',2);
+INSERT INTO tb_team (name,  manager_id) VALUES ('Santander',5);
+
 
 INSERT INTO tb_sale(user_seller_id,team_id,visited,deals,amount,date) VALUES (1,1,121,67,18196.0,'2022-06-16');
 INSERT INTO tb_sale(user_seller_id,team_id,visited,deals,amount,date) VALUES (1,1,26,14,4255.0,'2022-06-14');
