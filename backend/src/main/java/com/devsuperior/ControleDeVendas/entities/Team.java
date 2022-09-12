@@ -1,13 +1,20 @@
 package com.devsuperior.ControleDeVendas.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @Entity
@@ -23,6 +30,15 @@ public class Team implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "manager_id")
 	private User manager;
+	
+	@OneToMany(mappedBy = "team")
+	private List<Sale> sales = new ArrayList<>();
+	
+	@ManyToMany
+	@JoinTable(name = "tb_team_seller",
+			joinColumns = @JoinColumn(name = "team_id"),
+			inverseJoinColumns = @JoinColumn(name = "seller_id"))
+	private Set<User> sellers = new HashSet<>();
 	
 	public Team() {
 	}
@@ -55,6 +71,14 @@ public class Team implements Serializable {
 
 	public void setManager(User manager) {
 		this.manager = manager;
+	}
+
+	public List<Sale> getSales() {
+		return sales;
+	}
+
+	public Set<User> getSellers() {
+		return sellers;
 	}
 
 	@Override

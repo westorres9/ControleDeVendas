@@ -7,23 +7,9 @@ vendasApp.controller('UserController', function(UserService) {
     vm.SelectUser = SelectUser;
     vm.UpdateUser = UpdateUser;
     vm.DeleteUser = DeleteUser;
-    var user = {
-        id: 0,
-        name: '',
-        email: '',
-        password: '',
-        roles: {
-            id: 0,
-            authority: ''   
-        }
-    }
-
-    var role = [
-        {
-            id: 0,
-            authority: ''
-        }
-    ]
+    vm.roless = roless;
+    var role = vm.role;
+    
 
     function SelectUser (user) {
         vm.user = user
@@ -45,7 +31,8 @@ vendasApp.controller('UserController', function(UserService) {
 
     function InsertUser() {
         var user = vm.user;
-        
+        var role = vm.role
+        vm.user.roles(role)
         var insertUser = UserService.insert(user);
         insertUser.then(function(response) {
             vm.users = response.data.content;
@@ -84,7 +71,26 @@ vendasApp.controller('UserController', function(UserService) {
         
     }
 
-    
+    function roless() {
+        vm.roles = [
+            {
+                "id": 1,
+                "authority": "ROLE_SELLER"
+            },
+            {
+                "id": 2,
+                "authority": "ROLE_MANAGER"
+            },
+            {
+                "id": 3,
+                "authority": "ROLE_ADMIN"
+            }
+        ];
+        console.log(vm.roles)
+        return vm.roles;
+    } 
+
+    roless();
 
     
 
