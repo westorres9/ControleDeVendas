@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devsuperior.ControleDeVendas.dto.SaleDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleInsertDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleUpdateDTO;
 import com.devsuperior.ControleDeVendas.services.SaleService;
 
 @RestController
@@ -50,7 +51,7 @@ public class SaleResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<SaleDTO> update(@PathVariable Long id, @RequestBody SaleDTO dto) {
+	public ResponseEntity<SaleDTO> update(@PathVariable Long id, @RequestBody SaleUpdateDTO dto) {
 		SaleDTO newDTO = service.update(id, dto);
 		return ResponseEntity.ok().body(newDTO);
 	}

@@ -16,7 +16,7 @@ function Interceptor($q, AuthService) {
             }},
         responseError: function(error) {
             if(error.status === 401  || error.status === 403) {
-                console.log(config);
+                console.log(error);
             }
             return $q.reject(error);
         }

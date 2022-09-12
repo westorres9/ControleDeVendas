@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.ControleDeVendas.dto.SaleDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleInsertDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleUpdateDTO;
 import com.devsuperior.ControleDeVendas.entities.Sale;
 import com.devsuperior.ControleDeVendas.entities.Team;
 import com.devsuperior.ControleDeVendas.entities.User;
@@ -63,13 +64,15 @@ public class SaleService {
 	}
 	
 	@Transactional
-	public SaleDTO update(Long id, SaleDTO dto) {
+	public SaleDTO update(Long id, SaleUpdateDTO dto) {
 		try {
 			Sale entity = repository.getOne(id);
 			entity.setDate(dto.getDate());
 			entity.setVisited(dto.getVisited());
 			entity.setDeals(dto.getDeals());
 			entity.setAmount(dto.getAmount());
+			entity.setSeller(userRepository.getOne(entity.getSeller().getId()));
+			entity.setTeam(teamRepository.getOne(entity.getTeam().getId()));
 			entity = repository.save(entity);
 			return new SaleDTO(entity);
 		}
