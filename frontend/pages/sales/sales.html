@@ -22,6 +22,15 @@
                     <th>
                         Total
                     </th>
+                    <th>
+                        Cod Vendedor
+                    </th>
+                    <th>
+                        Nome Vendedor
+                    </th>
+                    <th>
+                        Cod Equipe
+                    </th>
                 </tr>
                 <tr ng-repeat="sale in vm.sales">
                     <td>{{sale.id}}</td>
@@ -29,6 +38,9 @@
                     <td>{{sale.visited}}</td>
                     <td>{{sale.deals}}</td>
                     <td>{{sale.amount}}</td>
+                    <td>{{sale.sellerId}}</td>
+                    <td>{{sale.sellerName}}</td>
+                    <td>{{sale.teamId}}</td>
                     <td>
                         <button href="#" class="btn btn-warning" ng-click="vm.SelectSale(sale)">
                             Selecionar
