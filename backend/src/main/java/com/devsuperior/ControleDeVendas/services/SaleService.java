@@ -12,8 +12,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.ControleDeVendas.dto.SaleDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleInsertDTO;
 import com.devsuperior.ControleDeVendas.entities.Sale;
+import com.devsuperior.ControleDeVendas.entities.Team;
+import com.devsuperior.ControleDeVendas.entities.User;
 import com.devsuperior.ControleDeVendas.repositories.SaleRepository;
+import com.devsuperior.ControleDeVendas.repositories.TeamRepository;
+import com.devsuperior.ControleDeVendas.repositories.UserRepository;
 import com.devsuperior.ControleDeVendas.services.exceptions.DatabaseException;
 import com.devsuperior.ControleDeVendas.services.exceptions.ResourceNotFoundException;
 
@@ -22,6 +27,12 @@ public class SaleService {
 	
 	@Autowired
 	private SaleRepository repository;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private TeamRepository teamRepository;
 	
 	@Transactional(readOnly = true)
 	public Page<SaleDTO> findAllPaged(Pageable pageable) {
@@ -37,12 +48,16 @@ public class SaleService {
 	}
 	
 	@Transactional
-	public SaleDTO insert(SaleDTO dto) {
+	public SaleDTO insert(SaleInsertDTO dto) {
 		Sale entity = new Sale();
 		entity.setDate(dto.getDate());
 		entity.setVisited(dto.getVisited());
 		entity.setDeals(dto.getDeals());
 		entity.setAmount(dto.getAmount());
+		User user = userRepository.getOne(dto.getSellerId());
+		entity.setSeller(user);
+		Team team = teamRepository.getOne(dto.getTeamId());
+		entity.setTeam(team);
 		entity = repository.save(entity);
 		return new SaleDTO(entity);
 	}

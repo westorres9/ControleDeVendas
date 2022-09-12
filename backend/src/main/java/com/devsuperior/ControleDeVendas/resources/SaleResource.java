@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devsuperior.ControleDeVendas.dto.SaleDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleInsertDTO;
 import com.devsuperior.ControleDeVendas.services.SaleService;
 
 @RestController
@@ -39,12 +40,12 @@ public class SaleResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<SaleDTO> insert(@RequestBody SaleDTO dto) {
-		dto = service.insert(dto);
+	public ResponseEntity<SaleDTO> insert(@RequestBody SaleInsertDTO dto) {
+		SaleDTO newDto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder
 				.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(dto.getId()).toUri();
-		return ResponseEntity.created(uri).body(dto);
+		return ResponseEntity.created(uri).body(newDto);
 		
 	}
 	
