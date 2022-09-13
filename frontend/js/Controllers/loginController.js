@@ -23,15 +23,19 @@ vendasApp.controller("LoginController", function ($http, $httpParamSerializerJQL
 				console.log('log2', AuthService.getToken());
 				console.log('log3', AuthService.getAuthority());
 				var USER_ROLE = AuthService.getAuthority();
-				console.log(authority)
-				var ROLE_ADMIN = {"authority":"ROLE_ADMIN"};
-				console.log(ROLE_ADMIN)
 				if(USER_ROLE.authority == "ROLE_ADMIN") {
+					window.location.href = '/index.html#/users';
+				}
+				else if (USER_ROLE.authority == "ROLE_MANAGER") {
+					window.location.href = '/index.html#/teams';
+				}
+				else if (USER_ROLE.authority == "ROLE_SELLER") {
 					window.location.href = '/index.html#/sales';
 				}
-				else {
+				else if (USER_ROLE.authority == null || USER_ROLE.authority == undefined) {
 					window.location.href = '/index.html#/login';
 				}
+				else (window.location.href = '/index.html#/login')
 			}).catch(function (response) {
 				console.log("Falha" + response.data);
 			});
