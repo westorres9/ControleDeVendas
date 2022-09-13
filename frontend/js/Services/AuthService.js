@@ -8,6 +8,14 @@ function AuthService () {
         getToken: function() {
             let token = window.localStorage.getItem('access_token');
             return angular.fromJson(token);
+        },
+        setAuthority: function(token) {
+            window.localStorage.setItem('Authority', angular.toJson(token));
+            console.log('AuthService.setAuthority', token)
+        },
+        getAuthority: function () {
+            let token = window.localStorage.getItem('Authority');
+            return angular.fromJson(token)
         }
     } 
 }

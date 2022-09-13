@@ -54,7 +54,7 @@
                 <div>
                     <label for="roles">Choose a role:</label>
                     <select name="roles" id="roles">
-                        <option value="" ng-repeat="role in vm.roles" ng-model="vm.user.roles[role]">{{role.authority}}</option>
+                        <option value="" ng-repeat="role in vm.roles" ng-model="vm.user.roles[role]" ng-click="vm.SelectRole(role)">{{role.authority}}</option>
                     </select>
                 </div>
 

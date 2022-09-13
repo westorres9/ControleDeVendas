@@ -18,9 +18,11 @@ vendasApp.controller("LoginController", function ($http, $httpParamSerializerJQL
 			.then(function (response, $window) {
 				const loginResponse = response.data;
 				console.log('response', response)
-				console.log(AuthService.setToken);
+				console.log(AuthService.setToken(response.data));
+				console.log(AuthService.setAuthority(response.data.Authority[0]));
 				AuthService.setToken(loginResponse);
 				console.log('log2', AuthService.getToken());
+				console.log('log3', AuthService.getAuthority());
 			}).catch(function (response) {
 				console.log("Falha" + response.data);
 			});
