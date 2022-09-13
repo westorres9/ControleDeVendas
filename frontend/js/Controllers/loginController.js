@@ -1,9 +1,8 @@
-vendasApp.controller("LoginController", function ($http, $httpParamSerializerJQLike , AuthService) {
+vendasApp.controller("LoginController", function ($http, $httpParamSerializerJQLike,$window, AuthService) {
 	var vm = this;
 	vm.user = { 'grant_type': 'password' };
 	vm.authenticate = authenticate;
-	
-	
+
 	function authenticate () {
 		var CLIENT_ID = 'dsvendas'
 		var CLIENT_SECRET = 'dsvendas123'
@@ -15,7 +14,7 @@ vendasApp.controller("LoginController", function ($http, $httpParamSerializerJQL
 					'Authorization': 'Basic ' + window.btoa(CLIENT_ID + ':' + CLIENT_SECRET)
 				}
 			})
-			.then(function (response, $window) {
+			.then(function (response, $location) {
 				const loginResponse = response.data;
 				console.log('response', response)
 				console.log(AuthService.setToken(response.data));
@@ -23,8 +22,21 @@ vendasApp.controller("LoginController", function ($http, $httpParamSerializerJQL
 				AuthService.setToken(loginResponse);
 				console.log('log2', AuthService.getToken());
 				console.log('log3', AuthService.getAuthority());
+				var USER_ROLE = AuthService.getAuthority();
+				console.log(authority)
+				var ROLE_ADMIN = {"authority":"ROLE_ADMIN"};
+				console.log(ROLE_ADMIN)
+				if(USER_ROLE.authority == "ROLE_ADMIN") {
+					window.location.href = '/index.html#/sales';
+				}
+				else {
+					window.location.href = '/index.html#/login';
+				}
 			}).catch(function (response) {
 				console.log("Falha" + response.data);
 			});
+
+			
+			
 	}
 })
