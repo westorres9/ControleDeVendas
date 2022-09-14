@@ -16,6 +16,11 @@ function AuthService () {
         getAuthority: function () {
             let token = window.localStorage.getItem('Authority');
             return angular.fromJson(token)
+        },
+        hasAnyRoles: function (roles) {
+            if (roles.length === 0) {
+              return true;
+            }
         }
     } 
 }

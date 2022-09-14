@@ -25,3 +25,21 @@ input {
     margin-bottom: 15px;
     margin-right: 8px;
 }
+
+.goback-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .goback-container img {
+    color: rgb(49, 39, 230);
+    transform: rotate(-180deg);
+    margin-left: 5px;
+  }
+  
+  .goback-container h2 {
+    margin-left: 15px;
+    font-size: 1em;
+    color: #263238;
+  }

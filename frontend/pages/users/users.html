@@ -2,10 +2,13 @@
     <h2>Usuarios</h2>
     <div class="users-card">
         <div class="users-content-container">
+            <a href="#home">
+                <div class="goback-container">
+                    <img src="/assets/img/arrow.svg" alt="">
+                    <h2>VOLTAR</h2>
+                </div> 
+            </a>
             <table class="dsvendas-users-table table">
-                <thead>
-                    {{vm.message}}
-                </thead>
                 <tr>
                     <th>
                         Id
@@ -16,19 +19,11 @@
                     <th>
                         Email
                     </th>
-                    <th>
-                        Password
-                    </th>
-                    <th>
-                        Role
-                    </th>
                 </tr>
                 <tr ng-repeat="user in vm.users">
                     <td>{{user.id}}</td>
                     <td>{{user.name}}</td>
                     <td>{{user.email}}</td>
-                    <td>{{user.password}}</td>
-                    <td>{{user.roles}}</td>
                     <td>
                         <button href="#" class="btn btn-warning" ng-click="vm.SelectUser(user)">
                             Selecionar

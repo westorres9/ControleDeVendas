@@ -1,4 +1,4 @@
-vendasApp.controller('salesController', function(SaleService) {
+vendasApp.controller('salesController', function(SaleService, AuthService) {
     var vm = this;
     vm.title = 'salesController'
     vm.message = 'SalesController'
@@ -23,6 +23,9 @@ vendasApp.controller('salesController', function(SaleService) {
             console.log(response.data.content);
         }).catch(function(error) {
             console.log('ERROR: ' + error.status, error);
+            if (error.status >= 400 ) {
+                window.location.href = '/index.html#/login';
+            }
         })
     }
 

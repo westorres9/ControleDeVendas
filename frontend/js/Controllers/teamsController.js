@@ -1,4 +1,4 @@
-vendasApp.controller('teamsController', function(TeamService) {
+vendasApp.controller('teamsController', function(TeamService, AuthService) {
     var vm = this;
     vm.title = 'teamsController'
     vm.message = 'TeamsController'
@@ -15,6 +15,9 @@ vendasApp.controller('teamsController', function(TeamService) {
             vm.teams = response.data.content;
         }).catch(function(error) {
             console.log('ERROR: ' + error.status, error);
+            if (error.status >= 400 ) {
+                window.location.href = '/index.html#/login';
+            }
         })
     }
     GetAllTeams();

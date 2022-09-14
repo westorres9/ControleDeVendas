@@ -1,4 +1,4 @@
-vendasApp.controller('UserController', function(UserService) {
+vendasApp.controller('UserController', function(UserService, AuthService) {
     var vm = this;
     vm.title = 'UserController'
     vm.message = 'UserController'
@@ -30,6 +30,9 @@ vendasApp.controller('UserController', function(UserService) {
             console.log(response.data.content);
         }).catch(function(error) {
             console.log('ERROR: ' + error.status, error);
+            if (error.status >= 400 ) {
+                window.location.href = '/index.html#/login';
+            }
         })
     }
 
@@ -46,6 +49,9 @@ vendasApp.controller('UserController', function(UserService) {
             GetAllUsers();
         }).catch(function(error) {
             console.log('ERROR: ' + error.status, error);
+            if (error.status >= 400 ) {
+                window.location.href = '/index.html#/login';
+            }
         })
     }
 
@@ -59,6 +65,9 @@ vendasApp.controller('UserController', function(UserService) {
             GetAllUsers();
         }).catch(function(error) {
             console.log('ERROR: ' + error.status, error);
+            if (error.status >= 400 ) {
+                window.location.href = '/index.html#/login';
+            }
         })
         
     }
@@ -73,6 +82,9 @@ vendasApp.controller('UserController', function(UserService) {
             GetAllUsers();
         }).catch(function(error) {
             console.log('ERROR: ' + error.status, error);
+            if (error.status >= 400 ) {
+                window.location.href = '/index.html#/login';
+            }
         })
         
     }
