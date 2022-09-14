@@ -2,12 +2,15 @@ package com.devsuperior.ControleDeVendas.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+
 import com.devsuperior.ControleDeVendas.entities.Team;
 
 public class TeamDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	@NotBlank(message = "campo requerido")
 	private String name;
 	private Long managerId;
 	private String managerName;

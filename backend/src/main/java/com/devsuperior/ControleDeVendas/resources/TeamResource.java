@@ -2,6 +2,8 @@ package com.devsuperior.ControleDeVendas.resources;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,7 +41,7 @@ public class TeamResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<TeamDTO> insert(@RequestBody TeamDTO dto) {
+	public ResponseEntity<TeamDTO> insert(@Valid @RequestBody TeamDTO dto) {
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder
 				.fromCurrentRequest()
@@ -49,7 +51,7 @@ public class TeamResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<TeamDTO> update(@PathVariable Long id, @RequestBody TeamDTO dto) {
+	public ResponseEntity<TeamDTO> update(@PathVariable Long id,@Valid @RequestBody TeamDTO dto) {
 		TeamDTO newDTO = service.update(id, dto);
 		return ResponseEntity.ok().body(newDTO);
 	}

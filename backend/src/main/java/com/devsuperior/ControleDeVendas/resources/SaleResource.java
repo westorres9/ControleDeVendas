@@ -2,6 +2,8 @@ package com.devsuperior.ControleDeVendas.resources;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,7 +43,7 @@ public class SaleResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<SaleDTO> insert(@RequestBody SaleInsertDTO dto) {
+	public ResponseEntity<SaleDTO> insert(@Valid @RequestBody SaleInsertDTO dto) {
 		SaleDTO newDto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder
 				.fromCurrentRequest()
@@ -51,7 +53,7 @@ public class SaleResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<SaleDTO> update(@PathVariable Long id, @RequestBody SaleUpdateDTO dto) {
+	public ResponseEntity<SaleDTO> update(@PathVariable Long id, @Valid @RequestBody SaleUpdateDTO dto) {
 		SaleDTO newDTO = service.update(id, dto);
 		return ResponseEntity.ok().body(newDTO);
 	}

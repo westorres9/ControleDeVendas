@@ -3,15 +3,25 @@ package com.devsuperior.ControleDeVendas.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
+
 import com.devsuperior.ControleDeVendas.entities.Sale;
 
 public class SaleDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	@NotBlank(message = "campo requerido")
+	@PastOrPresent(message = "data nao pode ser futura")
 	private LocalDate date;
+	@NotBlank(message = "campo requerido")
 	private Integer deals;
+	@NotBlank(message = "campo requerido")
 	private Integer visited;
+	@NotBlank(message = "campo requerido")
+	@Positive(message = "Preço deve ser positivo")
 	private Double amount;
 	private Long sellerId;
 	private String sellerName;
