@@ -21,6 +21,7 @@ vendasApp.controller("LoginController", function ($http, $httpParamSerializerJQL
 				console.log(AuthService.setAuthority(response.data.Authority[0]));
 				AuthService.setToken(loginResponse);
 				console.log('log2', AuthService.getToken());
+				console.log('log3', AuthService.getAuthority());
 				var USER_ROLE = AuthService.getAuthority();
 				if(USER_ROLE.authority == "ROLE_ADMIN") {
 					window.location.href = '/index.html#/users';

@@ -29,8 +29,8 @@ public class UserResource {
 	private UserService service;
 	
 	@GetMapping
-	public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable) {
-		Page<UserDTO> page = service.findAllPaged(pageable);
+	public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable, Long id) {
+		Page<UserDTO> page = service.findAllPaged(pageable, id);
 		return ResponseEntity.ok().body(page);
 	}
 	

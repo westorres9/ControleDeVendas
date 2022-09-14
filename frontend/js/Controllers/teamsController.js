@@ -7,6 +7,8 @@ vendasApp.controller('teamsController', function(TeamService, AuthService) {
     vm.UpdateTeam = UpdateTeam;
     vm.DeleteTeam = DeleteTeam;
     vm.SelectTeam = SelectTeam;
+    var USER_ROLE = AuthService.getAuthority();
+    vm.USER_ROLE = USER_ROLE;
 
     function GetAllTeams () {
         var getAllTeams = TeamService.getTeams();

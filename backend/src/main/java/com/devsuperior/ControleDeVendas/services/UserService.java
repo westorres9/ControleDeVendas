@@ -27,6 +27,7 @@ import com.devsuperior.ControleDeVendas.repositories.RoleRepository;
 import com.devsuperior.ControleDeVendas.repositories.UserRepository;
 import com.devsuperior.ControleDeVendas.services.exceptions.DatabaseException;
 import com.devsuperior.ControleDeVendas.services.exceptions.ResourceNotFoundException;
+import com.devsuperior.ControleDeVendas.services.exceptions.UnauthorizedException;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -40,17 +41,23 @@ public class UserService implements UserDetailsService {
 	@Autowired
 	private RoleRepository roleRepository;
 	
+	
+	@Autowired
+	private AuthService authService;
+	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Transactional(readOnly = true)
-	public Page<UserDTO> findAllPaged(Pageable pageable) {
+	public Page<UserDTO> findAllPaged(Pageable pageable, Long id) {
+		authService.ValidateAdmin(id);
 		Page<User> page = repository.findAll(pageable);
-		return page.map(x -> new UserDTO(x, x.getRoles()));
+		return page.map(x -> new UserDTO(x));
 	}
 	
 	@Transactional(readOnly = true)
 	public UserDTO findById(Long id) {
+		User user = authService.authenticated();
 		Optional<User> obj = repository.findById(id);
 		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity Not Found"));
 		return new UserDTO(entity, entity.getRoles());
@@ -58,37 +65,58 @@ public class UserService implements UserDetailsService {
 	
 	@Transactional
 	public UserDTO insert(UserInsertDTO dto) {
-		User entity = new User();
-		copyDtoToEntity(entity, dto);
-		entity.setPassword(passwordEncoder.encode(dto.getPassword()));
-		entity = repository.save(entity);
-		return new UserDTO(entity);
+		User user = authService.authenticated();
+		if (!user.hasRole("ROLE_ADMIN") || !user.hasRole("ROLE_MANAGER")) {
+			User entity = new User();
+			copyDtoToEntity(entity, dto);
+			entity.setPassword(passwordEncoder.encode(dto.getPassword()));
+			entity = repository.save(entity);
+			return new UserDTO(entity);
+		}
+		else {
+			throw new UnauthorizedException("Unauthorized User");
+		}
+		
 	}
 	
 	@Transactional
 	public UserDTO update(Long id, UserUpdateDTO dto) {
-		try {
-			User entity = repository.getOne(id);
-			copyDtoToEntity(entity, dto);
-			entity = repository.save(entity);
-			return new UserDTO(entity);
+		User user = authService.authenticated();
+		if (!user.hasRole("ROLE_ADMIN") || !user.hasRole("ROLE_MANAGER")) {
+			try {
+				User entity = repository.getOne(id);
+				copyDtoToEntity(entity, dto);
+				entity = repository.save(entity);
+				return new UserDTO(entity);
+			}
+			catch (EntityNotFoundException e) {
+				throw new ResourceNotFoundException("Entity not Found " + id);
+			}
 		}
-		catch (EntityNotFoundException e) {
-			throw new ResourceNotFoundException("Entity not Found " + id);
+		else {
+			throw new UnauthorizedException("Unauthorized User");
 		}
+		
 	}
 	
 	
 	public void delete(Long id) {
-		try {
-			repository.deleteById(id);
+		User user = authService.authenticated();
+		if (!user.hasRole("ROLE_ADMIN") || !user.hasRole("ROLE_MANAGER")) {
+			try {
+				repository.deleteById(id);
+			}
+			catch(EntityNotFoundException e) {
+				throw new ResourceNotFoundException("Entity not Found " + id);
+			}
+			catch(DataIntegrityViolationException e) {
+				throw new DatabaseException("Integrity violation");
+			}
 		}
-		catch(EntityNotFoundException e) {
-			throw new ResourceNotFoundException("Entity not Found " + id);
+		else {
+			throw new UnauthorizedException("Unauthorized User");
 		}
-		catch(DataIntegrityViolationException e) {
-			throw new DatabaseException("Integrity violation");
-		}
+		
 	}
 	
 	public void copyDtoToEntity(User entity, UserDTO dto) {

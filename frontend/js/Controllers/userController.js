@@ -9,6 +9,8 @@ vendasApp.controller('UserController', function(UserService, AuthService) {
     vm.DeleteUser = DeleteUser;
     vm.SelectRole = SelectRole;
     vm.GetRoles = GetRoles;
+    var USER_ROLE = AuthService.getAuthority();
+    vm.USER_ROLE = USER_ROLE;
 
     function SelectRole(role) {
         vm.role = role;

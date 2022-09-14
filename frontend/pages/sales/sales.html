@@ -46,14 +46,14 @@
                     <td>{{sale.sellerName}}</td>
                     <td>{{sale.teamId}}</td>
                     <td>
-                        <button href="#" class="btn btn-warning" ng-click="vm.SelectSale(sale)">
+                        <button href="#" class="btn btn-warning" ng-click="vm.SelectSale(sale)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
                             Selecionar
                         </button>
                         
                     </td>
                 </tr>
             </table>
-                <div class="formulario-sale">
+                <div class="formulario-sale" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
                     <div>
                         <div class="form">
                             <label for="">Data da Venda</label>
@@ -87,13 +87,13 @@
                     </div>
                 </div>
                 <div class="form-btn">
-                    <button href="#" class="btn btn-success" ng-click="vm.InsertSale(sale)">
+                    <button href="#" class="btn btn-success" ng-click="vm.InsertSale(sale)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
                         Nova Venda
                     </button>
-                    <button href="#" class="btn btn-primary" ng-click="vm.UpdateSale(sale)">
+                    <button href="#" class="btn btn-primary" ng-click="vm.UpdateSale(sale)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
                         Atualizar
                     </button>
-                    <button href="#" class="btn btn-danger" ng-click="vm.DeleteSale(vm.sale)">
+                    <button href="#" class="btn btn-danger" ng-click="vm.DeleteSale(vm.sale)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
                         Apagar
                     </button>
                 </div>

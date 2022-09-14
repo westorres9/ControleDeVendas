@@ -7,6 +7,9 @@ vendasApp.controller('salesController', function(SaleService, AuthService) {
     vm.UpdateSale = UpdateSale;
     vm.DeleteSale = DeleteSale;
     vm.SelectSale = SelectSale;
+    var USER_ROLE = AuthService.getAuthority();
+    vm.USER_ROLE = USER_ROLE;
+
 
     function SelectSale(sale) {
         vm.sale = sale;

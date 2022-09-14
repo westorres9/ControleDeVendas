@@ -29,14 +29,14 @@
                     <td>{{team.managerId}}</td>
                     <td>{{team.managerName}}</td>
                     <td>
-                        <button href="#" class="btn btn-warning" ng-click="vm.SelectTeam(team)">
+                        <button href="#" class="btn btn-warning" ng-click="vm.SelectTeam(team)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
                             Selecionar
                         </button>
                         
                     </td>
                 </tr>
             </table>
-                <div class="formulario">
+                <div class="formulario" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
                     <div class="form">
                         <label for="">Id Equipe</label>
                         <input type="text" ng-model="vm.team.id" placeholder="Id Equipe">
@@ -57,13 +57,13 @@
                     
                 </div>
                 <div>
-                    <button href="#" class="btn btn-success" ng-click="vm.InsertTeam(vm.team)">
+                    <button href="#" class="btn btn-success" ng-click="vm.InsertTeam(vm.team)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
                         Nova Equipe
                     </button>
-                    <button href="#" class="btn btn-primary" ng-click="vm.UpdateTeam(vm.team)">
+                    <button href="#" class="btn btn-primary" ng-click="vm.UpdateTeam(vm.team)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
                         Atualizar
                     </button>
-                    <button href="#" class="btn btn-danger" ng-click="vm.DeleteTeam(vm.team)">
+                    <button href="#" class="btn btn-danger" ng-click="vm.DeleteTeam(vm.team)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
                         Apagar
                     </button>
                 </div>

@@ -49,6 +49,7 @@
                 <div>
                     <label for="roles">Choose a role:</label>
                     <select name="roles" id="roles">
+                        <optgroup>ROLE</optgroup>
                         <option value="" ng-repeat="role in vm.roles" ng-model="vm.user.roles[role]" ng-click="vm.SelectRole(role)">{{role.authority}}</option>
                     </select>
                 </div>
