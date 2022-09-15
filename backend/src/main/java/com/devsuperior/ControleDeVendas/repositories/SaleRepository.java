@@ -15,4 +15,6 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 	
 	Page<Sale> findByTeam (Team team, Pageable pageable);
 	
+	Page<Sale> findByManager (User manager, Pageable pageable);
+	
 }

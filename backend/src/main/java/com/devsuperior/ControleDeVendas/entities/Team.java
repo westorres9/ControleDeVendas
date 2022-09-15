@@ -14,8 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name = "tb_team")
@@ -27,7 +27,7 @@ public class Team implements Serializable {
 	private Long id;
 	private String name;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "manager_id")
 	private User manager;
 	

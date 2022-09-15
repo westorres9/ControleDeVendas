@@ -18,8 +18,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -39,9 +39,13 @@ public class User implements Serializable, UserDetails {
 	private String email;
 	private String password;
 	
-	@OneToOne(mappedBy = "manager")
-    private Team team;
+	@OneToMany(mappedBy = "manager")
+    private List<Team> teams;
 	
+	public List<Team> getTeams() {
+		return teams;
+	}
+
 	@OneToMany(mappedBy = "seller")
 	private List<Sale> sales = new ArrayList<>();
 	
@@ -93,14 +97,11 @@ public class User implements Serializable, UserDetails {
 		this.password = password;
 	}
 	
-	public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
 	
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
 	public Set<Role> getRoles() {
 		return roles;
 	}

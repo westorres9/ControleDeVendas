@@ -32,10 +32,14 @@ public class Sale implements Serializable{
 	@JoinColumn(name = "teamId")
 	private Team team;
 	
+	@ManyToOne
+	@JoinColumn(name = "managerId")
+	private User manager;
+	
 	public Sale() {
 	}
 	
-	public Sale(Long id, LocalDate date, Integer deals, Integer visited, Double amount, User seller, Team team) {
+	public Sale(Long id, LocalDate date, Integer deals, Integer visited, Double amount, User seller, Team team, User manager) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -44,6 +48,7 @@ public class Sale implements Serializable{
 		this.amount = amount;
 		this.seller = seller;
 		this.team = team;
+		this.manager = manager;
 	}
 
 	public Long getId() {
@@ -92,6 +97,14 @@ public class Sale implements Serializable{
 
 	public void setSeller(User seller) {
 		this.seller = seller;
+	}
+
+	public User getManager() {
+		return manager;
+	}
+
+	public void setManagerId(User manager) {
+		this.manager = manager;
 	}
 
 	public Team getTeam() {

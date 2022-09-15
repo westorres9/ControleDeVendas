@@ -46,7 +46,7 @@ public class SaleService {
 			Page<Sale> page = repository.findBySeller(user, pageable);
 			return page.map(x -> new SaleDTO(x));
 		} else if (user.hasRole("ROLE_MANAGER")) {
-			Page<Sale> page = repository.findByTeam(user.getTeam(), pageable);
+			Page<Sale> page = repository.findByManager(user, pageable);
 			return page.map(x -> new SaleDTO(x));
 		} else {
 			Page<Sale> page = repository.findAll(pageable);
