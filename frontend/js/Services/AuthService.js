@@ -33,10 +33,11 @@ function AuthService () {
         logout: function () {
             window.localStorage.removeItem('access_token');
             window.localStorage.removeItem('Authority');
+            window.localStorage.clear();
             if(this.getToken() == undefined) {
                 window.location.href = '/index.html#/login';
             }
-            window.localStorage.clear();
+            window.location.path= '/index.html#/login';
         }
     } 
 }

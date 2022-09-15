@@ -35,6 +35,9 @@
                     <th>
                         ID Equipe
                     </th>
+                    <th>
+                        Gestor
+                    </th>
                 </tr>
                 <tr ng-repeat="sale in vm.sales">
                     <td>{{sale.id}}</td>
@@ -45,6 +48,8 @@
                     <td>{{sale.sellerId}}</td>
                     <td>{{sale.sellerName}}</td>
                     <td>{{sale.teamId}}</td>
+                    <td>{{sale.managerId}}</td>
+
                     <td>
                         <button href="#" class="btn btn-warning" ng-click="vm.SelectSale(sale)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
                             Selecionar

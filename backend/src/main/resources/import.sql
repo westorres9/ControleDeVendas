@@ -19,7 +19,7 @@ INSERT INTO tb_user_role (user_id, role_id) VALUES (6, 1);
 
 INSERT INTO tb_team (name,  manager_id) VALUES ('Bradesco',2);
 INSERT INTO tb_team (name,  manager_id) VALUES ('Santander',5);
-INSERT INTO tb_team (name,  manager_id) VALUES ('Banco Real',5);
+INSERT INTO tb_team (name,  manager_id) VALUES ('Embratel',5);
 
 INSERT INTO tb_team_seller(team_id, seller_id) VALUES (1,1);
 INSERT INTO tb_team_seller(team_id, seller_id) VALUES (2,4);

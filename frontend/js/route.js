@@ -48,7 +48,11 @@ vendasApp.run(["$rootScope", "$location", "AuthService", function($rootScope, $l
             var authority = AuthService.getAuthority();
             if (!token) {
                 $location.path("/login")
+                
             }
+            
         }
+        
     })
+    
 }])
