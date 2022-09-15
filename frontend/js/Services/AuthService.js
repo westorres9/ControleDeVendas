@@ -21,6 +21,22 @@ function AuthService () {
             if (roles.length === 0) {
               return true;
             }
+        },
+        setUserName: function(token) {
+            window.localStorage.setItem('userName', angular.toJson(token));
+            console.log('AuthService.setUserName', token)
+        },
+        getUserName: function () {
+            let token = window.localStorage.getItem('userName');
+            return angular.fromJson(token)
+        },
+        logout: function () {
+            window.localStorage.removeItem('access_token');
+            window.localStorage.removeItem('Authority');
+            if(this.getToken() == undefined) {
+                window.location.href = '/index.html#/login';
+            }
+            window.localStorage.clear();
         }
     } 
 }

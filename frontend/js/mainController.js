@@ -3,5 +3,7 @@ vendasApp.controller('mainController', function(AuthService) {
     vm.title = 'mainController'
     vm.message = 'Hello Angular'  
     vm.USER_ROLE = AuthService.getAuthority();
-    console.log(vm.USER_ROLE);
+    vm.USER_NAME = AuthService.getUserName();
+    vm.logout = AuthService.logout();
+    vm.token = AuthService.getToken();
 })
