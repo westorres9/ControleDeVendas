@@ -22,22 +22,20 @@ function AuthService () {
               return true;
             }
         },
-        setUserName: function(token) {
-            window.localStorage.setItem('userName', angular.toJson(token));
-            console.log('AuthService.setUserName', token)
+        setUserName: function(user) {
+            window.localStorage.setItem('userName', angular.toJson(user));
+            console.log('AuthService.setUserName', user)
         },
         getUserName: function () {
-            let token = window.localStorage.getItem('userName');
-            return angular.fromJson(token)
+            let user = window.localStorage.getItem('userName');
+            return angular.fromJson(user)
         },
         logout: function () {
             window.localStorage.removeItem('access_token');
             window.localStorage.removeItem('Authority');
             window.localStorage.clear();
-            if(this.getToken() == undefined) {
-                window.location.href = '/index.html#/login';
-            }
-            window.location.path= '/index.html#/login';
+            window.location.href = '/index.html#/login';
+            window.location.path = '/index.html#/login';
         }
     } 
 }

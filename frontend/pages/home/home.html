@@ -1,35 +1,44 @@
-
-<nav class="admin-nav-container">
-    <ul class="admin-nav-items-container">
-      <li ng-hide="vm.USER_ROLE.authority !== 'ROLE_ADMIN'">
-        <a  class="admin-nav-item" href="#users">
-          <p>Usuarios</p>
-        </a>
-      </li>
-      <li>
-      </li>
-      <li ng-hide="vm.USER_ROLE.authority !== 'ROLE_ADMIN' && vm.USER_ROLE.authority !== 'ROLE_MANAGER'">
-        <a class="admin-nav-item" href="#teams">
-          <p>Equipes</p>
-        </a>
-      </li>
-        <li>
-        <a  class="admin-nav-item" href="#sales">
-          <p>Vendas</p>
-        </a>
-      </li>
-      <li>
-        <a href="#login" ng-click="vm.logout()">Logout</a>  
-      </li>
-    </ul>
-  </nav>
-
-  <div class="home-content">
-    <h1>Home</h1>
-    <h2>{{vm.message}}</h2>
-    <div class="home-img">
-      <img src="/assets/img/Cadastro_de_Produtos.png" alt="">
-    </div>
-      
+<div class="home-content">
+  
+  <div class="home-img"> 
+    <h2>{{vm.message}}{{vm.user}}</h2>
+    <img src="/assets/img/Cadastro_de_Produtos.png" alt="">
   </div>
+</div>
+<nav class="admin-nav-container">
+  <ul class="admin-nav-items-container">
+    <li ng-hide="vm.USER_ROLE.authority !== 'ROLE_ADMIN'">
+      
+      <a  class="admin-nav-item" href="#users">
+        <img src="/assets/img/user.svg" alt="">
+        <p>Usuarios</p>
+      </a>
+    </li>
+    <li>
+    </li>
+    <li ng-hide="vm.USER_ROLE.authority !== 'ROLE_ADMIN' && vm.USER_ROLE.authority !== 'ROLE_MANAGER'">
+      
+      <a class="admin-nav-item" href="#teams">
+        <img src="/assets/img/teams.svg" alt="">
+        <p>Equipes</p>
+      </a>
+    </li>
+      <li>
+        
+      <a  class="admin-nav-item" href="#sales">
+        <img src="/assets/img/sales.svg" alt="">
+        <p>Vendas</p>
+      </a>
+    </li>
+    <li>
+      <a href="#login" ng-click="vm.logout()">Logout</a>  
+    </li>
+  </ul>
+</nav>
+
+
+
+
+
+  
 

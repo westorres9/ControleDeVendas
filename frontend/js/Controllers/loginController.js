@@ -35,7 +35,6 @@ vendasApp.controller("LoginController", function ($http, $httpParamSerializerJQL
 				}
 				else if (USER_ROLE.authority == null || USER_ROLE.authority == undefined) {
 					window.location.href = '/index.html#/login';
-					window.location.reload()
 				}
 				else (window.location.href = '/index.html#/login')
 			}).catch(function (response) {
