@@ -1,4 +1,4 @@
-vendasApp.controller("LoginController", function ($http, $httpParamSerializerJQLike,$window, AuthService) {
+vendasApp.controller('LoginController', function ($http, $httpParamSerializerJQLike,$window, AuthService) {
 	var vm = this;
 	vm.user = { 'grant_type': 'password' };
 	vm.authenticate = authenticate;
@@ -39,9 +39,6 @@ vendasApp.controller("LoginController", function ($http, $httpParamSerializerJQL
 				else (window.location.href = '/index.html#/login')
 			}).catch(function (response) {
 				console.log("Falha" + response.data);
-			});
-
-			
-			
+			});		
 	}
 })

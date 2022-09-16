@@ -2,7 +2,7 @@ vendasApp.config(function($routeProvider) {
     $routeProvider
     .when('/', {
         templateUrl: 'pages/login/login.html',
-        controller: 'LoginController',
+        controller: 'loginController',
         controllerAs: 'vm',
     })
     .when('/home', {
