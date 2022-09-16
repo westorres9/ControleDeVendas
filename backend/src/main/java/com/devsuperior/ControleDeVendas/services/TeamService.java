@@ -69,7 +69,7 @@ public class TeamService {
 	@Transactional
 	public TeamDTO insert(TeamDTO dto) {
 		User user = authService.authenticated();
-		if (user.hasRole("ROLE_ADMIN")) {
+		if(user.hasRole("ROLE_ADMIN") || user.hasRole("ROLE_MANAGER")) {
 			Team entity = new Team();
 			entity.setName(dto.getName());
 			user = userRepository.getOne(dto.getManagerId());
@@ -83,7 +83,7 @@ public class TeamService {
 	@Transactional
 	public TeamDTO update(Long id, TeamDTO dto) {
 		User user = authService.authenticated();
-		if (user.hasRole("ROLE_ADMIN")) {
+		if(user.hasRole("ROLE_ADMIN") || user.hasRole("ROLE_MANAGER")) {
 			try {
 				Team entity = repository.getOne(id);
 				entity.setName(dto.getName());
@@ -101,7 +101,7 @@ public class TeamService {
 	
 	public void delete(Long id) {
 		User user = authService.authenticated();
-		if (user.hasRole("ROLE_ADMIN")) {
+		if(user.hasRole("ROLE_ADMIN") || user.hasRole("ROLE_MANAGER")) {
 			try {
 				repository.deleteById(id);
 			}

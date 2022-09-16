@@ -13,14 +13,12 @@ public class SaleDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
-	@NotBlank(message = "campo requerido")
 	@PastOrPresent(message = "data nao pode ser futura")
 	private LocalDate date;
-	@NotBlank(message = "campo requerido")
+	@Positive(message = "Valor deve ser positivo")
 	private Integer deals;
-	@NotBlank(message = "campo requerido")
+	@Positive(message = "Valor deve ser positivo")
 	private Integer visited;
-	@NotBlank(message = "campo requerido")
 	@Positive(message = "Preço deve ser positivo")
 	private Double amount;
 	private Long sellerId;

@@ -2,13 +2,13 @@
     <div class="login-card">
         <div class="login-content-container">
             <h2>Login</h2>
-            <form ng-submit="vm.authenticate()">
+            <form  ng-submit="vm.authenticate()">
                 <label>Email</label>
-                <input type="text" ng-model="vm.user.username">
+                <input type="text" class="form-control base-input" ng-model="vm.user.username">
                 <label>Senha</label>
-                <input type="password" ng-model="vm.user.password">
+                <input type="password" class="form-control base-input" ng-model="vm.user.password">
                 
-                <input class ="btn btn-primary" type="submit" value="Login">
+                <input class ="btn btn-primary login-submit"  type="submit" value="Login">
             </form>
             
         </div>

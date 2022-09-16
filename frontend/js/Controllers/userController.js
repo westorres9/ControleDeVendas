@@ -1,7 +1,6 @@
 vendasApp.controller('UserController', function(UserService, AuthService) {
     var vm = this;
     vm.title = 'UserController'
-    vm.message = 'UserController'
     vm.GetAllUsers = GetAllUsers;
     vm.InsertUser = InsertUser;
     vm.SelectUser = SelectUser;

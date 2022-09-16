@@ -1,5 +1,6 @@
 package com.devsuperior.ControleDeVendas.services;
 
+import java.sql.Date;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -77,7 +78,7 @@ public class SaleService {
 		User user = authService.authenticated();
 		if (user.hasRole("ROLE_SELLER")) {
 			Sale entity = new Sale();
-			entity.setDate(dto.getDate());
+			entity.setDate(dto.getDate().now());
 			entity.setVisited(dto.getVisited());
 			entity.setDeals(dto.getDeals());
 			entity.setAmount(dto.getAmount());
@@ -85,6 +86,7 @@ public class SaleService {
 			entity.setSeller(user);
 			Team team = teamRepository.getOne(dto.getTeamId());
 			entity.setTeam(team);
+			entity.setManagerId(userRepository.getOne(dto.getManagerId()));
 			entity = repository.save(entity);
 			return new SaleDTO(entity);
 		} else {
