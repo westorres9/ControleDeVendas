@@ -1,4 +1,4 @@
-vendasApp.controller('UserController', function(UserService) {
+vendasApp.controller('UserController', function(UserService, AuthService) {
     var vm = this;
     vm.title = 'UserController'
     vm.message = 'UserController'
@@ -7,23 +7,17 @@ vendasApp.controller('UserController', function(UserService) {
     vm.SelectUser = SelectUser;
     vm.UpdateUser = UpdateUser;
     vm.DeleteUser = DeleteUser;
-    var user = {
-        id: 0,
-        name: '',
-        email: '',
-        password: '',
-        roles: {
-            id: 0,
-            authority: ''   
-        }
-    }
+    vm.SelectRole = SelectRole;
+    vm.GetRoles = GetRoles;
+    var USER_ROLE = AuthService.getAuthority();
+    vm.USER_ROLE = USER_ROLE;
 
-    var role = [
-        {
-            id: 0,
-            authority: ''
-        }
-    ]
+    function SelectRole(role) {
+        vm.role = role;
+        console.log(vm.role);
+        return vm.role;
+    }
+    
 
     function SelectUser (user) {
         vm.user = user
@@ -38,6 +32,9 @@ vendasApp.controller('UserController', function(UserService) {
             console.log(response.data.content);
         }).catch(function(error) {
             console.log('ERROR: ' + error.status, error);
+            if (error.status >= 400 ) {
+                window.location.href = '/index.html#/login';
+            }
         })
     }
 
@@ -45,7 +42,8 @@ vendasApp.controller('UserController', function(UserService) {
 
     function InsertUser() {
         var user = vm.user;
-        
+        var role = SelectRole(vm.role);
+        user.roles[role];
         var insertUser = UserService.insert(user);
         insertUser.then(function(response) {
             vm.users = response.data.content;
@@ -53,6 +51,9 @@ vendasApp.controller('UserController', function(UserService) {
             GetAllUsers();
         }).catch(function(error) {
             console.log('ERROR: ' + error.status, error);
+            if (error.status >= 400 ) {
+                window.location.href = '/index.html#/login';
+            }
         })
     }
 
@@ -66,6 +67,9 @@ vendasApp.controller('UserController', function(UserService) {
             GetAllUsers();
         }).catch(function(error) {
             console.log('ERROR: ' + error.status, error);
+            if (error.status >= 400 ) {
+                window.location.href = '/index.html#/login';
+            }
         })
         
     }
@@ -80,11 +84,33 @@ vendasApp.controller('UserController', function(UserService) {
             GetAllUsers();
         }).catch(function(error) {
             console.log('ERROR: ' + error.status, error);
+            if (error.status >= 400 ) {
+                window.location.href = '/index.html#/login';
+            }
         })
         
     }
 
-    
+    function GetRoles() {
+        vm.roles = [
+            {
+                "id": 1,
+                "authority": "ROLE_SELLER"
+            },
+            {
+                "id": 2,
+                "authority": "ROLE_MANAGER"
+            },
+            {
+                "id": 3,
+                "authority": "ROLE_ADMIN"
+            }
+        ];
+        console.log(vm.roles)
+        return vm.roles;
+    } 
+
+    GetRoles();
 
     
 

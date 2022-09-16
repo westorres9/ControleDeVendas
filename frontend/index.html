@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="/pages/sales/sales.css">
     <link rel="stylesheet" href="/pages/teams/teams.css">
     <link rel="stylesheet" href="/pages/users/users.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="/pages/login/login.css">
+    <link rel="stylesheet" href="/pages/home/home.css">
+    <title>DSVendas</title>
 </head>
 <body ng-controller="mainController">
     <div id="main">
@@ -23,25 +25,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#dsvendas" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="dsvendas">
-                    <ul class="navbar-nav offset-md-2 main-menu">
-                        <li>
-                            <a href="#home" class="active">Home</a>
-                        </li>
-                        <li>
-                            <a href="#users" >Usuários</a>
-                        </li>
-                        <li>
-                            <a href="#teams" >Equipes</a>
-                        </li>
-                        <li>
-                            <a href="#sales" >Vendas</a>
-                        </li>
-                        <li>
-                            <a href="#login">Login</a>
-                        </li>
-                    </ul>
-                </div>
+                         
             </div>
         </nav>
         <div ng-view></div>
@@ -53,13 +37,16 @@
     <script src="/app.js"></script>
     <script src="/js/route.js"></script>
     <script src="/js/mainController.js"></script>
+    <script src="/js/Services/TokenGlobalInterceptor.js"></script>
     <script src="/js/Controllers/homeController.js"></script>
-    <script src="/js/Controllers/loginController.js"></script>
+    <script src="/js/Controllers/LoginController.js"></script>
     <script src="/js/Controllers/salesController.js"></script>
     <script src="/js/Controllers/teamsController.js"></script>
     <script src="/js/Controllers/userController.js"></script>
     <script src="/js/Services/SaleService.js"></script>
     <script src="/js/Services/TeamService.js"></script>
     <script src="/js/Services/UserService.js"></script>
+    <script src="/js/Services/AuthService.js"></script>
+
 </body>
 </html>

@@ -2,6 +2,8 @@ package com.devsuperior.ControleDeVendas.resources;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devsuperior.ControleDeVendas.dto.SaleDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleInsertDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleUpdateDTO;
 import com.devsuperior.ControleDeVendas.services.SaleService;
 
 @RestController
@@ -39,17 +43,17 @@ public class SaleResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<SaleDTO> insert(@RequestBody SaleDTO dto) {
-		dto = service.insert(dto);
+	public ResponseEntity<SaleDTO> insert(@Valid @RequestBody SaleInsertDTO dto) {
+		SaleDTO newDto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder
 				.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(dto.getId()).toUri();
-		return ResponseEntity.created(uri).body(dto);
+		return ResponseEntity.created(uri).body(newDto);
 		
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<SaleDTO> update(@PathVariable Long id, @RequestBody SaleDTO dto) {
+	public ResponseEntity<SaleDTO> update(@PathVariable Long id, @Valid @RequestBody SaleUpdateDTO dto) {
 		SaleDTO newDTO = service.update(id, dto);
 		return ResponseEntity.ok().body(newDTO);
 	}

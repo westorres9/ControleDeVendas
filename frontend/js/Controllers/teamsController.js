@@ -1,4 +1,4 @@
-vendasApp.controller('teamsController', function(TeamService) {
+vendasApp.controller('teamsController', function(TeamService, AuthService) {
     var vm = this;
     vm.title = 'teamsController'
     vm.message = 'TeamsController'
@@ -7,6 +7,8 @@ vendasApp.controller('teamsController', function(TeamService) {
     vm.UpdateTeam = UpdateTeam;
     vm.DeleteTeam = DeleteTeam;
     vm.SelectTeam = SelectTeam;
+    var USER_ROLE = AuthService.getAuthority();
+    vm.USER_ROLE = USER_ROLE;
 
     function GetAllTeams () {
         var getAllTeams = TeamService.getTeams();
@@ -15,6 +17,9 @@ vendasApp.controller('teamsController', function(TeamService) {
             vm.teams = response.data.content;
         }).catch(function(error) {
             console.log('ERROR: ' + error.status, error);
+            if (error.status >= 400 ) {
+                window.location.href = '/index.html#/login';
+            }
         })
     }
     GetAllTeams();

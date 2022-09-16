@@ -2,10 +2,13 @@
     <h2>Equipes</h2>
     <div class="teams-card">
         <div class="teams-content-container">
+            <a href="#home">
+                <div class="goback-container">
+                    <img src="/assets/img/arrow.svg" alt="">
+                    <h2>VOLTAR</h2>
+                </div> 
+            </a>
             <table class="dsvendas-teams-table table">
-                <thead>
-                    {{vm.message}}
-                </thead>
                 <tr>
                     <th>
                         Id
@@ -13,19 +16,27 @@
                     <th>
                         Nome Equipe
                     </th>
+                    <th>
+                        Cod Lider Equipe
+                    </th>
+                    <th>
+                        Nome Lider Equipe
+                    </th>
                 </tr>
                 <tr ng-repeat="team in vm.teams">
                     <td>{{team.id}}</td>
                     <td>{{team.name}}</td>
+                    <td>{{team.managerId}}</td>
+                    <td>{{team.managerName}}</td>
                     <td>
-                        <button href="#" class="btn btn-warning" ng-click="vm.SelectTeam(team)">
+                        <button href="#" class="btn btn-warning" ng-click="vm.SelectTeam(team)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
                             Selecionar
                         </button>
                         
                     </td>
                 </tr>
             </table>
-                <div class="formulario">
+                <div class="formulario" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
                     <div class="form">
                         <label for="">Id Equipe</label>
                         <input type="text" ng-model="vm.team.id" placeholder="Id Equipe">
@@ -34,17 +45,25 @@
                         <label for="">Equipe</label>
                         <input type="text" ng-model="vm.team.name" placeholder="Nome Equipe">
                     </div>
+                    <div class="form">
+                        <label for="">Cod Lider Equipe</label>
+                        <input type="text" ng-model="vm.team.managerId" placeholder="Cod Lider Equipe">
+                    </div>
+                    <div class="form">
+                        <label for="">Lider Equipe</label>
+                        <input type="text" ng-model="vm.team.managerName" placeholder="Lider Equipe">
+                    </div>
                     
                     
                 </div>
                 <div>
-                    <button href="#" class="btn btn-success" ng-click="vm.InsertTeam(vm.team)">
-                        Nova Venda
+                    <button href="#" class="btn btn-success" ng-click="vm.InsertTeam(vm.team)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
+                        Nova Equipe
                     </button>
-                    <button href="#" class="btn btn-primary" ng-click="vm.UpdateTeam(vm.team)">
+                    <button href="#" class="btn btn-primary" ng-click="vm.UpdateTeam(vm.team)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
                         Atualizar
                     </button>
-                    <button href="#" class="btn btn-danger" ng-click="vm.DeleteTeam(vm.team)">
+                    <button href="#" class="btn btn-danger" ng-click="vm.DeleteTeam(vm.team)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
                         Apagar
                     </button>
                 </div>

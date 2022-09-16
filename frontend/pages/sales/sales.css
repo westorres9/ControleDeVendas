@@ -9,19 +9,53 @@
     border-radius: 10px;
 }
 
-.formulario {
+.formulario-sale {
     display: flex;
     flex-direction: row;
-    width: 600px;
+    max-width: 330px;
     align-items: center;
+    border: 1px solid #263238;
+    border-radius: 5px;
+    padding: 25px;
+    background-color: #e2e2e2;
     
 }
 
-label {
+.form{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    padding: 0 10px;
+}
+
+.form label {
     justify-content: right;
 }
 
-input {
-    margin-bottom: 15px;
+.form input {
+    margin-bottom: 5px;
     margin-right: 8px;
 }
+
+.form-btn {
+    padding-top: 10px;
+}
+
+.goback-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .goback-container img {
+    color: rgb(49, 39, 230);
+    transform: rotate(-180deg);
+    margin-left: 5px;
+  }
+  
+  .goback-container h2 {
+    margin-left: 15px;
+    font-size: 1em;
+    color: #263238;
+  }
+  
