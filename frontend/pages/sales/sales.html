@@ -1,16 +1,15 @@
 <div class="sales-container" id="dsvendas-container">
-        
-    <h2>Vendas</h2>
+    <a href="#home">
+        <div class="goback-container">
+            <img src="/assets/img/arrow.svg" alt="">
+            <h2>VOLTAR</h2>
+        </div> 
+    </a>
     <div class="sales-card">
-        <a href="#home">
-            <div class="goback-container">
-                <img src="/assets/img/arrow.svg" alt="">
-                <h2>VOLTAR</h2>
-            </div> 
-        </a>
+        
         <div class="sales-content-container">
-            <table class="dsvendas-sales-table table">
-                <tr>
+            <table class="table">
+                <tr class="dsvendas-sales-table">
                     <th>
                         Id
                     </th>
@@ -26,39 +25,39 @@
                     <th>
                         Total
                     </th>
-                    <th>
+                    <th class="vendas-th">
                         ID Vendedor
                     </th>
                     <th>
                         Vendedor
                     </th>
-                    <th>
+                    <th class="vendas-th">
                         ID Equipe
                     </th>
-                    <th>
+                    <th class="vendas-th">
                         Gestor
                     </th>
                 </tr>
-                <tr ng-repeat="sale in vm.sales">
+                <tr class="dsvendas-sales-table" ng-repeat="sale in vm.sales">
                     <td>{{sale.id}}</td>
                     <td>{{sale.date}}</td>
                     <td>{{sale.visited}}</td>
                     <td>{{sale.deals}}</td>
                     <td>{{sale.amount}}</td>
-                    <td>{{sale.sellerId}}</td>
+                    <td class="vendas-th">{{sale.sellerId}}</td>
                     <td>{{sale.sellerName}}</td>
-                    <td>{{sale.teamId}}</td>
-                    <td>{{sale.managerId}}</td>
+                    <td class="vendas-th">{{sale.teamId}}</td>
+                    <td class="vendas-th">{{sale.managerId}}</td>
 
                     <td>
-                        <button href="#" class="btn btn-warning" ng-click="vm.SelectSale(sale)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
-                            Selecionar
+                        <button href="#" class="btn-select btn btn-warning" ng-click="vm.SelectSale(sale)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
+                            <p>Selecionar</p>
                         </button>
                         
                     </td>
                 </tr>
             </table>
-                <div class="formulario-sale" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
+                <div class="formulario-sales" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
                     <div>
                         <div class="form">
                             <label for="">Data da Venda</label>

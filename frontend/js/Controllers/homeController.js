@@ -1,7 +1,12 @@
 vendasApp.controller('homeController', function (AuthService) {
     var vm = this;
     vm.title = 'homeController'
-    vm.message = 'Seja bem vindo '
+    vm.message = 'Seja bem vindo (a) ';
+    
+    vm.logout = logout;
+    function logout () {
+        AuthService.logout();
+    } 
 
     var user = AuthService.getToken();
     vm.user = user.userName + '!!';

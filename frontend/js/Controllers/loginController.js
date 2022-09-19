@@ -25,13 +25,13 @@ vendasApp.controller('LoginController', function ($http, $httpParamSerializerJQL
 				console.log('log4', AuthService.getUserName());
 				var USER_ROLE = AuthService.getAuthority();
 				if(USER_ROLE.authority == "ROLE_ADMIN") {
-					window.location.href = '/index.html#/users';
+					window.location.href = '/index.html#/home';
 				}
 				else if (USER_ROLE.authority == "ROLE_MANAGER") {
-					window.location.href = '/index.html#/teams';
+					window.location.href = '/index.html#/home';
 				}
 				else if (USER_ROLE.authority == "ROLE_SELLER") {
-					window.location.href = '/index.html#/sales';
+					window.location.href = '/index.html#/home';
 				}
 				else if (USER_ROLE.authority == null || USER_ROLE.authority == undefined) {
 					window.location.href = '/index.html#/login';

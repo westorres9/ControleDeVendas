@@ -35,7 +35,6 @@ function AuthService () {
             window.localStorage.removeItem('Authority');
             window.localStorage.clear();
             window.location.href = '/index.html#/login';
-            window.location.path = '/index.html#/login';
         }
     } 
 }
