@@ -5,8 +5,9 @@
 .sales-card {
     background-color: #FFF;
     margin:10px;
-    padding: 10px;
+    padding: 20px;
     border-radius: 10px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
 }
 
 .dsvendas-table {
@@ -14,6 +15,7 @@
     border-spacing: 0;
     border-collapse: collapse;
     border-color: #5f6e82;
+    
 }
 
 .dsvendas-table thead {
@@ -79,11 +81,12 @@
 }
 
 .card-form {
-    background-color: #717171;
+    background-color: #c5c5c5;
     border-radius: 5px;
     width: 100%;
     padding: 20px;
     margin: 0 auto;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
 }
 
 .form-controls label {
@@ -101,14 +104,44 @@
     border-radius: 4px;
     font-size: 12px;
     border: 0;
+    padding: 10px;
+    color: #263238;
 }
 
 .form-input::placeholder {
-    color: #263238
+    color: #263238, 
+}
+
+.form-input:disabled {
+    color: #ddd;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-container .btn {
+    height: 40px;
+    font-size: 10px;
+    width: 100%;
+}
+
+.btn-container .btn-left {
+    margin-right: 10px;
+}
+
+.btn-container .btn-right {
+    margin-left: 10px;
 }
 
 
 @media (min-width:576px) {
+
+    .sales-card {
+        margin: 20px;
+    }
+
     .show576 {
         display: table-cell;
     }
@@ -121,8 +154,18 @@
         font-size: 18px;
     }
 
+    .card-form {
+        max-width: 480px;
+        padding: 50px;
+    }
+
     .form-container {
         padding: 20px;
+    }
+
+    .form-input {
+        height: 40px;
+        font-size: 14px;
     }
 
     .btn-select {
@@ -131,11 +174,26 @@
         font-size: 15px;
         margin-left: 95px;
     }
+
+    .btn-container .btn {
+        height: 50px;
+        font-size: 14px;
+        width: 100%;
+    }
 }
 
 @media (min-width:768px) {
+
+    .sales-card {
+        margin: 30px;
+    }
+
     .form-container {
         padding: 30px;
+    }
+
+    .card-form {
+        max-width: 620px;
     }
 }
 

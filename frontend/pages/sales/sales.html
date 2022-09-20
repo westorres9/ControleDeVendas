@@ -6,7 +6,6 @@
     </div>
   </a>
   <div class="sales-card">
-    <div></div>
     <div>
       <table class="dsvendas-table">
         <thead>
@@ -52,24 +51,21 @@
       <div class="card-form">
         <form name="form-sales">
           <div class="form-controls">
-            <label for="Data Venda">Data Venda</label>
+            <label for="DataVenda">Data Venda</label>
             <input type="text" id="DataVenda" placeholder="Data Venda" class="form-input" ng-model="vm.sale.date">
-            <div class="error-message">Campo requerido</div>
           </div>
           <div class="form-controls">
             <label for="Visitas">Visitas</label>
             <input type="number" id="Visitas" placeholder="Visitas" class="form-input" ng-model="vm.sale.visited">
-            <div class="error-message">Campo requerido</div>
           </div>
           <div class="form-controls">
             <label for="Vendas">Vendas</label>
             <input type="number" id="Vendas" placeholder="Vendas" class="form-input" ng-model="vm.sale.deals">
-            <div class="error-message">Campo requerido</div>
           </div>
           <div class="form-controls">
             <label for="Total">Total</label>
             <input type="number" id="Total" placeholder="Total" class="form-input" ng-model="vm.sale.amount">
-            <div class="error-message">Campo requerido</div>
+  
           </div>
           <div class="form-controls">
             <label for="SellerId">Cod Vendedor</label>
@@ -81,10 +77,10 @@
           </div>
           <div class="form-controls">
             <label for="TeamId">Cod Equipe</label>
-            <input type="text" id="TeamId" placeholder="Cod Equipe" class="form-input" disabled ng-model="vm.sale.teamId">
+            <input type="text" id="TeamId" placeholder="Cod Equipe" class="form-input" ng-model="vm.sale.teamId">
           </div>
-          <div>
-            <button href="#" class="btn btn-success" ng-click="vm.InsertSale(sale)"
+          <div class="btn-container">
+            <button href="#" class="btn btn-left btn-success" ng-click="vm.InsertSale(sale)"
               ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
               Nova Venda
             </button>
@@ -92,7 +88,7 @@
               ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
               Atualizar
             </button>
-            <button href="#" class="btn btn-danger" ng-click="vm.DeleteSale(vm.sale)"
+            <button href="#" class="btn btn-right btn-danger" ng-click="vm.DeleteSale(vm.sale)"
               ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
               Apagar
             </button>

@@ -1,78 +1,84 @@
 <div class="users-container" id="dsvendas-container">
-    <h2>Usuarios</h2>
+    <a href="#home">
+        <div class="goback-container">
+          <img src="/assets/img/arrow.svg" alt="" />
+          <h2>VOLTAR</h2>
+        </div>
+      </a>
     <div class="users-card">
-        <div class="users-content-container">
-            <a href="#home">
-                <div class="goback-container">
-                    <img src="/assets/img/arrow.svg" alt="">
-                    <h2>VOLTAR</h2>
-                </div> 
-            </a>
-            <table class="dsvendas-table">
-                <thead>
-                    <tr>
-                        <th class="show992">
-                            Id
-                        </th>
-                        <th>
-                            Nome
-                        </th>
-                        <th class="show576">
-                            Email
-                        </th>
-                        <th>
-                            Selecionar
-                        </th>
-                    </tr>
-                </thead>
-                
-                <tr ng-repeat="user in vm.users">
-                    <td class="show992">{{user.id}}</td>
-                    <td>{{user.name}}</td>
-                    <td class="show576">{{user.email}}</td>
-                    <td>
-                        <button href="#" class="btn btn-warning" ng-click="vm.SelectUser(user)">
-                            Selecionar
-                        </button>
-
-                    </td>
-                </tr>
-            </table>
-            <div class="formulario">
-                <div class="form">
-                    <label for="">Nome Vendedor</label>
-                    <input type="text" ng-model="vm.user.name" placeholder="Nome usuario">
-                </div>
-                <div class="form">
-                    <label for="">Email</label>
-                    <input type="text" ng-model="vm.user.email" placeholder="Email">
-                </div>
-
-                <div class="form">
-                    <label for="">Password</label>
-                    <input type="password" ng-model="vm.user.password" placeholder="password">
-                </div>
-                <div>
-                    <label for="roles">Choose a role:</label>
-                    <select name="roles" id="roles">
-                        <optgroup>ROLE</optgroup>
-                        <option value="" ng-repeat="role in vm.roles" ng-model="vm.user.roles[role]" ng-click="vm.SelectRole(role)">{{role.authority}}</option>
-                    </select>
-                </div>
-
-
-            </div>
             <div>
-                <button href="#" class="btn btn-success" ng-click="vm.InsertUser(user)">
-                    Nova Venda
-                </button>
-                <button href="#" class="btn btn-primary" ng-click="vm.UpdateUser(user)">
-                    Atualizar
-                </button>
-                <button href="#" class="btn btn-danger" ng-click="vm.DeleteUser(user)">
-                    Apagar
-                </button>
+                <table class="dsvendas-table">
+                    <thead>
+                        <tr>
+                            <th class="show992">
+                                Id
+                            </th>
+                            <th>
+                                Nome
+                            </th>
+                            <th class="show576">
+                                Email
+                            </th>
+                            <th>
+                                Selecionar
+                            </th>
+                        </tr>
+                    </thead>
+                    
+                    <tr ng-repeat="user in vm.users">
+                        <td class="show992">{{user.id}}</td>
+                        <td>{{user.name}}</td>
+                        <td class="show576">{{user.email}}</td>
+                        <td>
+                            <button href="#" class="btn btn-warning" ng-click="vm.SelectUser(user)">
+                                Selecionar
+                            </button>
+    
+                        </td>
+                    </tr>
+                </table>
             </div>
+
+            <section id="form-section" class="form-container">
+                <div class="card-form">
+                    <form name="form-sales">
+                        <div class="form-controls">
+                            <label for="UserName">Nome Usuario</label>
+                            <input type="text" id="UserName" class="form-input" ng-model="vm.user.name" placeholder="Nome usuario">
+                        </div>
+                        <div class="form-controls">
+                            <label for="Email">Email</label>
+                            <input type="text" id="Email" class="form-input" ng-model="vm.user.email" placeholder="Email">
+                        </div>
+        
+                        <div class="form-controls">
+                            <label for="Password">Password</label>
+                            <input type="password" id="Password" class="form-input" ng-model="vm.user.password" placeholder="password">
+                        </div>
+                        <div class="form-controls">
+                            <label for="roles">Choose a role:</label>
+                            <select name="roles" id="roles">
+                                <optgroup>ROLE</optgroup>
+                                <option value="" ng-repeat="role in vm.roles" ng-model="vm.user.roles[role]" ng-click="vm.SelectRole(role)">{{role.authority}}</option>
+                            </select>
+                        </div>
+                        <div class="btn-container">
+                            <button class="btn btn-left btn-success" href="#" class="btn btn-success" ng-click="vm.InsertUser(user)">
+                                Nova Venda
+                            </button>
+                            <button href="#" class="btn btn-primary" ng-click="vm.UpdateUser(user)">
+                                Atualizar
+                            </button>
+                            <button href="#" class="btn bt-rigth btn-danger" ng-click="vm.DeleteUser(user)">
+                                Apagar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            
+            
+            
         </div>
     </div>
 </div>

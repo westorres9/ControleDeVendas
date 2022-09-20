@@ -41,41 +41,42 @@
                             
                         </td>
                     </tr>
-                </tbody>
-                
-                
+                </tbody> 
             </table>
-                <div class="formulario" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
-                    <div class="form">
-                        <label for="">Id Equipe</label>
-                        <input type="text" ng-model="vm.team.id" placeholder="Id Equipe">
-                    </div>
-                    <div class="form">
-                        <label for="">Equipe</label>
-                        <input type="text" ng-model="vm.team.name" placeholder="Nome Equipe">
-                    </div>
-                    <div class="form">
-                        <label for="">Cod Lider Equipe</label>
-                        <input type="text" ng-model="vm.team.managerId" placeholder="Cod Lider Equipe">
-                    </div>
-                    <div class="form">
-                        <label for="">Lider Equipe</label>
-                        <input type="text" ng-model="vm.team.managerName" placeholder="Lider Equipe">
-                    </div>
-                    
-                    
+
+            <section id="form-section" class="form-container" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
+                <div class="card-form">
+                    <form name="form-sales">
+                        <div class="form-controls">
+                            <label for="teamId">Id Equipe</label>
+                            <input type="text" id="teamId" placeholder="Id Equipe" class="form-input" ng-model="vm.team.id" placeholder="Id Equipe">
+                        </div>
+                        <div class="form-controls">
+                            <label for="Team">Equipe</label>
+                            <input type="text" id="Team" placeholder="Equipe" class="form-input" ng-model="vm.team.name">
+                        </div>
+                        <div class="form-controls">
+                            <label for="managerId">Cod Lider Equipe</label>
+                            <input type="text" id="managerId" ng-model="vm.team.managerId" class="form-input" placeholder="Cod Lider Equipe">
+                        </div>
+                        <div class="form-controls">
+                            <label for="managerName">Lider Equipe</label>
+                            <input type="text" id="managerName" ng-model="vm.team.managerName" class="form-input" placeholder="Lider Equipe">
+                        </div>
+                        <div class="btn-container">
+                            <button href="#"class="btn btn-left btn-success" ng-click="vm.InsertTeam(vm.team)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
+                                Nova Equipe
+                            </button>
+                            <button href="#" class="btn btn-primary" ng-click="vm.UpdateTeam(vm.team)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
+                                Atualizar
+                            </button>
+                            <button href="#" class="btn btn-right btn-danger" ng-click="vm.DeleteTeam(vm.team)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
+                                Apagar
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <div>
-                    <button href="#" class="btn btn-success" ng-click="vm.InsertTeam(vm.team)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
-                        Nova Equipe
-                    </button>
-                    <button href="#" class="btn btn-primary" ng-click="vm.UpdateTeam(vm.team)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
-                        Atualizar
-                    </button>
-                    <button href="#" class="btn btn-danger" ng-click="vm.DeleteTeam(vm.team)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
-                        Apagar
-                    </button>
-                </div>
+            </section>               
         </div>
     </div>
 </div>
