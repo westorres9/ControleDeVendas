@@ -8,33 +8,42 @@
                     <h2>VOLTAR</h2>
                 </div> 
             </a>
-            <table class="dsvendas-teams-table table">
-                <tr>
-                    <th>
-                        Id
-                    </th>
-                    <th>
-                        Nome Equipe
-                    </th>
-                    <th>
-                        Cod Lider Equipe
-                    </th>
-                    <th>
-                        Nome Lider Equipe
-                    </th>
-                </tr>
-                <tr ng-repeat="team in vm.teams">
-                    <td>{{team.id}}</td>
-                    <td>{{team.name}}</td>
-                    <td>{{team.managerId}}</td>
-                    <td>{{team.managerName}}</td>
-                    <td>
-                        <button href="#" class="btn btn-warning" ng-click="vm.SelectTeam(team)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
+            <table class="dsvendas-table">
+                <thead>
+                    <tr>
+                        <th >
+                            Id
+                        </th>
+                        <th>
+                            Nome Equipe
+                        </th>
+                        <th class="show992">
+                            Cod Lider Equipe
+                        </th>
+                        <th class="show992">
+                            Nome Lider Equipe
+                        </th>
+                        <th ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
                             Selecionar
-                        </button>
-                        
-                    </td>
-                </tr>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="team in vm.teams">
+                        <td>{{team.id}}</td>
+                        <td>{{team.name}}</td>
+                        <td class="show992">{{team.managerId}}</td>
+                        <td class="show992">{{team.managerName}}</td>
+                        <td>
+                            <button href="#" class="btn btn-warning" ng-click="vm.SelectTeam(team)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
+                                Selecionar
+                            </button>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+                
+                
             </table>
                 <div class="formulario" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
                     <div class="form">

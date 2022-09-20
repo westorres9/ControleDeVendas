@@ -1,6 +1,6 @@
 package com.devsuperior.ControleDeVendas.services;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -78,7 +78,7 @@ public class SaleService {
 		User user = authService.authenticated();
 		if (user.hasRole("ROLE_SELLER")) {
 			Sale entity = new Sale();
-			entity.setDate(dto.getDate().now());
+			entity.setDate(LocalDate.now());
 			entity.setVisited(dto.getVisited());
 			entity.setDeals(dto.getDeals());
 			entity.setAmount(dto.getAmount());

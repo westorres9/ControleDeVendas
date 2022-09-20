@@ -8,22 +8,28 @@
                     <h2>VOLTAR</h2>
                 </div> 
             </a>
-            <table class="dsvendas-users-table table">
-                <tr>
-                    <th>
-                        Id
-                    </th>
-                    <th>
-                        Nome
-                    </th>
-                    <th>
-                        Email
-                    </th>
-                </tr>
+            <table class="dsvendas-table">
+                <thead>
+                    <tr>
+                        <th class="show992">
+                            Id
+                        </th>
+                        <th>
+                            Nome
+                        </th>
+                        <th class="show576">
+                            Email
+                        </th>
+                        <th>
+                            Selecionar
+                        </th>
+                    </tr>
+                </thead>
+                
                 <tr ng-repeat="user in vm.users">
-                    <td>{{user.id}}</td>
+                    <td class="show992">{{user.id}}</td>
                     <td>{{user.name}}</td>
-                    <td>{{user.email}}</td>
+                    <td class="show576">{{user.email}}</td>
                     <td>
                         <button href="#" class="btn btn-warning" ng-click="vm.SelectUser(user)">
                             Selecionar

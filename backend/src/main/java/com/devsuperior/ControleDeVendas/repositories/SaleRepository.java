@@ -11,10 +11,12 @@ import com.devsuperior.ControleDeVendas.entities.User;
 @Repository
 public interface SaleRepository extends JpaRepository<Sale, Long>{
 	
+
 	Page<Sale> findBySeller (User seller, Pageable pageable);
 	
 	Page<Sale> findByTeam (Team team, Pageable pageable);
 	
-	Page<Sale> findByManager (User manager, Pageable pageable);
+	Page<Sale> findByManager ( User manager, Pageable pageable);
+	
 	
 }

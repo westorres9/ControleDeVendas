@@ -9,38 +9,144 @@
     border-radius: 10px;
 }
 
-.sales-content-container{
-    border: 1px solid red;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+.dsvendas-table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-color: #5f6e82;
 }
 
-.dsvendas-sales-table {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    font-size: 11px;
+.dsvendas-table thead {
+    height: 55px;
+    font-size: 16px;
+    color: #222222;
+    font-weight: 700;
+    text-align: center;
+    
 }
 
-.vendas-th {
-    display: none;
+.dsvendas-table tbody {
+    font-size: 14px;
+    font-weight: 400;
+    color:#222222; 
+    text-align: center;
+}
+
+.dsvendas-table tbody tr {
+    height: 74px;
+    border: 1px solid #5f6e82;
+    text-align: center;
+}
+
+.dsvendas-table  tbody tr:hover>td {
+    background-color: #FFF;
+}
+
+.dsvendas-table  tbody tr:nth-child(odd) {
+    background-color: #e9e9e9;
 }
 
 .btn-select {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 43px;
+    margin-left: 60px;
+    width: 70px;
     height: 35px;
-    font-size: 8px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.btn-select:hover {
+    border: 5px solid #ffc107;
 }
 
 .btn-select p {
     margin-top: 15px;
 }
 
-.formulario-sales {
-    display: flex;
-    flex-direction: column;
+.show576{
+    display: none;
+}
+
+.show992 {
+    display: none;
+}
+
+.form-container {
+    margin-top: 30px;
+    padding: 10px 0;
+}
+
+.card-form {
+    background-color: #717171;
+    border-radius: 5px;
+    width: 100%;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.form-controls label {
+    display: none;
+}
+
+.error-message {
+    margin-top: 5px;
+    color: #ff5e5e;
+}
+
+.form-input {
+    height: 30px;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 12px;
+    border: 0;
+}
+
+.form-input::placeholder {
+    color: #263238
+}
+
+
+@media (min-width:576px) {
+    .show576 {
+        display: table-cell;
+    }
+
+    .dsvendas-table tbody tr {
+        height: 55px;
+    }
+
+    .dsvendas-table tbody {
+        font-size: 18px;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+
+    .btn-select {
+        width: 90px;
+        height: 35px;
+        font-size: 15px;
+        margin-left: 95px;
+    }
+}
+
+@media (min-width:768px) {
+    .form-container {
+        padding: 30px;
+    }
+}
+
+@media (min-width:992px) {
+    .show992 {
+        display: table-cell;
+    }
+}
+
+@media (min-width:1400px) {
+    .btn-select {
+        margin-left: 220px;
+    }
 }

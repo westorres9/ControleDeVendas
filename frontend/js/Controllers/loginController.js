@@ -1,4 +1,4 @@
-vendasApp.controller('LoginController', function ($http, $httpParamSerializerJQLike,$window, AuthService) {
+vendasApp.controller('loginController', function ($http, $httpParamSerializerJQLike,$window, AuthService) {
 	var vm = this;
 	vm.user = { 'grant_type': 'password' };
 	vm.authenticate = authenticate;

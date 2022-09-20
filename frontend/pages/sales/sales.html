@@ -1,106 +1,104 @@
 <div class="sales-container" id="dsvendas-container">
-    <a href="#home">
-        <div class="goback-container">
-            <img src="/assets/img/arrow.svg" alt="">
-            <h2>VOLTAR</h2>
-        </div> 
-    </a>
-    <div class="sales-card">
-        
-        <div class="sales-content-container">
-            <table class="table">
-                <tr class="dsvendas-sales-table">
-                    <th>
-                        Id
-                    </th>
-                    <th>
-                        Data
-                    </th>
-                    <th>
-                        Visitas
-                    </th>
-                    <th>
-                        Vendas
-                    </th>
-                    <th>
-                        Total
-                    </th>
-                    <th class="vendas-th">
-                        ID Vendedor
-                    </th>
-                    <th>
-                        Vendedor
-                    </th>
-                    <th class="vendas-th">
-                        ID Equipe
-                    </th>
-                    <th class="vendas-th">
-                        Gestor
-                    </th>
-                </tr>
-                <tr class="dsvendas-sales-table" ng-repeat="sale in vm.sales">
-                    <td>{{sale.id}}</td>
-                    <td>{{sale.date}}</td>
-                    <td>{{sale.visited}}</td>
-                    <td>{{sale.deals}}</td>
-                    <td>{{sale.amount}}</td>
-                    <td class="vendas-th">{{sale.sellerId}}</td>
-                    <td>{{sale.sellerName}}</td>
-                    <td class="vendas-th">{{sale.teamId}}</td>
-                    <td class="vendas-th">{{sale.managerId}}</td>
-
-                    <td>
-                        <button href="#" class="btn-select btn btn-warning" ng-click="vm.SelectSale(sale)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
-                            <p>Selecionar</p>
-                        </button>
-                        
-                    </td>
-                </tr>
-            </table>
-                <div class="formulario-sales" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
-                    <div>
-                        <div class="form">
-                            <label for="">Data da Venda</label>
-                            <input type="text" ng-model="vm.sale.date" placeholder="Data Venda" ng-required="vm.sale.date">
-                        </div>
-                        <div class="form">
-                            <label for="">Visitas</label>
-                            <input type="text" ng-model="vm.sale.visited" placeholder="visitas" ng-required="vm.sale.visited">
-                        </div>
-                        <div class="form">
-                            <label for="">Qtde Vendas</label>
-                            <input type="text" ng-model="vm.sale.deals" placeholder="Qtde Vendas" ng-required="vm.sale.deals">
-                        </div>
-                        <div class="form">
-                            <label for="">Total</label>
-                            <input type="text" ng-model="vm.sale.amount" placeholder="Total" ng-required="vm.sale.amount>
-                        </div>
-                        
-                        <div class="form">
-                            <label for="">Cod Vendedor</label>
-                            <input type="text" ng-model="vm.sale.sellerId" placeholder="Cod Vendedor" ng-required="vm.sale.sellerId">
-                        </div>
-                        <div class="form">
-                            <label for="">Nome Vendedor</label>
-                            <input type="text" ng-model="vm.sale.sellerName" placeholder="Nome Vendedor" ng-required="vm.sale.sellerName">
-                        </div>
-                        <div class="form">
-                            <label for="">Cod Equipe</label>
-                            <input type="text" ng-model="vm.sale.teamId" placeholder="Cod Equipe" ng-required="vm.sale.teamId">
-                        </div>    
-                    </div>
-                </div>
-                <div class="form-btn">
-                    <button href="#" class="btn btn-success" ng-click="vm.InsertSale(sale)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
-                        Nova Venda
-                    </button>
-                    <button href="#" class="btn btn-primary" ng-click="vm.UpdateSale(sale)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
-                        Atualizar
-                    </button>
-                    <button href="#" class="btn btn-danger" ng-click="vm.DeleteSale(vm.sale)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
-                        Apagar
-                    </button>
-                </div>
-        </div>
+  <a href="#home">
+    <div class="goback-container">
+      <img src="/assets/img/arrow.svg" alt="" />
+      <h2>VOLTAR</h2>
     </div>
+  </a>
+  <div class="sales-card">
+    <div></div>
+    <div>
+      <table class="dsvendas-table">
+        <thead>
+          <tr>
+            <th class="show992">Id</th>
+            <th class="show576">Data</th>
+            <th>Vendedor</th>
+            <th class="show992">Visitas</th>
+            <th class="show992">Vendas</th>
+            <th>Total</th>
+            <th class="show992">ID Vendedor</th>
+
+            <th class="show992">ID Equipe</th>
+            <th class="show992">Gestor</th>
+            <th ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">Selecionar
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="sale in vm.sales">
+            <td class="show992">{{sale.id}}</td>
+            <td class="show576">{{sale.date}}</td>
+            <td>{{sale.sellerName}}</td>
+            <td class="show992">{{sale.visited}}</td>
+            <td class="show992">{{sale.deals}}</td>
+            <td>{{sale.amount}}</td>
+            <td class="show992">{{sale.sellerId}}</td>
+            <td class="show992">{{sale.teamId}}</td>
+            <td class="show992">{{sale.managerId}}</td>
+            <td>
+              <button href="#" class="btn-select btn btn-warning" ng-click="vm.SelectSale(sale)"
+                ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
+                <p>Selecionar</p>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <section id="form-section" class="form-container"
+      ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
+      <div class="card-form">
+        <form name="form-sales">
+          <div class="form-controls">
+            <label for="Data Venda">Data Venda</label>
+            <input type="text" id="DataVenda" placeholder="Data Venda" class="form-input" ng-model="vm.sale.date">
+            <div class="error-message">Campo requerido</div>
+          </div>
+          <div class="form-controls">
+            <label for="Visitas">Visitas</label>
+            <input type="number" id="Visitas" placeholder="Visitas" class="form-input" ng-model="vm.sale.visited">
+            <div class="error-message">Campo requerido</div>
+          </div>
+          <div class="form-controls">
+            <label for="Vendas">Vendas</label>
+            <input type="number" id="Vendas" placeholder="Vendas" class="form-input" ng-model="vm.sale.deals">
+            <div class="error-message">Campo requerido</div>
+          </div>
+          <div class="form-controls">
+            <label for="Total">Total</label>
+            <input type="number" id="Total" placeholder="Total" class="form-input" ng-model="vm.sale.amount">
+            <div class="error-message">Campo requerido</div>
+          </div>
+          <div class="form-controls">
+            <label for="SellerId">Cod Vendedor</label>
+            <input type="number" id="SellerId" placeholder="Cod Vendedor" class="form-input" ng-model="vm.sale.sellerId">
+          </div>
+          <div class="form-controls">
+            <label for="SellerName">Nome Vendedor</label>
+            <input type="text" id="SellerName" placeholder="Nome Vendedor" class="form-input" ng-model="vm.sale.sellerName">
+          </div>
+          <div class="form-controls">
+            <label for="TeamId">Cod Equipe</label>
+            <input type="text" id="TeamId" placeholder="Cod Equipe" class="form-input" disabled ng-model="vm.sale.teamId">
+          </div>
+          <div>
+            <button href="#" class="btn btn-success" ng-click="vm.InsertSale(sale)"
+              ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
+              Nova Venda
+            </button>
+            <button href="#" class="btn btn-primary" ng-click="vm.UpdateSale(sale)"
+              ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
+              Atualizar
+            </button>
+            <button href="#" class="btn btn-danger" ng-click="vm.DeleteSale(vm.sale)"
+              ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">
+              Apagar
+            </button>
+        </form>
+      </div>
+</section>
 </div>
+
+  

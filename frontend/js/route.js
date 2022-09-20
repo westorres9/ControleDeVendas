@@ -31,7 +31,7 @@ vendasApp.config(function($routeProvider) {
     })
     .when('/login', {
         templateUrl: 'pages/login/login.html',
-        controller: 'LoginController',
+        controller: 'loginController',
         controllerAs: 'vm'
     })
     .otherwise('/login');
