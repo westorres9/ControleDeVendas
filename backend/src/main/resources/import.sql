@@ -21,6 +21,11 @@ INSERT INTO tb_team (name) VALUES ('Bradesco');
 INSERT INTO tb_team (name) VALUES ('Santander');
 INSERT INTO tb_team (name) VALUES ('Embratel');
 
+INSERT INTO tb_team_manager(team_id, manager_id) VALUES (1,2);
+INSERT INTO tb_team_manager(team_id, manager_id) VALUES (1,5);
+INSERT INTO tb_team_manager(team_id, manager_id) VALUES (2,5);
+INSERT INTO tb_team_manager(team_id, manager_id) VALUES (3,5);
+
 INSERT INTO tb_sale(seller_id,visited,deals,amount,date) VALUES (1,121,67,18196.0,'2022-06-16');
 INSERT INTO tb_sale(seller_id,visited,deals,amount,date) VALUES (4,26,14,4255.0,'2022-06-14');
 INSERT INTO tb_sale(seller_id,visited,deals,amount,date) VALUES (6,55,42,13249.0,'2022-06-14');

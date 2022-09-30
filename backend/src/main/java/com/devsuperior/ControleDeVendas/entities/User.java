@@ -41,6 +41,9 @@ public class User implements Serializable, UserDetails {
 	@OneToMany(mappedBy = "seller")
 	private List<Sale> sales = new ArrayList<>();
 	
+	@ManyToMany(mappedBy = "managers")
+	private List<Team> teams = new ArrayList<>();
+	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_user_role",
 			joinColumns = @JoinColumn(name = "user_id"),
@@ -98,6 +101,14 @@ public class User implements Serializable, UserDetails {
 		return roles;
 	}
 	
+	public List<Sale> getSales() {
+		return sales;
+	}
+
+	public List<Team> getTeams() {
+		return teams;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
