@@ -17,6 +17,10 @@ INSERT INTO tb_user_role (user_id, role_id) VALUES (4, 1);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (5, 2);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (6, 1);
 
+INSERT INTO tb_team (name) VALUES ('Bradesco');
+INSERT INTO tb_team (name) VALUES ('Santander');
+INSERT INTO tb_team (name) VALUES ('Embratel');
+
 INSERT INTO tb_sale(seller_id,visited,deals,amount,date) VALUES (1,121,67,18196.0,'2022-06-16');
 INSERT INTO tb_sale(seller_id,visited,deals,amount,date) VALUES (4,26,14,4255.0,'2022-06-14');
 INSERT INTO tb_sale(seller_id,visited,deals,amount,date) VALUES (6,55,42,13249.0,'2022-06-14');
@@ -52,7 +56,6 @@ INSERT INTO tb_sale(seller_id,visited,deals,amount,date) VALUES (4,32,12,6926.0,
 INSERT INTO tb_sale(seller_id,visited,deals,amount,date) VALUES (4,64,33,8193.0,'2022-03-13');
 INSERT INTO tb_sale(seller_id,visited,deals,amount,date) VALUES (1,39,39,10557.0,'2022-03-05');
 INSERT INTO tb_sale(seller_id,visited,deals,amount,date) VALUES (1,158,84,21601.0,'2022-03-02');
-INSERT INTO tb_sale(seller_id,visited,deals,amount,date) VALUES (4,12,6,7625.0,'2022-02-29');
 INSERT INTO tb_sale(seller_id,visited,deals,amount,date) VALUES (6,82,82,22465.0,'2022-02-27');
 INSERT INTO tb_sale(seller_id,visited,deals,amount,date) VALUES (1,68,56,12595.0,'2022-02-17');
 INSERT INTO tb_sale(seller_id,visited,deals,amount,date) VALUES (4,27,13,4636.0,'2022-02-16');
