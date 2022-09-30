@@ -1,8 +1,11 @@
 package com.devsuperior.ControleDeVendas.repositories;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.devsuperior.ControleDeVendas.entities.Sale;
+
 @Repository
-public interface SaleRepository {
+public interface SaleRepository extends JpaRepository<Sale, Long>{
 
 }
