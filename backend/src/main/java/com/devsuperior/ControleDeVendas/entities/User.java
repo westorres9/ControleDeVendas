@@ -18,7 +18,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -39,13 +38,6 @@ public class User implements Serializable, UserDetails {
 	private String email;
 	private String password;
 	
-	@OneToMany(mappedBy = "manager")
-    private List<Team> teams;
-	
-	public List<Team> getTeams() {
-		return teams;
-	}
-
 	@OneToMany(mappedBy = "seller")
 	private List<Sale> sales = new ArrayList<>();
 	
@@ -106,10 +98,6 @@ public class User implements Serializable, UserDetails {
 		return roles;
 	}
 	
-	public List<Sale> getSales() {
-		return sales;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
