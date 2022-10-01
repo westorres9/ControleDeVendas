@@ -32,7 +32,7 @@ import com.devsuperior.ControleDeVendas.services.exceptions.UnauthorizedExceptio
 @Service
 public class UserService implements UserDetailsService {
 
-    private static Logger logger = LoggerFactory.getLogger(UserService.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
 	
 	@Autowired

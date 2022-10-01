@@ -1,8 +1,10 @@
 package com.devsuperior.ControleDeVendas.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.devsuperior.ControleDeVendas.entities.Team;
+import com.devsuperior.ControleDeVendas.entities.User;
 
 public class TeamDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,9 +22,9 @@ public class TeamDTO implements Serializable {
 	
 	public TeamDTO(Team entity) {
 		this.id = entity.getId();
-		this.name = entity.getName();
+		this.name = entity.getName();	
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -38,6 +40,5 @@ public class TeamDTO implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
 }
