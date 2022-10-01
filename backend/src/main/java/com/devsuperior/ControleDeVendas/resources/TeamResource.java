@@ -30,7 +30,7 @@ public class TeamResource {
 	
 	@GetMapping
 	public ResponseEntity<Page<TeamDTO>> findAll(Pageable pageable) {
-		Page<TeamDTO> page = service.findAllPaged(pageable);
+		Page<TeamDTO> page = service.findAll(pageable);
 		return ResponseEntity.ok().body(page);
 	}
 	
@@ -41,13 +41,12 @@ public class TeamResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<TeamDTO> insert(@Valid @RequestBody TeamDTO dto) {
+	public ResponseEntity<TeamDTO> insert(@RequestBody TeamDTO dto) {
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder
 				.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
-		
 	}
 	
 	@PutMapping(value = "/{id}")
@@ -62,7 +61,4 @@ public class TeamResource {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-	
-	
-
 }

@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.ControleDeVendas.dto.TeamDTO;
+import com.devsuperior.ControleDeVendas.dto.TeamDTO;
 import com.devsuperior.ControleDeVendas.entities.Team;
 import com.devsuperior.ControleDeVendas.entities.User;
+import com.devsuperior.ControleDeVendas.entities.Team;
 import com.devsuperior.ControleDeVendas.repositories.TeamRepository;
 import com.devsuperior.ControleDeVendas.repositories.UserRepository;
 import com.devsuperior.ControleDeVendas.services.exceptions.DatabaseException;
@@ -22,100 +24,100 @@ import com.devsuperior.ControleDeVendas.services.exceptions.UnauthorizedExceptio
 
 @Service
 public class TeamService {
-	
+
 	@Autowired
 	private TeamRepository repository;
-	
-	@Autowired
-	private AuthService authService;
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
+	@Autowired
+	private AuthService authService;
+
 	@Transactional(readOnly = true)
-	public Page<TeamDTO> findAllPaged(Pageable pageable) {
+	public Page<TeamDTO> findAll(Pageable pageable) {
 		User user = authService.authenticated();
-		if(user.hasRole("ROLE_MANAGER")) {
-			Page<Team> page = repository.findByManager(user, pageable);
+		if (user.hasRole("ROLE_MANAGER")) {
+			Page<Team> page = repository.findByManage(user.getId(), pageable);
 			return page.map(x -> new TeamDTO(x));
-		}
-		else if (user.hasRole("ROLE_ADMIN")) {
+		} else {
 			Page<Team> page = repository.findAll(pageable);
 			return page.map(x -> new TeamDTO(x));
 		}
-		throw new UnauthorizedException("Unauthorized Exception");	
+
 	}
-	
+
 	@Transactional(readOnly = true)
 	public TeamDTO findById(Long id) {
 		User user = authService.authenticated();
-		if (user.hasRole("ROLE_ADMIN") ) {
+		if (user.hasRole("ROLE_MANAGER")) {
 			Optional<Team> obj = repository.findById(id);
-			Team entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity Not Found"));
-			return new TeamDTO(entity);
-		} 
-		else if (user.hasRole("ROLE_MANAGER")) {
-			Optional<Team> obj = repository.findById(id);
-			Team entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity Not Found"));
-			if(entity.getManager().getId().equals(user.getId())) {
+			Team entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not Found"));
+			if (!entity.getManagers().contains(user)) {
+				throw new UnauthorizedException("Unauthorized");
+			} else {
 				return new TeamDTO(entity);
 			}
-			throw new UnauthorizedException("Unauthorized Exception");	
+		} else {
+			Optional<Team> obj = repository.findById(id);
+			Team entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not Found"));
+			return new TeamDTO(entity);
 		}
-		throw new UnauthorizedException("Unauthorized Exception");	
-		
+
 	}
-	
+
 	@Transactional
 	public TeamDTO insert(TeamDTO dto) {
 		User user = authService.authenticated();
-		if(user.hasRole("ROLE_ADMIN") || user.hasRole("ROLE_MANAGER")) {
+		if (user.hasRole("ROLE_MANAGER")) {
 			Team entity = new Team();
 			entity.setName(dto.getName());
-			user = userRepository.getOne(dto.getManagerId());
-			entity.setManager(user);
+			entity.getManagers().add(user);
 			entity = repository.save(entity);
 			return new TeamDTO(entity);
+		} else {
+			throw new UnauthorizedException("Unauthorized");
 		}
-		throw new UnauthorizedException("Unauthorized Exception");	
+
 	}
-	
+
 	@Transactional
 	public TeamDTO update(Long id, TeamDTO dto) {
 		User user = authService.authenticated();
-		if(user.hasRole("ROLE_ADMIN") || user.hasRole("ROLE_MANAGER")) {
+		if (user.hasRole("ROLE_MANAGER")) {
 			try {
 				Team entity = repository.getOne(id);
-				entity.setName(dto.getName());
-				entity.setManager(userRepository.getOne(entity.getManager().getId()));
-				entity = repository.save(entity);
-				return new TeamDTO(entity);
-			}
-			catch (EntityNotFoundException e) {
+				if (!entity.getManagers().contains(user)) {
+					throw new UnauthorizedException("Unauthorized");
+				} else {
+					entity.setName(dto.getName());
+					entity.getManagers().add(user);
+					entity = repository.save(entity);
+					return new TeamDTO(entity);
+				}
+
+			} catch (EntityNotFoundException e) {
 				throw new ResourceNotFoundException("Entity not Found " + id);
 			}
+		} else {
+			throw new UnauthorizedException("Unauthorized");
 		}
-		throw new UnauthorizedException("Unauthorized Exception");
+
 	}
-	
-	
+
 	public void delete(Long id) {
 		User user = authService.authenticated();
-		if(user.hasRole("ROLE_ADMIN") || user.hasRole("ROLE_MANAGER")) {
+		if (user.hasRole("ROLE_MANAGER")) {
 			try {
 				repository.deleteById(id);
-			}
-			catch(EntityNotFoundException e) {
+			} catch (EntityNotFoundException e) {
 				throw new ResourceNotFoundException("Entity not Found " + id);
-			}
-			catch(DataIntegrityViolationException e) {
+			} catch (DataIntegrityViolationException e) {
 				throw new DatabaseException("Integrity violation");
 			}
+		} else {
+			throw new UnauthorizedException("Unauthorized");
 		}
-		throw new UnauthorizedException("Unauthorized Exception");
-		
 	}
-	
-	
-	
+
 }

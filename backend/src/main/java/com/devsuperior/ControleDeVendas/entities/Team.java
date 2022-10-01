@@ -7,16 +7,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 @Entity
 @Table(name = "tb_team")
 public class Team implements Serializable {
@@ -27,26 +19,21 @@ public class Team implements Serializable {
 	private Long id;
 	private String name;
 	
-	@ManyToOne
-	@JoinColumn(name = "manager_id")
-	private User manager;
-	
-	@OneToMany(mappedBy = "team")
-	private List<Sale> sales = new ArrayList<>();
-	
-	@ManyToMany
-	@JoinTable(name = "tb_team_seller",
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "tb_team_manager",
 			joinColumns = @JoinColumn(name = "team_id"),
-			inverseJoinColumns = @JoinColumn(name = "seller_id"))
-	private Set<User> sellers = new HashSet<>();
-	
+			inverseJoinColumns = @JoinColumn(name = "manager_id"))
+	private List<User> managers = new ArrayList<>();
+
+	@OneToMany(mappedBy = "team")
+	private List<User> sellers = new ArrayList<>();
+
 	public Team() {
 	}
-	
-	public Team(Long id, String name, User manager) {
+
+	public Team(Long id, String name) {
 		this.id = id;
 		this.name = name;
-		this.manager = manager;
 	}
 
 	public Long getId() {
@@ -65,19 +52,11 @@ public class Team implements Serializable {
 		this.name = name;
 	}
 
-	public User getManager() {
-		return manager;
+	public List<User> getManagers() {
+		return managers;
 	}
 
-	public void setManager(User manager) {
-		this.manager = manager;
-	}
-
-	public List<Sale> getSales() {
-		return sales;
-	}
-
-	public Set<User> getSellers() {
+	public List<User> getSellers() {
 		return sellers;
 	}
 
@@ -99,6 +78,4 @@ public class Team implements Serializable {
 	}
 	
 	
-	
-
 }

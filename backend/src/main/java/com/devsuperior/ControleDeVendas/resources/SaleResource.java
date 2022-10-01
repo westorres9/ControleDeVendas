@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devsuperior.ControleDeVendas.dto.SaleDTO;
-import com.devsuperior.ControleDeVendas.dto.SaleInsertDTO;
-import com.devsuperior.ControleDeVendas.dto.SaleUpdateDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleDTO;
 import com.devsuperior.ControleDeVendas.services.SaleService;
 
 @RestController
@@ -32,7 +31,7 @@ public class SaleResource {
 	
 	@GetMapping
 	public ResponseEntity<Page<SaleDTO>> findAll(Pageable pageable) {
-		Page<SaleDTO> page = service.findAllPaged(pageable);
+		Page<SaleDTO> page = service.findAll(pageable);
 		return ResponseEntity.ok().body(page);
 	}
 	
@@ -43,17 +42,16 @@ public class SaleResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<SaleDTO> insert(@Valid @RequestBody SaleInsertDTO dto) {
-		SaleDTO newDto = service.insert(dto);
+	public ResponseEntity<SaleDTO> insert(@RequestBody SaleDTO dto) {
+		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder
 				.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(dto.getId()).toUri();
-		return ResponseEntity.created(uri).body(newDto);
-		
+		return ResponseEntity.created(uri).body(dto);
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<SaleDTO> update(@PathVariable Long id, @Valid @RequestBody SaleUpdateDTO dto) {
+	public ResponseEntity<SaleDTO> update(@PathVariable Long id,@Valid @RequestBody SaleDTO dto) {
 		SaleDTO newDTO = service.update(id, dto);
 		return ResponseEntity.ok().body(newDTO);
 	}
@@ -64,7 +62,4 @@ public class SaleResource {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-	
-	
-
 }

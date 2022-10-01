@@ -9,18 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -39,22 +28,22 @@ public class User implements Serializable, UserDetails {
 	private String email;
 	private String password;
 	
-	@OneToMany(mappedBy = "manager")
-    private List<Team> teams;
-	
-	public List<Team> getTeams() {
-		return teams;
-	}
-
 	@OneToMany(mappedBy = "seller")
 	private List<Sale> sales = new ArrayList<>();
 	
+	@ManyToMany(mappedBy = "managers")
+	private List<Team> teams = new ArrayList<>();
+
+	@ManyToOne
+	@JoinColumn(name = "team_id")
+	private Team team;
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_user_role",
 			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "role_id"))
 	public Set<Role> roles = new HashSet<>();
-	
+
 	public User() {
 	}
 
@@ -96,10 +85,13 @@ public class User implements Serializable, UserDetails {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
 	}
 
 	public Set<Role> getRoles() {
@@ -108,6 +100,10 @@ public class User implements Serializable, UserDetails {
 	
 	public List<Sale> getSales() {
 		return sales;
+	}
+
+	public List<Team> getTeams() {
+		return teams;
 	}
 
 	@Override

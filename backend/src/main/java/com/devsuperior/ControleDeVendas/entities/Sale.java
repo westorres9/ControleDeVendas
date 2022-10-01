@@ -13,42 +13,31 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name = "tb_sale")
-public class Sale implements Serializable{
+public class Sale implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private LocalDate date;
-	private Integer deals;
 	private Integer visited;
+	private Integer deals;
 	private Double amount;
 	
 	@ManyToOne
-	@JoinColumn(name = "userSellerId")
+	@JoinColumn(name = "seller_id")
 	private User seller;
-	
-	@ManyToOne
-	@JoinColumn(name = "teamId")
-	private Team team;
-	
-	@ManyToOne
-	@JoinColumn(name = "managerId")
-	private User manager;
 	
 	public Sale() {
 	}
-	
-	public Sale(Long id, LocalDate date, Integer deals, Integer visited, Double amount, User seller, Team team, User manager) {
-		super();
+
+	public Sale(Long id, LocalDate date, Integer visited, Integer deals, Double amount, User seller) {
 		this.id = id;
 		this.date = date;
-		this.deals = deals;
 		this.visited = visited;
+		this.deals = deals;
 		this.amount = amount;
 		this.seller = seller;
-		this.team = team;
-		this.manager = manager;
 	}
 
 	public Long getId() {
@@ -67,20 +56,20 @@ public class Sale implements Serializable{
 		this.date = date;
 	}
 
-	public Integer getDeals() {
-		return deals;
-	}
-
-	public void setDeals(Integer deals) {
-		this.deals = deals;
-	}
-
 	public Integer getVisited() {
 		return visited;
 	}
 
 	public void setVisited(Integer visited) {
 		this.visited = visited;
+	}
+
+	public Integer getDeals() {
+		return deals;
+	}
+
+	public void setDeals(Integer deals) {
+		this.deals = deals;
 	}
 
 	public Double getAmount() {
@@ -99,22 +88,6 @@ public class Sale implements Serializable{
 		this.seller = seller;
 	}
 
-	public User getManager() {
-		return manager;
-	}
-
-	public void setManagerId(User manager) {
-		this.manager = manager;
-	}
-
-	public Team getTeam() {
-		return team;
-	}
-
-	public void setTeam(Team team) {
-		this.team = team;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -131,6 +104,8 @@ public class Sale implements Serializable{
 		Sale other = (Sale) obj;
 		return Objects.equals(id, other.id);
 	}
+	
+	
 	
 	
 	
