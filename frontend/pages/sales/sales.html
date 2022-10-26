@@ -17,9 +17,6 @@
             <th class="show992">Vendas</th>
             <th>Total</th>
             <th class="show992">ID Vendedor</th>
-
-            <th class="show992">ID Equipe</th>
-            <th class="show992">Gestor</th>
             <th ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">Selecionar
             </th>
           </tr>
@@ -33,8 +30,6 @@
             <td class="show992">{{sale.deals}}</td>
             <td>{{sale.amount}}</td>
             <td class="show992">{{sale.sellerId}}</td>
-            <td class="show992">{{sale.teamId}}</td>
-            <td class="show992">{{sale.managerId}}</td>
             <td>
               <button href="#" class="btn-select btn btn-warning" ng-click="vm.SelectSale(sale)"
                 ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN' || vm.USER_ROLE.authority == 'ROLE_MANAGER'">

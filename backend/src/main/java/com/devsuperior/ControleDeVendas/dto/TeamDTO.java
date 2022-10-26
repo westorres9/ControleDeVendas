@@ -18,11 +18,12 @@ public class TeamDTO implements Serializable {
 	public TeamDTO(Long id, String name) {
 		this.id = id;
 		this.name = name;
+
 	}
 	
 	public TeamDTO(Team entity) {
 		this.id = entity.getId();
-		this.name = entity.getName();	
+		this.name = entity.getName();
 	}
 	
 	public Long getId() {

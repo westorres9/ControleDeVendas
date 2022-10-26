@@ -17,12 +17,6 @@
                         <th>
                             Nome Equipe
                         </th>
-                        <th class="show992">
-                            Cod Lider Equipe
-                        </th>
-                        <th class="show992">
-                            Nome Lider Equipe
-                        </th>
                         <th ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
                             Selecionar
                         </th>
@@ -32,8 +26,6 @@
                     <tr ng-repeat="team in vm.teams">
                         <td>{{team.id}}</td>
                         <td>{{team.name}}</td>
-                        <td class="show992">{{team.managerId}}</td>
-                        <td class="show992">{{team.managerName}}</td>
                         <td>
                             <button href="#" class="btn btn-warning" ng-click="vm.SelectTeam(team)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
                                 Selecionar
@@ -54,14 +46,6 @@
                         <div class="form-controls">
                             <label for="Team">Equipe</label>
                             <input type="text" id="Team" placeholder="Equipe" class="form-input" ng-model="vm.team.name">
-                        </div>
-                        <div class="form-controls">
-                            <label for="managerId">Cod Lider Equipe</label>
-                            <input type="text" id="managerId" ng-model="vm.team.managerId" class="form-input" placeholder="Cod Lider Equipe">
-                        </div>
-                        <div class="form-controls">
-                            <label for="managerName">Lider Equipe</label>
-                            <input type="text" id="managerName" ng-model="vm.team.managerName" class="form-input" placeholder="Lider Equipe">
                         </div>
                         <div class="btn-container">
                             <button href="#"class="btn btn-left btn-success" ng-click="vm.InsertTeam(vm.team)" ng-hide="vm.USER_ROLE.authority == 'ROLE_ADMIN'">
