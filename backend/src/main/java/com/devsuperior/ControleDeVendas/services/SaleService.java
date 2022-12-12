@@ -35,7 +35,7 @@ public class SaleService {
 	private UserRepository userRepository;
 	
 	@Transactional(readOnly = true)
-	public Page<SaleDTO> findAll(Pageable pageable) {
+	public Page<SaleDTO> findAll(String name, Pageable pageable) {
 		User user = authService.authenticated();
 		if (user.hasRole("ROLE_SELLER")) {
 			Page<Sale> page = repository.findBySeller(user, pageable);
@@ -46,7 +46,7 @@ public class SaleService {
 			return page.map(x -> new SaleDTO(x));
 		}
 		else {
-			Page<Sale> page = repository.findAll(pageable); 
+			Page<Sale> page = repository.findBySellerName(name, pageable);
 			return page.map(x -> new SaleDTO(x));
 		}
 		

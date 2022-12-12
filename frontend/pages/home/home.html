@@ -1,8 +1,12 @@
 <div class="home-content">
-  
   <div class="home-img"> 
     <h2>{{vm.message}}{{vm.user}}</h2>
     <img src="/assets/img/Cadastro_de_Produtos.png" alt="">
+  </div>
+  <div>
+    <button class="logout-btn btn btn-primary" ng-click="vm.logout()">
+      Logout
+    </button> 
   </div>
 </div>
 <nav class="admin-nav-container">
@@ -31,9 +35,7 @@
       </a>
     </li>
     <li>
-      <button class="logout-btn btn btn-primary" ng-click="vm.logout()">
-        Logout
-      </button>  
+       
     </li>
   </ul>
 </nav>
