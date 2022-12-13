@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="vendasApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="views/login/login.css">
+    <link rel="stylesheet" href="views/admin/admin.css">
+    <link rel="stylesheet" href="views/sales/sales.css">
+    <link rel="stylesheet" href="views/sale-form/saleform.css">
+    <link rel="stylesheet" href="views/teams/teams.css">
+    <link rel="stylesheet" href="views/team-form/teamform.css">
+    <link rel="stylesheet" href="views/users/users.css">
+    <link rel="stylesheet" href="views/user-form/userform.css">
+    <title>Document</title>
+</head>
+<body ng-controller="mainController">
+    <header class="header-bar-container">
+        <div class="header-bar-content">
+            <a href="#home"><h1>DSVendas</h1></a>
+            <a href="#login">Login</a>
+        </div>
+    </header>
+    <main>
+        <div ng-view></div>
+    </main>
+
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="js/route.js"></script>
+    <script src="js/controllers/home.controller.js"></script>
+    <script src="js/controllers/main.controller.js"></script>
+    <script src="js/controllers/login.controller.js"></script>
+    <script src="js/controllers/admin.controller.js"></script>
+    <script src="js/controllers/sales.controller.js"></script>
+    <script src="js/controllers/teams.controller.js"></script>
+    <script src="js/controllers/users.controller.js"></script>
+    <script src="js/controllers/sale.form.controller.js"></script>
+    <script src="js/controllers/user.form.controller.js"></script>
+    <script src="js/controllers/team.form.controller.js"></script>
+</body>
+</html>

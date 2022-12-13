@@ -1,0 +1,99 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    border-radius: 4px;
+    box-shadow: 5px 8px rgba(0, 0, 0, 0.05);
+}
+
+.login-card h2 {
+    font-size: 26px;
+    margin: 80px auto;
+}
+
+.login-card .form-input-email{
+    margin-bottom: 20px;
+}
+
+.login-card .form-input-password {
+    margin-bottom: 50px;
+}
+
+.form-input-button {
+    margin-bottom: 120px;
+}
+
+.form-input-button .btn {
+    width: 100%;
+}
+
+@media (min-width: 576px) {
+    .login-card{
+        margin: 20px;
+    }
+
+    .login-card h2 {
+        font-size: 34px;
+    }
+
+    .login-card form {
+        width: 300px;
+    }
+
+    .login-card input {
+        height: 45px;
+    }
+
+    .login-card button {
+        height: 45px;
+        font-size: 18px;
+    }
+
+    .form-input-button {
+        margin-bottom: 140px;
+    }
+}
+
+@media (min-width: 768px) {
+    .login-card{
+        margin: 30px;
+    }
+
+    .form-input-button {
+        margin-bottom: 180px;
+    }
+}
+
+@media (min-width: 992px) {
+    .login-card h2 {
+        font-size: 40px;
+        margin: 130px auto;
+    }
+
+    .login-card{
+        margin: 40px;
+    }
+
+    .login-card form {
+        width: 400px;
+    }
+
+    .login-card input {
+        height: 55px;
+    }
+
+    .login-card button {
+        height: 55px;
+        font-size: 20px;
+    }
+}
+

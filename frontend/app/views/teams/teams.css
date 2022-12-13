@@ -1,0 +1,43 @@
+.vendas-container-top-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 10px
+  }
+  
+  .vendas-container-top-area a {
+    margin-right: 50px;
+  }
+  
+  .vendas-container-top-area a span {
+    font-size: 18px;
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  
+  .vendas-container-top-area img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .teamImg img {
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+  }
+
+.show576 {
+    display: none;
+}
+
+@media (min-width:576px) {
+    .show576 {
+        display: unset;
+    }
+
+    .new-sale .btn {
+      height: 45px;
+      padding-top: 10px;
+      margin-bottom: 30px;
+  }
+}
