@@ -1,21 +1,21 @@
 <section class="dsvendas-container">
     <div class="login-card">
         <h2>Login</h2>
-        <form>
+        <form ng-submit="vm.authenticate()" ng-required="vm.user.username && vm.user.password" required>
             <div class="form-input-email">
                 <div class="valid-feedback">
                     Looks good
                 </div>
-                <input class="form-control base-input email"type="text" placeholder="Email">
+                <input class="form-control base-input email"type="text" placeholder="Email" ng-model="vm.user.username">
             </div>
             <div class="form-input-password">
                 <div class="valid-feedback">
                     Looks good
                 </div>
-                <input class="form-control base-input password" type="password" placeholder="Senha">
+                <input class="form-control base-input password" type="password" placeholder="Senha" ng-model="vm.user.password">
             </div>
             <div class="form-input-button">
-                <a href="#admin"><button class="btn-primary btn" type="submit">Entar</button></a>
+                <button class="btn-primary btn" type="submit">Entar</button>
             </div>
         </form>
     </div>

@@ -38,7 +38,8 @@
 
 @media (min-width: 576px) {
     .login-card{
-        margin: 20px;
+        margin: 20px auto;
+        max-width: 500px;
     }
 
     .login-card h2 {
@@ -60,40 +61,6 @@
 
     .form-input-button {
         margin-bottom: 140px;
-    }
-}
-
-@media (min-width: 768px) {
-    .login-card{
-        margin: 30px;
-    }
-
-    .form-input-button {
-        margin-bottom: 180px;
-    }
-}
-
-@media (min-width: 992px) {
-    .login-card h2 {
-        font-size: 40px;
-        margin: 130px auto;
-    }
-
-    .login-card{
-        margin: 40px;
-    }
-
-    .login-card form {
-        width: 400px;
-    }
-
-    .login-card input {
-        height: 55px;
-    }
-
-    .login-card button {
-        height: 55px;
-        font-size: 20px;
     }
 }
 

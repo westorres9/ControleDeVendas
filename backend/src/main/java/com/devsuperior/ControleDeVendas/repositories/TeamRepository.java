@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.devsuperior.ControleDeVendas.entities.Team;
-import com.devsuperior.ControleDeVendas.entities.User;
 
 @Repository
 public interface TeamRepository extends JpaRepository<Team, Long>{
@@ -17,11 +16,4 @@ public interface TeamRepository extends JpaRepository<Team, Long>{
 			+ "ON tb_team_manager.team_id = tb_team.id "
 			+ "WHERE tb_team_manager.manager_id = :id")
 	Page<Team> findByManage(Long id, Pageable pageable);
-	
-	
-	@Query(nativeQuery = true, value = "SELECT * FROM tb_team " 
-			+ "INNER JOIN tb_user "
-			+ "ON tb_user.team_id = tb_team.id "
-			+ "WHERE LOWER(tb_user.name) LIKE LOWER(CONCAT('%',:name ,'%')) ") 
-	User findSellerByName(String name, Pageable pageable);  
 }

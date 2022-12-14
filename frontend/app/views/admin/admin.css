@@ -10,6 +10,11 @@
     font-size: 20px;
 }
 
+.welcome-admin-area button{
+    font-size: 12px;
+    font-weight: bold;
+}
+
 .helloImg {
     width: 50px;
     height: 50px;
@@ -46,6 +51,10 @@
     .welcome-admin-area h2 {
         font-size: 30px;
     }
+
+    .welcome-admin-area button{
+        font-size: 16px;
+    }
     
     .helloImg {
         width: 100px;
@@ -61,6 +70,11 @@
     flex-direction: row;
     margin-top: 160px;
     }
+
+    .welcome-admin-area button{
+        font-size: 18px;
+    }
+
     .admin-card {
         width: 300px;
         height: 360px;

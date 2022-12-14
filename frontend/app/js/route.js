@@ -68,4 +68,9 @@ vendasApp.config(function ($routeProvider) {
             controller: 'saleFormController',
             controllerAs: 'vm'
         })
-})
+        .otherwise('/login', {
+            templateUrl: 'views/login/login.html',
+            controller: 'loginController',
+            controllerAs: 'vm'
+        })
+});
