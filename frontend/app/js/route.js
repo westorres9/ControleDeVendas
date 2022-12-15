@@ -1,7 +1,5 @@
 vendasApp.config(function ($routeProvider) {
 
-    var id = '1';
-
     $routeProvider
         .when('/', {
             templateUrl: 'views/home/home.html',
@@ -28,44 +26,47 @@ vendasApp.config(function ($routeProvider) {
             controller: 'salesController',
             controllerAs: 'vm'
         })
-        .when('/admin/sales/create', {
-            templateUrl: 'views/sale-form/saleform.html',
-            controller: 'saleFormController',
-            controllerAs: 'vm'
-        })
+        
         .when('/admin/teams', {
             templateUrl: 'views/teams/teams.html',
             controller: 'teamsController',
             controllerAs: 'vm'
         })
-        .when('/admin/teams/create', {
-            templateUrl: 'views/team-form/teamform.html',
-            controller: 'teamFormController',
-            controllerAs: 'vm'
-        })
+        
         .when('/admin/users', {
             templateUrl: 'views/users/users.html',
             controller: 'usersController',
             controllerAs: 'vm'
         })
+        
+        .when('/admin/users/:userId', {
+            templateUrl: 'views/user-form/userform.html',
+            controller: 'usersController',
+            controllerAs: 'vm'
+        })
         .when('/admin/users/create', {
             templateUrl: 'views/user-form/userform.html',
-            controller: 'userFormController',
+            controller: 'usersController',
             controllerAs: 'vm'
         })
-        .when('/admin/users/:{id}', {
-            templateUrl: 'views/user-form/userform.html',
-            controller: 'userFormController',
-            controllerAs: 'vm'
-        })
-        .when('/admin/users/:{id}', {
+        .when('/admin/teams/:teamId', {
             templateUrl: 'views/team-form/teamform.html',
-            controller: 'teamFormController',
+            controller: 'teamsController',
             controllerAs: 'vm'
         })
-        .when(`/admin/sales/${id}`, {
+        .when('/admin/teams/create', {
+            templateUrl: 'views/team-form/teamform.html',
+            controller: 'teamsController',
+            controllerAs: 'vm'
+        })
+        .when(`/admin/sales/:id`, {
             templateUrl: 'views/sale-form/saleform.html',
-            controller: 'saleFormController',
+            controller: 'salesController',
+            controllerAs: 'vm'
+        })
+        .when('/admin/sales/create', {
+            templateUrl: 'views/sale-form/saleform.html',
+            controller:'salesController',
             controllerAs: 'vm'
         })
         .otherwise('/login', {

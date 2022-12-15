@@ -19,136 +19,27 @@
             <tr>
                 <th></th>
                 <th class="show576">ID</th>
-                <th class="show576">Data</th>
                 <th class="show576">Visitas</th>
                 <th>Vendas</th>
-                <th>Total</th> 
-                <th class="show576">Nome Vendedor</th>
+                <th>Total</th>
+                <th class="show576">Data</th>
+                <th class="show768">Cód Vendedor</th>
                 <th></th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
+            <tr ng-repeat ="sale in vm.sales">
                 <td class="saleImg"><img src="/app/assets/img/sales.png" alt=""></td>
-                <td class="show576">1</td>
-                <td class="show576">06/02/89</td>
-                <td class="show576">84</td>
-                <td>36</td>
-                <td>R$ 1533.00</td>
-                <td class="show576">Ana</td>
-                <td><a href="#admin/sales/1"><img src="/app/assets/img/edit.svg" alt=""></a></td>
-                <td><img src="/app/assets/img/delete.svg" alt=""></td>
+                <td class="show576">{{sale.id}}</td>
+                <td class="show576">{{sale.visited}}</td>
+                <td>{{sale.deals}}</td>
+                <td>{{sale.amount}}</td>
+                <td class="show576">{{sale.date}}</td>
+                <td class="show768">{{sale.sellerId}}</td>
+                <td><img class="edit" src="/app/assets/img/edit.svg" alt="" ng-click="vm.getSaleById(vm.sale)"></td>
+                <td><img src="/app/assets/img/delete.svg" ng-click="vm.DeleteSale(sale)" alt=""></td>
             </tr>
-            <tr>
-                <td class="saleImg"><img src="/app/assets/img/sales.png" alt=""></td>
-                <td class="show576">1</td>
-                <td class="show576">06/02/89</td>
-                <td class="show576">84</td>
-                <td>36</td>
-                <td>R$ 1533.00</td>
-                <td class="show576">Ana</td>
-                <td><img src="/app/assets/img/edit.svg" alt=""></td>
-                <td><img src="/app/assets/img/delete.svg" alt=""></td>
-            </tr>
-            <tr>
-                <td class="saleImg"><img src="/app/assets/img/sales.png" alt=""></td>
-                <td class="show576">1</td>
-                <td class="show576">06/02/89</td>
-                <td class="show576">84</td>
-                <td>36</td>
-                <td>R$ 1533.00</td>
-                <td class="show576">Ana</td>
-                <td><img src="/app/assets/img/edit.svg" alt=""></td>
-                <td><img src="/app/assets/img/delete.svg" alt=""></td>
-            </tr>
-            <tr>
-                <td class="saleImg"><img src="/app/assets/img/sales.png" alt=""></td>
-                <td class="show576">1</td>
-                <td class="show576">06/02/89</td>
-                <td class="show576">84</td>
-                <td>36</td>
-                <td>R$ 1533.00</td>
-                <td class="show576">Ana</td>
-                <td><img src="/app/assets/img/edit.svg" alt=""></td>
-                <td><img src="/app/assets/img/delete.svg" alt=""></td>
-            </tr>
-            <tr>
-                <td class="saleImg"><img src="/app/assets/img/sales.png" alt=""></td>
-                <td class="show576">1</td>
-                <td class="show576">06/02/89</td>
-                <td class="show576">84</td>
-                <td>36</td>
-                <td>R$ 1533.00</td>
-                <td class="show576">Ana</td>
-                <td><img src="/app/assets/img/edit.svg" alt=""></td>
-                <td><img src="/app/assets/img/delete.svg" alt=""></td>
-            </tr>
-            <tr>
-                <td class="saleImg"><img src="/app/assets/img/sales.png" alt=""></td>
-                <td class="show576">1</td>
-                <td class="show576">06/02/89</td>
-                <td class="show576">84</td>
-                <td>36</td>
-                <td>R$ 1533.00</td>
-                <td class="show576">Ana</td>
-                <td><img src="/app/assets/img/edit.svg" alt=""></td>
-                <td><img src="/app/assets/img/delete.svg" alt=""></td>
-            </tr>
-            <tr>
-                <td class="saleImg"><img src="/app/assets/img/sales.png" alt=""></td>
-                <td class="show576">1</td>
-                <td class="show576">06/02/89</td>
-                <td class="show576">84</td>
-                <td>36</td>
-                <td>R$ 1533.00</td>
-                <td class="show576">Ana</td>
-                <td><img src="/app/assets/img/edit.svg" alt=""></td>
-                <td><img src="/app/assets/img/delete.svg" alt=""></td>
-            </tr>
-            <tr>
-                <td class="saleImg"><img src="/app/assets/img/sales.png" alt=""></td>
-                <td class="show576">1</td>
-                <td class="show576">06/02/89</td>
-                <td class="show576">84</td>
-                <td>36</td>
-                <td>R$ 1533.00</td>
-                <td class="show576">Ana</td>
-                <td><img src="/app/assets/img/edit.svg" alt=""></td>
-                <td><img src="/app/assets/img/delete.svg" alt=""></td>
-            </tr>
-            <tr>
-                <td class="saleImg"><img src="/app/assets/img/sales.png" alt=""></td>
-                <td class="show576">1</td>
-                <td class="show576">06/02/89</td>
-                <td class="show576">84</td>
-                <td>36</td>
-                <td>R$ 1533.00</td>
-                <td class="show576">Ana</td>
-                <td><img src="/app/assets/img/edit.svg" alt=""></td>
-                <td><img src="/app/assets/img/delete.svg" alt=""></td>
-            </tr>
-            <tr>
-                <td class="saleImg"><img src="/app/assets/img/sales.png" alt=""></td>
-                <td class="show576">1</td>
-                <td class="show576">06/02/89</td>
-                <td class="show576">84</td>
-                <td>36</td>
-                <td>R$ 1533.00</td>
-                <td class="show576">Ana</td>
-                <td><img src="/app/assets/img/edit.svg" alt=""></td>
-                <td><img src="/app/assets/img/delete.svg" alt=""></td>
-            </tr>
-            <tr>
-                <td class="saleImg"><img src="/app/assets/img/sales.png" alt=""></td>
-                <td class="show576">1</td>
-                <td class="show576">06/02/89</td>
-                <td class="show576">84</td>
-                <td>36</td>
-                <td>R$ 1533.00</td>
-                <td class="show576">Ana</td>
-                <td><img src="/app/assets/img/edit.svg" alt=""></td>
-                <td><img src="/app/assets/img/delete.svg" alt=""></td>
-            </tr>
+            
     </table>
 </section>

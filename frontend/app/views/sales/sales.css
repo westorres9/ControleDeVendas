@@ -65,7 +65,7 @@ table {
     border-radius: 5px;
     box-shadow: 5px 8px rgba(0, 0, 0, 0.050);
     padding: 5px;
-    
+    margin-bottom: 100px; 
 }
 
 thead {
@@ -79,6 +79,10 @@ tr {
     height: 40px;
 }
 
+td .edit {
+    cursor: pointer;
+}
+
 .saleImg img {
     margin-left: 10px;
     width: 30px;
@@ -86,6 +90,10 @@ tr {
 }
 
 .show576 {
+    display: none;
+}
+
+.show768 {
     display: none;
 }
 
@@ -113,7 +121,7 @@ tr {
 @media (min-width:768px) {
 
     
-    .show576 {
+    .show768 {
         display: unset;
     }
 
@@ -125,3 +133,5 @@ tr {
         font-size: 20px;
     }
 }
+
+
