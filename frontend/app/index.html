@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="vendasApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="views/login/login.css">
+    <link rel="stylesheet" href="views/admin/admin.css">
+    <link rel="stylesheet" href="views/sales/sales.css">
+    <link rel="stylesheet" href="views/teams/teams.css">
+    <link rel="stylesheet" href="views/users/users.css">
+    <title>Controle de Vendas</title>
+</head>
+<body ng-controller="mainController">
+    <header class="header-bar-container">
+        <div class="header-bar-content">
+            <a href="#home"><h1>DSVendas</h1></a>
+            <a href="#login">Login</a>
+        </div>
+    </header>
+    <main>
+        <div ng-view></div>
+    </main>
+
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="js/route.js"></script>
+    <script src="js/controllers/homeController.js"></script>
+    <script src="js/controllers/mainController.js"></script>
+    <script src="js/controllers/loginController.js"></script>
+    <script src="js/controllers/adminController.js"></script>
+    <script src="js/controllers/salesController.js"></script>
+    <script src="js/controllers/teamsController.js"></script>
+    <script src="js/controllers/usersController.js"></script>
+    <script src="js/services/saleService.js"></script>
+    <script src="js/services/teamService.js"></script>
+    <script src="js/services/userService.js"></script>
+    <script src="js/localStorage/AuthService.js"></script>
+    <script src="js/localStorage/TokenGlobalInterceptor.js"></script>
+    
+</body>
+</html>

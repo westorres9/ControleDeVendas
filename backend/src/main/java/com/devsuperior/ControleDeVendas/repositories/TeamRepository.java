@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.devsuperior.ControleDeVendas.entities.Team;
-import com.devsuperior.ControleDeVendas.entities.User;
 
 @Repository
 public interface TeamRepository extends JpaRepository<Team, Long>{

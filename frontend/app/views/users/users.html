@@ -1,0 +1,50 @@
+<section class="dsvendas-container">
+    <div class="vendas-container-top-area">
+        <a href="#admin"><img src="/app/assets/img/return.svg" alt="return"></a>
+        <h1>Usuários</h1>
+    </div>
+        <div class="user-form-container">
+          <form class="user-card dsc-form">
+            <h2>Dados do Usuario</h2>
+            <div class="form-controls-container">
+              <div>
+                <input class="form-control" type="text" placeholder="Nome" value="name" ng-model="vm.user.name">
+              </div>
+              <div>
+                <input class="form-control" type="text" placeholder="Email" value="email" ng-model="vm.user.email">
+              </div>
+            
+            </div>
+    
+            <div class="form-buttons">
+                <button type="reset" class="btn btn-danger">Cancelar</button>
+                <button type="submit" class="btn-primary btn" ng-click="vm.UpdateTeam(team)">Atualizar</button>
+                <button type="submit" class="btn-success btn" ng-click="vm.InsertTeam(team)">Salvar</button>
+            </div>
+          </form>
+        </div>
+
+        <table class="table table-sm table-responsive table-stripped tb-card">
+            <thead>
+                <tr>
+                    <th class="col">#</th>
+                    <th class="show576 col">ID</th>
+                    <th class="col">Nome</th>
+                    <th class="show576 col">email</th>
+                    <th class="col"></th>
+                    <th class="col"></th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="user in vm.users">
+                <tr>
+                    <td class="userImg"><img src="/app/assets/img/users.png" alt=""></td>
+                    <td class="show576">{{user.id}}</td>
+                    <td>{{user.name}}</td>
+                    <td class="show576">{{user.email}}</td>
+                    <td><img src="/app/assets/img/edit.svg"  alt="editar" ng-click="vm.SelectUser(user)"></td>
+                    <td><img src="/app/assets/img/delete.svg" alt="apagar" ng-click="vm.DeleteUser(user)"></td>
+                </tr>
+            </tbody>
+        </table>
+    
+</section>
