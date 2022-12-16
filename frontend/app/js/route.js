@@ -26,47 +26,14 @@ vendasApp.config(function ($routeProvider) {
             controller: 'salesController',
             controllerAs: 'vm'
         })
-        
         .when('/admin/teams', {
             templateUrl: 'views/teams/teams.html',
             controller: 'teamsController',
             controllerAs: 'vm'
         })
-        
         .when('/admin/users', {
             templateUrl: 'views/users/users.html',
             controller: 'usersController',
-            controllerAs: 'vm'
-        })
-        
-        .when('/admin/users/:userId', {
-            templateUrl: 'views/user-form/userform.html',
-            controller: 'usersController',
-            controllerAs: 'vm'
-        })
-        .when('/admin/users/create', {
-            templateUrl: 'views/user-form/userform.html',
-            controller: 'usersController',
-            controllerAs: 'vm'
-        })
-        .when('/admin/teams/:teamId', {
-            templateUrl: 'views/team-form/teamform.html',
-            controller: 'teamsController',
-            controllerAs: 'vm'
-        })
-        .when('/admin/teams/create', {
-            templateUrl: 'views/team-form/teamform.html',
-            controller: 'teamsController',
-            controllerAs: 'vm'
-        })
-        .when(`/admin/sales/:id`, {
-            templateUrl: 'views/sale-form/saleform.html',
-            controller: 'salesController',
-            controllerAs: 'vm'
-        })
-        .when('/admin/sales/create', {
-            templateUrl: 'views/sale-form/saleform.html',
-            controller:'salesController',
             controllerAs: 'vm'
         })
         .otherwise('/login', {

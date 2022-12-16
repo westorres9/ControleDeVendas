@@ -3,7 +3,6 @@ vendasApp.controller('salesController', function(SaleService, AuthService) {
     vm.title = 'salesController'
     vm.message = 'SalesController'
     vm.GetAllSales = GetAllSales;
-    vm.getSaleById = getSaleById;
     vm.InsertSale = InsertSale;
     vm.UpdateSale = UpdateSale;
     vm.DeleteSale = DeleteSale;
@@ -33,14 +32,6 @@ vendasApp.controller('salesController', function(SaleService, AuthService) {
 
     GetAllSales();
 
-    function getSaleById(sale) {
-        SaleService.getSaleById(sale.id).then(function(response) {
-            vm.sale = response.data;
-            window.location.href = `/index.html#/admin/sales/${vm.sale.id}`;
-            console.log(vm.sale);
-        })
-    }
-
     function InsertSale () {
         var sale = vm.sale;
         var insertSale = SaleService.insertSale(sale);
@@ -53,7 +44,7 @@ vendasApp.controller('salesController', function(SaleService, AuthService) {
         });
     }
 
-    function UpdateSale () {
+    function UpdateSale(sale) {
         var sale = vm.sale;
         var updateSale = SaleService.updateSale(sale);
         updateSale.then(function(response) {
@@ -64,7 +55,7 @@ vendasApp.controller('salesController', function(SaleService, AuthService) {
         });
     }
 
-    function DeleteSale() {
+    function DeleteSale(sale) {
         vm.sale = SelectSale(sale);
         var deleteSale = SaleService.deleteSale(vm.sale);
         deleteSale.then(function(response) {

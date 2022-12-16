@@ -5,10 +5,6 @@ vendasApp.service('SaleService', function($http, $routeParams) {
         return $http.get(`${BASE_URL}/sales`);
     }
 
-    this.getSaleById = function(sale) {
-        return $http.get(`${BASE_URL}/sales/${sale.id}`);
-    }
-
     this.insertSale = function(sale) {
 
         var request = $http(
@@ -21,12 +17,12 @@ vendasApp.service('SaleService', function($http, $routeParams) {
         return request;
     }
 
-    this.updateSale = function(saleId) {
+    this.updateSale = function(sale) {
 
         var request = $http(
             {
                 method: 'put',
-                url: `${BASE_URL}/sales/${saleId}`,
+                url: `${BASE_URL}/sales/${sale.id}`,
                 data: sale
             }
         )
