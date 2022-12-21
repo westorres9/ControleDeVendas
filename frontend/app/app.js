@@ -1,1 +1,1 @@
-var vendasApp = angular.module('vendasApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute'])

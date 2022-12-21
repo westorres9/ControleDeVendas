@@ -1,44 +1,89 @@
-<section class="dsvendas-container">
-    <div class="vendas-container-top-area">
-        <a href="#admin"><img src="/app/assets/img/return.svg" alt="return"></a>
-        <h1>Equipes</h1>
-    </div>
-    <div class="team-form-container">
-        <form class="teams-form-card dsc-form">
-          <h2>Dados da Equipe</h2>
-          <div class="form-controls-container">
-            <div>
-              <input class="form-control" id="name" name="name" type="text" placeholder="Nome da equipe" value="name" ng-model="vm.team.name">
-            </div>    
-          </div>
-    
-          <div class="form-buttons">
-            <button type="reset" class="btn btn-danger">Cancelar</button>
-            <button type="submit" class="btn-primary btn" ng-click="vm.UpdateTeam(team)">Atualizar</button>
-            <button type="submit" class="btn-success btn" ng-click="vm.InsertTeam(team)">Salvar</button>
-          </div>
-        </form>
-      </div>
-    <table class="table table-sm table-responsive tb-card">
-        <thead>
-            <tr>
-                <th class="col">#</th>
-                <th class="col">ID</th>
-                <th class="col">Nome</th>
-                <th class="col">#</th>
-                <th class="col">#</th>
-            </tr>
-        </thead>
-        <tbody ng-repeat="team in vm.teams">
-            <tr>
-                <td class="saleImg" scope="row"><img src="/app/assets/img/teams.png" alt=""></td>
-                <td>{{team.id}}</td>
-                <td>{{team.name}}</td>
-                <td class="img-btn"><img src="/app/assets/img/edit.svg" alt="" ng-click="vm.SelectTeam(team)"></td>
-                <td class="img-btn"><img src="/app/assets/img/delete.svg" alt="" ng-click="vm.DeleteTeam(team)"></td>
-            </tr>
-        </tbody>
-    </table>
+<section class="sales-container">
+  <div class="vendas-container-top-area">
+    <a href="#admin"><img src="/app/assets/img/return.svg" alt="return"></a>
+    <h1>Equipes</h1>
+  </div>
+  <div>
+    <h2>Cadastro de Equipes</h2>
+    <button class="btn btn-success btn-new" ng-click="vm.ShowFormNew()">Novo</button>
 
-  
+  </div>
+  <form class="dsc-search-bar">
+    <button type="submit">🔎︎</button>
+    <input type="text" placeholder="Nome da Equipe" name="text" />
+    <button>🗙</button>
+  </form>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Id</th>
+          <th scope="col">Nome Equipe</th>
+          <th scope="col">#</th>
+          <th scope="col">#</th>
+        </tr>
+      </thead>
+      <tbody ng-repeat="team in vm.teams">
+        <tr>
+          <td class="tb-img"><img src="/app/assets/img/teams.png" alt=""></td>
+          <td scope="row">{{team.id}}</td>
+          <td>{{team.name}}</td>
+          <td><img src="/app/assets/img/edit.svg" alt="editar" ng-click="vm.SelectTeam(team)"></td>
+          <td><img src="/app/assets/img/delete.svg" alt="apagar" ng-click="vm.SelectToDelete(team)"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="dialog-background" ng-hide="vm.formVisible !== true">
+    <div class="dialog-box">
+      <form class="form-card">
+        <h2>Dados da Equipe</h2>
+        <div class="form-controls-container">
+          <div>
+            <input class="form-control" id="name" name="name" type="text" placeholder="Nome" value="name"
+              ng-model="vm.team.name">
+          </div>
+        </div>
+
+        <div class="form-buttons">
+          <button type="reset" class="btn btn-danger" ng-click="vm.CloseForm()">Cancelar</button>
+          <button type="submit" class="btn-primary btn" ng-click="vm.UpdateTeam(team)">Atualizar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="dialog-background" ng-hide="vm.formNewVisible !== true">
+    <div class="dialog-box">
+      <form class="form-card">
+        <h2>Nova Equipe</h2>
+        <div class="form-controls-container">
+          <div>
+            <input class="form-control" id="name" name="name" type="text" placeholder="Nome" value="name"
+              ng-model="vm.team.name">
+          </div>
+        </div>
+
+        <div class="form-buttons">
+          <button type="reset" class="btn btn-danger" ng-click="vm.CloseFormNew()">Cancelar</button>
+          <button type="submit" class="btn-success btn" ng-click="vm.InsertTeam(team)">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="dialog-background" ng-hide="vm.warningVisible !== true">
+    <div class="dialog-box">
+      <div class="form-card">
+        <h2>Tem certeza?</h2>
+        <div class="form-buttons">
+          <button type="reset" class="btn btn-danger" ng-click="vm.CloseWarning()">Não</button>
+          <button type="submit" class="btn-success btn" ng-click="vm.DeleteTeam(team)">Sim</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

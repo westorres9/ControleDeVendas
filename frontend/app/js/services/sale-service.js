@@ -1,4 +1,4 @@
-vendasApp.service('SaleService', function($http, $routeParams) {
+myApp.service('SaleService', function($http, $routeParams) {
     let BASE_URL = "http://localhost:8080";
 
     this.getAllSales = function() {
@@ -33,7 +33,4 @@ vendasApp.service('SaleService', function($http, $routeParams) {
         var request = $http.delete(`${BASE_URL}/sales/${sale.id}`);
         return request;
     }
-
-})
-
-
+});

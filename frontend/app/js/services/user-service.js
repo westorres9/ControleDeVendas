@@ -1,11 +1,11 @@
-vendasApp.service('UserService', function($http, $routeParams) {
+myApp.service('UserService', function($http, $routeParams) {
     let BASE_URL = "http://localhost:8080";
 
     this.getAllUsers = function() {
         return $http.get(`${BASE_URL}/users`);
     }
 
-    this.insertUser = function(user) {
+    this.insertUser = function (user) {
 
         var request = $http(
             {
@@ -17,7 +17,7 @@ vendasApp.service('UserService', function($http, $routeParams) {
         return request;
     }
 
-    this.updateUser = function(user) {
+    this.updateUser = function (user) {
 
         var request = $http(
             {
@@ -29,11 +29,13 @@ vendasApp.service('UserService', function($http, $routeParams) {
         return request;
     }
 
-    this.deleteUser = function (user) {
-        var request = $http.delete(`${BASE_URL}/users/${user.id}`);
+    this.deleteUser = function(user) {
+        var request = $http(
+            {
+                method: 'delete',
+                url: `${BASE_URL}/users/${user.id}`,
+            }
+        )
         return request;
     }
-
-})
-
-
+});

@@ -1,10 +1,9 @@
-vendasApp.factory('AuthService', AuthService);
+myApp.factory('AuthService', AuthService);
 
 function AuthService() {
     return {
         setToken: function (token) {
             window.localStorage.setItem('access_token', angular.toJson(token));
-            console.log('AuthService: setToken', token);
         },
         getToken: function () {
             let token = window.localStorage.getItem('access_token');
@@ -36,6 +35,6 @@ function AuthService() {
         getUserName: function () {
             let user = window.localStorage.getItem('userName');
             return angular.fromJson(user)
-        },
+        }
     }
 }

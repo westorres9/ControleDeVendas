@@ -1,31 +1,27 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: #d2d2d2;
-}
-
-main {
-    padding: 0 20px;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 a, a:hover {
-    text-decoration: none;
-    color: unset;
+  text-decoration: none;
+  color: unset;
 }
 
-.header-bar-container {
-    background-color: #407bff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 70px;
+body {
+  background-color: #e5e5e5;
 }
 
-.header-bar-content {
+.header-main {
+  background-color: #407bff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+}
+
+.header-content {
     color: white;
     display: flex;
     flex-direction: row;
@@ -35,26 +31,43 @@ a, a:hover {
     margin: 0 auto;
 }
 
-.header-bar-content h1 {
-    margin-left: 20px;
-    margin-top: 10px;
-    font-size: 24px;
+.header-content h1 {
+  margin-right: 20px;
+  margin-top: 10px;
+  font-size: 24px;
 }
 
-.header-bar-content a {
-    margin-right: 20px;
-    font-size: 20px;
+.header-content a {
+  margin-right: 20px;
+  font-size: 20px; 
 }
 
 .dsvendas-container {
-    width: 100%;
-    max-width: 1250px;
-    margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  margin: 50px auto;
 }
 
-@media (min-width:576px) {
-
-    .header-bar-content h1 {
-    font-size: 28px;
+.dialog-background {
+  position: fixed;
+  top: 0;
+  left:0;
+  right:0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5)
 }
+
+.dialog-box {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 4px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.form-card {
+  padding: 50px;
 }

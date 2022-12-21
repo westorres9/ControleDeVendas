@@ -1,4 +1,4 @@
-vendasApp.service('TeamService', function($http, $routeParams) {
+myApp.service('TeamService', function($http, $routeParams) {
     let BASE_URL = "http://localhost:8080";
 
     this.getAllTeams = function() {
@@ -33,7 +33,4 @@ vendasApp.service('TeamService', function($http, $routeParams) {
         var request = $http.delete(`${BASE_URL}/teams/${team.id}`);
         return request;
     }
-
-})
-
-
+});
