@@ -91,6 +91,9 @@ table td, th {
     display: none;
 }
 
+.table-responsive{
+  margin-top: 100px;
+}
 
 
 .dsc-search-bar {
@@ -136,6 +139,22 @@ table td, th {
     border-radius: 0 4px 4px 0;
   }
 
+  .dsmeta-form-control-container {
+    margin-bottom: 16px;
+    max-width: 300px;
+  }
+  
+  .dsmeta-form-control {
+    width: 100%;
+    height: 46px;
+    background-color: #fff;
+    border: 1px solid #9aaabe;
+    border-radius: 5px;
+    color:#384459;
+    padding: 0 20px;
+    font-size: 18px;
+  }
+
 @media (min-width: 576px) {
 
   .vendas-container-top-area img {
@@ -172,6 +191,6 @@ table td, th {
   }
 
     .table {
-        margin: 0 auto; 
+        margin: 50px auto; 
     }
 }

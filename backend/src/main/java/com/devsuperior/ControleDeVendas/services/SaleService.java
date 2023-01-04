@@ -1,5 +1,8 @@
 package com.devsuperior.ControleDeVendas.services;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -12,8 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.ControleDeVendas.dto.SaleDTO;
-import com.devsuperior.ControleDeVendas.dto.SaleDTO;
-import com.devsuperior.ControleDeVendas.entities.Sale;
 import com.devsuperior.ControleDeVendas.entities.Sale;
 import com.devsuperior.ControleDeVendas.entities.User;
 import com.devsuperior.ControleDeVendas.repositories.SaleRepository;
@@ -35,14 +36,19 @@ public class SaleService {
 	private UserRepository userRepository;
 	
 	@Transactional(readOnly = true)
-	public Page<SaleDTO> findAll(String name, Pageable pageable) {
+	public Page<SaleDTO> findAll(String minDate, String  maxDate, String name, Pageable pageable) {	
 		User user = authService.authenticated();
+		LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
+		
+		
+		LocalDate min = minDate.equals("") ? today.minusDays(365) : LocalDate.parse(minDate);
+		LocalDate max = maxDate.equals("") ? today : LocalDate.parse(maxDate);
 		if (user.hasRole("ROLE_SELLER")) {
-			Page<Sale> page = repository.findBySeller(user, pageable);
+			Page<Sale> page = repository.findBySellerAndDateBetween(pageable, user, min, max);
 			return page.map(x -> new SaleDTO(x));
 		}
 		else if (user.hasRole("ROLE_MANAGER")) {
-			Page<Sale> page = repository.findByManage(user.getId(), pageable);
+			Page<Sale> page = repository.findByManage(user.getId(),pageable );
 			return page.map(x -> new SaleDTO(x));
 		}
 		else {

@@ -32,9 +32,11 @@ public class SaleResource {
 	
 	@GetMapping
 	public ResponseEntity<Page<SaleDTO>> findAll(
+			@RequestParam(value = "minDate", defaultValue = "")String minDate,
+			@RequestParam(value = "maxDate", defaultValue = "")String maxDate,
 			@RequestParam(value = "name", defaultValue = "")String name,
 			Pageable pageable) {
-		Page<SaleDTO> page = service.findAll(name, pageable);
+		Page<SaleDTO> page = service.findAll(minDate, maxDate, name, pageable);
 		return ResponseEntity.ok().body(page);
 	}
 	

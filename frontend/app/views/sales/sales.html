@@ -17,8 +17,27 @@
       />
       <button>🗙</button>
     </form>
+
+    <figure class="highcharts-figure">
+      <div id="container3"></div>
+  </figure>
+
+  <div class="date">
     
-    
+    <div class="dsmeta-form-control-container">
+      <h2>Informe um periodo</h2>
+      <datepicker date="MM-DD-YYYY">
+        <input ng-model="vm.minDate" date="MM-DD-YYYY" type="text" ng-change="vm.SelectMinDate(vm.minDate)"/>
+      </datepicker>
+      <datepicker>
+        <input ng-model="vm.maxDate" date="MM-DD-YYYY" type="text" ng-change="vm.SelectMaxDate(vm.maxDate)"/>
+      </datepicker>
+      <button class="btn btn-success">BUSCAR</button>
+    </div>
+    {{vm.minDate}}
+    {{vm.maxDate}}
+  </div>
+
     <div class="table-responsive">
         <table class="table">
             <thead>

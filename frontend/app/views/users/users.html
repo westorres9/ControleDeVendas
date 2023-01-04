@@ -21,6 +21,7 @@
               <th scope="col">#</th>
               <th scope="col">Id</th>
               <th scope="col">Nome Usuário</th>
+              <th scope="col">Email Usuário</th>
               <th scope="col">#</th>
               <th scope="col">#</th>
             </tr>
@@ -30,6 +31,7 @@
               <td class="tb-img"><img src="/app/assets/img/users.png" alt=""></td>
               <td scope="row">{{user.id}}</td>
               <td>{{user.name}}</td>
+              <td>{{user.email}}</td>
               <td><img src="/app/assets/img/edit.svg" ng-click="vm.SelectUser(user)" alt="editar"></td>
               <td><img src="/app/assets/img/delete.svg" ng-click="vm.SelectToDelete(user)" alt="apagar"></td>
             </tr>
@@ -45,6 +47,10 @@
               <div>
                 <input class="form-control" id="name" name="name" type="text" placeholder="Nome" value="name"
                   ng-model="vm.user.name">
+              </div>
+              <div>
+                <input class="form-control" id="email" name="email" type="text" placeholder="Email" value="email"
+                  ng-model="vm.user.email">
               </div>
             </div>
     
@@ -65,8 +71,11 @@
                 <input class="form-control" id="name" name="name" type="text" placeholder="Nome" value="name"
                   ng-model="vm.user.name">
               </div>
+              <div>
+                <input class="form-control" id="email" name="email" type="text" placeholder="Email" value="email"
+                  ng-model="vm.user.email">
+              </div>
             </div>
-    
             <div class="form-buttons">
               <button type="reset" class="btn btn-danger" ng-click="vm.CloseFormNew()">Cancelar</button>
               <button type="submit" class="btn-success btn" ng-click="vm.InsertUser(user)">Salvar</button>

@@ -7,9 +7,11 @@
   "license": "MIT",
   "dependencies": {
     "angular": "^1.7.5",
+    "angular-chart.js": "^1.1.1",
     "angular-loader": "^1.7.5",
     "angular-route": "^1.7.5",
     "bootstrap": "^5.2.3",
+    "chart.js": "^4.1.1",
     "html5-boilerplate": "0.0.1"
   },
   "devDependencies": {

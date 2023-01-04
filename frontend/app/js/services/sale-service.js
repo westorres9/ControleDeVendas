@@ -1,8 +1,8 @@
 myApp.service('SaleService', function($http, $routeParams) {
     let BASE_URL = "http://localhost:8080";
 
-    this.getAllSales = function() {
-        return $http.get(`${BASE_URL}/sales`);
+    this.getAllSales = function(minDate, maxDate) {
+        return $http.get(`${BASE_URL}/sales?page=0&size=50&minDate=${minDate}&maxDate=${maxDate}`);
     }
 
     this.insertSale = function(sale) {

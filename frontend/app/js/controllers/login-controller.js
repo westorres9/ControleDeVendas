@@ -21,6 +21,10 @@ myApp.controller('loginCtrl', function($http, $httpParamSerializerJQLike, AuthSe
             let LoginResponse = response.data;
             console.log(LoginResponse);
             AuthService.setToken(LoginResponse.access_token);
+            AuthService.setAuthority(LoginResponse.Authority[0])
+            AuthService.setUserName(LoginResponse.userName)
+            console.log(AuthService.getUserName());
+            console.log(AuthService.getAuthority())
             console.log(AuthService.getToken());
             let token = AuthService.getToken();
             if(token !== undefined || null) {

@@ -7,7 +7,7 @@ INSERT INTO tb_user (name, email, password) VALUES ('Bob', 'bob@gmail.com', '$2a
 INSERT INTO tb_user (name, email, password) VALUES ('Maria', 'maria@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 INSERT INTO tb_user (name, email, password, team_id) VALUES ('Billy', 'billy@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG',2);
 INSERT INTO tb_user (name, email, password) VALUES ('Charlie', 'charlie@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
-INSERT INTO tb_user (name, email, password, team_id) VALUES ('Ed', 'ed@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG',3);
+INSERT INTO tb_user (name, email, password, team_id) VALUES ('Ed', 'ed@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG',1);
 
 INSERT INTO tb_role (authority) VALUES ('ROLE_SELLER');
 INSERT INTO tb_role (authority) VALUES ('ROLE_MANAGER');

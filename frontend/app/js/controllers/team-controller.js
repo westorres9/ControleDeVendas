@@ -54,6 +54,58 @@ myApp.controller('teamCtrl', function(TeamService) {
         var getAllTeams = TeamService.getAllTeams();
         getAllTeams.then(function (response) {
             vm.teams = response.data.content;
+            var teamNames = [];
+            vm.teams.forEach(x => teamNames.push(x.name));
+            console.log('teamNames',teamNames)
+            vm.teamNames = teamNames;
+
+            Highcharts.chart('container4', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Vendas por Equipe em 2022'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    name: 'Brands',
+                    colorByPoint: true,
+                    data: [{
+                        name: teamNames[0],
+                        y: 74.77,
+                        sliced: true,
+                        selected: true
+                    },  {
+                        name: teamNames[1],
+                        y: 12.82
+                    },  {
+                        name: teamNames[3],
+                        y: 4.63
+                    }
+                ]
+                }]
+            });
+
             console.log(vm.teams)
         }).catch(function (error) {
             console.log('ERROR: ' + error.status, error);

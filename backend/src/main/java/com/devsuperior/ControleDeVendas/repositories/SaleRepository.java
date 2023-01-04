@@ -14,7 +14,8 @@ import com.devsuperior.ControleDeVendas.entities.User;
 @Repository
 public interface SaleRepository extends JpaRepository<Sale, Long>{
 	
-	Page<Sale> findBySeller(User seller, Pageable pageable);
+	Page<Sale> findBySellerAndDateBetween(Pageable pageable, User seller, LocalDate minDate, LocalDate maxDate);
+	
 	
 	@Query(nativeQuery = true,value = "SELECT * FROM tb_sale " +
 			"INNER JOIN  tb_user " +
@@ -34,4 +35,7 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 	@Query(nativeQuery = true,  value= "SELECT * FROM tb_sale " +
 			"WHERE tb-sale.date BETWEEN :min AND :max ORDER BY tb_sale.amount DESC" )
 	Page<Sale> findSales(LocalDate min, LocalDate max, Pageable pageable);
+	
+	
+	
 }
