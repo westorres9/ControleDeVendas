@@ -1,0 +1,54 @@
+
+<div layout="column" style="height: 550px;" ng-cloak>
+
+  <section layout="row" flex>
+
+    <md-sidenav class="md-sidenav-left" md-component-id="left"
+                md-disable-backdrop="" md-whiteframe="4">
+
+      <md-toolbar class="md-theme-indigo menu-side-bar-title">
+        <h1 class="md-toolbar-tools">DSVendas</h1>
+      </md-toolbar>
+
+      <md-content layout-margin="">
+        <div>
+          <ul class="menu-side-bar">
+            <li class="menu-side-bar-items">
+              <a href="#admin/sales" class="menu-side-item">
+                <img src="/app/assets/img/sales.png" alt="">
+                <span>Vendas</span>
+              </a>
+            </li>
+            <li class="menu-side-bar-items">
+              <a href="#admin/teams" class="menu-side-item">
+                <img src="/app/assets/img/teams.png" alt="">
+                <span>Equipes</span>
+              </a>
+            </li>
+            <li class="menu-side-bar-items">
+              <a href="#admin/users" class="menu-side-item">
+                <img src="/app/assets/img/users.png" alt="">
+                <span>Usuários</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <md-button ng-click="vm.toggleLeft()" class="md-accent">
+          Fechar
+        </md-button>
+      </md-content>
+
+    </md-sidenav>
+
+    <md-content flex layout-padding>
+      <div class="admin-container">
+        <h1>{{vm.title}} {{vm.user}}!!</h1>
+        <md-button ng-click="vm.toggleLeft()" class="md-raised">
+          Menu
+        </md-button>
+      </div>
+    </md-content>
+
+  </section>
+
+</div>

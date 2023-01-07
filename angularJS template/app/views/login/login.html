@@ -1,0 +1,23 @@
+<div class="login-container">
+    <md-card class="login-card">
+        <md-card-title>
+            <h2>LOGIN</h4>
+        </md-card-title>
+            <form ng-submit="vm.Authenticate()" ng-required="vm.user.username && vm.user.password">
+              <md-input-container class="md-block login-card-inputs" flex-gt-sm/>
+                <div class="valid-feedback">
+                  Looks good
+                </div>
+                <input  class="base-input" placeholder="Informe um email" ng-model="vm.user.username" required>
+            </md-input-container>
+              <md-input-container class="md-block login-card-inputs" flex-gt-sm>
+                <div class="valid-feedback">
+                  Looks good
+                </div>
+                <input class=" base-input" type="password" placeholder="Informe a senha" ng-model="vm.user.password" required>
+              </md-input-container class="login-card-button">
+                <md-button class="md-raised md-primary" type="submit">Login</md-button>
+            </form>
+    </md-card>
+</div>
+    
