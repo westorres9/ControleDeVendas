@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.ControleDeVendas.dto.TeamDTO;
+import com.devsuperior.ControleDeVendas.entities.Sale;
 import com.devsuperior.ControleDeVendas.entities.Team;
 import com.devsuperior.ControleDeVendas.entities.User;
+import com.devsuperior.ControleDeVendas.repositories.SaleRepository;
 import com.devsuperior.ControleDeVendas.repositories.TeamRepository;
 import com.devsuperior.ControleDeVendas.repositories.UserRepository;
 import com.devsuperior.ControleDeVendas.services.exceptions.DatabaseException;
@@ -28,6 +30,9 @@ public class TeamService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private SaleRepository saleRepository;
 
 	@Autowired
 	private AuthService authService;
@@ -37,10 +42,12 @@ public class TeamService {
 		User user = authService.authenticated();
 		if (user.hasRole("ROLE_MANAGER")) {
 			Page<Team> page = repository.findByManage(user.getId(), pageable);
-			return page.map(x -> new TeamDTO(x));
+			Page<Sale> sales = saleRepository.findByManage(user.getId(), pageable);
+			return page.map(x -> new TeamDTO(x, x.getSellers(),sales.getContent()));
 		} else {
 			Page<Team> page = repository.findAll(pageable);
-			return page.map(x -> new TeamDTO(x));
+			Page<Sale> sales = saleRepository.findByManage(user.getId(), pageable);
+			return page.map(x -> new TeamDTO(x, x.getSellers(), sales.getContent()));
 		}
 
 	}
@@ -54,12 +61,12 @@ public class TeamService {
 			if (!entity.getManagers().contains(user)) {
 				throw new UnauthorizedException("Unauthorized");
 			} else {
-				return new TeamDTO(entity);
+				return new TeamDTO(entity, entity.getSellers());
 			}
 		} else {
 			Optional<Team> obj = repository.findById(id);
 			Team entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not Found"));
-			return new TeamDTO(entity);
+			return new TeamDTO(entity, entity.getSellers());
 		}
 
 	}
