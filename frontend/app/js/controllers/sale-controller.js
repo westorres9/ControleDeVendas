@@ -72,6 +72,7 @@ myapp.controller('saleCtrl', function (SaleService, $log) {
                 vm.deals = deals;
                 vm.amount = amount;
                 vm.date = date;
+                console.log(vm.sales)
 
                 Highcharts.chart('container3', {
                     chart: {

@@ -11,13 +11,14 @@
     <link rel="stylesheet" href="/app/views/login/login.css">
     <link rel="stylesheet" href="/app/views/admin/admin.css">
     <link rel="stylesheet" href="/app/views/sales/sales.css">
+    <link rel="stylesheet" href="/app/views/teams/teams.css">
     <title>DSVendas</title>
 </head>
-<body ng-controller="mainCtrl">
+<body ng-controller="mainCtrl as vm">
     <md-toolbar>
         <div class="md-toolbar-container">
             <a ng-href="#home"><h1>DSVendas</h1></a>
-            <a ng-href="#login">Login</a>
+            <a ng-href="#login">{{vm.title}}</a>
         </div>
     </md-toolbar>
     <ng-view></ng-view>
@@ -38,8 +39,10 @@
     <script src="/app/js/controllers/user-controller.js"></script>
     <script src="/app/js/localStorage/auth-service.js"></script>
     <script src="/app/js/services/sale-service.js"></script>
+    <script src="/app/js/services/team-service.js"></script>
     <script src="/app/js/localStorage/token-global-interceptors.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script src="/app/js/route.js"></script>
 </body>
