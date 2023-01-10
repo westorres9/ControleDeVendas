@@ -1,6 +1,7 @@
 package com.devsuperior.ControleDeVendas.repositories;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.devsuperior.ControleDeVendas.entities.Sale;
 import com.devsuperior.ControleDeVendas.entities.User;
+
 
 @Repository
 public interface SaleRepository extends JpaRepository<Sale, Long>{
@@ -35,6 +37,7 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 	@Query(nativeQuery = true,  value= "SELECT * FROM tb_sale " +
 			"WHERE tb-sale.date BETWEEN :min AND :max ORDER BY tb_sale.amount DESC" )
 	Page<Sale> findSales(LocalDate min, LocalDate max, Pageable pageable);
+	
 	
 	
 	

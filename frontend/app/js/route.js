@@ -1,13 +1,8 @@
 myapp.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'views/home/home.html',
-            controller: 'homeCtrl',
-            controllerAs: 'vm'
-        })
-        .when('/home', {
-            templateUrl: 'views/home/home.html',
-            controller: 'homeCtrl',
+            templateUrl: 'views/login/login.html',
+            controller: 'loginCtrl',
             controllerAs: 'vm'
         })
         .when('/login', {

@@ -80,7 +80,7 @@
     color: #fff;
 }
 
-.sale-form-card {
+.team-form-card {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -126,7 +126,7 @@
         display: table-cell;
     }
 
-    .sale-form-card {
+    .team-form-card {
         top: 55%;
         min-width: 480px;
         padding: 25px;

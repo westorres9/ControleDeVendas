@@ -1,6 +1,5 @@
 myapp.controller('loginCtrl', function($http, $httpParamSerializerJQLike, AuthService) {
     vm = this;
-    vm.title = 'loginCtrl';
     vm.user = {'grant_type' : 'password' };
     vm.Authenticate = Authenticate;
 

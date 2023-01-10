@@ -1,13 +1,12 @@
 <section class="dsvendas-container">
     <md-card class="dsvendas-card">
-        <div class="dsvendas-top-container">
-            <a ng-href="#admin">
-                <md-button class="md-raised md-primary">VOLTAR</md-button>
-            </a>
-            <md-button class="md-fab md-primary btn-add" aria-label="Profile" ng-click="vm.ShowFormNew()">
-                <p>+</p>
-            </md-button>
-        </div>
+        <a ng-href="#admin">
+            <div class="dsvendas-top-container">
+                <img src="/app/assets/img/arrow.svg" alt="" ng-click="vm.nextPage()">
+                <h3>Voltar</h3>
+            </div>
+        </a>
+        
         <div class="dsvendas-pagination-container">
             <img class="btn-page-previous" ng-click="vm.previousPage()" src="/app/assets/img/arrow.svg" alt="">
             <p>Pagina {{vm.page.number + 1}}</p>
@@ -21,6 +20,12 @@
 
         <div>
             <h2>{{vm.title}}</h2>
+        </div>
+        <div class="dsvendas-add-container">
+            <md-button class="md-fab md-primary btn-add" aria-label="Profile" ng-click="vm.ShowFormNew()">
+                <p>+</p>
+            </md-button>
+            <h3>Adicionar Nova Venda</h3>
         </div>
 
         <md-table-container>
