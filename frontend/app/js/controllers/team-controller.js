@@ -1,3 +1,5 @@
+const { map } = require("../../../bower_components/highcharts/highcharts");
+
 myapp.controller('teamCtrl', function (TeamService, $log) {
     vm = this;
     vm.title = 'Equipes'
@@ -46,10 +48,16 @@ myapp.controller('teamCtrl', function (TeamService, $log) {
         TeamService.getAllTeams()
             .then((response) => {
                 vm.teams = response.data.content;
+                vm.sales = response.data.content[0].sales;
+                vm.sellers = response.data.content[0].sellers;
                 console.log(vm.teams);
+                console.log(vm.sales);
+                console.log(vm.sellers);
                 var teamName = [];
                 vm.teams.forEach(x => teamName.push(x.name))
                 console.log(teamName)
+                vm.sales.filter().map(x => x.sellerId == vm.seller.id)
+                console.log(vm.sales);
 
               Highcharts.chart('containerTeam', {
                     chart: {
@@ -89,12 +97,12 @@ myapp.controller('teamCtrl', function (TeamService, $log) {
                         name: 'Vendedores',
                         colorByPoint: true,
                         data: [{
-                            name: 'Bradesco',
+                            name: `${vm.sellers[0].name}`,
                             y: 5,
                             drilldown: 'vendedores'
                         }, {
-                            name: 'Santander',
-                            y: 2,
+                            name: `${vm.sellers[1].name}`,
+                            y: 5,
                             drilldown: 'vendas'
                         }, {
                             name: 'Picpay',
@@ -111,7 +119,7 @@ myapp.controller('teamCtrl', function (TeamService, $log) {
                         series: [{
                             id: 'vendedores',
                             data: [
-                                ['Ana',  15608],
+                                ['Vendas',1231 ],
                                 ['Bob',  3254],
                                 ['Charlie',  4575],
                                 ['Maria',  9875],
