@@ -46,10 +46,14 @@ myapp.controller('teamCtrl', function (TeamService, $log) {
         TeamService.getAllTeams()
             .then((response) => {
                 vm.teams = response.data.content;
-                console.log(vm.teams);
+                vm.sellers = response.data.content[0].sellers;
+                vm.sales = response.data.content[0].sales;
+                console.log('equipes', vm.teams);
                 var teamName = [];
                 vm.teams.forEach(x => teamName.push(x.name))
-                console.log(teamName)
+                console.log('nome da equipe', teamName)
+                console.log('vendedores',vm.sellers);
+                console.log('vendas', vm.sales);
 
               Highcharts.chart('containerTeam', {
                     chart: {
@@ -89,21 +93,17 @@ myapp.controller('teamCtrl', function (TeamService, $log) {
                         name: 'Vendedores',
                         colorByPoint: true,
                         data: [{
-                            name: 'Bradesco',
+                            name: `${vm.sellers[0].name}`,
                             y: 5,
                             drilldown: 'vendedores'
                         }, {
-                            name: 'Santander',
-                            y: 2,
-                            drilldown: 'vendas'
+                            name: `${vm.sellers[1].name}`,
+                            y: 5,
+                            drilldown: 'vendedores'
                         }, {
-                            name: 'Picpay',
-                            y: 4,
-                            drilldown: 'vendas'
-                        },{
-                            name: 'Vivo',
-                            y: 4,
-                            drilldown: 'vendas'
+                            name: `${vm.sellers[2].name}`,
+                            y: 5,
+                            drilldown: 'vendedores'
                         }
                     ]
                     }],
