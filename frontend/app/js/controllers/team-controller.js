@@ -1,5 +1,3 @@
-const { map } = require("../../../bower_components/highcharts/highcharts");
-
 myapp.controller('teamCtrl', function (TeamService, $log) {
     vm = this;
     vm.title = 'Equipes'
@@ -48,18 +46,6 @@ myapp.controller('teamCtrl', function (TeamService, $log) {
         TeamService.getAllTeams()
             .then((response) => {
                 vm.teams = response.data.content;
-<<<<<<< HEAD
-                vm.sales = response.data.content[0].sales;
-                vm.sellers = response.data.content[0].sellers;
-                console.log(vm.teams);
-                console.log(vm.sales);
-                console.log(vm.sellers);
-                var teamName = [];
-                vm.teams.forEach(x => teamName.push(x.name))
-                console.log(teamName)
-                vm.sales.filter().map(x => x.sellerId == vm.seller.id)
-                console.log(vm.sales);
-=======
                 vm.sellers = response.data.content[0].sellers;
                 vm.sales = response.data.content[0].sales;
                 console.log('equipes', vm.teams);
@@ -68,7 +54,6 @@ myapp.controller('teamCtrl', function (TeamService, $log) {
                 console.log('nome da equipe', teamName)
                 console.log('vendedores',vm.sellers);
                 console.log('vendas', vm.sales);
->>>>>>> main
 
               Highcharts.chart('containerTeam', {
                     chart: {
@@ -114,11 +99,7 @@ myapp.controller('teamCtrl', function (TeamService, $log) {
                         }, {
                             name: `${vm.sellers[1].name}`,
                             y: 5,
-<<<<<<< HEAD
-                            drilldown: 'vendas'
-=======
                             drilldown: 'vendedores'
->>>>>>> main
                         }, {
                             name: `${vm.sellers[2].name}`,
                             y: 5,
@@ -130,7 +111,7 @@ myapp.controller('teamCtrl', function (TeamService, $log) {
                         series: [{
                             id: 'vendedores',
                             data: [
-                                ['Vendas',1231 ],
+                                ['Ana',  15608],
                                 ['Bob',  3254],
                                 ['Charlie',  4575],
                                 ['Maria',  9875],
