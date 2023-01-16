@@ -9,6 +9,10 @@ a, a:hover {
     color: unset;
 }
 
+.logout {
+    cursor: pointer;
+}
+
 md-toolbar {
     height: 70px;
     display: flex;

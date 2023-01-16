@@ -18,20 +18,21 @@ public class SaleSumByTeamDTO implements Serializable {
         this.sum = sum;
     }
 
-    public String getSellerName() {
-        return teamName;
-    }
+	public String getTeamName() {
+		return teamName;
+	}
 
-    public void setSellerName(String teamName) {
-        this.teamName = teamName;
-    }
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
 
-    public Double getSum() {
-        return sum;
-    }
+	public Double getSum() {
+		return sum;
+	}
 
-    public void setSum(Double sum) {
-        this.sum = sum;
-    }
+	public void setSum(Double sum) {
+		this.sum = sum;
+	}
 
+    
 }

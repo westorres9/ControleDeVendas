@@ -21,8 +21,108 @@ myapp.controller('teamCtrl', function (TeamService, $log) {
     vm.formVisible = formVisible;
     var warningVisible = false;
     vm.warningVisible = warningVisible;
-    
+    vm.SalesSumBySeller = SalesSumBySeller;
+    vm.SalesSumByTeam = SalesSumByTeam;
+    vm.SalesSucessBySeller = SalesSuccessBySeller;
 
+    vm.salesbySeller = [];
+    vm.salesbyTeam = [];
+    vm.salesSuccess = [];
+    
+    function SalesSuccessBySeller() {
+        TeamService.salesSuccessBySeller().then(response => {
+            vm.salesSuccess = response.data;
+            console.log('Sales success',vm.salesSuccess )
+        })
+    }
+    SalesSumBySeller();
+
+    function SalesSumBySeller() {
+        TeamService.salesSumBySeller().then(response => {
+            vm.salesbySeller = response.data;
+            console.log('Sales sum by seller',vm.salesbySeller)
+        })
+    }
+    SalesSuccessBySeller();
+
+    function SalesSumByTeam() {
+        TeamService.salesSumByTeam().then(response => {
+            vm.salesbyTeam = response.data;
+            console.log('Sales sum by team',vm.salesbyTeam)
+            let teams = [];
+            let teamNames = [];
+            let teamTotal = [];
+            console.log(vm.salesbyTeam);
+            vm.salesbyTeam.forEach(x => teams.push(x));
+            vm.salesbyTeam.forEach(x => teamNames.push(x.teamName));
+            vm.salesbyTeam.forEach(x => teamTotal.push(x.sum));
+            vm.teams = teams;
+            vm.teamNames = teamNames;
+            vm.teamTotal = teamTotal;
+            console.log('teams', vm.teams);
+            console.log('teamNames', vm.teamNames);
+            console.log('teamTotal', vm.teamTotal);
+            function teamToDrillDown(name, y, drilldown) {
+                this.name = name;
+                this.y= y;
+                this.drilldown = drilldown;
+            }
+            teamDrillDown = teamToDrillDown();
+            let TeamsToDrillDown = [];
+            vm.salesbyTeam.forEach(x => TeamsToDrillDown.push(new teamToDrillDown(x.teamName, x.sum, x.teamName)));   
+            console.log(TeamsToDrillDown);         
+            
+            Highcharts.chart('containerTeam', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: `Vendas das Equipes`
+                },
+                subtitle: {
+                    text: `Vendas entre periodo`
+                },
+                xAxis: {
+                    categories: vm.teamNames,
+                    crosshair:true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: `Total de vendas`
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.2f}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.1,
+                        borderWidth: 0
+                    }
+                },
+                series: [
+                    {
+                        name: 'Equipes',
+                        data: TeamsToDrillDown,
+            }],drilldown: {
+                series: [
+                    {
+                        TeamsToDrillDown
+                    }
+                ]
+            }
+            })    
+        }).catch(function(error) {
+        console.log('ERROR: ' + error.status, error);
+        })
+    }
+    SalesSumByTeam();
 
     function nextPage() {
         page = page + 1;
@@ -43,98 +143,12 @@ myapp.controller('teamCtrl', function (TeamService, $log) {
 
     function GetAllTeams() {
 
+        vm.teams = TeamService.getAllTeams();
+        
         TeamService.getAllTeams()
             .then((response) => {
                 vm.teams = response.data.content;
                 vm.sellers = response.data.content[0].sellers;
-                vm.sales = response.data.content[0].sales;
-                console.log('equipes', vm.teams);
-                var teamName = [];
-                vm.teams.forEach(x => teamName.push(x.name))
-                console.log('nome da equipe', teamName)
-                console.log('vendedores',vm.sellers);
-                console.log('vendas', vm.sales);
-
-              Highcharts.chart('containerTeam', {
-                    chart: {
-                        type: 'column'
-                    },
-                    title: {
-                        text: `Vendas da Equipe ${vm.teams[0].name}`
-                    },
-                    subtitle: {
-                        text: `Vendas entre periodo`
-                    },
-                    xAxis: {
-                        categories: 'Equipes',
-                        crosshair:true
-                    },
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: `Total de vendas`
-                        }
-                    },
-                    tooltip: {
-                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                            '<td style="padding:0"><b>{point.y:.2f}</b></td></tr>',
-                        footerFormat: '</table>',
-                        shared: true,
-                        useHTML: true
-                    },
-                    plotOptions: {
-                        column: {
-                            pointPadding: 0.1,
-                            borderWidth: 0
-                        }
-                    },
-                    series: [{
-                        name: 'Vendedores',
-                        colorByPoint: true,
-                        data: [{
-                            name: `${vm.sellers[0].name}`,
-                            y: 5,
-                            drilldown: 'vendedores'
-                        }, {
-                            name: `${vm.sellers[1].name}`,
-                            y: 5,
-                            drilldown: 'vendedores'
-                        }, {
-                            name: `${vm.sellers[2].name}`,
-                            y: 5,
-                            drilldown: 'vendedores'
-                        }
-                    ]
-                    }],
-                    drilldown: {
-                        series: [{
-                            id: 'vendedores',
-                            data: [
-                                ['Ana',  15608],
-                                ['Bob',  3254],
-                                ['Charlie',  4575],
-                                ['Maria',  9875],
-                                ['Eddie',  412],
-                            ]
-                        }, {
-                            id: 'fruits',
-                            data: [
-                                ['Apples', 4],
-                                ['Oranges', 2]
-                            ]
-                        }, {
-                            id: 'cars',
-                            data: [
-                                ['Toyota', 4],
-                                ['Opel', 2],
-                                ['Volkswagen', 2]
-                            ]
-                        }]
-                    }
-                })    
-            }).catch(function(error) {
-            console.log('ERROR: ' + error.status, error);
         });
     }
 

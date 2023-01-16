@@ -14,11 +14,11 @@
     <link rel="stylesheet" href="/app/views/teams/teams.css">
     <title>DSVendas</title>
 </head>
-<body ng-controller="mainCtrl as vm">
+<body ng-controller="loginCtrl as vm">
     <md-toolbar>
         <div class="md-toolbar-container">
-            <a ng-href="#home"><h1>DSVendas</h1></a>
-            <a ng-href="#login">{{vm.title}}</a>
+            <a ng-href="#login"><h1>DSVendas</h1></a>
+            <a class="logout" ng-click="vm.Logout()" ng-model="vm.title" ng-change="vm.setTitle()">{{vm.title}}</a>
         </div>
     </md-toolbar>
     <ng-view></ng-view>
@@ -31,7 +31,6 @@
     <script src="/bower_components/angular-material-data-table/dist/md-data-table.min.js"></script>
     <script src="/app/app.js"></script>
     <script src="/app/js/controllers/main-controller.js"></script>
-    <script src="/app/js/controllers/home-controller.js"></script>
     <script src="/app/js/controllers/login-controller.js"></script>
     <script src="/app/js/controllers/admin-controller.js"></script>
     <script src="/app/js/controllers/sale-controller.js"></script>
