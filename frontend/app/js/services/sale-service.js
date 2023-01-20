@@ -1,15 +1,17 @@
+
 myapp.service('SaleService' ,function($http) {
     const BASE_URL = "http://localhost:8080";
 
     this.getAllSales = (page,size,minDate,maxDate) => {
         const request = $http(
             {
-                method: 'get',
-                url: `${BASE_URL}/sales/?page=${page}&size=${size}&minDate=${minDate}&maxDate=${maxDate}`,
-            } 
+                method: 'post',
+                url: `${BASE_URL}/sales?page=${page}&size=${size}&minDate=${minDate}&maxDate=${maxDate}`
+            }
         )
         return request;
     };
+    
 
     this.insertSale = (sale) => {
         

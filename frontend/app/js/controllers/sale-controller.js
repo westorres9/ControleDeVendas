@@ -32,7 +32,7 @@ myapp.controller('saleCtrl', function (SaleService, $log) {
 
     let page = 0
     let size = 12
-    let minDate = '2022-01-01'
+    let minDate = '2021-12-28'
     let maxDate = '2022-06-16'
     vm.page = page
   
@@ -124,7 +124,7 @@ myapp.controller('saleCtrl', function (SaleService, $log) {
             }).catch(function (error) {
                 console.log('ERROR: ' + error.status, error);
                 if (error.status >= 400) {
-                    window.location.href = '/index.html#/login';
+                    console.log('ERROR: ' + error.status, error);
                 }
             });
     }
@@ -211,7 +211,5 @@ myapp.controller('saleCtrl', function (SaleService, $log) {
         console.log(vm.sale)
         return vm.sale;
     }
-
-    
 
 })

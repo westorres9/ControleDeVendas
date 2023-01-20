@@ -38,12 +38,14 @@ public class SaleResource {
 		List<SaleSumBySellerDTO> list = service.amountGroupedBySeller();
 		return ResponseEntity.ok().body(list);
 	}
+	
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	@GetMapping(value = "/success-by-seller")
 	public ResponseEntity<List<SaleSuccessDTO>> successGroupedBySeller() {
 		List<SaleSuccessDTO> list = service.successGroupedBySeller();
 		return ResponseEntity.ok().body(list);
 	}
+	
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	@GetMapping(value = "/sum-by-team")
 	public ResponseEntity<List<SaleSumByTeamDTO>> amountGroupedByTeam() {
@@ -81,7 +83,6 @@ public class SaleResource {
 		SaleDTO newDTO = service.update(id, dto);
 		return ResponseEntity.ok().body(newDTO);
 	}
-	
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {

@@ -17,6 +17,7 @@
                 <div id="containerTeam"></div>
             </figure>
         </md-container>
+        <chart user="chart"></chart>
 
         <div>
             <h2>{{vm.title}}</h2>
@@ -101,10 +102,6 @@
         </div>
         </div>
 
-
-
-
-
         <div class="dialog-background" ng-hide="vm.warningVisible !== true">
             <div class="dialog-box">
                 <div class="sale-form-card">
@@ -113,12 +110,18 @@
                         
                         <md-button class="md-raised md-primary btn-form" type="reset"
                         ng-click="vm.CloseWarning()">Não</md-button>
-                                <md-button class="md-raised md-accent btn-form" type="submit"
-                                ng-click="vm.DeleteTeam(vm.team)">SIM</md-button>
+                        <md-button class="md-raised md-accent btn-form" type="submit"
+                        ng-click="vm.DeleteTeam(vm.team)">SIM</md-button>
                     </div>
                 </div>
             </div>
         </div>
     </md-card>
+    
+    <div>
+        <helloworld user="wester"></helloworld>
+        <!-- <helloWorld user="ctrl.user"></helloWorld> -->
+    </div>
+    
     
 </section>

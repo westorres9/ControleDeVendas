@@ -1,4 +1,4 @@
-myapp.controller('teamCtrl', function (TeamService, $log) {
+myapp.controller('teamCtrl', function (TeamService) {
     vm = this;
     vm.title = 'Equipes'
     vm.GetAllTeams = GetAllTeams;
@@ -24,105 +24,44 @@ myapp.controller('teamCtrl', function (TeamService, $log) {
     vm.SalesSumBySeller = SalesSumBySeller;
     vm.SalesSumByTeam = SalesSumByTeam;
     vm.SalesSucessBySeller = SalesSuccessBySeller;
-
     vm.salesbySeller = [];
-    vm.salesbyTeam = [];
+    vm.salesbyTeam = [{}];
     vm.salesSuccess = [];
-    
+    vm.teams = [];
+    var dataToFirstGraph =[];
+    var dataToDrilldown =[];
+
+    function init() {
+        SalesSumBySeller();
+        SalesSumBySeller();
+        SalesSumByTeam();
+    }
+    init();
+
     function SalesSuccessBySeller() {
-        TeamService.salesSuccessBySeller().then(response => {
+        return TeamService.salesSuccessBySeller().then(response => {
             vm.salesSuccess = response.data;
             console.log('Sales success',vm.salesSuccess )
-        })
+        });
     }
-    SalesSumBySeller();
+    
+
 
     function SalesSumBySeller() {
-        TeamService.salesSumBySeller().then(response => {
+        return TeamService.salesSumBySeller().then(response => {
             vm.salesbySeller = response.data;
             console.log('Sales sum by seller',vm.salesbySeller)
+            
         })
     }
-    SalesSuccessBySeller();
+    
 
     function SalesSumByTeam() {
-        TeamService.salesSumByTeam().then(response => {
+        return TeamService.salesSumByTeam().then(response => {
             vm.salesbyTeam = response.data;
             console.log('Sales sum by team',vm.salesbyTeam)
-            let teams = [];
-            let teamNames = [];
-            let teamTotal = [];
-            console.log(vm.salesbyTeam);
-            vm.salesbyTeam.forEach(x => teams.push(x));
-            vm.salesbyTeam.forEach(x => teamNames.push(x.teamName));
-            vm.salesbyTeam.forEach(x => teamTotal.push(x.sum));
-            vm.teams = teams;
-            vm.teamNames = teamNames;
-            vm.teamTotal = teamTotal;
-            console.log('teams', vm.teams);
-            console.log('teamNames', vm.teamNames);
-            console.log('teamTotal', vm.teamTotal);
-            function teamToDrillDown(name, y, drilldown) {
-                this.name = name;
-                this.y= y;
-                this.drilldown = drilldown;
-            }
-            teamDrillDown = teamToDrillDown();
-            let TeamsToDrillDown = [];
-            vm.salesbyTeam.forEach(x => TeamsToDrillDown.push(new teamToDrillDown(x.teamName, x.sum, x.teamName)));   
-            console.log(TeamsToDrillDown);         
-            
-            Highcharts.chart('containerTeam', {
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: `Vendas das Equipes`
-                },
-                subtitle: {
-                    text: `Vendas entre periodo`
-                },
-                xAxis: {
-                    categories: vm.teamNames,
-                    crosshair:true
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: `Total de vendas`
-                    }
-                },
-                tooltip: {
-                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                        '<td style="padding:0"><b>{point.y:.2f}</b></td></tr>',
-                    footerFormat: '</table>',
-                    shared: true,
-                    useHTML: true
-                },
-                plotOptions: {
-                    column: {
-                        pointPadding: 0.1,
-                        borderWidth: 0
-                    }
-                },
-                series: [
-                    {
-                        name: 'Equipes',
-                        data: TeamsToDrillDown,
-            }],drilldown: {
-                series: [
-                    {
-                        TeamsToDrillDown
-                    }
-                ]
-            }
-            })    
-        }).catch(function(error) {
-        console.log('ERROR: ' + error.status, error);
-        })
-    }
-    SalesSumByTeam();
+        })}
+    
 
     function nextPage() {
         page = page + 1;
@@ -131,27 +70,22 @@ myapp.controller('teamCtrl', function (TeamService, $log) {
 
     function previousPage() {
         page = page - 1;
-        if(page < 0) {
+        if (page < 0) {
             page = 0
             GetAllTeams();
         }
         else {
             GetAllTeams();
         }
-        
     }
 
     function GetAllTeams() {
-
-        vm.teams = TeamService.getAllTeams();
-        
-        TeamService.getAllTeams()
-            .then((response) => {
+        return TeamService.getAllTeams()
+            .then( response => {
                 vm.teams = response.data.content;
-                vm.sellers = response.data.content[0].sellers;
-        });
+                console.log('get All Sales', vm.teams)
+            });
     }
-
     GetAllTeams();
 
     function SelectTeam(team) {
@@ -161,14 +95,14 @@ myapp.controller('teamCtrl', function (TeamService, $log) {
         return vm.team;
     }
 
-    function InsertTeam () {
+    function InsertTeam() {
         var team = vm.team;
         var insertTeam = TeamService.insertTeam(team);
-        insertTeam.then(function(response) {
+        insertTeam.then(function (response) {
             console.log(response.data)
             CloseFormNew();
             GetAllTeams();
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.log('ERROR: ' + error.status, error);
         });
     }
@@ -179,7 +113,7 @@ myapp.controller('teamCtrl', function (TeamService, $log) {
         updateTeam.then(() => {
             CloseForm();
             GetAllTeams();
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.log('ERROR: ' + error.status, error);
         });
     }
@@ -190,7 +124,7 @@ myapp.controller('teamCtrl', function (TeamService, $log) {
         deleteTeam.then(() => {
             CloseWarning();
             GetAllTeams();
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.log('ERROR: ' + error.status, error);
         });
     }
@@ -200,7 +134,7 @@ myapp.controller('teamCtrl', function (TeamService, $log) {
         console.log('warningVisible', vm.warningVisible)
     }
 
-    function CloseWarning () {
+    function CloseWarning() {
         vm.warningVisible = false;
         console.log('warningVisible', vm.warningVisible)
     }
@@ -233,5 +167,117 @@ myapp.controller('teamCtrl', function (TeamService, $log) {
     }
 
     
+    function Charts() {
+        var teamnames = []
+        var teamsum = []
+        
+        TeamService.salesSumByTeam().then(response => {
+            vm.salesbyTeam = response.data;
+            console.log('Sales sum by team',vm.salesbyTeam)
+            vm.salesbyTeam.forEach(x => dataToFirstGraph.push({name: x.teamName, y: x.sum, drilldown: true}));
+            vm.salesbyTeam.forEach(x => teamnames.push(x.teamName))
+            vm.salesbyTeam.forEach(x => teamsum.push(x.sum))
+            console.log('teamnames', teamnames)
+            console.log('teamsum', teamsum)
+            console.log('dataToFirstGraph', dataToFirstGraph )
+        })
 
+        TeamService.salesSumBySeller().then(response => {
+            vm.salesbySeller = response.data;
+            console.log('Sales sum by seller',vm.salesbySeller);
+            vm.salesbySeller.forEach(x => dataToDrilldown.push({name: x.sellerName, data: [['sum', x.sum]]}));
+            console.log('dataToDrillDrown', dataToDrilldown)
+        })
+
+        Highcharts.chart('containerTeam', {
+            chart: {
+                type: 'column',
+                events: {
+                    drilldown: function (e) {
+                        if (!e.seriesOptions) {
+        
+                            var chart = this,
+                                drilldowns = {
+                                    Animals: {
+                                        name: 'Animals',
+                                        data: [
+                                            ['Cows', 2],
+                                            ['Sheep', 3]
+                                        ]
+                                    },
+                                    Fruits: {
+                                        name: 'Fruits',
+                                        data: [
+                                            ['Apples', 5],
+                                            ['Oranges', 7],
+                                            ['Bananas', 2]
+                                        ]
+                                    },
+                                    Cars: {
+                                        name: 'Cars',
+                                        data: [
+                                            ['Toyota', 1],
+                                            ['Volkswagen', 2],
+                                            ['Opel', 5]
+                                        ]
+                                    }
+                                },
+                                series = drilldowns[e.point.name];
+        
+                            // Show the loading label
+                            chart.showLoading('Simulating Ajax ...');
+        
+                            setTimeout(function () {
+                                chart.hideLoading();
+                                chart.addSeriesAsDrilldown(e.point, series);
+                            }, 1000);
+                        }
+        
+                    }
+                }
+            },
+            title: {
+                text: 'Async drilldown'
+            },
+            xAxis: {
+                type: 'category'
+            },
+        
+            legend: {
+                enabled: false
+            },
+        
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+        
+            series: [{
+                name: 'Things',
+                colorByPoint: true,
+                data: [{
+                    name: 'Animals',
+                    y: 5,
+                    drilldown: true
+                }, {
+                    name: 'Fruits',
+                    y: 2,
+                    drilldown: true
+                }, {
+                    name: 'Cars',
+                    y: 4,
+                    drilldown: true
+                }]
+            }],
+        
+            drilldown: {
+                series: []
+            }
+        });  
+    }       
+    Charts();
 })

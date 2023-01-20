@@ -1,7 +1,6 @@
 package com.devsuperior.ControleDeVendas.dto;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
 
 import com.devsuperior.ControleDeVendas.entities.Sale;

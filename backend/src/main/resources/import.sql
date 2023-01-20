@@ -2,11 +2,11 @@ INSERT INTO tb_team (name) VALUES ('Bradesco');
 INSERT INTO tb_team (name) VALUES ('Santander');
 INSERT INTO tb_team (name) VALUES ('Embratel');
 
-INSERT INTO tb_user(name,email, phone, password, birth_date, team_id) VALUES ('Ana','logan@gmail.com', '988888888', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '2001-07-25',1);
-INSERT INTO tb_user(name,email, phone, password, birth_date, team_id) VALUES ('Charlie','anakin@gmail.com', '977777777', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '2001-07-25',1);
-INSERT INTO tb_user(name,email, phone, password, birth_date, team_id) VALUES ('Bob','allen@gmail.com', '966666666', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '2001-07-25',2);
-INSERT INTO tb_user(name,email, phone, password, birth_date, team_id) VALUES ('Eddy','kalel@gmail.com', '955555555', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '2001-07-25',2);
-INSERT INTO tb_user(name,email, phone, password, birth_date, team_id) VALUES ('Terry','padme@gmail.com', '944444444', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '2001-07-25',3);
+INSERT INTO tb_user(name,email, phone, password, birth_date, team_id) VALUES ('Logan','logan@gmail.com', '988888888', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '2001-07-25',1);
+INSERT INTO tb_user(name,email, phone, password, birth_date, team_id) VALUES ('Anakin','anakin@gmail.com', '977777777', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '2001-07-25',1);
+INSERT INTO tb_user(name,email, phone, password, birth_date, team_id) VALUES ('allen','allen@gmail.com', '966666666', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '2001-07-25',2);
+INSERT INTO tb_user(name,email, phone, password, birth_date, team_id) VALUES ('Kal El','kalel@gmail.com', '955555555', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '2001-07-25',2);
+INSERT INTO tb_user(name,email, phone, password, birth_date, team_id) VALUES ('Padme','padme@gmail.com', '944444444', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '2001-07-25',3);
 
 INSERT INTO tb_user(name, email, phone, password, birth_date) VALUES ('Maria Brown', 'maria@gmail.com', '933333333', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '2001-07-25');
 INSERT INTO tb_user(name, email, phone, password, birth_date) VALUES ('Alex Green', 'alex@gmail.com', '922222222', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '1987-12-13');

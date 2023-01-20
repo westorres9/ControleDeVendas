@@ -15,6 +15,11 @@ myapp.config(function ($routeProvider) {
             controller: 'adminCtrl',
             controllerAs: 'vm'
         })
+        .when('/teste', {
+            templateUrl: 'views/teste/teste.html',
+            controller: 'testeCtrl',
+            controllerAs: 'vm'
+        })
         .when('/admin/sales', {
             templateUrl: 'views/sales/sales.html',
             controller: 'saleCtrl',
