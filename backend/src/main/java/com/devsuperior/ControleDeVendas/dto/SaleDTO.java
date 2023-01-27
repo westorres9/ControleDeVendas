@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import com.devsuperior.ControleDeVendas.entities.Sale;
+import com.devsuperior.ControleDeVendas.entities.SaleStatus;
 
 public class SaleDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -13,6 +14,7 @@ public class SaleDTO implements Serializable {
 	private Integer visited;
 	private Integer deals;
 	private Double amount;
+	private String status;
 	private Long sellerId;
 
 	private String sellerName;
@@ -20,12 +22,13 @@ public class SaleDTO implements Serializable {
 	public SaleDTO() {
 	}
 
-	public SaleDTO(Long id, LocalDate date, Integer visited, Integer deals, Double amount, Long sellerId, String sellerName) {
+	public SaleDTO(Long id, LocalDate date, Integer visited, Integer deals, Double amount,String status, Long sellerId, String sellerName) {
 		this.id = id;
 		this.date = date;
 		this.visited = visited;
 		this.deals = deals;
 		this.amount = amount;
+		this.status = status;
 		this.sellerId = sellerId;
 		this.sellerName = sellerName;
 	}
@@ -36,6 +39,7 @@ public class SaleDTO implements Serializable {
 		this.visited = entity.getVisited();
 		this.deals = entity.getDeals();
 		this.amount = entity.getAmount();
+		this.status = entity.getStatus().toString();
 		this.sellerId = entity.getSeller().getId();
 		this.sellerName = entity.getSeller().getName();
 	}
@@ -78,6 +82,14 @@ public class SaleDTO implements Serializable {
 
 	public void setAmount(Double amount) {
 		this.amount = amount;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Long getSellerId() {

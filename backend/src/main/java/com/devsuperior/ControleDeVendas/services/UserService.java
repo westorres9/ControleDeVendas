@@ -34,100 +34,11 @@ public class UserService implements UserDetailsService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
-	
+
 	@Autowired
 	private UserRepository repository;
-	
-	@Autowired
-	private RoleRepository roleRepository;
-	
-	
-	@Autowired
-	private AuthService authService;
-	
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
-	
-	@Transactional(readOnly = true)
-	public Page<UserDTO> findAllPaged(Pageable pageable, Long id) {
-		authService.ValidateAdmin(id);
-		Page<User> page = repository.findAll(pageable);
-		return page.map(x -> new UserDTO(x));
-	}
-	
-	@Transactional(readOnly = true)
-	public UserDTO findById(Long id) {
-		User user = authService.authenticated();
-		Optional<User> obj = repository.findById(id);
-		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity Not Found"));
-		return new UserDTO(entity, entity.getRoles());
-	}
-	
-	@Transactional
-	public UserDTO insert(UserInsertDTO dto) {
-		User user = authService.authenticated();
-		if (!user.hasRole("ROLE_ADMIN") || !user.hasRole("ROLE_MANAGER")) {
-			User entity = new User();
-			copyDtoToEntity(entity, dto);
-			entity.setPassword(passwordEncoder.encode(dto.getPassword()));
-			entity = repository.save(entity);
-			return new UserDTO(entity);
-		}
-		else {
-			throw new UnauthorizedException("Unauthorized User");
-		}
-		
-	}
-	
-	@Transactional
-	public UserDTO update(Long id, UserUpdateDTO dto) {
-		User user = authService.authenticated();
-		if (!user.hasRole("ROLE_ADMIN") || !user.hasRole("ROLE_MANAGER")) {
-			try {
-				User entity = repository.getOne(id);
-				copyDtoToEntity(entity, dto);
-				entity = repository.save(entity);
-				return new UserDTO(entity);
-			}
-			catch (EntityNotFoundException e) {
-				throw new ResourceNotFoundException("Entity not Found " + id);
-			}
-		}
-		else {
-			throw new UnauthorizedException("Unauthorized User");
-		}
-		
-	}
-	
-	
-	public void delete(Long id) {
-		User user = authService.authenticated();
-		if (!user.hasRole("ROLE_ADMIN") || !user.hasRole("ROLE_MANAGER")) {
-			try {
-				repository.deleteById(id);
-			}
-			catch(EntityNotFoundException e) {
-				throw new ResourceNotFoundException("Entity not Found " + id);
-			}
-			catch(DataIntegrityViolationException e) {
-				throw new DatabaseException("Integrity violation");
-			}
-		}
-		else {
-			throw new UnauthorizedException("Unauthorized User");
-		}
-		
-	}
-	
-	public void copyDtoToEntity(User entity, UserDTO dto) {
-		entity.setName(dto.getName());
-		entity.setEmail(dto.getEmail());
-		entity.getRoles().clear();
-		for(RoleDTO roleDTO : dto.getRoles()) {
-			Role role = roleRepository.getOne(roleDTO.getId());
-			entity.getRoles().add(role);
-		}
-	}
+
+
 	
 	@Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

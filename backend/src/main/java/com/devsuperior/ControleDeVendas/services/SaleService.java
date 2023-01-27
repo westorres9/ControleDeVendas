@@ -11,6 +11,7 @@ import javax.persistence.EntityNotFoundException;
 import com.devsuperior.ControleDeVendas.dto.SaleSuccessDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumBySellerDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumByTeamDTO;
+import com.devsuperior.ControleDeVendas.entities.SaleStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -29,131 +30,65 @@ import com.devsuperior.ControleDeVendas.services.exceptions.UnauthorizedExceptio
 
 @Service
 public class SaleService {
-	
-	@Autowired
-	private AuthService authService;
-	
-	@Autowired
-	private SaleRepository repository;
-	
-	@Autowired
-	private UserRepository userRepository;
 
-	@Transactional(readOnly = true)
-	public List<SaleSumBySellerDTO> amountGroupedBySeller() {
-		return repository.amountGroupedBySeller();
-	}
+    @Autowired
+    private SaleRepository repository;
 
-	@Transactional(readOnly = true)
-	public List<SaleSumByTeamDTO> amountGroupedByTeam() {
-		return repository.amountGroupedByTeam();
-	}
+    @Autowired
+    private UserRepository  userRepository;
 
-	@Transactional(readOnly = true)
-	public List<SaleSuccessDTO> successGroupedBySeller() {
-		return repository.successGroupedBySeller();
-	}
-	
-	@Transactional(readOnly = true)
-	public Page<SaleDTO> findAll(String minDate, String  maxDate, String name, Pageable pageable) {	
-		User user = authService.authenticated();
-		LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
-		LocalDate min = minDate.equals("") ? today.minusDays(365) : LocalDate.parse(minDate);
-		LocalDate max = maxDate.equals("") ? today : LocalDate.parse(maxDate);
-		if (user.hasRole("ROLE_SELLER")) {
-			Page<Sale> page = repository.findBySellerAndDateBetween(pageable, user, min, max);
-			return page.map(x -> new SaleDTO(x));
-		}
-		else if (user.hasRole("ROLE_MANAGER")) {
-			Page<Sale> page = repository.findByManage(user.getId(),pageable );
-			return page.map(x -> new SaleDTO(x));
-		}
-		else {
-			Page<Sale> page = repository.findBySellerName(name, pageable);
-			return page.map(x -> new SaleDTO(x));
-		}
-		
-		
-	}
-	
-	@Transactional(readOnly = true)
-	public SaleDTO findById(Long id) {
-		User user = authService.authenticated();
-		if (user.hasRole("ROLE_SELLER")) {
-			Optional<Sale> obj = repository.findById(id);
-			Sale entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not Found"));
-			if(entity.getSeller().getId() == user.getId()) {
-				return new SaleDTO(entity);
-			}
-			else {
-				throw new UnauthorizedException("Unauthorized");
-			}
-		}
-		Optional<Sale> obj = repository.findById(id);
-		Sale entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not Found"));
-		return new SaleDTO(entity);
-	}
-	
-	@Transactional
-	public SaleDTO insert(SaleDTO dto) {
-		User user = authService.authenticated();
-		if (user.hasRole("ROLE_SELLER")) {
-			Sale entity = new Sale();
-			entity.setDate(dto.getDate());
-			entity.setVisited(dto.getVisited());
-			entity.setDeals(dto.getDeals());
-			entity.setAmount(dto.getAmount());
-			entity.setSeller(userRepository.getOne(user.getId()));
-			entity = repository.save(entity);
-			return new SaleDTO(entity);
-		}
-		else {
-			throw new UnauthorizedException("Unauthorized User");
-		}
-		
-	}
-	
-	@Transactional
-	public SaleDTO update(Long id, SaleDTO dto) {
-		User user = authService.authenticated();
-		if (user.hasRole("ROLE_SELLER")) {
-			try {
-				Sale entity = repository.getOne(id);
-				entity.setDate(dto.getDate());
-				entity.setVisited(dto.getVisited());
-				entity.setDeals(dto.getDeals());
-				entity.setAmount(dto.getAmount());
-				entity.setSeller(userRepository.getOne(user.getId()));
-				entity = repository.save(entity);
-				return new SaleDTO(entity);
-			}
-			catch (EntityNotFoundException e) {
-				throw new ResourceNotFoundException("Entity not Found " + id);
-			}
-		}
-		else {
-			throw new UnauthorizedException("Unauthorized User");
-		}
-		
-	}
-	
-	public void delete(Long id) {
-		User user = authService.authenticated();
-		if (user.hasRole("ROLE_SELLER")) {
-			try {
-				repository.deleteById(id);
-			}
-			catch(EntityNotFoundException e) {
-				throw new ResourceNotFoundException("Entity not Found " + id);
-			}
-			catch(DataIntegrityViolationException e) {
-				throw new DatabaseException("Integrity violation");
-			}
-		}
-		else {
-			throw new UnauthorizedException("Unauthorized User");
-		}
-		
-	}
+    @Transactional(readOnly = true)
+    public Page<SaleDTO> findAllSales(Pageable pageable) {
+        Page<Sale> page = repository.findAll(pageable);
+        return page.map(x -> new SaleDTO(x));
+    }
 
+    @Transactional(readOnly = true)
+    public SaleDTO findById(Long id) {
+        Optional<Sale> obj = repository.findById(id);
+        Sale entity = obj.orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
+        return new SaleDTO(entity);
+    }
+
+    @Transactional
+    public SaleDTO insert(SaleDTO dto) {
+        Sale entity = new Sale();
+        entity.setDate(LocalDate.now());
+        entity.setAmount(dto.getAmount());
+        entity.setDeals(dto.getDeals());
+        entity.setVisited(dto.getVisited());
+        entity.setStatus(SaleStatus.PENDING);
+        entity.setSeller(userRepository.getOne(1L));
+        entity = repository.save(entity);
+        return new SaleDTO(entity);
+    }
+
+    @Transactional
+    public SaleDTO update(Long id, SaleDTO dto) {
+        try {
+            Sale entity = repository.getOne(id);
+            entity.setAmount(dto.getAmount());
+            entity.setDeals(dto.getDeals());
+            entity.setVisited(dto.getVisited());
+            entity.setStatus(SaleStatus.PAID);
+            entity.setSeller(userRepository.getOne(1L));
+            entity = repository.save(entity);
+            return new SaleDTO(entity);
+        }
+        catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Ifd not found " + id);
+        }
+    }
+
+    public void delete(Long id) {
+        try {
+            repository.deleteById(id);
+        }
+        catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Id not found " + id);
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Integrity violation");
+        }
+    }
 }

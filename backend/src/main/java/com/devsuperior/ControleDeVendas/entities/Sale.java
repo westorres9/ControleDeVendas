@@ -24,6 +24,8 @@ public class Sale implements Serializable {
 	private Integer visited;
 	private Integer deals;
 	private Double amount;
+
+	private SaleStatus status;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "seller_id")
@@ -32,12 +34,13 @@ public class Sale implements Serializable {
 	public Sale() {
 	}
 
-	public Sale(Long id, LocalDate date, Integer visited, Integer deals, Double amount, User seller) {
+	public Sale(Long id, LocalDate date, Integer visited, Integer deals, Double amount,SaleStatus status, User seller) {
 		this.id = id;
 		this.date = date;
 		this.visited = visited;
 		this.deals = deals;
 		this.amount = amount;
+		this.status = status;
 		this.seller = seller;
 	}
 
@@ -79,6 +82,14 @@ public class Sale implements Serializable {
 
 	public void setAmount(Double amount) {
 		this.amount = amount;
+	}
+
+	public SaleStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(SaleStatus status) {
+		this.status = status;
 	}
 
 	public User getSeller() {
