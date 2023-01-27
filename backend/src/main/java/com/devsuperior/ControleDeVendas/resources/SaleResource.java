@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.devsuperior.ControleDeVendas.dto.*;
+import com.devsuperior.ControleDeVendas.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,6 +32,8 @@ public class SaleResource {
 	
 	@Autowired
 	private SaleService service;
+	@Autowired
+	private UserRepository userRepository;
 
 	@GetMapping
 	public ResponseEntity<Page<SaleDTO>> findAllSales(Pageable pageable) {
@@ -44,6 +47,24 @@ public class SaleResource {
 		return ResponseEntity.ok().body(dto);
 	}
 
+	@PostMapping
+	public ResponseEntity<SaleDTO> insert(@RequestBody SaleDTO dto) {
+		dto = service.insert(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(dto.getId()).toUri();
+		return ResponseEntity.created(uri).body(dto);
+	}
 
+	@PutMapping("/{id}")
+	public ResponseEntity<SaleDTO> update(@PathVariable Long id, @RequestBody SaleDTO dto) {
+		SaleDTO newDto = service.update(id, dto);
+		return ResponseEntity.ok().body(newDto);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 
 }
