@@ -3,6 +3,7 @@ package com.devsuperior.ControleDeVendas.services;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -15,6 +16,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.ControleDeVendas.dto.SaleDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleSuccessDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleSumBySellerDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleSumByTeamDTO;
 import com.devsuperior.ControleDeVendas.entities.Sale;
 import com.devsuperior.ControleDeVendas.entities.SaleStatus;
 import com.devsuperior.ControleDeVendas.entities.User;
@@ -34,6 +38,21 @@ public class SaleService {
 
     @Autowired
     private UserRepository  userRepository;
+    
+    @Transactional(readOnly = true)
+	public List<SaleSumBySellerDTO> amountGroupedBySeller() {
+		return repository.amountGroupedBySeller();
+	}
+
+	@Transactional(readOnly = true)
+	public List<SaleSumByTeamDTO> amountGroupedByTeam() {
+		return repository.amountGroupedByTeam();
+	}
+
+	@Transactional(readOnly = true)
+	public List<SaleSuccessDTO> successGroupedBySeller() {
+		return repository.successGroupedBySeller();
+	}
 
     @Transactional(readOnly = true)
     public Page<SaleDTO> findAllSales(String name,String minDate, String  maxDate,Pageable pageable) {
@@ -42,11 +61,11 @@ public class SaleService {
 		LocalDate min = minDate.equals("") ? today.minusDays(365) : LocalDate.parse(minDate);
 		LocalDate max = maxDate.equals("") ? today : LocalDate.parse(maxDate);
     	if(user.hasRole("ROLE_SELLER")) {
-    		Page<Sale> page = repository.finbBySeller(user.getId(),min, max, pageable);
+    		Page<Sale> page = repository.findBySeller(user.getId(),min, max, pageable);
     		return page.map(x -> new SaleDTO(x));
     	}
     	else if(user.hasRole("ROLE_MANAGER")) {
-    		Page<Sale> page = repository.finbByManager(user.getId(),min, max, pageable);
+    		Page<Sale> page = repository.findByManager(user.getId(),name, min, max, pageable);
     		return page.map(x -> new SaleDTO(x));
     	}
         Page<Sale> page = repository.findAll(name, min, max,pageable);

@@ -21,7 +21,7 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 	@Query(nativeQuery = true, value = "SELECT * FROM tb_sale "
 			+ "WHERE tb_sale.seller_id = :id "
 			+ "AND tb_sale.date BETWEEN :minDate AND :maxDate order by tb_sale.amount DESC")
-	Page<Sale> finbBySeller(Long id,LocalDate minDate,LocalDate maxDate, Pageable pageable);
+	Page<Sale> findBySeller(Long id,LocalDate minDate,LocalDate maxDate, Pageable pageable);
 	
 	@Query(nativeQuery = true, value = "SELECT * FROM tb_sale "
 			+ "INNER JOIN tb_user "
@@ -29,11 +29,14 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 			+ "INNER JOIN tb_team_manager "
 			+ "ON tb_team_manager.team_id = tb_user.team_id "
 			+ "WHERE tb_team_manager.manager_id = :id "
+			+ "WHERE LOWER(tb_user.name) LIKE LOWER(CONCAT('%',:name ,'%')) "
 			+ "AND tb_sale.date BETWEEN :minDate AND :maxDate order by tb_sale.amount DESC")
-	Page<Sale> finbByManager(Long id, LocalDate minDate,LocalDate maxDate, Pageable pageable);
+	Page<Sale> findByManager(Long id,String name, LocalDate minDate,LocalDate maxDate, Pageable pageable);
 	
 	@Query(nativeQuery = true, value = "SELECT * FROM tb_sale "
-			+ "WHERE tb_sale.seller_name = :name "
+			+ "INNER JOIN tb_user "
+			+ "ON tb_user.id = tb_sale.seller_id "
+			+ "WHERE LOWER(tb_user.name) LIKE LOWER(CONCAT('%',:name ,'%')) "
 			+ "AND tb_sale.date BETWEEN :minDate AND :maxDate order by tb_sale.amount DESC")
 	Page<Sale> findAll(String name, LocalDate minDate,LocalDate maxDate, Pageable pageable);
 	
@@ -52,7 +55,7 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 			+ "INNER JOIN Team as t "
 			+ "ON u.team.id = t.id "
 			+ "GROUP BY u.team")
-	List<SaleSumByTeamDTO> amountGroupedByTeam();
+	List<SaleSumByTeamDTO> amountGroupedByTeam(); 
 	
 	
 }

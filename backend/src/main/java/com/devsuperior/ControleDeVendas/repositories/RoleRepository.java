@@ -7,5 +7,6 @@ import com.devsuperior.ControleDeVendas.entities.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long>{
-
+	
+	Role findByAuthority(String authority);
 }

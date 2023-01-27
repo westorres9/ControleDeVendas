@@ -1,11 +1,13 @@
 package com.devsuperior.ControleDeVendas.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devsuperior.ControleDeVendas.dto.SaleDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleSuccessDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleSumBySellerDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleSumByTeamDTO;
 import com.devsuperior.ControleDeVendas.services.SaleService;
 
 @RestController
@@ -26,6 +31,28 @@ public class SaleResource {
 	
 	@Autowired
 	private SaleService service;
+	
+
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+	@GetMapping(value = "/sum-by-seller")
+	public ResponseEntity<List<SaleSumBySellerDTO>> amountGroupedBySeller() {
+		List<SaleSumBySellerDTO> list = service.amountGroupedBySeller();
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+	@GetMapping(value = "/success-by-seller")
+	public ResponseEntity<List<SaleSuccessDTO>> successGroupedBySeller() {
+		List<SaleSuccessDTO> list = service.successGroupedBySeller();
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+	@GetMapping(value = "/sum-by-team")
+	public ResponseEntity<List<SaleSumByTeamDTO>> amountGroupedByTeam() {
+		List<SaleSumByTeamDTO> list = service.amountGroupedByTeam();
+		return ResponseEntity.ok().body(list);
+	}
 
 	@GetMapping
 	public ResponseEntity<Page<SaleDTO>> findAllSales(
