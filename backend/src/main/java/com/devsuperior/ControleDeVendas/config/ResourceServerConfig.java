@@ -31,7 +31,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
     private static  final String[] SELLER = {"/sales/**"};
-    private static final String[] MANAGER_OR_ADMIN = {"/users/**", "/teams/**"};
+    private static final String[] MANAGER_OR_ADMIN = {"/users/**", "/teams/**","/sellers/**", "managers"};
+    private static  final String[] ADMIN = {"/managers/**"};
 
 
     @Override
@@ -50,6 +51,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.authorizeRequests().antMatchers(PUBLIC).permitAll()
                 .antMatchers(SELLER).hasAnyRole("SELLER", "ADMIN", "MANAGER")
                 .antMatchers(MANAGER_OR_ADMIN).hasAnyRole("ADMIN", "MANAGER")
+                .antMatchers(ADMIN).hasRole("ADMIN")
                 .anyRequest()
                 .authenticated();
         http.cors().configurationSource(corsConfigurationSource());

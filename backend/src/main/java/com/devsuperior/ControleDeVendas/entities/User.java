@@ -27,9 +27,6 @@ public class User implements Serializable, UserDetails {
 	
 	@Column(unique = true)
 	private String email;
-
-	private String phone;
-	private LocalDate birthDate;
 	private String password;
 	
 	@OneToMany(mappedBy = "seller")
@@ -51,12 +48,10 @@ public class User implements Serializable, UserDetails {
 	public User() {
 	}
 
-	public User(Long id, String name, String email, String phone, LocalDate birthDate, String password) {
+	public User(Long id, String name, String email, String password) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
-		this.phone = phone;
-		this.birthDate = birthDate;
 		this.password = password;
 	}
 
@@ -84,21 +79,6 @@ public class User implements Serializable, UserDetails {
 		this.email = email;
 	}
 
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public LocalDate getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
-	}
 
 	@Override
 	public String getPassword() {

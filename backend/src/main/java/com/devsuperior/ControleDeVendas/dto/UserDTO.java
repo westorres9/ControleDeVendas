@@ -19,8 +19,6 @@ public class UserDTO implements Serializable{
 	@Email(message = "Favor insira um email valido")
 	private String email;
 	
-	private final Set<RoleDTO> roles = new HashSet<>();
-	
 	public UserDTO() {
 	}
 
@@ -34,11 +32,6 @@ public class UserDTO implements Serializable{
 		this.id = entity.getId();
 		this.name = entity.getName();
 		this.email = entity.getEmail();
-	}
-	
-	public UserDTO(User entity, Set<Role> roles) {
-		this(entity);
-		roles.forEach(role -> this.roles.add(new RoleDTO(role)));
 	}
 	
 
@@ -65,16 +58,5 @@ public class UserDTO implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public Set<RoleDTO> getRoles() {
-		return roles;
-	}
-	
-	
-	
-	
-	
-	
-	
 
 }

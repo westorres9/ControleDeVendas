@@ -2,34 +2,33 @@ INSERT INTO tb_team (name) VALUES ('Bradesco');
 INSERT INTO tb_team (name) VALUES ('Santander');
 INSERT INTO tb_team (name) VALUES ('Embratel');
 
-INSERT INTO tb_user(name,email, phone, password, birth_date, team_id) VALUES ('Logan','logan@gmail.com', '988888888', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '2001-07-25',1);
-INSERT INTO tb_user(name,email, phone, password, birth_date, team_id) VALUES ('Anakin','anakin@gmail.com', '977777777', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '2001-07-25',1);
-INSERT INTO tb_user(name,email, phone, password, birth_date, team_id) VALUES ('allen','allen@gmail.com', '966666666', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '2001-07-25',2);
-INSERT INTO tb_user(name,email, phone, password, birth_date, team_id) VALUES ('Kal El','kalel@gmail.com', '955555555', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '2001-07-25',2);
-INSERT INTO tb_user(name,email, phone, password, birth_date, team_id) VALUES ('Padme','padme@gmail.com', '944444444', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '2001-07-25',3);
+INSERT INTO tb_user(name,email, password, team_id) VALUES ('Logan','logan@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G',1);
+INSERT INTO tb_user(name,email, password, team_id) VALUES ('Anakin','anakin@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G',1);
+INSERT INTO tb_user(name,email, password, team_id) VALUES ('allen','allen@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G',2);
+INSERT INTO tb_user(name,email, password, team_id) VALUES ('Kal El','kalel@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G',2);
+INSERT INTO tb_user(name,email, password, team_id) VALUES ('Padme','padme@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G',3);
+INSERT INTO tb_user(name, email, password) VALUES ('Alex Green', 'alex@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G');
+INSERT INTO tb_user(name, email, password) VALUES ('Ana Blue', 'ana@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G');
+INSERT INTO tb_user(name, email, password) VALUES ('Bob Brown', 'bob@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G');
+INSERT INTO tb_user(name, email, password) VALUES ('Maria Brown', 'maria@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G');
 
-INSERT INTO tb_user(name, email, phone, password, birth_date) VALUES ('Maria Brown', 'maria@gmail.com', '933333333', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '2001-07-25');
-INSERT INTO tb_user(name, email, phone, password, birth_date) VALUES ('Alex Green', 'alex@gmail.com', '922222222', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '1987-12-13');
-INSERT INTO tb_user(name, email, phone, password, birth_date) VALUES ('Ana Blue', 'ana@gmail.com', '911111111', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '1987-12-13');
-INSERT INTO tb_user(name, email, phone, password, birth_date) VALUES ('Bob Brown', 'bob@gmail.com', '900000000', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', '1987-12-13');
-
-INSERT INTO tb_role(authority) VALUES ('ROLE_ADMIN');
-INSERT INTO tb_role(authority) VALUES ('ROLE_MANAGER');
 INSERT INTO tb_role(authority) VALUES ('ROLE_SELLER');
+INSERT INTO tb_role(authority) VALUES ('ROLE_MANAGER');
+INSERT INTO tb_role(authority) VALUES ('ROLE_ADMIN');
 
-INSERT INTO tb_user_role(user_id, role_id) VALUES (1,3);
-INSERT INTO tb_user_role(user_id, role_id) VALUES (2,3);
-INSERT INTO tb_user_role(user_id, role_id) VALUES (3,3);
-INSERT INTO tb_user_role(user_id, role_id) VALUES (4,3);
-INSERT INTO tb_user_role(user_id, role_id) VALUES (5,3);
-INSERT INTO tb_user_role(user_id, role_id) VALUES (6,1);
+INSERT INTO tb_user_role(user_id, role_id) VALUES (1,1);
+INSERT INTO tb_user_role(user_id, role_id) VALUES (2,1);
+INSERT INTO tb_user_role(user_id, role_id) VALUES (3,1);
+INSERT INTO tb_user_role(user_id, role_id) VALUES (4,1);
+INSERT INTO tb_user_role(user_id, role_id) VALUES (5,1);
+INSERT INTO tb_user_role(user_id, role_id) VALUES (6,2);
 INSERT INTO tb_user_role(user_id, role_id) VALUES (7,2);
 INSERT INTO tb_user_role(user_id, role_id) VALUES (8,2);
-INSERT INTO tb_user_role(user_id, role_id) VALUES (9,2);
+INSERT INTO tb_user_role(user_id, role_id) VALUES (9,3);
 
-INSERT INTO tb_team_manager(team_id, manager_id) VALUES (1,7);
-INSERT INTO tb_team_manager(team_id, manager_id) VALUES (2,8);
-INSERT INTO tb_team_manager(team_id, manager_id) VALUES (3,9);
+INSERT INTO tb_team_manager(team_id, manager_id) VALUES (1,6);
+INSERT INTO tb_team_manager(team_id, manager_id) VALUES (2,7);
+INSERT INTO tb_team_manager(team_id, manager_id) VALUES (3,8);
 
 INSERT INTO tb_sale(seller_id,visited,deals,amount,date,status) VALUES (5,83,66,5501.0,'2022-04-01',1);
 INSERT INTO tb_sale(seller_id,visited,deals,amount,date,status) VALUES (5,113,78,8290.0,'2022-03-31',1);

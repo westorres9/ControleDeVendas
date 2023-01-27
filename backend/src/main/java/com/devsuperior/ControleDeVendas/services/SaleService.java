@@ -3,15 +3,10 @@ package com.devsuperior.ControleDeVendas.services;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
-import com.devsuperior.ControleDeVendas.dto.SaleSuccessDTO;
-import com.devsuperior.ControleDeVendas.dto.SaleSumBySellerDTO;
-import com.devsuperior.ControleDeVendas.dto.SaleSumByTeamDTO;
-import com.devsuperior.ControleDeVendas.entities.SaleStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -21,25 +16,40 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.ControleDeVendas.dto.SaleDTO;
 import com.devsuperior.ControleDeVendas.entities.Sale;
+import com.devsuperior.ControleDeVendas.entities.SaleStatus;
 import com.devsuperior.ControleDeVendas.entities.User;
 import com.devsuperior.ControleDeVendas.repositories.SaleRepository;
 import com.devsuperior.ControleDeVendas.repositories.UserRepository;
 import com.devsuperior.ControleDeVendas.services.exceptions.DatabaseException;
 import com.devsuperior.ControleDeVendas.services.exceptions.ResourceNotFoundException;
-import com.devsuperior.ControleDeVendas.services.exceptions.UnauthorizedException;
 
 @Service
 public class SaleService {
 
     @Autowired
     private SaleRepository repository;
+    
+    @Autowired
+    private AuthService authService;
 
     @Autowired
     private UserRepository  userRepository;
 
     @Transactional(readOnly = true)
-    public Page<SaleDTO> findAllSales(Pageable pageable) {
-        Page<Sale> page = repository.findAll(pageable);
+    public Page<SaleDTO> findAllSales(String name,String minDate, String  maxDate,Pageable pageable) {
+    	User user = authService.authenticated();
+    	LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
+		LocalDate min = minDate.equals("") ? today.minusDays(365) : LocalDate.parse(minDate);
+		LocalDate max = maxDate.equals("") ? today : LocalDate.parse(maxDate);
+    	if(user.hasRole("ROLE_SELLER")) {
+    		Page<Sale> page = repository.finbBySeller(user.getId(),min, max, pageable);
+    		return page.map(x -> new SaleDTO(x));
+    	}
+    	else if(user.hasRole("ROLE_MANAGER")) {
+    		Page<Sale> page = repository.finbByManager(user.getId(),min, max, pageable);
+    		return page.map(x -> new SaleDTO(x));
+    	}
+        Page<Sale> page = repository.findAll(name, min, max,pageable);
         return page.map(x -> new SaleDTO(x));
     }
 
