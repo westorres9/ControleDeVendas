@@ -1,1 +1,1 @@
-var myapp = angular.module('myapp', ['ngRoute','ngMaterial','ngMessages', 'ngAnimate', 'ngAria', 'md.data.table']);
+var app = angular.module('app', ['ngRoute','ngMaterial', 'ngMessages']);

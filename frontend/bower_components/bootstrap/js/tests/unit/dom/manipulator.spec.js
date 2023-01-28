@@ -1,5 +1,7 @@
 import Manipulator from '../../../src/dom/manipulator'
-import { clearFixture, getFixture } from '../../helpers/fixture'
+
+/** Test helpers */
+import { getFixture, clearFixture } from '../../helpers/fixture'
 
 describe('Manipulator', () => {
   let fixtureEl
@@ -70,17 +72,6 @@ describe('Manipulator', () => {
         target: '#element'
       })
     })
-
-    it('should omit `bs-config` data attribute', () => {
-      fixtureEl.innerHTML = '<div data-bs-toggle="tabs" data-bs-target="#element" data-bs-config=\'{"testBool":false}\'></div>'
-
-      const div = fixtureEl.querySelector('div')
-
-      expect(Manipulator.getDataAttributes(div)).toEqual({
-        toggle: 'tabs',
-        target: '#element'
-      })
-    })
   })
 
   describe('getDataAttribute', () => {
@@ -107,29 +98,39 @@ describe('Manipulator', () => {
 
       const div = fixtureEl.querySelector('div')
 
-      expect(Manipulator.getDataAttribute(div, 'test')).toBeFalse()
+      expect(Manipulator.getDataAttribute(div, 'test')).toEqual(false)
 
       div.setAttribute('data-bs-test', 'true')
-      expect(Manipulator.getDataAttribute(div, 'test')).toBeTrue()
+      expect(Manipulator.getDataAttribute(div, 'test')).toEqual(true)
 
       div.setAttribute('data-bs-test', '1')
       expect(Manipulator.getDataAttribute(div, 'test')).toEqual(1)
     })
+  })
 
-    it('should normalize json data', () => {
-      fixtureEl.innerHTML = '<div data-bs-test=\'{"delay":{"show":100,"hide":10}}\'></div>'
+  describe('offset', () => {
+    it('should return an object with two properties top and left, both numbers', () => {
+      fixtureEl.innerHTML = '<div></div>'
 
       const div = fixtureEl.querySelector('div')
+      const offset = Manipulator.offset(div)
 
-      expect(Manipulator.getDataAttribute(div, 'test')).toEqual({ delay: { show: 100, hide: 10 } })
+      expect(offset).toBeDefined()
+      expect(offset.top).toEqual(jasmine.any(Number))
+      expect(offset.left).toEqual(jasmine.any(Number))
+    })
+  })
 
-      const objectData = { 'Super Hero': ['Iron Man', 'Super Man'], testNum: 90, url: 'http://localhost:8080/test?foo=bar' }
-      const dataStr = JSON.stringify(objectData)
-      div.setAttribute('data-bs-test', encodeURIComponent(dataStr))
-      expect(Manipulator.getDataAttribute(div, 'test')).toEqual(objectData)
+  describe('position', () => {
+    it('should return an object with two properties top and left, both numbers', () => {
+      fixtureEl.innerHTML = '<div></div>'
 
-      div.setAttribute('data-bs-test', dataStr)
-      expect(Manipulator.getDataAttribute(div, 'test')).toEqual(objectData)
+      const div = fixtureEl.querySelector('div')
+      const position = Manipulator.position(div)
+
+      expect(position).toBeDefined()
+      expect(position.top).toEqual(jasmine.any(Number))
+      expect(position.left).toEqual(jasmine.any(Number))
     })
   })
 })
