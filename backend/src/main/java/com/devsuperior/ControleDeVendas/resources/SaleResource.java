@@ -31,28 +31,6 @@ public class SaleResource {
 	
 	@Autowired
 	private SaleService service;
-	
-
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-	@GetMapping(value = "/sum-by-seller")
-	public ResponseEntity<List<SaleSumBySellerDTO>> amountGroupedBySeller() {
-		List<SaleSumBySellerDTO> list = service.amountGroupedBySeller();
-		return ResponseEntity.ok().body(list);
-	}
-	
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-	@GetMapping(value = "/success-by-seller")
-	public ResponseEntity<List<SaleSuccessDTO>> successGroupedBySeller() {
-		List<SaleSuccessDTO> list = service.successGroupedBySeller();
-		return ResponseEntity.ok().body(list);
-	}
-	
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-	@GetMapping(value = "/sum-by-team")
-	public ResponseEntity<List<SaleSumByTeamDTO>> amountGroupedByTeam() {
-		List<SaleSumByTeamDTO> list = service.amountGroupedByTeam();
-		return ResponseEntity.ok().body(list);
-	}
 
 	@GetMapping
 	public ResponseEntity<Page<SaleDTO>> findAllSales(
@@ -60,7 +38,7 @@ public class SaleResource {
 			@RequestParam(value = "maxDate", defaultValue = "")String maxDate,
 			@RequestParam(value = "name", defaultValue = "")String name,
 			Pageable pageable) {
-		Page<SaleDTO> page = service.findAllSales(name, minDate,maxDate, pageable);
+		Page<SaleDTO> page = service.findAllSales(name, minDate, maxDate, pageable);
 		return ResponseEntity.ok().body(page);
 	}
 
@@ -88,6 +66,27 @@ public class SaleResource {
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+	@GetMapping(value = "/sum-by-seller")
+	public ResponseEntity<List<SaleSumBySellerDTO>> amountGroupedBySeller() {
+		List<SaleSumBySellerDTO> page = service.amountGroupedBySeller();
+		return ResponseEntity.ok().body(page);
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+	@GetMapping(value = "/success-by-seller")
+	public ResponseEntity<List<SaleSuccessDTO>> successGroupedBySeller() {
+		List<SaleSuccessDTO> page = service.successGroupedBySeller();
+		return ResponseEntity.ok().body(page);
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+	@GetMapping(value = "/sum-by-team")
+	public ResponseEntity<List<SaleSumByTeamDTO>> amountGroupedByTeam() {
+		List<SaleSumByTeamDTO> page = service.amountGroupedByTeam();
+		return ResponseEntity.ok().body(page);
 	}
 
 }

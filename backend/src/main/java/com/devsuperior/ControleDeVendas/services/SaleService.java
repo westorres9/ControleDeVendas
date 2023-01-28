@@ -55,17 +55,17 @@ public class SaleService {
 	}
 
     @Transactional(readOnly = true)
-    public Page<SaleDTO> findAllSales(String name,String minDate, String  maxDate,Pageable pageable) {
+    public Page<SaleDTO> findAllSales(String name,String minDate, String  maxDate, Pageable pageable) {
     	User user = authService.authenticated();
     	LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
 		LocalDate min = minDate.equals("") ? today.minusDays(365) : LocalDate.parse(minDate);
 		LocalDate max = maxDate.equals("") ? today : LocalDate.parse(maxDate);
     	if(user.hasRole("ROLE_SELLER")) {
-    		Page<Sale> page = repository.findBySeller(user.getId(),min, max, pageable);
+    		Page<Sale> page = repository.findBySeller(user.getId(),min, max,pageable);
     		return page.map(x -> new SaleDTO(x));
     	}
     	else if(user.hasRole("ROLE_MANAGER")) {
-    		Page<Sale> page = repository.findByManager(user.getId(),name, min, max, pageable);
+    		Page<Sale> page = repository.findByManager(user.getId(),name, min, max,pageable);
     		return page.map(x -> new SaleDTO(x));
     	}
         Page<Sale> page = repository.findAll(name, min, max,pageable);
@@ -105,7 +105,7 @@ public class SaleService {
             return new SaleDTO(entity);
         }
         catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Ifd not found " + id);
+            throw new ResourceNotFoundException("Id not found " + id);
         }
     }
 

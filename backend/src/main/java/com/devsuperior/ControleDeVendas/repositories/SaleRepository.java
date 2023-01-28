@@ -19,9 +19,11 @@ import com.devsuperior.ControleDeVendas.entities.Sale;
 public interface SaleRepository extends JpaRepository<Sale, Long>{
 	
 	@Query(nativeQuery = true, value = "SELECT * FROM tb_sale "
+			+ "INNER JOIN tb_user "
+			+ "ON tb_user.id = tb_sale.seller_id "
 			+ "WHERE tb_sale.seller_id = :id "
 			+ "AND tb_sale.date BETWEEN :minDate AND :maxDate order by tb_sale.amount DESC")
-	Page<Sale> findBySeller(Long id,LocalDate minDate,LocalDate maxDate, Pageable pageable);
+	Page<Sale> findBySeller(Long id, LocalDate minDate,LocalDate maxDate,Pageable pageable);
 	
 	@Query(nativeQuery = true, value = "SELECT * FROM tb_sale "
 			+ "INNER JOIN tb_user "
@@ -31,14 +33,14 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 			+ "WHERE tb_team_manager.manager_id = :id "
 			+ "WHERE LOWER(tb_user.name) LIKE LOWER(CONCAT('%',:name ,'%')) "
 			+ "AND tb_sale.date BETWEEN :minDate AND :maxDate order by tb_sale.amount DESC")
-	Page<Sale> findByManager(Long id,String name, LocalDate minDate,LocalDate maxDate, Pageable pageable);
+	Page<Sale> findByManager(Long id,String name, LocalDate minDate,LocalDate maxDate,Pageable pageable);
 	
 	@Query(nativeQuery = true, value = "SELECT * FROM tb_sale "
 			+ "INNER JOIN tb_user "
 			+ "ON tb_user.id = tb_sale.seller_id "
 			+ "WHERE LOWER(tb_user.name) LIKE LOWER(CONCAT('%',:name ,'%')) "
 			+ "AND tb_sale.date BETWEEN :minDate AND :maxDate order by tb_sale.amount DESC")
-	Page<Sale> findAll(String name, LocalDate minDate,LocalDate maxDate, Pageable pageable);
+	Page<Sale> findAll(String name, LocalDate minDate,LocalDate maxDate,Pageable pageable);
 	
 	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleSumBySellerDTO(obj.seller, SUM(obj.amount)) "
 			+ "FROM Sale as obj GROUP BY obj.seller")
