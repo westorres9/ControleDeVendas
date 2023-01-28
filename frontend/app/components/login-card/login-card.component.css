@@ -1,0 +1,80 @@
+.ds-login-card-container {
+ display: flex;
+ flex-direction: row;
+ margin-top: 50px;
+ box-shadow: 0px 4px 10px rgba(0,0,0,0.25);
+}
+.ds-login-card-img {
+    display: none;
+    background-image:url('/app/assets/img/background-img.jpg');
+}
+.ds-login-card-form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.ds-login-card-form h1 {
+    margin-bottom: 50px;
+}
+
+.ds-login-card-form input {
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.input-container {
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container .form-label {
+    text-align: left;
+}
+
+.login-btn {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    height: 40px;
+    width: 200px;
+}
+
+@media (min-width:576px) {
+    .ds-login-card-form{
+        padding: 40px;
+    }
+}
+
+@media (min-width:992px) {
+    .ds-login-card-img {
+        display: flex;
+        max-width: 100%;
+        justify-content: center;
+        flex: 1;
+        border-radius: 8px 0px 0px 8px;
+    }
+
+    .ds-login-card-form {
+        max-width: 380px;
+        padding: 60px;
+        border-radius: 0px 8px 8px 0px;
+    }
+
+    .ds-login-card-form input {
+        height: 50px;
+    }
+
+    .login-btn {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        height: 50px;
+        width: 260px;
+        font-size: 1.1rem;
+    }
+}

@@ -3,13 +3,13 @@
 /*!
  * Script to create the built examples zip archive;
  * requires the `zip` command to be present!
- * Copyright 2020-2022 The Bootstrap Authors
+ * Copyright 2020-2021 The Bootstrap Authors
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
 'use strict'
 
-const path = require('node:path')
+const path = require('path')
 const sh = require('shelljs')
 
 const pkg = require('../package.json')
@@ -57,22 +57,22 @@ sh.mkdir('-p', [
 
 sh.cp('-Rf', `${docsDir}/examples/*`, distFolder)
 
-for (const file of cssFiles) {
+cssFiles.forEach(file => {
   sh.cp('-f', `${docsDir}/dist/css/${file}`, `${distFolder}/assets/dist/css/`)
-}
+})
 
-for (const file of jsFiles) {
+jsFiles.forEach(file => {
   sh.cp('-f', `${docsDir}/dist/js/${file}`, `${distFolder}/assets/dist/js/`)
-}
+})
 
-for (const file of imgFiles) {
+imgFiles.forEach(file => {
   sh.cp('-f', `${docsDir}/assets/brand/${file}`, `${distFolder}/assets/brand/`)
-}
+})
 
 sh.rm(`${distFolder}/index.html`)
 
 // get all examples' HTML files
-for (const file of sh.find(`${distFolder}/**/*.html`)) {
+sh.find(`${distFolder}/**/*.html`).forEach(file => {
   const fileContents = sh.cat(file)
     .toString()
     .replace(new RegExp(`"/docs/${versionShort}/`, 'g'), '"../')
@@ -81,7 +81,7 @@ for (const file of sh.find(`${distFolder}/**/*.html`)) {
     .replace(/(<script src="\.\.\/.*) integrity=".*>/g, '$1></script>')
     .replace(/( +)<!-- favicons(.|\n)+<style>/i, '    <style>')
   new sh.ShellString(fileContents).to(file)
-}
+})
 
 // create the zip file
 sh.exec(`zip -r9 "${distFolder}.zip" "${distFolder}"`)

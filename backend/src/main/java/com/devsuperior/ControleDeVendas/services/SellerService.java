@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.ControleDeVendas.dto.UserDTO;
 import com.devsuperior.ControleDeVendas.dto.UserInsertDTO;
+import com.devsuperior.ControleDeVendas.entities.RoleType;
 import com.devsuperior.ControleDeVendas.entities.User;
 import com.devsuperior.ControleDeVendas.repositories.RoleRepository;
 import com.devsuperior.ControleDeVendas.repositories.UserRepository;
@@ -32,10 +33,9 @@ public class SellerService {
     private BCryptPasswordEncoder passwordEncoder;
 	
 	@Transactional(readOnly = true)
-	public List<UserDTO> findAll(){
-		List<User> list = repository.findAll();
-		List<User> filteredList = list.stream().filter(user -> user.hasRole("ROLE_SELLER")).collect(Collectors.toList());
-		return filteredList.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
+	public List<UserDTO> findAll(String name){
+		List<User> list = repository.findSellers(name);
+		return list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
 	}
 	
 	@Transactional(readOnly = true)
@@ -57,7 +57,7 @@ public class SellerService {
 		entity.setEmail(dto.getEmail());
 		entity.setPassword(passwordEncoder.encode(dto.getPassword()));
 		entity.getRoles().clear();
-		entity.getRoles().add(roleRepository.getOne(1L));
+		entity.getRoles().add(roleRepository.findByAuthority(RoleType.SELLER));
 		entity = repository.save(entity);
 		return new UserDTO(entity);
 	}

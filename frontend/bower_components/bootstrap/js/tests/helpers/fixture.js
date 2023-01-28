@@ -1,47 +1,50 @@
 const fixtureId = 'fixture'
 
 export const getFixture = () => {
-  let fixtureElement = document.getElementById(fixtureId)
+  let fixtureEl = document.getElementById(fixtureId)
 
-  if (!fixtureElement) {
-    fixtureElement = document.createElement('div')
-    fixtureElement.setAttribute('id', fixtureId)
-    fixtureElement.style.position = 'absolute'
-    fixtureElement.style.top = '-10000px'
-    fixtureElement.style.left = '-10000px'
-    fixtureElement.style.width = '10000px'
-    fixtureElement.style.height = '10000px'
-    document.body.append(fixtureElement)
+  if (!fixtureEl) {
+    fixtureEl = document.createElement('div')
+    fixtureEl.setAttribute('id', fixtureId)
+    fixtureEl.style.position = 'absolute'
+    fixtureEl.style.top = '-10000px'
+    fixtureEl.style.left = '-10000px'
+    fixtureEl.style.width = '10000px'
+    fixtureEl.style.height = '10000px'
+    document.body.appendChild(fixtureEl)
   }
 
-  return fixtureElement
+  return fixtureEl
 }
 
 export const clearFixture = () => {
-  const fixtureElement = getFixture()
+  const fixtureEl = getFixture()
 
-  fixtureElement.innerHTML = ''
+  fixtureEl.innerHTML = ''
 }
 
-export const createEvent = (eventName, parameters = {}) => {
-  return new Event(eventName, parameters)
+export const createEvent = (eventName, params = {}) => {
+  const e = document.createEvent('Event')
+
+  e.initEvent(eventName, Boolean(params.bubbles), Boolean(params.cancelable))
+  return e
 }
 
 export const jQueryMock = {
   elements: undefined,
   fn: {},
   each(fn) {
-    for (const element of this.elements) {
-      fn.call(element)
-    }
+    this.elements.forEach(el => {
+      fn.call(el)
+    })
   }
 }
 
 export const clearBodyAndDocument = () => {
   const attributes = ['data-bs-padding-right', 'style']
 
-  for (const attribute of attributes) {
-    document.documentElement.removeAttribute(attribute)
-    document.body.removeAttribute(attribute)
-  }
+  attributes.forEach(attr => {
+    document.documentElement.removeAttribute(attr)
+    document.body.removeAttribute(attr)
+  })
 }

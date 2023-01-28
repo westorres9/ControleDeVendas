@@ -2,13 +2,17 @@
 
 'use strict'
 
-const path = require('node:path')
+const path = require('path')
 const ip = require('ip')
 const { babel } = require('@rollup/plugin-babel')
 const istanbul = require('rollup-plugin-istanbul')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const replace = require('@rollup/plugin-replace')
-const { browsers } = require('./browsers')
+
+const {
+  browsers,
+  browsersKeys
+} = require('./browsers')
 
 const ENV = process.env
 const BROWSERSTACK = Boolean(ENV.BROWSERSTACK)
@@ -50,7 +54,7 @@ const detectBrowsers = {
   }
 }
 
-const config = {
+const conf = {
   basePath: '../..',
   port: 9876,
   colors: true,
@@ -94,24 +98,23 @@ const config = {
     output: {
       format: 'iife',
       name: 'bootstrapTest',
-      sourcemap: 'inline',
-      generatedCode: 'es2015'
+      sourcemap: 'inline'
     }
   }
 }
 
 if (BROWSERSTACK) {
-  config.hostname = ip.address()
-  config.browserStack = {
+  conf.hostname = ip.address()
+  conf.browserStack = {
     username: ENV.BROWSER_STACK_USERNAME,
     accessKey: ENV.BROWSER_STACK_ACCESS_KEY,
-    build: `bootstrap-${ENV.GITHUB_SHA ? ENV.GITHUB_SHA.slice(0, 7) + '-' : ''}${new Date().toISOString()}`,
+    build: `bootstrap-${new Date().toISOString()}`,
     project: 'Bootstrap',
     retryLimit: 2
   }
   plugins.push('karma-browserstack-launcher', 'karma-jasmine-html-reporter')
-  config.customLaunchers = browsers
-  config.browsers = Object.keys(browsers)
+  conf.customLaunchers = browsers
+  conf.browsers = browsersKeys
   reporters.push('BrowserStack', 'kjhtml')
 } else if (JQUERY_TEST) {
   frameworks.push('detectBrowsers')
@@ -120,8 +123,8 @@ if (BROWSERSTACK) {
     'karma-firefox-launcher',
     'karma-detect-browsers'
   )
-  config.detectBrowsers = detectBrowsers
-  config.files = [
+  conf.detectBrowsers = detectBrowsers
+  conf.files = [
     'node_modules/jquery/dist/jquery.slim.min.js',
     {
       pattern: 'js/tests/unit/jquery.spec.js',
@@ -137,8 +140,8 @@ if (BROWSERSTACK) {
     'karma-coverage-istanbul-reporter'
   )
   reporters.push('coverage-istanbul')
-  config.detectBrowsers = detectBrowsers
-  config.coverageIstanbulReporter = {
+  conf.detectBrowsers = detectBrowsers
+  conf.coverageIstanbulReporter = {
     dir: path.resolve(__dirname, '../coverage/'),
     reports: ['lcov', 'text-summary'],
     thresholds: {
@@ -153,19 +156,19 @@ if (BROWSERSTACK) {
   }
 
   if (DEBUG) {
-    config.hostname = ip.address()
+    conf.hostname = ip.address()
     plugins.push('karma-jasmine-html-reporter')
     reporters.push('kjhtml')
-    config.singleRun = false
-    config.autoWatch = true
+    conf.singleRun = false
+    conf.autoWatch = true
   }
 }
 
-config.frameworks = frameworks
-config.plugins = plugins
-config.reporters = reporters
+conf.frameworks = frameworks
+conf.plugins = plugins
+conf.reporters = reporters
 
 module.exports = karmaConfig => {
-  config.logLevel = karmaConfig.LOG_ERROR
-  karmaConfig.set(config)
+  conf.logLevel = karmaConfig.LOG_ERROR
+  karmaConfig.set(conf)
 }

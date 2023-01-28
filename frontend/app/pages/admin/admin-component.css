@@ -1,0 +1,80 @@
+.admin-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.ds-aside-bar {
+   display: none;
+}
+
+
+
+@media (min-width: 992px) {
+    .ds-aside-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #fff;
+        height: calc(100vh - 60px);
+        width: 230px;
+        padding: 10px;
+    }
+
+    .ds-aside-title {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .ds-aside-title img {
+        width: 50px;
+    }
+    
+    .ds-aside-title h3 {
+        margin-top: 10px;
+        margin-left: 10px;
+        font-size: 1.3rem;
+        margin-bottom: 0;
+    }
+    
+    .ds-aside-menu {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ds-aside-menu a {
+        margin-bottom: 10px;
+    }
+
+    .ds-aside-menu a button {
+        height: 35px;
+        width: 180px;
+        border-radius: 10px;
+    }
+
+    .ds-logout {
+        margin-top: 50vh;
+    }
+
+    .ds-logout button {
+        background-color: #adb5bd;
+        width: 180px;
+        border-radius: 10px;
+        color: #fff;
+    }
+
+    .ds-logout button:hover {
+        background-color: #807f7f;
+        color: #fff;
+    }
+
+    .ds-logout img {
+        width: 28px;
+        margin-right: 20px;
+        color: #fff;
+    }
+
+    
+}

@@ -1,0 +1,46 @@
+<div class="admin-container">
+    <aside-bar></aside-bar>
+    <section class="ds-container sales-container">
+      <h1>Tela Sales</h1>
+      <md-content layout-padding="" ng-cloak="" class="datepickerdemoBasicUsage">
+        <date-picker minDate="$ctrl.minDate" maxDate="$ctrl.minDate"></date-picker>
+      </md-content>
+      <div class="charts-container">
+        <div class="charts-content">
+          <success-chart></success-chart>
+        </div>
+        <div class="charts-content">
+          <sum-chart></sum-chart>
+        </div>
+      </div>
+      <div  class="sales-by-seller-chart">
+        <sales-by-seller-chart></sales-by-seller-chart>
+      </div>
+      <div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Id</th>
+              <th scope="col">Vendedor</th>
+              <th scope="col">Total</th>
+              <th scope="col">Data</th>
+              <th scope="col">#</th>
+              <th scope="col">#</th>
+            </tr>
+          </thead>
+          <tbody ng-repeat="sale in $ctrl.AllSales">
+            <tr>
+              <th scope="row">#</th>
+              <td>{{sale.id}}</td>
+              <td>{{sale.sellerName}}</td>
+              <td>{{sale.amount}}</td>
+              <td>{{sale.date}}</td>
+              <td>#</td>
+              <td>#</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>

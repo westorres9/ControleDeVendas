@@ -1,24 +1,9 @@
 {
-  "name": "angularJS template",
-  "authors": [
-    "westorres9 <wester.torres9@gmail.com>"
-  ],
-  "description": "",
-  "main": "",
+  "name": "angular",
+  "version": "1.5.8",
   "license": "MIT",
-  "homepage": "",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
+  "main": "./angular.js",
+  "ignore": [],
   "dependencies": {
-    "angular-material": "^1.2.5",
-    "angular-route": "1.5.8",
-    "angular": "1.5.8",
-    "angular-animate": "^1.8.3",
-    "angular-aria": "^1.8.3"
   }
 }

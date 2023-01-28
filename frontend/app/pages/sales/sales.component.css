@@ -1,0 +1,21 @@
+.sales-container {
+    font-size:12px;
+}
+
+.table {
+    font-size:5px;
+}
+
+.charts-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.charts-content{
+    flex: 1;
+    justify-content: center;
+    text-align: center;
+    height: 400px;
+    background-color: #fff;
+    margin-right: 10px;
+}

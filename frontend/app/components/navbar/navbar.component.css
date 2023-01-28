@@ -1,0 +1,25 @@
+.ds-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 60px;
+}
+
+.ds-header-container h3{
+    font-size: 1.6rem;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.ds-header-container {
+    display: flex;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1280px;
+}
+
+.ds-header-login {
+    display: flex;
+    align-items: center;
+}
+
