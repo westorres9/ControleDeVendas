@@ -56,6 +56,7 @@ public class ManagerService {
 		entity.setName(dto.getName());
 		entity.setEmail(dto.getEmail());
 		entity.setPassword(passwordEncoder.encode(dto.getPassword()));
+		entity.setImgUrl(dto.getImgUrl());
 		entity.getRoles().clear();
 		entity.getRoles().add(roleRepository.findByAuthority(RoleType.MANAGER));
 		entity = repository.save(entity);

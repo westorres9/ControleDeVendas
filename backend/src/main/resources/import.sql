@@ -1,16 +1,16 @@
-INSERT INTO tb_team (name) VALUES ('Bradesco');
-INSERT INTO tb_team (name) VALUES ('Santander');
-INSERT INTO tb_team (name) VALUES ('Embratel');
+INSERT INTO tb_team (name, img_url) VALUES ('Sharp','https://user-images.githubusercontent.com/91570669/216033463-b63f5066-0016-468c-97ac-33ef0ef20879.jpg');
+INSERT INTO tb_team (name, img_url) VALUES ('Phillips','https://user-images.githubusercontent.com/91570669/216033459-0e09b464-6a5c-43a0-9db5-c43e2f633d51.png');
+INSERT INTO tb_team (name, img_url) VALUES ('TCL Semp','https://user-images.githubusercontent.com/91570669/216033466-a22ca6ff-b409-4dfa-a9af-2897459a5b02.png');
 
-INSERT INTO tb_user(name,email, password, team_id) VALUES ('Logan','logan@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G',1);
-INSERT INTO tb_user(name,email, password, team_id) VALUES ('Anakin','anakin@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G',1);
-INSERT INTO tb_user(name,email, password, team_id) VALUES ('allen','allen@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G',2);
-INSERT INTO tb_user(name,email, password, team_id) VALUES ('Kal El','kalel@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G',2);
-INSERT INTO tb_user(name,email, password, team_id) VALUES ('Padme','padme@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G',3);
-INSERT INTO tb_user(name, email, password) VALUES ('Alex Green', 'alex@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G');
-INSERT INTO tb_user(name, email, password) VALUES ('Ana Blue', 'ana@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G');
-INSERT INTO tb_user(name, email, password) VALUES ('Bob Brown', 'bob@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G');
-INSERT INTO tb_user(name, email, password) VALUES ('Maria Brown', 'maria@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G');
+INSERT INTO tb_user(name,email, password, team_id, img_url ) VALUES ('Logan','logan@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G',1, 'https://user-images.githubusercontent.com/91570669/216034768-5a8cd167-b5ab-49da-b713-fdabbe7df2d7.png');
+INSERT INTO tb_user(name,email, password, team_id, img_url ) VALUES ('Anakin','anakin@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G',1, 'https://user-images.githubusercontent.com/91570669/216034766-887e2d48-b616-4458-9008-a18c9142d1b9.png');
+INSERT INTO tb_user(name,email, password, team_id, img_url ) VALUES ('Aayla','aayla@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G',2, 'https://user-images.githubusercontent.com/91570669/216034765-65575bcd-452a-4666-9068-deea3345bf0e.png');
+INSERT INTO tb_user(name,email, password, team_id, img_url ) VALUES ('Chewbacca','chewbacca@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G',2, 'https://user-images.githubusercontent.com/91570669/216036010-5e7de539-cf40-4a49-a13a-81e73319ab4b.png');
+INSERT INTO tb_user(name,email, password, team_id, img_url ) VALUES ('Padme','padme@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G',3, 'https://user-images.githubusercontent.com/91570669/216034758-20886cd6-0826-4a71-92f1-1747a902dd65.png');
+INSERT INTO tb_user(name, email, password, img_url ) VALUES ('Alex Green', 'alex@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', 'https://user-images.githubusercontent.com/91570669/216034772-b8454ea9-7488-40ec-801c-5e09fb502583.png');
+INSERT INTO tb_user(name, email, password, img_url ) VALUES ('Ana Blue', 'ana@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', 'https://user-images.githubusercontent.com/91570669/216034780-8994a50e-de2f-487a-9563-bacd31c62b98.png');
+INSERT INTO tb_user(name, email, password, img_url ) VALUES ('Bob Brown', 'bob@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', 'https://user-images.githubusercontent.com/91570669/216034775-8265745d-d432-442a-962a-bbb1ccb0e871.png');
+INSERT INTO tb_user(name, email, password, img_url ) VALUES ('Maria Brown', 'maria@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G', 'https://user-images.githubusercontent.com/91570669/216034779-efa7f877-0ea6-4a70-b12e-4468d1d6324b.png');
 
 INSERT INTO tb_role(authority) VALUES ('ROLE_SELLER');
 INSERT INTO tb_role(authority) VALUES ('ROLE_MANAGER');

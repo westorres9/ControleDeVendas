@@ -1,6 +1,7 @@
 package com.devsuperior.ControleDeVendas.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.devsuperior.ControleDeVendas.entities.Team;
@@ -11,19 +12,29 @@ public class TeamDTO implements Serializable {
 	
 	private Long id;
 	private String name;
+	private String imgUrl;
+	private List<UserDTO> sellers = new ArrayList<>();
 	
 	public TeamDTO() {
 	}
 
-	public TeamDTO(Long id, String name) {
+	public TeamDTO(Long id, String name,String imgUrl) {
 		this.id = id;
 		this.name = name;
+		this.imgUrl = imgUrl;
 
 	}
 	
 	public TeamDTO(Team entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();
+		this.imgUrl = entity.getImgUrl();
+	}
+	
+	public TeamDTO(Team entity, List<User> sellers) {
+		this(entity);
+		sellers.forEach(seller -> this.sellers.add(new UserDTO(seller)));
+		
 	}
 	
 	public Long getId() {
@@ -42,4 +53,15 @@ public class TeamDTO implements Serializable {
 		this.name = name;
 	}
 
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+	public List<UserDTO> getSellers() {
+		return sellers;
+	}
 }

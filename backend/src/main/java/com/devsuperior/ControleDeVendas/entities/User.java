@@ -28,6 +28,7 @@ public class User implements Serializable, UserDetails {
 	@Column(unique = true)
 	private String email;
 	private String password;
+	private String imgUrl;
 	
 	@OneToMany(mappedBy = "seller")
 	private List<Sale> sales = new ArrayList<>();
@@ -48,11 +49,12 @@ public class User implements Serializable, UserDetails {
 	public User() {
 	}
 
-	public User(Long id, String name, String email, String password) {
+	public User(Long id, String name, String email, String password,String imgUrl) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
+		this.imgUrl = imgUrl;
 	}
 
 	public Long getId() {
@@ -78,7 +80,14 @@ public class User implements Serializable, UserDetails {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public String getImgUrl() {
+		return imgUrl;
+	}
 
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
 
 	@Override
 	public String getPassword() {

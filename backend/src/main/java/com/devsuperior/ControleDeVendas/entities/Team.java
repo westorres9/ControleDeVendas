@@ -18,22 +18,24 @@ public class Team implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	private String imgUrl;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_team_manager",
 			joinColumns = @JoinColumn(name = "team_id"),
 			inverseJoinColumns = @JoinColumn(name = "manager_id"))
 	private List<User> managers = new ArrayList<>();
-
-	@OneToMany(mappedBy = "team")
+	
+	@OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
 	private List<User> sellers = new ArrayList<>();
 
 	public Team() {
 	}
 
-	public Team(Long id, String name) {
+	public Team(Long id, String name,String imgUrl) {
 		this.id = id;
 		this.name = name;
+		this.imgUrl = imgUrl;
 	}
 
 	public Long getId() {
@@ -50,6 +52,14 @@ public class Team implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 
 	public List<User> getManagers() {

@@ -13,8 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.ControleDeVendas.dto.TeamDTO;
 import com.devsuperior.ControleDeVendas.entities.Team;
+import com.devsuperior.ControleDeVendas.entities.User;
 import com.devsuperior.ControleDeVendas.repositories.TeamRepository;
+import com.devsuperior.ControleDeVendas.repositories.UserRepository;
 import com.devsuperior.ControleDeVendas.services.exceptions.DatabaseException;
+import com.devsuperior.ControleDeVendas.services.exceptions.ForbiddenException;
 import com.devsuperior.ControleDeVendas.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -22,18 +25,42 @@ public class TeamService {
 
 	@Autowired
 	private TeamRepository repository;
+		@Autowired
+    private AuthService authService;
+
+    @Autowired
+    private UserRepository  userRepository;
 	
 	@Transactional(readOnly = true)
 	public List<TeamDTO> findAll(){
+		User user = authService.authenticated();
+		if(user.hasRole("ROLE_MANAGER")) {
+			List<Team> list = repository.findByManagerId(user.getId());
+			return list.stream().map(x -> new TeamDTO(x)).collect(Collectors.toList());
+		}
 		List<Team> list = repository.findAll();
 		return list.stream().map(x -> new TeamDTO(x)).collect(Collectors.toList());
 	}
 	
 	@Transactional(readOnly = true)
 	public TeamDTO findById(Long id) {
-		Optional<Team> obj = repository.findById(id);
-        Team entity = obj.orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
-        return new TeamDTO(entity);
+		User user = authService.authenticated();
+		if(user.hasRole("ROLE_MANAGER")) {
+			Optional<Team> obj = repository.findById(id);
+	        Team entity = obj.orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
+	        if(entity.getManagers().contains(user)) {
+	        	return new TeamDTO(entity, entity.getSellers());
+	        }
+	        else {
+	        	throw new ForbiddenException("Forbidden Exception");
+	        }
+		}
+		else {
+			Optional<Team> obj = repository.findById(id);
+	        Team entity = obj.orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
+	        return new TeamDTO(entity,entity.getSellers());
+		}
+		
 	}
 	
 	@Transactional
@@ -53,7 +80,7 @@ public class TeamService {
 			return new TeamDTO(entity);
 		}
 		catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Ifd not found " + id);
+            throw new ResourceNotFoundException("Id not found " + id);
         }
 	}
 	

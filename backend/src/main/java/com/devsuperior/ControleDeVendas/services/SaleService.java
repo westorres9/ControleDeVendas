@@ -51,6 +51,7 @@ public class SaleService {
 
 	@Transactional(readOnly = true)
 	public List<SaleSuccessDTO> successGroupedBySeller() {
+		User user = authService.authenticated();
 		return repository.successGroupedBySeller();
 	}
 

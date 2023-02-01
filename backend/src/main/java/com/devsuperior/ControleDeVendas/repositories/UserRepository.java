@@ -32,4 +32,12 @@ public interface UserRepository extends JpaRepository<User, Long>{
 			+ "WHERE tb_user_role.role_id = 2 "
 			+ "AND LOWER(tb_user.name) LIKE LOWER(CONCAT('%',:name ,'%'))")
 	List<User> findManagers(String name);
+	
+	@Query(nativeQuery = true, value = "SELECT * FROM tb_user "
+			+ "INNER JOIN tb_team "
+			+ "ON tb_team.id = tb_user.team_id "
+			+ "INNER JOIN tb_team_manager "
+			+ "ON tb_team_manager.team_id = tb_team.id "
+			+ "WHERE tb_team_manager.manager_id = :id ")
+	List<User> findSellersByTeam(Long id);
 }

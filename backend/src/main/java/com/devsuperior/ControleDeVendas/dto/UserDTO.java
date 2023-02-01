@@ -18,20 +18,23 @@ public class UserDTO implements Serializable{
 	private String name;
 	@Email(message = "Favor insira um email valido")
 	private String email;
+	private String imgUrl;
 	
 	public UserDTO() {
 	}
 
-	public UserDTO(Long id, String name, String email) {
+	public UserDTO(Long id, String name, String email,String imgUrl) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
+		this.imgUrl = imgUrl;
 	}
 	
 	public UserDTO(User entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();
 		this.email = entity.getEmail();
+		this.imgUrl = entity.getImgUrl();
 	}
 	
 
@@ -58,5 +61,15 @@ public class UserDTO implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+	
+	
 
 }

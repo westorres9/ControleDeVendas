@@ -22,7 +22,7 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 			+ "INNER JOIN tb_user "
 			+ "ON tb_user.id = tb_sale.seller_id "
 			+ "WHERE tb_sale.seller_id = :id "
-			+ "AND tb_sale.date BETWEEN :minDate AND :maxDate order by tb_sale.amount DESC")
+			+ "AND tb_sale.date BETWEEN :minDate AND :maxDate order by tb_sale.date DESC")
 	Page<Sale> findBySeller(Long id, LocalDate minDate,LocalDate maxDate,Pageable pageable);
 	
 	@Query(nativeQuery = true, value = "SELECT * FROM tb_sale "
@@ -31,7 +31,7 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 			+ "INNER JOIN tb_team_manager "
 			+ "ON tb_team_manager.team_id = tb_user.team_id "
 			+ "WHERE tb_team_manager.manager_id = :id "
-			+ "WHERE LOWER(tb_user.name) LIKE LOWER(CONCAT('%',:name ,'%')) "
+			+ "AND LOWER(tb_user.name) LIKE LOWER(CONCAT('%',:name ,'%')) "
 			+ "AND tb_sale.date BETWEEN :minDate AND :maxDate order by tb_sale.amount DESC")
 	Page<Sale> findByManager(Long id,String name, LocalDate minDate,LocalDate maxDate,Pageable pageable);
 	
