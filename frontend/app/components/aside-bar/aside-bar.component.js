@@ -1,8 +1,8 @@
 function AsideBarComponentController(AuthService) {
     var $ctrl = this
-    $ctrl.Logout = Logout;
+    $ctrl.loggedUser = '';
 
-    function Logout() {
+    $ctrl.Logout = () => {
         AuthService.removeToken();
         window.location.href = 'index.html#/';
     }

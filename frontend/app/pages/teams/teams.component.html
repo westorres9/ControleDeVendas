@@ -2,5 +2,12 @@
     <aside-bar></aside-bar>
     <section class="ds-container">
       <h1>Tela Teams</h1>
+        <div class="ds-team-container"  ng-repeat="team in $ctrl.teams">
+          <a ng-href="#/admin/teams/{{team.id}}">
+            <div class="team-card-container">
+              <img src={{team.imgUrl}} alt="">
+            </div>
+          </a>
+        </div>
     </section>
   </div>

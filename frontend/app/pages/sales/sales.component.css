@@ -19,3 +19,33 @@
     background-color: #fff;
     margin-right: 10px;
 }
+
+tr img {
+    width: 20px;
+    height: 20px;
+}
+
+.new-sale-container {
+    margin-bottom: 20px;
+}
+
+.ds-form-card h2 {
+    margin-bottom: 30px;
+}
+
+.form-buttons button{
+    width: 150px;
+    margin-right: 20px;
+    font-size: 20px;
+    margin-top: 20px;
+    width: 200px;
+    border-radius: 8px;
+}
+
+.btn-search {
+    margin-top: 20px;
+    width: 200px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border-radius: 8px;
+}

@@ -33,6 +33,8 @@
         font-size: 1.3rem;
         margin-bottom: 0;
     }
+
+
     
     .ds-aside-menu {
         margin-top: 50px;
@@ -51,7 +53,7 @@
     }
 
     .ds-logout {
-        margin-top: 50vh;
+        margin-top: 20vh;
     }
 
     .ds-logout button {
