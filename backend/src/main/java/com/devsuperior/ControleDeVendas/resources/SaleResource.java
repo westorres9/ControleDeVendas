@@ -23,6 +23,7 @@ import com.devsuperior.ControleDeVendas.dto.SaleDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSuccessDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumBySellerDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumByTeamDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO;
 import com.devsuperior.ControleDeVendas.services.SaleService;
 
 @RestController
@@ -87,6 +88,13 @@ public class SaleResource {
 	public ResponseEntity<List<SaleSumByTeamDTO>> amountGroupedByTeam() {
 		List<SaleSumByTeamDTO> page = service.amountGroupedByTeam();
 		return ResponseEntity.ok().body(page);
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@GetMapping(value = "/sale-sum-total")
+	public ResponseEntity<SaleSumTotalDTO> saleSumTotalOfDeals() {
+		SaleSumTotalDTO total = service.saleSumTotalOfDeals();
+		return ResponseEntity.ok().body(total);
 	}
 
 }

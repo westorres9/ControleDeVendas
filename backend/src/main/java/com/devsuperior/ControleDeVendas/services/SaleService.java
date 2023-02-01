@@ -19,6 +19,7 @@ import com.devsuperior.ControleDeVendas.dto.SaleDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSuccessDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumBySellerDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumByTeamDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO;
 import com.devsuperior.ControleDeVendas.entities.Sale;
 import com.devsuperior.ControleDeVendas.entities.SaleStatus;
 import com.devsuperior.ControleDeVendas.entities.User;
@@ -38,6 +39,12 @@ public class SaleService {
 
     @Autowired
     private UserRepository  userRepository;
+    
+    @Transactional(readOnly = true)
+    public SaleSumTotalDTO saleSumTotalOfDeals() {
+    	SaleSumTotalDTO total = repository.saleSumTotalOfDeals();
+    	return total;
+    }
     
     @Transactional(readOnly = true)
 	public List<SaleSumBySellerDTO> amountGroupedBySeller() {

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.devsuperior.ControleDeVendas.dto.SaleSuccessDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumBySellerDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumByTeamDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO;
 import com.devsuperior.ControleDeVendas.entities.Sale;
 
 
@@ -58,6 +59,15 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 			+ "ON u.team.id = t.id "
 			+ "GROUP BY u.team")
 	List<SaleSumByTeamDTO> amountGroupedByTeam(); 
+	
+	
+	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO(SUM(obj.visited), "
+			+ "SUM(obj.deals), "
+			+ "SUM(obj.amount)) "
+			+ "FROM Sale as obj")
+	SaleSumTotalDTO saleSumTotalOfDeals();
+	
+	
 	
 	
 }
