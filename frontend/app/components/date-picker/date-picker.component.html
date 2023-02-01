@@ -1,12 +1,12 @@
 <md-content layout-padding="" ng-cloak="" class="datepickerdemoBasicUsage">
     <div layout-gt-xs="row">
-      <div flex-gt-xs="">
+      <div flex-gt-xs="col">
         <h4>Data inicial</h4>
-        <md-datepicker ng-model="$ctrl.minDate" ng-change="$ctrl.setMinDate($ctrl.minDate)" md-placeholder="Data inicial"></md-datepicker>
+        <md-datepicker ng-model="$ctrl.minDate" ng-change="$ctrl.setMinDate(minDate)" md-placeholder="Data inicial"></md-datepicker>
       </div>
-      <div flex-gt-xs="">
+      <div flex-gt-xs="col">
         <h4>Data final</h4>
-        <md-datepicker ng-model="$ctrl.maxDate" ng-change="$ctrl.setMaxDate($ctrl.maxDate)" md-placeholder="Data final"></md-datepicker>
+        <md-datepicker ng-model="$ctrl.maxDate" ng-change="$ctrl.setMaxDate(maxDate)" md-placeholder="Data final"></md-datepicker>
       </div>
     </div>
   </md-content>

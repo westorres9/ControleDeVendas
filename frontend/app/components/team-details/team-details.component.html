@@ -1,0 +1,17 @@
+<div class="admin-container">
+    <aside-bar></aside-bar>
+    <div class="ds-container">
+        <h2>Team details</h2>
+        <div class="team-detail-container">
+            <img src={{$ctrl.team.imgUrl}} alt="">
+        <h4>{{$ctrl.team.name}}</h4>
+        <ul ng-repeat="seller in $ctrl.team.sellers">
+            <li class="team-details-user-list">
+                <p>{{seller.name}}</p>
+                <img src={{seller.imgUrl}} alt="">
+            </li>
+        </ul>
+        </div>
+    </div>
+</div>
+</div>

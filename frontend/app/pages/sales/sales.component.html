@@ -3,7 +3,8 @@
     <section class="ds-container sales-container">
       <h1>Tela Sales</h1>
       <md-content layout-padding="" ng-cloak="" class="datepickerdemoBasicUsage">
-        <date-picker minDate="$ctrl.minDate" maxDate="$ctrl.minDate"></date-picker>
+        <date-picker min-date="$ctrl.minDate" max-date="$ctrl.maxDate"></date-picker>
+        <button class="btn btn-primary btn-search" ng-click="$ctrl.onChangeDate()">Buscar</button>
       </md-content>
       <div class="charts-container">
         <div class="charts-content">
@@ -16,8 +17,17 @@
       <div  class="sales-by-seller-chart">
         <sales-by-seller-chart></sales-by-seller-chart>
       </div>
+      <div class="new-sale-container">
+        <a ng-href="#/admin/sales/new"><button class="btn btn-primary">Adicionar Nova Venda</button></a>
+      </div>
       <div>
         <table class="table table-hover">
+
+          <div class="dsvendas-pagination-container">
+            <img class="btn-page-previous" ng-click="$ctrl.previousPage()" src="/app/assets/img/arrow.svg" alt="">
+            <p>Pagina {{$ctrl.page.number + 1}}</p>
+            <img src="/app/assets/img/arrow.svg" ng-click="$ctrl.nextPage()" alt="">
+        </div>
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -29,18 +39,29 @@
               <th scope="col">#</th>
             </tr>
           </thead>
-          <tbody ng-repeat="sale in $ctrl.AllSales">
-            <tr>
-              <th scope="row">#</th>
+          <tbody >
+            <tr ng-repeat="sale in $ctrl.AllSales">
+              <th scope="row"><img src="/app/assets/img/sales.png" alt="" ></th>
               <td>{{sale.id}}</td>
               <td>{{sale.sellerName}}</td>
               <td>{{sale.amount}}</td>
               <td>{{sale.date}}</td>
-              <td>#</td>
-              <td>#</td>
+              <td><a ng-href="#/admin/sales/{{sale.id}}"><img src="/app/assets/img/edit.svg" alt=""></a></td>
+              <td><img src="/app/assets/img/delete.svg" alt="" ng-click="$ctrl.selectToDelete(sale)"></td>
             </tr>
           </tbody>
         </table>
-      </div>
+        <div class="dialog-background" ng-hide="$ctrl.warningVisible !== true">
+          <div class="dialog-box">
+            <div class="ds-form-card">
+              <h2>Tem certeza?</h2>
+              <div class="form-buttons">
+                <button class="btn btn-warning" ng-click="$ctrl.closeWarning()">Não</button>
+                <button class="btn btn-danger" ng-click="$ctrl.deleteSale($ctrl.sale)">Sim</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>   
     </section>
   </div>

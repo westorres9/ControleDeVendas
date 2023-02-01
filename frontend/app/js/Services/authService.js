@@ -36,6 +36,14 @@ function AuthService() {
         getUsername: () => {
             const user = window.localStorage.getItem('userName');
             return angular.fromJson(user);
+        },
+        setProfileImage: (token) => {
+            window.localStorage.setItem('profileImage', angular.toJson(token));
+            console.log('profileImg', token);
+        },
+        getProfileImage: () => {
+            const profileImage = window.localStorage.getItem('profileImage');
+            return angular.fromJson(profileImage);
         }
 
     }

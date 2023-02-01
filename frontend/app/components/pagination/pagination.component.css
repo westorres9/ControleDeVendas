@@ -1,0 +1,13 @@
+.dsvendas-pagination-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dsvendas-pagination-container img {
+    cursor: pointer;
+}
+
+.btn-page-previous {
+    transform: rotate(-180deg);
+}

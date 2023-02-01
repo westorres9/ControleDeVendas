@@ -1,42 +1,61 @@
 app.service('SaleService', function($http) {
+
+    var $ctrl = this;
+
     const BASE_URL = 'http://localhost:8080'
 
-    this.getAllSales = () => {
+    $ctrl.getAllSales = (page, size, minDate, maxDate) => {
         
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sales`
+                url: `${BASE_URL}/sales`,
+                params: {
+                    'maxDate': maxDate,
+                    'minDate': minDate,
+                   'size': size,
+                    'page': page
+                }
             }
         )
         return request; 
     }
 
-    this.insertSale = (sale) => {
+    $ctrl.getSaleById = (id) => {
+        var request = $http(
+            {
+                method: 'get',
+                url: `${BASE_URL}/sales/${id}`
+            }
+        )
+        return request; 
+    }
+
+    $ctrl.insertSale = (sale) => {
         
         var request = $http(
             {
                 method: 'post',
                 url: `${BASE_URL}/sales`,
-                date: sale
+                data: sale
             }
         )
         return request; 
     }
 
-    this.updateSale = (sale) => {
+    $ctrl.updateSale = (sale) => {
         
         var request = $http(
             {
                 method: 'put',
                 url: `${BASE_URL}/sales/${sale.id}`,
-                date: sale
+                data: sale
             }
         )
         return request; 
     }
 
-    this.deleteSale = (sale) => {
+    $ctrl.deleteSale = (sale) => {
         
         var request = $http(
             {
@@ -47,7 +66,7 @@ app.service('SaleService', function($http) {
         return request; 
     }
 
-    this.salesSumBySeller = () => {
+    $ctrl.salesSumBySeller = () => {
 
         var request = $http(
             {
@@ -58,7 +77,7 @@ app.service('SaleService', function($http) {
         return request; 
     }
 
-    this.salesSuccessBySeller = () => {
+    $ctrl.salesSuccessBySeller = () => {
 
         var request = $http(
             {

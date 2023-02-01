@@ -1,63 +1,70 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="app">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="/bower_components/bootstrap/dist/css/bootstrap.css"
-    />
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.css">
-    <link rel="stylesheet" href="/app/app.css" />
-    <link rel="stylesheet" href="/app/components/navbar/navbar.component.css" />
-    <link
-      rel="stylesheet"
-      href="/app/components/login-card/login-card.component.css"
-    />
-    <link rel="stylesheet" href="/app/components/sum-chart/sum-chart.component.css">
-    <link rel="stylesheet" href="/app/pages/login/login.component.css" />
-    <link rel="stylesheet" href="/app/pages/admin/admin-component.css" />
-    <link
-      rel="stylesheet"
-      href="/app/components/aside-bar/aside-bar.component.css"
-    />
-    <link rel="stylesheet" href="/app/pages/sales/sales.component.css" />
-    <title>DSVendas</title>
-  </head>
-  <body>
-    <navbar></navbar>
-    <div ng-view></div>
-    <script src="/bower_components/angular/angular.js"></script>
-    <script src="/bower_components/angular-route/angular-route.js"></script>
-    <script src="/app/app.js"></script>
-    <script src="/app/js/route.js"></script>
-    <script src="/app/js/Services/authService.js"></script>
-    <script src="/app/js/Services/tokenGlobalInterceptor.js"></script>
-    <script src="/app/js/Services/SaleService.js"></script>
-    <script src="/app/components/navbar/navbar.component.js"></script>
-    <script src="/app/components/login-card/login-card.component.js"></script>
-    <script src="/app/components/aside-bar/aside-bar.component.js"></script>
-    <script src="/app/pages/login/login.component.js"></script>
-    <script src="/app/pages/admin/admin.component.js"></script>
-    <script src="/app/pages/home/home.component.js"></script>
-    <script src="/app/pages/sales/sales.component.js"></script>
-    <script src="/app/pages/sellers/sellers.component.js"></script>
-    <script src="/app/pages/teams/teams.component.js"></script>
-    <script src="/app/components/success-chart/success-chart.component.js"></script>
-    <script src="/app/components/sales-by-seller-chart/sales-by-seller-chart.component.js"></script>
-    <script src="/app/components/sum-chart/sum-chart.component.js"></script>
-    <script src="/app/components/date-picker/date-picker.component.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-    <script src="/bower_components/angular-material/angular-material.js"></script>
-    <script src="/bower_components/angular-messages/angular-messages.js"></script>
-    <script src="/bower_components/angular-aria/angular-aria.js"></script>
-    <script src="/bower_components/angular-animate/angular-animate.js"></script>
-    <script src="/node_modules/dayjs/dayjs.min.js"></script>
-    <script src="/node_modules/dayjs/locale/pt-br.js"></script>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.css">
+  <link rel="stylesheet" href="/app/app.css" />
+  <link rel="stylesheet" href="/app/components/navbar/navbar.component.css" />
+  <link rel="stylesheet" href="/app/components/login-card/login-card.component.css" />
+  <link rel="stylesheet" href="/app/components/sum-chart/sum-chart.component.css">
+  <link rel="stylesheet" href="/app/pages/login/login.component.css" />
+  <link rel="stylesheet" href="/app/pages/admin/admin-component.css" />
+  <link rel="stylesheet" href="/app/components/aside-bar/aside-bar.component.css" />
+  <link rel="stylesheet" href="/app/pages/sales/sales.component.css" />
+  <link rel="stylesheet" href="/app/components/pagination/pagination.component.css">
+  <link rel="stylesheet" href="/app/components/new-sale/new-sale.component.css">
+  <link rel="stylesheet" href="/app/pages/teams/teams.component.css">
+  <link rel="stylesheet" href="/app/components/profile-user/profile-user.component.css">
+  <link rel="stylesheet" href="/app/components/team-details/team-details.component.css">
+  <title>DSVendas</title>
+</head>
+
+<body>
+  <navbar></navbar>
+  <div ng-view></div>
+  <script src="/bower_components/angular/angular.js"></script>
+  <script src="/bower_components/angular-route/angular-route.js"></script>
+  <script src="/app/app.js"></script>
+  <script src="/app/js/route.js"></script>
+  <script src="/app/js/Services/authService.js"></script>
+  <script src="/app/js/Services/tokenGlobalInterceptor.js"></script>
+  <script src="/app/js/Services/SaleService.js"></script>
+  <script src="/app/js/Services/TeamService.js"></script>
+  <script src="/app/js/Services/SellerService.js"></script>
+  <script src="/app/components/navbar/navbar.component.js"></script>
+  <script src="/app/components/login-card/login-card.component.js"></script>
+  <script src="/app/components/aside-bar/aside-bar.component.js"></script>
+  <script src="/app/components/success-chart/success-chart.component.js"></script>
+  <script src="/app/components/sales-by-seller-chart/sales-by-seller-chart.component.js"></script>
+  <script src="/app/components/sum-chart/sum-chart.component.js"></script>
+  <script src="/app/components/date-picker/date-picker.component.js"></script>
+  <script src="/app/components/pagination/pagination.component.js"></script>
+  <script src="/app/components/new-sale/new-sale.component.js"></script>
+  <script src="/app/components/update-sale/update-sale.component.js"></script>
+  <script src="/app/components/team-details/team-details.component.js"></script>
+  <script src="/app/components/profile-user/profile-user.component.js"></script>
+  <script src="/app/pages/login/login.component.js"></script>
+  <script src="/app/pages/admin/admin.component.js"></script>
+  <script src="/app/pages/home/home.component.js"></script>
+  <script src="/app/pages/sales/sales.component.js"></script>
+  <script src="/app/pages/sellers/sellers.component.js"></script>
+  <script src="/app/pages/teams/teams.component.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+  <script src="/bower_components/angular-material/angular-material.js"></script>
+  <script src="/bower_components/angular-messages/angular-messages.js"></script>
+  <script src="/bower_components/angular-aria/angular-aria.js"></script>
+  <script src="/bower_components/angular-animate/angular-animate.js"></script>
+  <script src="/node_modules/moment/moment.js"></script>
+  <script src="/node_modules/moment/package.js"></script>
+  <script src="/node_modules/moment/locale/en-ca.js"></script>
 </body>
-  </body>
+</body>
+
 </html>

@@ -22,6 +22,12 @@ function LoginCardComponentController($http, $httpParamSerializerJQLike, AuthSer
         console.log(loginResponse);
         AuthService.setToken(loginResponse.access_token);
         const token = AuthService.getToken();
+        AuthService.setUsername(loginResponse.userName);
+        const username = AuthService.getUsername();
+        AuthService.setProfileImage(loginResponse.profileImage);
+        const profileImage = AuthService.getProfileImage();
+        console.log(profileImage);
+        console.log(username);
         console.log('token', token);
         if(token !== null) {
           window.location.href = 'index.html#/admin';
