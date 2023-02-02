@@ -14,6 +14,7 @@ import com.devsuperior.ControleDeVendas.dto.SaleSumBySellerDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumByTeamDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO;
 import com.devsuperior.ControleDeVendas.entities.Sale;
+import com.devsuperior.ControleDeVendas.entities.User;
 
 
 @Repository
@@ -66,6 +67,17 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 			+ "SUM(obj.amount)) "
 			+ "FROM Sale as obj")
 	SaleSumTotalDTO saleSumTotalOfDeals();
+	
+	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO(SUM(obj.visited), "
+			+ "SUM(obj.deals), "
+			+ "SUM(obj.amount)) "
+			+ "FROM Sale as obj "
+			+ "INNER JOIN User as user "
+			+ "ON user.id = obj.seller.id "
+			+ "INNER JOIN Team as team FETCH ALL team.managers "
+			+ "ON team.id = user.team.id "
+			+ "WHERE managers.user.id = 6")
+	SaleSumTotalDTO saleSumTotalByManager();
 	
 	
 	

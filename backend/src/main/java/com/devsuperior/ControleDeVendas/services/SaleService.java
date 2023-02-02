@@ -42,8 +42,16 @@ public class SaleService {
     
     @Transactional(readOnly = true)
     public SaleSumTotalDTO saleSumTotalOfDeals() {
-    	SaleSumTotalDTO total = repository.saleSumTotalOfDeals();
-    	return total;
+    	User user = authService.authenticated();
+    	if(user.hasRole("ROLE_MANAGER")) {
+    		SaleSumTotalDTO total = repository.saleSumTotalByManager();
+        	return total;
+    	}
+    	else {
+    		SaleSumTotalDTO total = repository.saleSumTotalOfDeals();
+        	return total;
+    	}
+    	
     }
     
     @Transactional(readOnly = true)

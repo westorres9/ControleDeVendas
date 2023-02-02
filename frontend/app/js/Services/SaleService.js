@@ -87,4 +87,15 @@ app.service('SaleService', function($http) {
         )
         return request; 
     }
+
+    $ctrl.salesSumTotal = () => {
+
+        var request = $http(
+            {
+                method: 'get',
+                url: `${BASE_URL}/sales/sale-sum-total`
+            }
+        )
+        return request; 
+    }
 })

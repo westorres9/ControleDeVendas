@@ -90,7 +90,7 @@ public class SaleResource {
 		return ResponseEntity.ok().body(page);
 	}
 	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	@GetMapping(value = "/sale-sum-total")
 	public ResponseEntity<SaleSumTotalDTO> saleSumTotalOfDeals() {
 		SaleSumTotalDTO total = service.saleSumTotalOfDeals();
