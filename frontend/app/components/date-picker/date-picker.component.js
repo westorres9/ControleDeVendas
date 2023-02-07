@@ -1,10 +1,10 @@
 function DatePickerController(SaleService) {
     var $ctrl = this;
-    $ctrl.isOpen = false;  
+    $ctrl.isOpen = false;
+    moment.locale('en');
 
     $ctrl.setMinDate = (minDate) => {
-        moment.locale('en-ca')
-        $ctrl.minDate =  moment(minDate).format('L');
+        $ctrl.minDate =  moment(minDate).format('YYYY-MM-DD');
         console.log('mindate atualizado no componente', $ctrl.minDate);
         $ctrl.onChanges({
             minDate: $ctrl.minDate,
@@ -13,7 +13,8 @@ function DatePickerController(SaleService) {
     }
 
     $ctrl.setMaxDate = (maxDate) => {
-        $ctrl.maxDate = moment(maxDate).format();
+
+        $ctrl.maxDate = moment(maxDate).format('YYYY-MM-DD');
         console.log('mindate atualizado no componente', $ctrl.maxDate);
         $ctrl.onChanges({
             minDate: $ctrl.minDate,

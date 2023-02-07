@@ -8,11 +8,14 @@
       </md-content>
       <div class="charts-container">
         <div class="charts-content">
-          <sales-sum-total-chart></sales-sum-total-chart>
+          <sales-sum-total-chart min-date="$ctrl.minDate" max-date="$ctrl.maxDate" onChanges="$ctrl.onChangeDate()"></sales-sum-total-chart>
         </div>
         <div class="charts-content">
           <sum-chart></sum-chart>
         </div>
+      </div>
+      <div  class="sales-by-seller-chart">
+        <sum-chart-bar previousPage="$ctrl.previousPage()" nextPage="$ctrl.nextPage()" onChanges=""></sum-chart-bar>
       </div>
       <div  class="sales-by-seller-chart">
         <sales-by-seller-chart></sales-by-seller-chart>
@@ -27,7 +30,7 @@
             <img class="btn-page-previous" ng-click="$ctrl.previousPage()" src="/app/assets/img/arrow.svg" alt="">
             <p>Pagina {{$ctrl.page.number + 1}}</p>
             <img src="/app/assets/img/arrow.svg" ng-click="$ctrl.nextPage()" alt="">
-        </div>
+          </div>
           <thead>
             <tr>
               <th scope="col">#</th>

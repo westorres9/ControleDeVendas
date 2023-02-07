@@ -19,6 +19,7 @@ import com.devsuperior.ControleDeVendas.dto.SaleDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSuccessDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumBySellerDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumByTeamDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleSumTotalByMonthDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO;
 import com.devsuperior.ControleDeVendas.entities.Sale;
 import com.devsuperior.ControleDeVendas.entities.SaleStatus;
@@ -41,18 +42,30 @@ public class SaleService {
     private UserRepository  userRepository;
     
     @Transactional(readOnly = true)
-    public SaleSumTotalDTO saleSumTotalOfDeals() {
+    public SaleSumTotalDTO saleSumTotalOfDeals(String minDate, String  maxDate) {
     	User user = authService.authenticated();
+    	LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
+		LocalDate min = minDate.equals("") ? today.minusDays(365) : LocalDate.parse(minDate);
+		LocalDate max = maxDate.equals("") ? today : LocalDate.parse(maxDate);
     	if(user.hasRole("ROLE_MANAGER")) {
-    		SaleSumTotalDTO total = repository.saleSumTotalByManager();
+    		SaleSumTotalDTO total = repository.saleSumTotalByManager(user.getId(),min, max);
+        	return total;
+    	}
+    	else if (user.hasRole("ROLE_SELLER")) {
+    		SaleSumTotalDTO total = repository.saleSumTotalBySeller(user.getId(),min, max);
         	return total;
     	}
     	else {
-    		SaleSumTotalDTO total = repository.saleSumTotalOfDeals();
+    		SaleSumTotalDTO total = repository.saleSumTotalOfDeals(min, max);
         	return total;
     	}
     	
     }
+    
+    @Transactional(readOnly = true)
+	public List<SaleSumTotalByMonthDTO> saleSumTotalByMonth() {
+		return repository.saleSumTotalByMonth();
+	}
     
     @Transactional(readOnly = true)
 	public List<SaleSumBySellerDTO> amountGroupedBySeller() {

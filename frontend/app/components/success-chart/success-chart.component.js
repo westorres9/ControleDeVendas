@@ -56,4 +56,9 @@ function SuccessChartController(SaleService) {
 app.component('successChart', {
     templateUrl: 'components/success-chart/success-chart.component.html',
     controller: SuccessChartController,
+    bindings: {
+      minDate: '=',
+      maxDate: '=',
+      onChanges: '&'
+  }
 })

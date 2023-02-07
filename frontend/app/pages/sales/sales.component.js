@@ -6,9 +6,12 @@ function SalesController(SaleService) {
   $ctrl.warningVisible = false;
 
   var size = 12;
-  var page = 0
-  $ctrl.minDate = moment('2022-01-01').format('L');
-  $ctrl.maxDate = moment('2022-12-31').format('L');
+  var page = 0;
+
+  var minDate = '2022-01-01';
+  var maxDate = '2022-12-31';
+  $ctrl.minDate = minDate;
+  $ctrl.maxDate = maxDate;
 
   $ctrl.resetPage = () => {
     page = 0;
@@ -34,7 +37,7 @@ function SalesController(SaleService) {
         $ctrl.page = response.data;
         console.log('page', $ctrl.page);
         $ctrl.AllSales = response.data.content;
-        console.log('sales', $ctrl.AllSales)
+        console.log('sales', $ctrl.AllSales);
     });
   };
 
@@ -80,4 +83,7 @@ function SalesController(SaleService) {
 app.component("sales", {
   templateUrl: "pages/sales/sales.component.html",
   controller: SalesController,
+  bindings: {
+    onChangeDate: '&'
+  }
 });

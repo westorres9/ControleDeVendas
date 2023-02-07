@@ -2,36 +2,78 @@ function SumChartController (SaleService) {
     var $ctrl = this;
 
     $ctrl.sum = []
+    $ctrl.teams = [];
 
     $ctrl.sumBySeller = () => {
-        SaleService.salesSumBySeller().then((response) => {
-          console.log(response.data);
+        SaleService.salesSumByTeam().then((response) => {
+          console.log('sum',response.data);
           $ctrl.sum = response.data;
-          Highcharts.chart("sum", {
+          Highcharts.chart('sum', {
             chart: {
-              type: "column",
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
             },
             title: {
-              text: "Total de vendas",
+                text: 'Total de vendas por Equipe',
+                align: 'left'
             },
-            subtitle: {
-              text: `Vendedor: ${$ctrl.sum[0].sellerName}`,
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
             },
-            xAxis: {
-              categories: ["Visitas", "Vendas", "Total"],
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
             },
-            yAxis: {
-              title: {
-                text: "Taxa de sucesso",
-              },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    }
+                }
             },
-            series: [
-              {
-                name: "Total vendido",
-                data: [$ctrl.sum[0].sum],
-              }
-            ]
-          });
+            series: [{
+                name: 'Percentual',
+                colorByPoint: true,
+                data: [{
+                    name: $ctrl.sum[0].teamName,
+                    y: $ctrl.sum[0].sum,
+                    drilldown: `${$ctrl.sum[0].teamName}`
+                }, {
+                    name: $ctrl.sum[1].teamName,
+                    y: $ctrl.sum[1].sum,
+                    drilldown: `${$ctrl.sum[1].teamName}`
+                },  {
+                    name:$ctrl.sum[2].teamName,
+                    y: $ctrl.sum[2].sum,
+                    drilldown: `${$ctrl.sum[2].teamName}`
+                }]
+            }],
+            drilldown:{
+                series: [
+                    {
+                        id: $ctrl.sum[0].teamName,
+                        data: [
+                            [$ctrl.sum[0].teamName, $ctrl.sum[0].sum]
+                        ],
+                        id: $ctrl.sum[1].teamName,
+                        data: [
+                            [$ctrl.sum[1].teamName, $ctrl.sum[1].sum]
+                        ],
+                        id: $ctrl.sum[2].teamName,
+                        data: [
+                            [$ctrl.sum[2].teamName, $ctrl.sum[2].sum]
+                        ]
+                    }
+                ]
+            }
+        });
+            
         });
       };
 
@@ -46,4 +88,9 @@ function SumChartController (SaleService) {
 app.component('sumChart', {
     templateUrl: 'components/sum-chart/sum-chart.component.html',
     controller: SumChartController,
+    bindings: {
+        minDate: '=',
+        maxDate: '=',
+        onChanges: '&'
+    }
 })

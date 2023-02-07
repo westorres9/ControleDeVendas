@@ -1,47 +1,26 @@
 
-
 <div class="admin-container">
     <aside-bar></aside-bar>
     <div class="update-sale-form-container ds-container">
-        <h2>Cadastrar Nova Venda</h2>
+        <h2>Cadastrar Nova Equipe</h2>
         <div class="ds-form-card">
             <form action="">
                 <div class="form-input">
                     <input 
                     type="text"
                     class="form-control base-input" 
-                    placeholder="Visitas"  
-                    name="visited" 
-                    id="visited"
-                    value="visited"
-                    ng-model="$ctrl.sale.visited" 
+                    placeholder="Nome da Equipe"  
+                    name="name" 
+                    id="name"
+                    value="name"
+                    ng-model="$ctrl.team.name" 
                     required
                     />
                 </div>
                 <div class="form-input">
-                    <input 
-                    type="text" 
-                    class="form-control base-input" 
-                    placeholder="Vendas"  
-                    name="deals" 
-                    id="deals"
-                    value="deals"
-                    ng-model="$ctrl.sale.deals" 
-                    required>
-                </div>
-                <div class="form-input">
-                    <input 
-                    type="text" 
-                    class="form-control base-input" 
-                    placeholder="Total"  
-                    name="amount"
-                    id="amount"
-                    value="amount"
-                    ng-model="$ctrl.sale.amount" 
-                    required>
-                </div>
-                <button class="btn btn-success" ng-click="$ctrl.insertNewSale($ctrl.sale)" type="submit">Salvar</button>
-                <button class="btn btn-danger" ng-click="$ctrl.returnToPageSales()">Cancelar</button>
+
+                <button class="btn btn-success" ng-click="$ctrl.insertNewTeam($ctrl.team)" type="submit">Salvar</button>
+                <button class="btn btn-danger" ng-click="$ctrl.returnToPageTeams()">Cancelar</button>
             </form>
         </div>
     </div>

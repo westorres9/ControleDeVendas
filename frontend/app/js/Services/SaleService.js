@@ -77,6 +77,17 @@ app.service('SaleService', function($http) {
         return request; 
     }
 
+    $ctrl.salesSumByTeam = () => {
+
+        var request = $http(
+            {
+                method: 'get',
+                url: `${BASE_URL}/sales/sum-by-team`
+            }
+        )
+        return request; 
+    }
+
     $ctrl.salesSuccessBySeller = () => {
 
         var request = $http(
@@ -94,6 +105,17 @@ app.service('SaleService', function($http) {
             {
                 method: 'get',
                 url: `${BASE_URL}/sales/sale-sum-total`
+            }
+        )
+        return request; 
+    }
+
+    $ctrl.salesSumTotalByMonth = () => {
+
+        var request = $http(
+            {
+                method: 'get',
+                url: `${BASE_URL}/sales/sum-by-month`
             }
         )
         return request; 

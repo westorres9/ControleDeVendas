@@ -3,6 +3,7 @@ function SalesBySellerChartController (SaleService) {
 
     $ctrl.sales = [];
     $ctrl.page = [];
+    $ctrl.date = [];
 
     $ctrl.salesBySeller = () => {
         SaleService.getAllSales().then((response) => {
@@ -13,19 +14,28 @@ function SalesBySellerChartController (SaleService) {
             $ctrl.visited = []
             $ctrl.deals = []
             $ctrl.amount = []
+            $ctrl.sales.forEach(x => $ctrl.date.push(x.date));
             $ctrl.sales.forEach(x => $ctrl.visited.push(x.visited))
             $ctrl.sales.forEach(x => $ctrl.deals.push(x.deals))
             $ctrl.sales.forEach(x => $ctrl.amount.push(x.amount))
             console.log($ctrl.visited)
             Highcharts.chart('sales-by-seller', {
                 title: {
-                    text: `Vendas do Vendedor ${$ctrl.sales[0].sellerName}`
+                    text: `Vendas de todos durante o periodo`
                 },
                 subtitle: {
-                    text: `periodo de ${$ctrl.sales[0].date}`
+                    text:`${$ctrl.date[0]} a ${$ctrl.date[19]}`
+                },
+                xAxis: {
+                    title: 'Vendas',
+                    categories: $ctrl.date,
+                    crosshair: true
                 },
                 yAxis: {
-                    title: 'Vendas'
+                    min: 0,
+                    title: {
+                        text: 'Vendas x visitas'
+                    }
                 },
                 legend: {
                     layout: 'vertical',
@@ -50,7 +60,7 @@ function SalesBySellerChartController (SaleService) {
                     },
                     {
                         name: 'Vendas',
-                        data: $ctrl.deals
+                        data: $ctrl.amount
                     }
 
                 ], 
@@ -71,4 +81,9 @@ function SalesBySellerChartController (SaleService) {
 app.component('salesBySellerChart', {
     templateUrl: 'components/sales-by-seller-chart/sales-by-seller-chart.component.html',
     controller: SalesBySellerChartController,
+    bindings: {
+        minDate: '=',
+        maxDate: '=',
+        onChanges: '&'
+    }
 })

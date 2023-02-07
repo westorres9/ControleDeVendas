@@ -25,8 +25,12 @@ function config($routeProvider) {
     .when('/admin/teams', {
         template: '<teams></teams>'
     })
+    .when('/admin/teams/new', {
+        template: '<new-team></new-team>'
+    })
     .when('/admin/teams/:id', {
         template: '<team-details></team-details>'
     })
+    
 }])
 

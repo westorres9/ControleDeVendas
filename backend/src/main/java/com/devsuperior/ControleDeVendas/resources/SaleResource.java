@@ -23,6 +23,7 @@ import com.devsuperior.ControleDeVendas.dto.SaleDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSuccessDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumBySellerDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumByTeamDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleSumTotalByMonthDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO;
 import com.devsuperior.ControleDeVendas.services.SaleService;
 
@@ -84,6 +85,13 @@ public class SaleResource {
 	}
 	
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+	@GetMapping(value = "/sum-by-month")
+	public ResponseEntity<List<SaleSumTotalByMonthDTO>> saleSumTotalByMonth() {
+		List<SaleSumTotalByMonthDTO> list = service.saleSumTotalByMonth();
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	@GetMapping(value = "/sum-by-team")
 	public ResponseEntity<List<SaleSumByTeamDTO>> amountGroupedByTeam() {
 		List<SaleSumByTeamDTO> page = service.amountGroupedByTeam();
@@ -92,8 +100,11 @@ public class SaleResource {
 	
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	@GetMapping(value = "/sale-sum-total")
-	public ResponseEntity<SaleSumTotalDTO> saleSumTotalOfDeals() {
-		SaleSumTotalDTO total = service.saleSumTotalOfDeals();
+	public ResponseEntity<SaleSumTotalDTO> saleSumTotalOfDeals(
+			@RequestParam(value = "minDate", defaultValue = "")String minDate,
+			@RequestParam(value = "maxDate", defaultValue = "")String maxDate
+			) {
+		SaleSumTotalDTO total = service.saleSumTotalOfDeals(minDate, maxDate);
 		return ResponseEntity.ok().body(total);
 	}
 

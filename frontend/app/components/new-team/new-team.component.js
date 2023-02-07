@@ -1,11 +1,11 @@
-function NewSaleController(SaleService, $window) {
+function NewTeamController(TeamService, $window) {
     var $ctrl = this;
 
-    $ctrl.insertNewSale = () => {
+    $ctrl.insertNewTeam = () => {
         
-        SaleService.insertSale($ctrl.sale).then((response) => {
+        TeamService.insertTeam($ctrl.team).then((response) => {
             console.log(response.data);
-            $ctrl.returnToPageSales();
+            $ctrl.returnToPageTeams();
         }).catch((error) => {
             console.log(error.status)
         }).finally(() => {
@@ -13,12 +13,12 @@ function NewSaleController(SaleService, $window) {
         })
     }
 
-    $ctrl.returnToPageSales = () => {
-        $window.location.href = "index.html#/admin/sales"
+    $ctrl.returnToPageTeams = () => {
+        $window.location.href = "index.html#/admin/teams"
     }
 }
 
-app.component('newSale', {
-    templateUrl:'components/new-sale/new-sale.component.html',
-    controller: NewSaleController,
+app.component('newTeam', {
+    templateUrl:'components/new-team/new-team.component.html',
+    controller: NewTeamController,
 })
