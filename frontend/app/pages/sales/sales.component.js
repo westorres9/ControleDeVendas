@@ -1,51 +1,50 @@
 function SalesController(SaleService) {
   var $ctrl = this;
   $ctrl.AllSales = [];
-  $ctrl.page= {};
   $ctrl.isOpen = false;
   $ctrl.warningVisible = false;
 
-  var size = 12;
-  var page = 0;
-
-  var minDate = '2022-01-01';
-  var maxDate = '2022-12-31';
-  $ctrl.minDate = minDate;
-  $ctrl.maxDate = maxDate;
+  $ctrl.size = 12;
+  $ctrl.page = 0;
+  let mindate = '2022-01-01';
+  let maxdate = '2022-12-31';
+  $ctrl.mindate = mindate;
+  $ctrl.maxdate = maxdate;
 
   $ctrl.resetPage = () => {
-    page = 0;
-    $ctrl.getAllSales(page, size);
+    $ctrl.page = 0;
+    $ctrl.getAllSales($ctrl.page, $ctrl.size);
   }
 
   $ctrl.nextPage = () => {
-    page = page + 1;
-    $ctrl.getAllSales(page, size);
+    $ctrl.page = $ctrl.page + 1;
+    $ctrl.getAllSales($ctrl.page, $ctrl.size);
   }
 
   $ctrl.previousPage = () => {
-    page = page - 1;
-    if(page < 0) return;
-    console.log(page);
-    $ctrl.getAllSales(page, size);
+    $ctrl.page = $ctrl.page - 1;
+    if($ctrl.page < 0) return;
+    console.log($ctrl.page);
+    $ctrl.getAllSales($ctrl.page, $ctrl.size);
   }
 
-  $ctrl.getAllSales = (page, size) => {
+  $ctrl.getAllSales = () => {
     // $ctrl.minDate
     // $ctrl.maxDate
-    SaleService.getAllSales(page, size, $ctrl.minDate, $ctrl.maxDate).then((response) => {
-        $ctrl.page = response.data;
-        console.log('page', $ctrl.page);
+    SaleService.getAllSales($ctrl.page, $ctrl.size, $ctrl.mindate, $ctrl.maxdate).then((response) => {
         $ctrl.AllSales = response.data.content;
         console.log('sales', $ctrl.AllSales);
     });
   };
 
   $ctrl.onChangeDate = () => {
-    $ctrl.getAllSales(page, size,$ctrl.minDate, $ctrl.maxDate);
+    $ctrl.getAllSales($ctrl.page, $ctrl.size,$ctrl.mindate, $ctrl.maxdate); 
   }
 
-  $ctrl.getAllSales(page, size,$ctrl.minDate, $ctrl.maxDate);
+  $ctrl.$onInit = () => {
+    $ctrl.getAllSales($ctrl.page, $ctrl.size,$ctrl.mindate, $ctrl.maxdate);
+  }
+
 
   $ctrl.selectSale = (sale) => {
     $ctrl.sale = sale;
@@ -78,12 +77,11 @@ function SalesController(SaleService) {
     console.log($ctrl.sale);
     return $ctrl.sale
   }
+
+  
 }
 
 app.component("sales", {
   templateUrl: "pages/sales/sales.component.html",
   controller: SalesController,
-  bindings: {
-    onChangeDate: '&'
-  }
 });

@@ -4,16 +4,16 @@ app.service('SaleService', function($http) {
 
     const BASE_URL = 'http://localhost:8080'
 
-    $ctrl.getAllSales = (page, size, minDate, maxDate) => {
+    $ctrl.getAllSales = (page, size, mindate, maxdate) => {
         
         var request = $http(
             {
                 method: 'get',
                 url: `${BASE_URL}/sales`,
                 params: {
-                    'maxDate': maxDate,
-                    'minDate': minDate,
-                   'size': size,
+                    'maxDate': maxdate,
+                    'minDate': mindate,
+                    'size': size,
                     'page': page
                 }
             }
@@ -99,12 +99,16 @@ app.service('SaleService', function($http) {
         return request; 
     }
 
-    $ctrl.salesSumTotal = () => {
+    $ctrl.salesSumTotal = (mindate, maxdate) => {
 
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sales/sale-sum-total`
+                url: `${BASE_URL}/sales/sale-sum-total`,
+                params: {
+                    'maxDate': maxdate,
+                    'minDate': mindate,
+                }
             }
         )
         return request; 

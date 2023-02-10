@@ -3,19 +3,19 @@
     <section class="ds-container sales-container">
       <h1>Tela Sales</h1>
       <md-content layout-padding="" ng-cloak="" class="datepickerdemoBasicUsage">
-        <date-picker min-date="$ctrl.minDate" max-date="$ctrl.maxDate"></date-picker>
+        <date-picker mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></date-picker>
         <button class="btn btn-primary btn-search" ng-click="$ctrl.onChangeDate()">Buscar</button>
       </md-content>
       <div class="charts-container">
         <div class="charts-content">
-          <sales-sum-total-chart min-date="$ctrl.minDate" max-date="$ctrl.maxDate" onChanges="$ctrl.onChangeDate()"></sales-sum-total-chart>
+          <sales-sum-total-chart mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></sales-sum-total-chart>
         </div>
         <div class="charts-content">
           <sum-chart></sum-chart>
         </div>
       </div>
       <div  class="sales-by-seller-chart">
-        <sum-chart-bar previousPage="$ctrl.previousPage()" nextPage="$ctrl.nextPage()" onChanges=""></sum-chart-bar>
+        <sum-chart-bar mindate="$ctrl.mindate" maxdate="$ctrl.maxdate" page="$ctrl.page" size="$ctrl.size"></sum-chart-bar>
       </div>
       <div  class="sales-by-seller-chart">
         <sales-by-seller-chart></sales-by-seller-chart>
@@ -28,7 +28,7 @@
 
           <div class="dsvendas-pagination-container">
             <img class="btn-page-previous" ng-click="$ctrl.previousPage()" src="/app/assets/img/arrow.svg" alt="">
-            <p>Pagina {{$ctrl.page.number + 1}}</p>
+            <p>Pagina {{$ctrl.page + 1}}</p>
             <img src="/app/assets/img/arrow.svg" ng-click="$ctrl.nextPage()" alt="">
           </div>
           <thead>
