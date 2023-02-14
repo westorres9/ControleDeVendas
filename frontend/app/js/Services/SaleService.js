@@ -114,12 +114,16 @@ app.service('SaleService', function($http) {
         return request; 
     }
 
-    $ctrl.salesSumTotalByMonth = () => {
+    $ctrl.salesSumTotalByMonth = (mindate, maxdate) => {
 
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sales/sum-by-month`
+                url: `${BASE_URL}/sales/sum-by-month`,
+                params: {
+                    'maxDate': maxdate,
+                    'minDate': mindate,
+                }
             }
         )
         return request; 

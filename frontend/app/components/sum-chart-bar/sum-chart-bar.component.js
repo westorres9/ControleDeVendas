@@ -9,19 +9,35 @@ function SumChartBarController(SaleService) {
 
 
     let chart = Highcharts.chart('sum-chart-bar', {
-        title: {
-            text: 'Vendas por periodo'
+        type: 'column',
+        events: {
+            drilldown: function(e) {
+                console.log('point', e.point.data);
+                console.log('point.name', e.point.name);
+                console.log('point.info', e.point.info);
+                console.log('point.y', e.point.y)
+                var chart = this;
+                SaleService.getAllSales($ctrl.mindate, $ctrl.maxdate).then((response) => {
+                    sales = response.data.content;
+                    sales.forEach(item => date.push(item.date));
+                    console.log('date', date)
+                    var series = {
+                        name: 'Cars',
+                        data : [
+                            ['toyota', 1],
+                            ['Volkswagen', 2],
+                            ['Opel', 5]
+                        ]
+                    }
+                    chart.addSeriesAsDrilldown(e.point, series);
+                })
+            }
         },
-        subtitle: {
-            text: ''
+        title: {
+            text: 'Vendas durante o periodo'
         },
         xAxis: {
-            categories:[]
-        },
-        yAxis: {
-            title: {
-                text: ''
-            }
+            categories: date
         }
     });
 
@@ -29,24 +45,21 @@ function SumChartBarController(SaleService) {
         SaleService.getAllSales($ctrl.mindate, $ctrl.maxdate).then((response) => {
             sales = response.data.content;
             sales.forEach(item => date.push(item.date));
-            console.log(sales);
-            console.log(date);
-
-            chart.xAxis[0].setCategories(date)
-
+            sales.forEach(item => deals.push(item.deals));
+            sales.forEach(item => visited.push(item.visited));
             chart.addSeries({
                 name: 'Visitas',
-                data: [visited]
+                data: visited
             });
             chart.addSeries({
                 name: 'Vendas',
-                data: [deals]
+                data: deals
             })
         })
     }
 
     $ctrl.$onInit = function() {
-        
+        getAllSales();
     }
 
     $ctrl.$onChanges = function(mindate, maxdate) {

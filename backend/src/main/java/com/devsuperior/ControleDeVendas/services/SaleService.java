@@ -63,8 +63,11 @@ public class SaleService {
     }
     
     @Transactional(readOnly = true)
-	public List<SaleSumTotalByMonthDTO> saleSumTotalByMonth() {
-		return repository.saleSumTotalByMonth();
+	public List<SaleSumTotalByMonthDTO> saleSumTotalByMonth(String minDate, String  maxDate) {
+    	LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
+		LocalDate min = minDate.equals("") ? today.minusDays(365) : LocalDate.parse(minDate);
+		LocalDate max = maxDate.equals("") ? today : LocalDate.parse(maxDate);
+		return repository.saleSumTotalByMonth(min, max);
 	}
     
     @Transactional(readOnly = true)
