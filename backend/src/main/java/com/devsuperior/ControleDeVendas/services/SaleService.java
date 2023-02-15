@@ -21,12 +21,16 @@ import com.devsuperior.ControleDeVendas.dto.SaleSumBySellerDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumByTeamDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumTotalByMonthDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO;
+import com.devsuperior.ControleDeVendas.dto.SellersByTeamDTO;
 import com.devsuperior.ControleDeVendas.entities.Sale;
 import com.devsuperior.ControleDeVendas.entities.SaleStatus;
+import com.devsuperior.ControleDeVendas.entities.Team;
 import com.devsuperior.ControleDeVendas.entities.User;
 import com.devsuperior.ControleDeVendas.repositories.SaleRepository;
+import com.devsuperior.ControleDeVendas.repositories.TeamRepository;
 import com.devsuperior.ControleDeVendas.repositories.UserRepository;
 import com.devsuperior.ControleDeVendas.services.exceptions.DatabaseException;
+import com.devsuperior.ControleDeVendas.services.exceptions.ForbiddenException;
 import com.devsuperior.ControleDeVendas.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -34,6 +38,9 @@ public class SaleService {
 
     @Autowired
     private SaleRepository repository;
+    
+    @Autowired
+    private TeamRepository teamRepository;
     
     @Autowired
     private AuthService authService;
@@ -79,6 +86,29 @@ public class SaleService {
 	public List<SaleSumByTeamDTO> amountGroupedByTeam() {
 		return repository.amountGroupedByTeam();
 	}
+	
+	@Transactional(readOnly = true)
+	public List<SellersByTeamDTO> salesBySeller(Long id) {
+		User user = authService.authenticated();
+		if(user.hasRole("ROLE_ADMIN")) {
+			Team team = teamRepository.getOne(id);
+			return repository.sellersByTeam(team.getId());
+		}
+		else if(user.hasRole("ROLE_MANAGER")) {
+			Team team = teamRepository.getOne(id);
+			if(user.getTeams().contains(team)) {
+				return repository.sellersByTeam(team.getId());
+			}
+			else {
+				throw new ResourceNotFoundException("Id not found " + id);
+			}
+		}
+		else {
+			throw new ForbiddenException("Forbidden Exception");
+		}
+		
+	}
+	
 
 	@Transactional(readOnly = true)
 	public List<SaleSuccessDTO> successGroupedBySeller() {

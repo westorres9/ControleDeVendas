@@ -25,6 +25,7 @@ import com.devsuperior.ControleDeVendas.dto.SaleSumBySellerDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumByTeamDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumTotalByMonthDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO;
+import com.devsuperior.ControleDeVendas.dto.SellersByTeamDTO;
 import com.devsuperior.ControleDeVendas.services.SaleService;
 
 @RestController
@@ -98,6 +99,13 @@ public class SaleResource {
 	public ResponseEntity<List<SaleSumByTeamDTO>> amountGroupedByTeam() {
 		List<SaleSumByTeamDTO> page = service.amountGroupedByTeam();
 		return ResponseEntity.ok().body(page);
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+	@GetMapping(value = "/sum-by-team/{id}")
+	public ResponseEntity<List<SellersByTeamDTO>> salesBySeller(@PathVariable Long id) {
+		List<SellersByTeamDTO> list = service.salesBySeller(id);
+		return ResponseEntity.ok().body(list);
 	}
 	
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")

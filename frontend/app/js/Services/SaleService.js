@@ -77,12 +77,26 @@ app.service('SaleService', function($http) {
         return request; 
     }
 
-    $ctrl.salesSumByTeam = () => {
+    $ctrl.salesSumByTeam = (e) => {
 
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sales/sum-by-team`
+                url: `${BASE_URL}/sales/sum-by-team`,
+                params : {
+                    e
+                }
+            }
+        )
+        return request; 
+    }
+
+    $ctrl.sellersByTeam = (e) => {
+
+        var request = $http(
+            {
+                method: 'get',
+                url: `${BASE_URL}/sales/sum-by-team/${e}`,
             }
         )
         return request; 
@@ -114,7 +128,22 @@ app.service('SaleService', function($http) {
         return request; 
     }
 
-    $ctrl.salesSumTotalByMonth = (mindate, maxdate) => {
+    $ctrl.salesSumTotalByMonth = (e,mindate, maxdate) => {
+
+        var request = $http(
+            {
+                method: 'get',
+                url: `${BASE_URL}/sales/sum-by-month`,
+                params: {
+                    'maxDate': maxdate,
+                    'minDate': mindate,
+                }
+            }
+        )
+        return request; 
+    }
+
+    $ctrl.searchDrilldown = (e,mindate, maxdate) => {
 
         var request = $http(
             {

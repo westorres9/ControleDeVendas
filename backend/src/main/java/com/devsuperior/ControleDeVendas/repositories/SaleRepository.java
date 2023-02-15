@@ -14,6 +14,7 @@ import com.devsuperior.ControleDeVendas.dto.SaleSumBySellerDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumByTeamDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumTotalByMonthDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO;
+import com.devsuperior.ControleDeVendas.dto.SellersByTeamDTO;
 import com.devsuperior.ControleDeVendas.entities.Sale;
 
 
@@ -52,14 +53,24 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 			+ "FROM Sale as obj GROUP BY obj.seller")
 	List<SaleSuccessDTO> successGroupedBySeller();
 
-	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleSumByTeamDTO(u.team, SUM(obj.amount)) "
+	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleSumByTeamDTO( u.team.id, u.team, SUM(obj.amount)) "
 			+ "FROM Sale as obj "
 			+ "INNER JOIN User as u "
 			+ "ON obj.seller.id = u.id "
 			+ "INNER JOIN Team as t "
 			+ "ON u.team.id = t.id "
 			+ "GROUP BY u.team")
-	List<SaleSumByTeamDTO> amountGroupedByTeam(); 
+	List<SaleSumByTeamDTO> amountGroupedByTeam();
+	
+	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SellersByTeamDTO(user.name, SUM(obj.visited),SUM(obj.deals),SUM(obj.amount)) "
+			+ "FROM Sale as obj "
+			+ "INNER JOIN User as user "
+			+ "ON obj.seller.id = user.id "
+			+ "INNER JOIN Team as team "
+			+ "ON user.team.id = team.id "
+			+ "WHERE team.id = :teamId "
+			+ "GROUP BY user.name")
+	List<SellersByTeamDTO> sellersByTeam(Long teamId);
 	
 	
 	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO(SUM(obj.visited), "
@@ -100,6 +111,4 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 				+ "GROUP BY month, year "
 				+ "ORDER BY month, year ")
 	 List<SaleSumTotalByMonthDTO> saleSumTotalByMonth(LocalDate minDate ,LocalDate maxDate);
-	 
-	 
 }
