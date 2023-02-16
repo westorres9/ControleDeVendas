@@ -4,8 +4,6 @@ function SalesSumTotalChartController(SaleService) {
   let deals = [];
   let date = [];
   $ctrl.salesSumTotal = salesSumTotal;
-  //$ctrl.salesSumTotalByMonth = salesSumTotalByMonth;
-
   let chart = Highcharts.chart('sales-sum-total', {
     chart: {
       type: 'bar',
@@ -85,7 +83,7 @@ function SalesSumTotalChartController(SaleService) {
           chart.yAxis[0].remove();
         }
 
-        console.log('sumTotal', sum);
+      console.log('sumTotal', sum);
       chart.setSubtitle({
         text: `Vendas no periodo de ${$ctrl.mindate} a ${$ctrl.maxdate}`
       })
@@ -113,6 +111,7 @@ function SalesSumTotalChartController(SaleService) {
   $ctrl.$onChanges = () => {
     salesSumTotal();
     chart.drillUp();
+    
       
   }
 

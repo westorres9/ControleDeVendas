@@ -4,7 +4,7 @@ app.service('SaleService', function($http) {
 
     const BASE_URL = 'http://localhost:8080'
 
-    $ctrl.getAllSales = (page, size, mindate, maxdate) => {
+    $ctrl.getAllSales = ( page, size, mindate, maxdate) => {
         
         var request = $http(
             {
@@ -14,7 +14,7 @@ app.service('SaleService', function($http) {
                     'maxDate': maxdate,
                     'minDate': mindate,
                     'size': size,
-                    'page': page
+                    'page': page,
                 }
             }
         )

@@ -38,9 +38,8 @@ function SalesBySellerChartController (SaleService) {
                     }
                 },
                 legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle'
+                    layout: 'horizontal',
+                    verticalAlign: 'bottom'
                 },
                 plotOptions: {
                     series: {
@@ -57,15 +56,8 @@ function SalesBySellerChartController (SaleService) {
                     {
                         name: 'Vendas',
                         data: $ctrl.deals
-                    },
-                    {
-                        name: 'Vendas',
-                        data: $ctrl.amount
                     }
-
                 ], 
-
-
             })
         })
     }

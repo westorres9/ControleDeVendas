@@ -1,71 +1,128 @@
 function SumChartBarController(SaleService) {
     var $ctrl = this;
     $ctrl.getAllSales = getAllSales;
-    let sales = [];
-    let date = [];
-    let visited = [];
-    let deals = [];
-
-
+    var sales = [];
+    var visited = [];
+    var deals = [];
+    var date = [];
+    var amount = [];
+    var id = [];
+    var salesdata = [];
 
     let chart = Highcharts.chart('sum-chart-bar', {
-        type: 'column',
-        events: {
-            drilldown: function(e) {
-                console.log('point', e.point.data);
-                console.log('point.name', e.point.name);
-                console.log('point.info', e.point.info);
-                console.log('point.y', e.point.y)
-                var chart = this;
-                SaleService.getAllSales($ctrl.mindate, $ctrl.maxdate).then((response) => {
-                    sales = response.data.content;
-                    sales.forEach(item => date.push(item.date));
-                    console.log('date', date)
-                    var series = {
-                        name: 'Cars',
-                        data : [
-                            ['toyota', 1],
-                            ['Volkswagen', 2],
-                            ['Opel', 5]
-                        ]
-                    }
-                    chart.addSeriesAsDrilldown(e.point, series);
-                })
+        chart: {
+            type: 'column',
+            events: {
+                drilldown: function (e) {
+                    console.log('point', e.point);
+                    console.log('e.point.name', e.point.name);
+                    console.log('e.point.info', e.point.info);
+                    var chart = this;
+                    SaleService.getAllSales(e.point.info, $ctrl.mindate, $ctrl.maxdate).then((response) => {
+                        salesdata = response.data.content;
+                        console.log('salesdata', salesdata);
+
+                        salesdata.forEach(item => date.push(
+                            item.date
+                        ));
+
+
+                        salesdata.forEach(item => amount.push(
+                            item.amount
+                        ));
+
+                        var series = {
+                            name: 'amount',
+                            colorByPoint: true,
+                            data: salesdata
+                        }
+
+                        var categories = date;
+
+                        chart.addSeriesAsDrilldown(e.point, series, categories);
+                    })
+
+                }
             }
         },
         title: {
-            text: 'Vendas durante o periodo'
+            text: 'Total de vendas por periodo'
+        },
+        subtitle: {
+            text: ''
         },
         xAxis: {
-            categories: date
-        }
-    });
+            title: 'Vendas',
+            categories: $ctrl.date,
+            crosshair: true
+        },
+        yAxis: {
+            title: {
+                text: ''
+            }
+        },
+        drilldown: {
+            series: []
+          }
+    })
 
     function getAllSales() {
         SaleService.getAllSales($ctrl.mindate, $ctrl.maxdate).then((response) => {
+            while (chart.series.length > 0) {
+                console.log('removing series');
+                chart.series[0].remove();
+            }
+            while (chart.yAxis.length > 0) {
+                console.log('removing axis');
+                chart.yAxis[0].remove();
+            }
+            sales = [];
+            deals = [];
+            visited = [];
             sales = response.data.content;
-            sales.forEach(item => date.push(item.date));
-            sales.forEach(item => deals.push(item.deals));
-            sales.forEach(item => visited.push(item.visited));
+
+            sales.forEach(item => visited.push(
+                item.visited
+            ))
+            console.log('visited', visited);
+            sales.forEach(item => id.push(
+                item.id
+            ))
+            console.log('id', id);
+            sales.forEach(item => deals.push(
+                item.deals
+            ))
+            console.log('deals', deals);
+
+            chart.setSubtitle({
+                text: `Vendas no periodo de ${$ctrl.mindate} a ${$ctrl.maxdate}`
+            })
+            chart.addAxis(({
+                title: {
+                    text: 'vendas x visitas'
+                }
+            }))
             chart.addSeries({
                 name: 'Visitas',
-                data: visited
-            });
+                data: visited,
+                info: visited,
+                drilldown: true
+            })
             chart.addSeries({
                 name: 'Vendas',
-                data: deals
-            })
+                data: deals,
+                info: deals,
+                drilldown: true
+            });
         })
     }
-
-    $ctrl.$onInit = function() {
-        getAllSales();
+    $ctrl.$onInit = () => {
     }
 
-    $ctrl.$onChanges = function(mindate, maxdate) {
-        getAllSales();
+    $ctrl.$onChanges = (mindate, maxdate, page) => {
+        getAllSales(mindate, maxdate, page);
     }
-   
+
 }
 app.component('sumChartBar', {
     templateUrl: 'components/sum-chart-bar/sum-chart-bar.component.html',
@@ -73,7 +130,5 @@ app.component('sumChartBar', {
     bindings: {
         mindate: '<',
         maxdate: '<',
-        page: '<',
-        size: '<'
     }
 })

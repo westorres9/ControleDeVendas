@@ -13,10 +13,16 @@
         <div class="charts-content">
           <pie-chart-team-seller></pie-chart-team-seller>
         </div>
+        <br>
       </div>
-      <div  class="sales-by-seller-chart">
-        <sum-chart-bar mindate="$ctrl.mindate" maxdate="$ctrl.maxdate" page="$ctrl.page" size="$ctrl.size"></sum-chart-bar>
+      <div  class="sum-chart-bar">
+        <br>
+        <sum-chart-bar mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></sum-chart-bar>
       </div>
+      <div  class="sum-chart-bar">
+        <sales-by-seller-chart mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></sales-by-seller-chart>
+      </div>
+     
       <div class="new-sale-container">
         <a ng-href="#/admin/sales/new"><button class="btn btn-primary">Adicionar Nova Venda</button></a>
       </div>
