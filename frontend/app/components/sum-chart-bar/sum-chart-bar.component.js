@@ -94,8 +94,11 @@ function SumChartBarController(SaleService) {
             ))
             console.log('deals', deals);
 
+            moment.locale('pt-br');
+            var mindateFormated = moment($ctrl.mindate).format('L');
+            var maxdateFormated = moment($ctrl.maxdate).format('L');
             chart.setSubtitle({
-                text: `Vendas no periodo de ${$ctrl.mindate} a ${$ctrl.maxdate}`
+              text: `Vendas no periodo de ${mindateFormated} a ${maxdateFormated}`
             })
             chart.addAxis(({
                 title: {
