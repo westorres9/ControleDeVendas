@@ -31,6 +31,12 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 	@Query(nativeQuery = true, value = "SELECT * FROM tb_sale "
 			+ "INNER JOIN tb_user "
 			+ "ON tb_user.id = tb_sale.seller_id "
+			+ "WHERE tb_sale.seller_id = :id ")
+	List<Sale> findSalesBySeller(Long id);
+	
+	@Query(nativeQuery = true, value = "SELECT * FROM tb_sale "
+			+ "INNER JOIN tb_user "
+			+ "ON tb_user.id = tb_sale.seller_id "
 			+ "INNER JOIN tb_team_manager "
 			+ "ON tb_team_manager.team_id = tb_user.team_id "
 			+ "WHERE tb_team_manager.manager_id = :id "

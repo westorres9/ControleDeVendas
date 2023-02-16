@@ -117,5 +117,12 @@ public class SaleResource {
 		SaleSumTotalDTO total = service.saleSumTotalOfDeals(minDate, maxDate);
 		return ResponseEntity.ok().body(total);
 	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+	@GetMapping(value = "/by-seller/{id}")
+	public ResponseEntity<List<SaleDTO>> saleBySeller(@PathVariable Long id) {
+		List<SaleDTO> list = service.findSalesBySeller(id);
+		return ResponseEntity.ok().body(list);
+	}
 
 }

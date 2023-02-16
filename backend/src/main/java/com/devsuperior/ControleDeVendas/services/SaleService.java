@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -115,7 +116,36 @@ public class SaleService {
 		User user = authService.authenticated();
 		return repository.successGroupedBySeller();
 	}
-
+	
+	
+	
+	@Transactional(readOnly = true)
+	public List<SaleDTO> findSalesBySeller(Long id) {
+		User loggedUser = authService.authenticated();
+		if(loggedUser.hasRole("ROLE_MANAGER")) {
+			User user = userRepository.getOne(id);
+			if(loggedUser.getTeams().contains(user.getTeam())) {
+				List<Sale> list = repository.findSalesBySeller(user.getId());
+				return list.stream().map(x -> new SaleDTO(x)).collect(Collectors.toList());
+			}
+			else {
+				throw new ResourceNotFoundException("Id not found " + id);
+			}
+		}
+		else if(loggedUser.hasRole("ROLE_ADMIN")) {
+			User user = userRepository.getOne(id);
+			List<Sale> list = repository.findSalesBySeller(user.getId());
+			return list.stream().map(x -> new SaleDTO(x)).collect(Collectors.toList());
+		}
+		else {
+			throw new ForbiddenException("Forbidden Exception");
+		}	
+	}
+	
+	
+	
+	
+	
     @Transactional(readOnly = true)
     public Page<SaleDTO> findAllSales(String name,String minDate, String  maxDate, Pageable pageable) {
     	User user = authService.authenticated();
