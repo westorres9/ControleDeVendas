@@ -13,7 +13,7 @@ function config($routeProvider) {
     })
     .when('/admin/sales', {
         template: '<sales></sales>',
-        authenticated: true
+        authenticated: true,
     })
     .when('/admin/sales/new', {
         template: '<new-sale></new-sale>',
@@ -47,11 +47,16 @@ app.run(["$rootScope", "$location", "AuthService", function($rootScope, $locatio
 
         if(current.$$route.authenticated) {
             var token = AuthService.getToken();
-            var authority = AuthService.getAuthority();
+            var auth = AuthService.getAuthority();
+            var authority = auth[0].authority;
+            console.log(authority)
             if(!token) {
                 window.localStorage.clear();
                 AuthService.removeToken();
                 window.location.href = 'index.html#/';
+            }
+            if(!authority) {
+                event.preventDefault(); 
             }
         }
     })

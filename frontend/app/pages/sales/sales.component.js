@@ -23,7 +23,9 @@ function SalesController(SaleService) {
 
   $ctrl.previousPage = () => {
     $ctrl.page = $ctrl.page - 1;
-    if($ctrl.page < 0) return;
+    if($ctrl.page < 0) {
+      $ctrl.page = 0;
+    }
     console.log($ctrl.page);
     $ctrl.getAllSales($ctrl.page, $ctrl.size);
   }
