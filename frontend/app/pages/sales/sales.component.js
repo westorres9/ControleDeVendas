@@ -78,6 +78,17 @@ function SalesController(SaleService) {
     return $ctrl.sale
   }
 
+  $ctrl.loggedUser = '';
+
+    $ctrl.GetLoggedUser = () => {
+        const username = AuthService.getUsername();
+        const authority = AuthService.getAuthority();
+        const role = authority[0].authority;
+        console.log(role)
+        $ctrl.loggedUser = {name: username, authority: role}
+        console.log($ctrl.loggedUser);
+    }
+
   
 }
 

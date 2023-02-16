@@ -89,7 +89,7 @@ function SalesSumTotalChartController(SaleService) {
       })
       chart.addAxis(({
         title: {
-          text: `Taxa de sucesso: ${100 - (((sum.visited - sum.deals) / sum.visited) * 100).toFixed(2)} % <br/><br/> Total de vendas em R$ ${sum.amount}`
+          text: `Taxa de sucesso: ${(100 - (((sum.visited - sum.deals) / sum.visited) * 100)).toFixed(2)} % <br/><br/> Total de vendas em R$ ${sum.amount}`
         }
       }))
       chart.addSeries({

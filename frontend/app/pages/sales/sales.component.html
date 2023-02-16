@@ -10,8 +10,8 @@
         <div class="charts-content">
           <sales-sum-total-chart mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></sales-sum-total-chart>
         </div>
-        <div class="charts-content">
-          <pie-chart-team-seller></pie-chart-team-seller>
+        <div class="charts-content" ng-hide="$ctrl.loggedUser.authority == 'ROLE_SELLER'">
+          <pie-chart-team-seller ></pie-chart-team-seller>
         </div>
         <br>
       </div>

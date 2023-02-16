@@ -1,81 +1,134 @@
 function SalesBySellerChartController (SaleService) {
     var $ctrl = this;
+    $ctrl.getAllSales = getAllSales;
+    var sales = [];
+    var visited = [];
+    var deals = [];
+    var date = [];
+    var amount = [];
+    var id = [];
+    var salesdata = [];
 
-    $ctrl.sales = [];
-    $ctrl.page = [];
-    $ctrl.date = [];
+    let chart = Highcharts.chart('sales-by-seller', {
+        chart: {
+            type: 'line',
+            events: {
+                drilldown: function (e) {
+                    console.log('point', e.point);
+                    console.log('e.point.name', e.point.name);
+                    console.log('e.point.info', e.point.info);
+                    var chart = this;
+                    SaleService.getAllSales(e.point.info, $ctrl.mindate, $ctrl.maxdate).then((response) => {
+                        salesdata = response.data.content;
+                        console.log('salesdata', salesdata);
 
-    $ctrl.salesBySeller = () => {
-        SaleService.getAllSales().then((response) => {
-            $ctrl.page = response.data;
-            console.log($ctrl.page)
-            $ctrl.sales = response.data.content;
-            console.log('sale',response.data.content)
-            $ctrl.visited = []
-            $ctrl.deals = []
-            $ctrl.amount = []
-            $ctrl.sales.forEach(x => $ctrl.date.push(x.date));
-            $ctrl.sales.forEach(x => $ctrl.visited.push(x.visited))
-            $ctrl.sales.forEach(x => $ctrl.deals.push(x.deals))
-            $ctrl.sales.forEach(x => $ctrl.amount.push(x.amount))
-            console.log($ctrl.visited)
-            Highcharts.chart('sales-by-seller', {
-                title: {
-                    text: `Vendas de todos durante o periodo`
-                },
-                subtitle: {
-                    text:`${$ctrl.date[0]} a ${$ctrl.date[19]}`
-                },
-                xAxis: {
-                    title: 'Vendas',
-                    categories: $ctrl.date,
-                    crosshair: true
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: 'Vendas x visitas'
-                    }
-                },
-                legend: {
-                    layout: 'horizontal',
-                    verticalAlign: 'bottom'
-                },
-                plotOptions: {
-                    series: {
-                        label: {
-                            connectorAllowed: false,
+                        salesdata.forEach(item => date.push(
+                            item.date
+                        ));
+
+
+                        salesdata.forEach(item => amount.push(
+                            item.amount
+                        ));
+
+                        var series = {
+                            name: 'amount',
+                            colorByPoint: true,
+                            data: salesdata
                         }
-                    }
-                },
-                series: [
-                    {
-                        name: 'Visitas',
-                        data: $ctrl.visited
-                    },
-                    {
-                        name: 'Vendas',
-                        data: $ctrl.deals
-                    }
-                ], 
+
+                        var categories = date;
+
+                        chart.addSeriesAsDrilldown(e.point, series, categories);
+                    })
+
+                }
+            }
+        },
+        title: {
+            text: 'Total de vendas por periodo'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            title: 'Vendas',
+            categories: $ctrl.date,
+            crosshair: true
+        },
+        yAxis: {
+            title: {
+                text: ''
+            }
+        },
+        drilldown: {
+            series: []
+          }
+    })
+
+    function getAllSales() {
+        SaleService.getAllSales($ctrl.mindate, $ctrl.maxdate).then((response) => {
+            while (chart.series.length > 0) {
+                console.log('removing series');
+                chart.series[0].remove();
+            }
+            while (chart.yAxis.length > 0) {
+                console.log('removing axis');
+                chart.yAxis[0].remove();
+            }
+            sales = [];
+            deals = [];
+            visited = [];
+            sales = response.data.content;
+
+            sales.forEach(item => visited.push(
+                item.visited
+            ))
+            console.log('visited', visited);
+            sales.forEach(item => id.push(
+                item.id
+            ))
+            console.log('id', id);
+            sales.forEach(item => deals.push(
+                item.deals
+            ))
+            console.log('deals', deals);
+
+            chart.setSubtitle({
+                text: `Vendas no periodo de ${$ctrl.mindate} a ${$ctrl.maxdate}`
             })
+            chart.addAxis(({
+                title: {
+                    text: 'vendas x visitas'
+                }
+            }))
+            chart.addSeries({
+                name: 'Visitas',
+                data: visited,
+                info: visited,
+                drilldown: true
+            })
+            chart.addSeries({
+                name: 'Vendas',
+                data: deals,
+                info: deals,
+                drilldown: true
+            });
         })
     }
-
-    
-
     $ctrl.$onInit = () => {
-        $ctrl.salesBySeller();
-        }
+    }
+
+    $ctrl.$onChanges = (mindate, maxdate, page) => {
+        getAllSales(mindate, maxdate, page);
+    }
 
 }
-
 app.component('salesBySellerChart', {
     templateUrl: 'components/sales-by-seller-chart/sales-by-seller-chart.component.html',
     controller: SalesBySellerChartController,
     bindings: {
-        minDate: '=',
-        maxDate: '=',
-        onChanges: '&'
+        mindate: '<',
+        maxdate: '<',
     }
 })
