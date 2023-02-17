@@ -1,5 +1,6 @@
 package com.devsuperior.ControleDeVendas.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.devsuperior.ControleDeVendas.dto.TeamDTO;
 import com.devsuperior.ControleDeVendas.dto.UserDTO;
 import com.devsuperior.ControleDeVendas.dto.UserInsertDTO;
+import com.devsuperior.ControleDeVendas.dto.UserUpdateDTO;
 import com.devsuperior.ControleDeVendas.entities.RoleType;
 import com.devsuperior.ControleDeVendas.entities.Team;
 import com.devsuperior.ControleDeVendas.entities.User;
@@ -68,6 +70,7 @@ public class SellerService {
 	
 	@Transactional
 	public UserDTO insert(UserInsertDTO dto) {
+		User loggedUser = authService.authenticated();
 		User entity = new User();
 		entity.setName(dto.getName());
 		entity.setEmail(dto.getEmail());
@@ -76,14 +79,20 @@ public class SellerService {
 		entity.getRoles().clear();
 		entity.getRoles().add(roleRepository.findByAuthority(RoleType.SELLER));
 		entity = repository.save(entity);
+		List<Team> teams = new ArrayList<>();
+		teams.addAll(loggedUser.getTeams());
+		Team team = teams.get(0);
+		entity.setTeam(team);
 		return new UserDTO(entity);
 	}
 	
 	@Transactional
-	public UserDTO update(Long id, UserDTO dto) {
+	public UserDTO update(Long id, UserUpdateDTO dto) {
 		try {
 			User entity = repository.getOne(id);
 			entity.setName(dto.getName());
+			entity.setImgUrl(dto.getImgUrl());
+			entity.setPassword(passwordEncoder.encode(dto.getPassword()));
 			entity = repository.save(entity);
 			return new UserDTO(entity);
 		}
@@ -98,9 +107,6 @@ public class SellerService {
         }
         catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Id not found " + id);
-        }
-        catch (DataIntegrityViolationException e) {
-            throw new DatabaseException("Integrity violation");
         }
     }
 }

@@ -1,4 +1,4 @@
-function SalesSumTotalChartController(SaleService) {
+function SalesSumTotalChartController(SaleService, $filter) {
   var $ctrl = this;
   let visited = [];
   let deals = [];
@@ -71,7 +71,7 @@ function SalesSumTotalChartController(SaleService) {
     SaleService.salesSumTotal($ctrl.mindate, $ctrl.maxdate).then((response) => {
       sum = response.data;
 
-      setTimeout(function() {
+      setTimeout(function () {
         chart.drillUp();
 
         while (chart.series.length > 0) {
@@ -83,25 +83,28 @@ function SalesSumTotalChartController(SaleService) {
           chart.yAxis[0].remove();
         }
 
-      console.log('sumTotal', sum);
-      chart.setSubtitle({
-        text: `Vendas no periodo de ${$ctrl.mindate} a ${$ctrl.maxdate}`
-      })
-      chart.addAxis(({
-        title: {
-          text: `Taxa de sucesso: ${(100 - (((sum.visited - sum.deals) / sum.visited) * 100)).toFixed(2)} % <br/><br/> Total de vendas em R$ ${sum.amount}`
-        }
-      }))
-      chart.addSeries({
-        name: 'Visitas',
-        data: [{ y: sum.visited, info: 'visited', drilldown: true }]
-      })
-      chart.addSeries({
-        name: 'Vendas',
-        data: [{ y: sum.deals, info: 'deals', drilldown: true }]
-      })
+        console.log('sumTotal', sum);
+        moment.locale('pt-br');
+        var mindateFormated = moment($ctrl.mindate).format('L');
+        var maxdateFormated = moment($ctrl.maxdate).format('L');
+        chart.setSubtitle({
+          text: `Vendas no periodo de ${mindateFormated} a ${maxdateFormated}`
+        })
+        chart.addAxis(({
+          title: {
+            text: `Taxa de sucesso: ${(100 - (((sum.visited - sum.deals) / sum.visited) * 100)).toFixed(2)} % <br/><br/> Total de vendas em R$ ${sum.amount}`
+          }
+        }))
+        chart.addSeries({
+          name: 'Visitas',
+          data: [{ y: sum.visited, info: 'visited', drilldown: true }]
+        })
+        chart.addSeries({
+          name: 'Vendas',
+          data: [{ y: sum.deals, info: 'deals', drilldown: true }]
+        })
       }, 500)
-      
+
     })
   }
 
@@ -111,8 +114,8 @@ function SalesSumTotalChartController(SaleService) {
   $ctrl.$onChanges = () => {
     salesSumTotal();
     chart.drillUp();
-    
-      
+
+
   }
 
 }

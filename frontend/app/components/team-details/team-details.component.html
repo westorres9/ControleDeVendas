@@ -1,17 +1,47 @@
 <div class="admin-container">
     <aside-bar></aside-bar>
     <div class="ds-container">
-        <h2>Team details</h2>
+        <h2>Vendedores da equipe</h2>
         <div class="team-detail-container">
             <img src={{$ctrl.team.imgUrl}} alt="">
-        <h4>{{$ctrl.team.name}}</h4>
-        <ul ng-repeat="seller in $ctrl.team.sellers">
-            <li class="team-details-user-list">
-                <p>{{seller.name}}</p>
-                <img src={{seller.imgUrl}} alt="">
-            </li>
-        </ul>
         </div>
+        <a ng-href='index.html#/admin/teams/{{$ctrl.team.id}}/new-user'><button class="btn btn-primary">Adicionar Novo Vendedor</button></a>
+        <table class="table table-hover">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Id</th>
+              <th scope="col">foto</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Email</th>
+              <th scope="col">#</th>
+              <th scope="col">#</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="seller in $ctrl.team.sellers">
+              <th scope="row"><img class="list-icon" src="/app/assets/img/users.png" alt="" ></th>
+              <td>{{seller.id}}</td>
+              <td><img src={{seller.imgUrl}} alt=""></td>
+              <td>{{seller.name}}</td>
+              <td>{{seller.email}}</td>
+              <td><a ng-href='index.html#/admin/teams/{{$ctrl.team.id}}/user/{{seller.id}}'><img class="list-icon" src="/app/assets/img/edit.svg" alt=""></a></td>
+              <td><img class="list-icon" src="/app/assets/img/delete.svg" alt="" ng-click="$ctrl.selectToDelete(seller.id)"></td>
+              <div class="dialog-background" ng-hide="$ctrl.warningVisible !== true">
+                <div class="dialog-box">
+                  <div class="ds-form-card">
+                    <h2>Tem certeza?</h2>
+                    <div class="form-buttons">
+                      <button class="btn btn-warning" ng-click="$ctrl.closeWarning()">Não</button>
+                      <button class="btn btn-danger" ng-click="$ctrl.deleteSellerById(seller.id)">Sim</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tr>
+          </tbody>
+        </table>
+      </div>   
     </div>
 </div>
 </div>
