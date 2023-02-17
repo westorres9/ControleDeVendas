@@ -1,8 +1,29 @@
 .team-detail-container img {
     width: 300px;
+    margin-bottom: 30px;
 }
 
 .team-details-user-list img {
     height: 200px;
     width: 200px;
+}
+
+.table-hover {
+    margin-top: 20px;
+}
+
+
+th .list-icon {
+    width: 30px;
+    height: 30px;
+}
+
+td .list-icon {
+    width: 30px;
+    height: 30px;
+}
+
+td img {
+    width: 60px;
+    height: 60px;
 }
