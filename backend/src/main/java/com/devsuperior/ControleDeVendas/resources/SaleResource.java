@@ -85,14 +85,6 @@ public class SaleResource {
 		return ResponseEntity.ok().body(page);
 	}
 	
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-	@GetMapping(value = "/sum-by-month")
-	public ResponseEntity<List<SaleSumTotalByMonthDTO>> saleSumTotalByMonth(
-			@RequestParam(value = "minDate", defaultValue = "")String minDate,
-			@RequestParam(value = "maxDate", defaultValue = "")String maxDate) {
-		List<SaleSumTotalByMonthDTO> list = service.saleSumTotalByMonth(minDate, maxDate);
-		return ResponseEntity.ok().body(list);
-	}
 	
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	@GetMapping(value = "/sum-by-team")

@@ -106,15 +106,5 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 				+ "AND obj.date BETWEEN :minDate AND :maxDate")
 	 SaleSumTotalDTO saleSumTotalBySeller(Long id, LocalDate minDate ,LocalDate maxDate);
 	 
-	 @Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleSumTotalByMonthDTO("
-				+ "TO_CHAR(obj.date, 'Month') as month, "
-				+ "EXTRACT(YEAR FROM obj.date) AS year, "
-	 			+ "SUM(obj.visited), "
-				+ "SUM(obj.deals), "
-				+ "SUM(obj.amount)) "
-				+ "FROM Sale as obj "
-				+ "WHERE obj.date BETWEEN :minDate AND :maxDate "
-				+ "GROUP BY month, year "
-				+ "ORDER BY month, year ")
-	 List<SaleSumTotalByMonthDTO> saleSumTotalByMonth(LocalDate minDate ,LocalDate maxDate);
+
 }

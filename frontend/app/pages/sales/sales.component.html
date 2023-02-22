@@ -6,6 +6,9 @@
         <date-picker mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></date-picker>
         <button class="btn btn-primary btn-search" ng-click="$ctrl.onChangeDate()">Buscar</button>
       </md-content>
+      <div class="report" ng-hide="$ctrl.loggedUser.authority !== ROLE_ADMIN">
+        <button ng-click="$ctrl.generateReport()" class="btn btn-success">Gerar Relatório</button>
+      </div>
       <div class="charts-container">
         <div class="charts-content">
           <sales-sum-total-chart mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></sales-sum-total-chart>

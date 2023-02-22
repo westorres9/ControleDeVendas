@@ -116,6 +116,14 @@ public class Sale implements Serializable {
 		Sale other = (Sale) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	@Override
+	public String toString() {
+		return id + "," + date + "," + visited + "," + deals + "," + amount
+				+ "," + status.toString() + "," + seller.getName();
+	}
+	
+	
 	
 	
 	

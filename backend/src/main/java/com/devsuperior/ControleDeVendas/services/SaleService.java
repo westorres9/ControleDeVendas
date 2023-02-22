@@ -71,14 +71,6 @@ public class SaleService {
     }
     
     @Transactional(readOnly = true)
-	public List<SaleSumTotalByMonthDTO> saleSumTotalByMonth(String minDate, String  maxDate) {
-    	LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
-		LocalDate min = minDate.equals("") ? today.minusDays(365) : LocalDate.parse(minDate);
-		LocalDate max = maxDate.equals("") ? today : LocalDate.parse(maxDate);
-		return repository.saleSumTotalByMonth(min, max);
-	}
-    
-    @Transactional(readOnly = true)
 	public List<SaleSumBySellerDTO> amountGroupedBySeller() {
 		return repository.amountGroupedBySeller();
 	}
@@ -142,11 +134,15 @@ public class SaleService {
 		}	
 	}
 	
+	@Transactional(readOnly = true)
+	public List<SaleDTO> findAll() {
+		List<Sale> list = repository.findAll();
+		return list.stream().map(x -> new SaleDTO(x)).collect(Collectors.toList());
+	}
 	
 	
 	
-	
-    @Transactional(readOnly = true)
+	@Transactional(readOnly = true)
     public Page<SaleDTO> findAllSales(String name,String minDate, String  maxDate, Pageable pageable) {
     	User user = authService.authenticated();
     	LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());

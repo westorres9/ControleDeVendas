@@ -534,6 +534,3 @@ INSERT INTO tb_sale(seller_id,visited,deals,amount,date,status) VALUES (5,81,53,
 
 
 
-
-
-

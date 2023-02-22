@@ -1,4 +1,4 @@
-function SalesController(SaleService) {
+function SalesController(SaleService, ReportService) {
   var $ctrl = this;
   $ctrl.AllSales = [];
   $ctrl.isOpen = false;
@@ -89,10 +89,21 @@ function SalesController(SaleService) {
         console.log(role)
         $ctrl.loggedUser = {name: username, authority: role}
         console.log($ctrl.loggedUser);
-    }
-
+  }
   
+  $ctrl.generateReport = () => {
+    ReportService.generateReport().then((response) => {
+      var archive =document.createElement("a");
+                    archive.href ='data:attachment/csv;charset=utf-8,' + encodeURI(response.data);
+                    archive.target ='_blank';
+                    archive.download ='sales.csv';
+                    document.body.appendChild(archive);
+                    archive.click();
+    })
+  }
 }
+
+
 
 app.component("sales", {
   templateUrl: "pages/sales/sales.component.html",
