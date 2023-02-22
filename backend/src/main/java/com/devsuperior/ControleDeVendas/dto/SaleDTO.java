@@ -4,26 +4,33 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import com.devsuperior.ControleDeVendas.entities.Sale;
+import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByPosition;
+import com.opencsv.bean.CsvDate;
 
 public class SaleDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@CsvBindByPosition(position = 0)
+	@CsvBindByName(column = "Id", required = true)
 	private Long id;
-	@CsvBindByPosition(position = 1)
 	private LocalDate date;
-	@CsvBindByPosition(position = 2)
+    
+	@CsvBindByName(column = "Visitas", required = true)
 	private Integer visited;
-	@CsvBindByPosition(position = 3)
+	
+	@CsvBindByName(column = "Vendas", required = true)
 	private Integer deals;
-	@CsvBindByPosition(position = 4)
+	
+	@CsvBindByName(column = "Total", required = true)
 	private Double amount;
-	@CsvBindByPosition(position = 5)
+	
+	@CsvBindByName(column = "Status", required = true)
 	private String status;
+	
+	@CsvBindByName(column = "Id Vendedor", required = true)
 	private Long sellerId;
 	
-	@CsvBindByPosition(position = 6)
+	@CsvBindByName(column = "Nome Vendedor", required = true)
 	private String sellerName;
 	
 	public SaleDTO() {
