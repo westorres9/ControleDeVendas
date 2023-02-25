@@ -2,5 +2,21 @@
     <aside-bar></aside-bar>
     <section class="ds-container">
       <h1>Tela Sellers</h1>
+      <div class="download-container">
+        <h2>Relatorio Vendedores</h2>
+        <div class="col-md-4 upload-box">
+          <button ng-click="$ctrl.generateReportSellers()" class="btn btn-success">Gerar Relatório</button>
+        </div>
+      </div>
+
+      <div class="upload-container">
+        <h2>Importar Vendedores</h2>
+        <div class="col-md-4 upload-box" >
+          <input type="file" name="file" id="file" ng-model="file" ngf-select="$ctrl.selectFile(file)" accept=".csv">
+        </div>
+        <div class="col-md-6 upload-button">
+          <button class="btn btn-secondary" ng-click="$ctrl.uploadFile()">Upload</button>
+        </div>
+      </div>
     </section>
   </div>

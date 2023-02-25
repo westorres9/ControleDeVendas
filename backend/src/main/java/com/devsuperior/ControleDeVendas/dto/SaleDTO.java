@@ -5,7 +5,6 @@ import java.time.LocalDate;
 
 import com.devsuperior.ControleDeVendas.entities.Sale;
 import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvBindByPosition;
 import com.opencsv.bean.CsvDate;
 
 public class SaleDTO implements Serializable {
@@ -13,6 +12,9 @@ public class SaleDTO implements Serializable {
 	
 	@CsvBindByName(column = "Id", required = true)
 	private Long id;
+	
+	@CsvBindByName(column = "Date", required = true)
+	@CsvDate("yyyy-MM-dd")
 	private LocalDate date;
     
 	@CsvBindByName(column = "Visitas", required = true)

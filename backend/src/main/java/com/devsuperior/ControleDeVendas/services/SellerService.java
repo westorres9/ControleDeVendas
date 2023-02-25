@@ -8,22 +8,19 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.devsuperior.ControleDeVendas.dto.TeamDTO;
 import com.devsuperior.ControleDeVendas.dto.UserDTO;
+import com.devsuperior.ControleDeVendas.dto.UserDtoToDownload;
 import com.devsuperior.ControleDeVendas.dto.UserInsertDTO;
 import com.devsuperior.ControleDeVendas.dto.UserUpdateDTO;
 import com.devsuperior.ControleDeVendas.entities.RoleType;
 import com.devsuperior.ControleDeVendas.entities.Team;
 import com.devsuperior.ControleDeVendas.entities.User;
 import com.devsuperior.ControleDeVendas.repositories.RoleRepository;
-import com.devsuperior.ControleDeVendas.repositories.TeamRepository;
 import com.devsuperior.ControleDeVendas.repositories.UserRepository;
-import com.devsuperior.ControleDeVendas.services.exceptions.DatabaseException;
 import com.devsuperior.ControleDeVendas.services.exceptions.ResourceNotFoundException;
 @Service
 public class SellerService {
@@ -38,10 +35,20 @@ public class SellerService {
 	private RoleRepository roleRepository;
 	
 	@Autowired
-	private TeamRepository teamRepository;
-	
-	@Autowired
     private BCryptPasswordEncoder passwordEncoder;
+	
+	@Transactional(readOnly = true)
+	public List<UserDtoToDownload> findAllSellers(){
+		User user = authService.authenticated();
+		if(user.hasRole("ROLE_MANAGER")) {
+			List<User> list = repository.findSellersByTeam(user.getId());
+			return list.stream().map(x -> new UserDtoToDownload(x)).collect(Collectors.toList());
+		}
+		else {
+			List<User> list = repository.findSellers();
+			return list.stream().map(x -> new UserDtoToDownload(x)).collect(Collectors.toList());
+		}
+	}
 	
 	@Transactional(readOnly = true)
 	public List<UserDTO> findAll(String name){
@@ -51,7 +58,7 @@ public class SellerService {
 			return list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
 		}
 		else {
-			List<User> list = repository.findSellers(name);
+			List<User> list = repository.findSellersByName(name);
 			return list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
 		}	
 	}

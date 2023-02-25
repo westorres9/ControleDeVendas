@@ -92,7 +92,7 @@ function SalesController(SaleService, ReportService) {
   }
   
   $ctrl.generateReport = () => {
-    ReportService.generateReport().then((response) => {
+    ReportService.generateReportSales().then((response) => {
       var archive =document.createElement("a");
                     archive.href ='data:attachment/csv;charset=utf-8,' + encodeURI(response.data);
                     archive.target ='_blank';
