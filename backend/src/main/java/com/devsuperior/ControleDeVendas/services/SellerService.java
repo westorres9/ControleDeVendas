@@ -3,6 +3,7 @@ package com.devsuperior.ControleDeVendas.services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
@@ -19,15 +20,20 @@ import com.devsuperior.ControleDeVendas.dto.UserDTO;
 import com.devsuperior.ControleDeVendas.dto.UserDtoToDownload;
 import com.devsuperior.ControleDeVendas.dto.UserInsertDTO;
 import com.devsuperior.ControleDeVendas.dto.UserUpdateDTO;
+import com.devsuperior.ControleDeVendas.entities.PasswordResetToken;
 import com.devsuperior.ControleDeVendas.entities.RoleType;
 import com.devsuperior.ControleDeVendas.entities.Team;
 import com.devsuperior.ControleDeVendas.entities.User;
+import com.devsuperior.ControleDeVendas.repositories.PasswordResetTokenRepository;
 import com.devsuperior.ControleDeVendas.repositories.RoleRepository;
 import com.devsuperior.ControleDeVendas.repositories.UserRepository;
 import com.devsuperior.ControleDeVendas.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class SellerService {
+	
+	@Autowired
+	private PasswordResetTokenRepository passwordResetTokenRepository;
 	
 	@Autowired
 	private JavaMailSender mailSender;
@@ -86,12 +92,14 @@ public class SellerService {
         }       
 	}
 	
-	@Transactional(readOnly = true)
+	@Transactional
 	public UserDTO findByEmail(String email) {
 		User entity = repository.findByEmail(email);
 		if(entity != null) {
+			String token = UUID.randomUUID().toString();
+			createPasswordResetTokenForUser(entity, token);
 			 SimpleMailMessage message = new SimpleMailMessage();
-		        message.setText("Segue link para redefinição de senha http://127.0.0.1:5500/app/index.html#/reset-password");
+		        message.setText("Segue link para redefinição de senha http://127.0.0.1:5500/app/index.html#/reset-password?token="+token);
 		        message.setTo(email);
 		        message.setSubject("Redefinição de Senha");
 		        message.setFrom(mailSendFrom);
@@ -149,5 +157,12 @@ public class SellerService {
             throw new ResourceNotFoundException("Id not found " + id);
         }
     }
+	
+	
+	public void createPasswordResetTokenForUser(User user, String token) {
+		PasswordResetToken myToken = new PasswordResetToken(token, user.getId());
+		passwordResetTokenRepository.save(myToken);
+		
+	}
 
 }

@@ -24,7 +24,6 @@ public class Sale implements Serializable {
 	private Integer visited;
 	private Integer deals;
 	private Double amount;
-
 	private SaleStatus status;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
