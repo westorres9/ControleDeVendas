@@ -1,1 +1,1 @@
-var app = angular.module('app', ['ngRoute','ngMaterial', 'ngMessages', 'ngFileUpload']);
+var app = angular.module('app', ['ngRoute','ngMaterial', 'ngMessages', 'ngFileUpload','toaster', 'ngAnimate']);

@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +25,15 @@ import com.devsuperior.ControleDeVendas.entities.User;
 import com.devsuperior.ControleDeVendas.repositories.RoleRepository;
 import com.devsuperior.ControleDeVendas.repositories.UserRepository;
 import com.devsuperior.ControleDeVendas.services.exceptions.ResourceNotFoundException;
+
 @Service
 public class SellerService {
+	
+	@Autowired
+	private JavaMailSender mailSender;
+	
+	@Value("${spring.mail.username}")
+	private String mailSendFrom;
 	
 	@Autowired
     private AuthService authService;
@@ -63,6 +73,7 @@ public class SellerService {
 		}	
 	}
 	
+	
 	@Transactional(readOnly = true)
 	public UserDTO findById(Long id) {
 		Optional<User> obj = repository.findById(id);
@@ -73,6 +84,28 @@ public class SellerService {
         else {
         	throw new ResourceNotFoundException("Id not found " + id);
         }       
+	}
+	
+	@Transactional(readOnly = true)
+	public UserDTO findByEmail(String email) {
+		User entity = repository.findByEmail(email);
+		if(entity != null) {
+			 SimpleMailMessage message = new SimpleMailMessage();
+		        message.setText("Segue link para redefinição de senha http://127.0.0.1:5500/app/index.html#/reset-password");
+		        message.setTo(email);
+		        message.setSubject("Redefinição de Senha");
+		        message.setFrom(mailSendFrom);
+
+		        try {
+		            mailSender.send(message);
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
+			return new UserDTO(entity);
+		}
+		else {
+			throw new ResourceNotFoundException("Email not found " + email);
+		}
 	}
 	
 	@Transactional
@@ -116,4 +149,5 @@ public class SellerService {
             throw new ResourceNotFoundException("Id not found " + id);
         }
     }
+
 }

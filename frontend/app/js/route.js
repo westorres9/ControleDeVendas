@@ -7,6 +7,12 @@ function config($routeProvider) {
     .when('/home', {
         template: '<login></login>'
     })
+    .when('/recover', {
+        template: '<recover></recover>'
+    })
+    .when('/reset-password', {
+        template: '<recover></recover>'
+    })
     .when('/admin', {
         template: '<admin></admin>',
         authenticated: true

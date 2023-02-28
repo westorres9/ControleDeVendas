@@ -41,7 +41,7 @@ public class SellerResource {
 		UserDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
-
+	
 	@PostMapping
 	public ResponseEntity<UserDTO> insert(@RequestBody UserInsertDTO dto) {
 		UserDTO newDto = service.insert(dto);

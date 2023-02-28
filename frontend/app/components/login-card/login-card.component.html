@@ -1,7 +1,4 @@
 <div class="ds-login-card-container">
-    <div class="ds-login-card-img">
-        <img src="/app/assets/img/login-img.svg" alt="">
-    </div>
     <div class="ds-login-card-form">
         <h1>Login</h1>
         <form ng-submit="$ctrl.Authenticate()" ng-required="$ctrl.user.username && $ctrl.user.password" required>
@@ -20,6 +17,9 @@
                 </div>
             </div>
                 <button class="btn btn-primary text-white ds-btn-primary login-btn" type="submit">Entrar</button>
+            <div>
+                <a ng-href="index.html#/recover">Primeiro Acesso? <span class="recover text-primary">Redefinir Senha</span></a>
+            </div>
         </form>
     </div>
 </div>
