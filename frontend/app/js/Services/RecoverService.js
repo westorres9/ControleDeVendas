@@ -15,4 +15,15 @@ app.service('RecoverService', function($http) {
         )
         return request; 
     }
+
+    $ctrl.validToken = (token) => {
+        var request = $http(
+            
+            {
+                method: 'get',
+                url: `${BASE_URL}/recover/token/${token}`
+            }
+        )
+        return request; 
+    }
 });

@@ -12,11 +12,19 @@ import com.devsuperior.ControleDeVendas.services.SellerService;
 @RestController
 @RequestMapping(value = "/recover")
 public class RecoverResource {
+	
 	@Autowired
 	private SellerService service;
+	
 	@GetMapping(value = "/{email}")
 	public ResponseEntity<UserDTO> findByEmail(@PathVariable String email) {
 		UserDTO dto = service.findByEmail(email);
+		return ResponseEntity.ok().body(dto);
+	}
+	
+	@GetMapping(value = "/token/{token}")
+	public ResponseEntity<UserDTO> ValidToken(@PathVariable String token) {
+		UserDTO dto = service.validToken(token);
 		return ResponseEntity.ok().body(dto);
 	}
 }

@@ -10,8 +10,11 @@ function config($routeProvider) {
     .when('/recover', {
         template: '<recover></recover>'
     })
-    .when('/reset-password', {
-        template: '<recover></recover>'
+    .when('/valid-token', {
+        template: '<valid-token></valid-token>'
+    })
+    .when('/:id/reset-password', {
+        template: '<reset-password user="user"></reset-password>'
     })
     .when('/admin', {
         template: '<admin></admin>',

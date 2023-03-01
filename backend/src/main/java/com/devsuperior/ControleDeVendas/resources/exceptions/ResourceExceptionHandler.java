@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.devsuperior.ControleDeVendas.services.exceptions.DatabaseException;
 import com.devsuperior.ControleDeVendas.services.exceptions.ForbiddenException;
+import com.devsuperior.ControleDeVendas.services.exceptions.InvalidTokenException;
 import com.devsuperior.ControleDeVendas.services.exceptions.ResourceNotFoundException;
 import com.devsuperior.ControleDeVendas.services.exceptions.UnauthorizedException;
 
@@ -57,6 +58,18 @@ public class ResourceExceptionHandler {
             err.addError(f.getField(), f.getDefaultMessage());
         }
 
+        return ResponseEntity.status(status).body(err);
+    }
+    
+    @ExceptionHandler(InvalidTokenException.class)
+    public ResponseEntity<StandardError> invalidToken(InvalidTokenException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        StandardError err = new StandardError();
+        err.setTimestamp(Instant.now());
+        err.setStatus(status.value());
+        err.setError("Resource Not Found");
+        err.setMessage(e.getMessage());
+        err.setPath(request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
 

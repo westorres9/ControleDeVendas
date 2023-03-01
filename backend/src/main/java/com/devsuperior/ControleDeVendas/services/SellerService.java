@@ -1,6 +1,7 @@
 package com.devsuperior.ControleDeVendas.services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -27,6 +28,7 @@ import com.devsuperior.ControleDeVendas.entities.User;
 import com.devsuperior.ControleDeVendas.repositories.PasswordResetTokenRepository;
 import com.devsuperior.ControleDeVendas.repositories.RoleRepository;
 import com.devsuperior.ControleDeVendas.repositories.UserRepository;
+import com.devsuperior.ControleDeVendas.services.exceptions.InvalidTokenException;
 import com.devsuperior.ControleDeVendas.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -99,7 +101,7 @@ public class SellerService {
 			String token = UUID.randomUUID().toString();
 			createPasswordResetTokenForUser(entity, token);
 			 SimpleMailMessage message = new SimpleMailMessage();
-		        message.setText("Segue link para redefinição de senha http://127.0.0.1:5500/app/index.html#/reset-password?token="+token);
+		        message.setText("Segue link para redefinição de senha http://127.0.0.1:5500/app/index.html#/valid-token?token="+token);
 		        message.setTo(email);
 		        message.setSubject("Redefinição de Senha");
 		        message.setFrom(mailSendFrom);
@@ -158,11 +160,36 @@ public class SellerService {
         }
     }
 	
-	
 	public void createPasswordResetTokenForUser(User user, String token) {
 		PasswordResetToken myToken = new PasswordResetToken(token, user.getId());
 		passwordResetTokenRepository.save(myToken);
 		
+	}
+
+	@Transactional
+	public UserDTO validToken(String token) {
+		
+		final PasswordResetToken passToken = passwordResetTokenRepository.findByToken(token);
+		
+		if (!isTokenFound(passToken)) {
+			throw new InvalidTokenException("token not found");
+		}
+		else if (isTokenExpired(passToken) == true) {
+			throw new InvalidTokenException("token expired");
+		}
+		else {
+			User user = repository.getOne(passToken.getUserId());
+			return new UserDTO(user);
+		}
+	}
+	
+	private boolean isTokenFound(PasswordResetToken passToken) {
+		return passToken != null;
+	}
+	
+	private boolean isTokenExpired(PasswordResetToken passToken) {
+		final Calendar cal = Calendar.getInstance();
+		return passToken.getExpiryDate().before(cal.getTime());
 	}
 
 }
