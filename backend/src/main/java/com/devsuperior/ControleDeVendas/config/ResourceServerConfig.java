@@ -50,7 +50,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         }
 
         http.authorizeRequests().antMatchers(PUBLIC).permitAll()
-                .antMatchers(SELLER).hasAnyRole("SELLER", "ADMIN", "MANAGER")
+                .antMatchers(SELLER).hasAnyRole("SELLER","CLIENT", "ADMIN", "MANAGER")
                 .antMatchers(MANAGER_OR_ADMIN).hasAnyRole("ADMIN", "MANAGER")
                 .antMatchers(ADMIN).hasRole("ADMIN")
                 .anyRequest()

@@ -29,7 +29,7 @@ import com.opencsv.exceptions.CsvException;
 public class ReportController {
 	
 	@Autowired
-	private SaleService service;
+	private SaleService saleService;
 	
 	@Autowired
 	private SellerService sellerService;
@@ -45,7 +45,7 @@ public class ReportController {
 		StatefulBeanToCsv<SaleDTO> writer = new StatefulBeanToCsvBuilder<SaleDTO>(response.getWriter())
 				.withQuotechar(CSVWriter.NO_QUOTE_CHARACTER).withSeparator(CSVWriter.DEFAULT_SEPARATOR)
 				.withOrderedResults(false).build();
-		writer.write(service.findAll());
+		writer.write(saleService.findAllToExport());
 	}
 	
 	@GetMapping("/download/sellers")

@@ -9,11 +9,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.devsuperior.ControleDeVendas.dto.SaleSuccessDTO;
-import com.devsuperior.ControleDeVendas.dto.SaleSumBySellerDTO;
-import com.devsuperior.ControleDeVendas.dto.SaleSumByTeamDTO;
-import com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO;
-import com.devsuperior.ControleDeVendas.dto.SellersByTeamDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleTaxSuccessDTO;
+import com.devsuperior.ControleDeVendas.dto.SumBySellerDTO;
+import com.devsuperior.ControleDeVendas.dto.SumByTeamDTO;
 import com.devsuperior.ControleDeVendas.entities.Sale;
 
 
@@ -50,60 +48,29 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 			+ "AND tb_sale.date BETWEEN :minDate AND :maxDate order by tb_sale.date ASC")
 	Page<Sale> findAll(String name, LocalDate minDate,LocalDate maxDate,Pageable pageable);
 	
-	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleSumBySellerDTO(obj.seller, SUM(obj.amount)) "
+	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleTaxSuccessDTO(obj.seller, COUNT(obj), SUM(obj.calls)) "
 			+ "FROM Sale as obj GROUP BY obj.seller")
-	List<SaleSumBySellerDTO> amountGroupedBySeller();
-
-	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleSuccessDTO(obj.seller, SUM(obj.visited), SUM(obj.deals)) "
-			+ "FROM Sale as obj GROUP BY obj.seller")
-	List<SaleSuccessDTO> successGroupedBySeller();
-
-	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleSumByTeamDTO( u.team.id, u.team, SUM(obj.amount)) "
-			+ "FROM Sale as obj "
-			+ "INNER JOIN User as u "
-			+ "ON obj.seller.id = u.id "
-			+ "INNER JOIN Team as t "
-			+ "ON u.team.id = t.id "
-			+ "GROUP BY u.team")
-	List<SaleSumByTeamDTO> amountGroupedByTeam();
+	List<SaleTaxSuccessDTO> taxSuccessBySeller();
 	
-	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SellersByTeamDTO(user.name, SUM(obj.visited),SUM(obj.deals),SUM(obj.amount)) "
+	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SumBySellerDTO( "
+			+ "obj.seller, SUM(saleItems.price * saleItems.quantity)) "
 			+ "FROM Sale as obj "
-			+ "INNER JOIN User as user "
-			+ "ON obj.seller.id = user.id "
-			+ "INNER JOIN Team as team "
+			+ "JOIN obj.items as saleItems "
+			+ "WHERE saleItems.id.sale.id = obj.id "
+			+ "GROUP BY obj.seller")
+	List<SumBySellerDTO> sumBySeller();
+	
+	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SumByTeamDTO( "
+			+ "team.id, user.team, SUM(saleItems.price * saleItems.quantity)) "
+			+ "FROM Sale as obj "
+			+ "JOIN obj.items as saleItems "
+			+ "ON saleItems.id.sale.id = obj.id "
+			+ "JOIN User as user "
+			+ "ON user.id = obj.seller.id "
+			+ "JOIN Team as team "
 			+ "ON user.team.id = team.id "
-			+ "WHERE team.id = :teamId "
-			+ "GROUP BY user.name")
-	List<SellersByTeamDTO> sellersByTeam(Long teamId);
+			+ "GROUP BY team.id, user.team.id ")
+	List<SumByTeamDTO> sumByTeam();
 	
 	
-	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO(SUM(obj.visited), "
-			+ "SUM(obj.deals), "
-			+ "SUM(obj.amount)) "
-			+ "FROM Sale as obj "
-			+ "WHERE obj.date BETWEEN :minDate AND :maxDate")
-	SaleSumTotalDTO saleSumTotalOfDeals(LocalDate minDate ,LocalDate maxDate);
-	
-	 @Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO(SUM(obj.visited), "
-	            + "SUM(obj.deals), "
-	            + "SUM(obj.amount)) "
-	            + "FROM Sale as obj " +
-	            " JOIN obj.seller as seller " +
-	            " JOIN seller.team as sellerTeam " +
-	            " JOIN sellerTeam.managers as sellerManagers "
-	            + "WHERE sellerManagers.id = :id "
-				+ "AND obj.date BETWEEN :minDate AND :maxDate")
-	 SaleSumTotalDTO saleSumTotalByManager(Long id, LocalDate minDate ,LocalDate maxDate);
-	 
-	 
-	 @Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO(SUM(obj.visited), "
-				+ "SUM(obj.deals), "
-				+ "SUM(obj.amount)) "
-				+ "FROM Sale as obj "
-				+ "WHERE obj.seller.id = :id "
-				+ "AND obj.date BETWEEN :minDate AND :maxDate")
-	 SaleSumTotalDTO saleSumTotalBySeller(Long id, LocalDate minDate ,LocalDate maxDate);
-	 
-
 }
