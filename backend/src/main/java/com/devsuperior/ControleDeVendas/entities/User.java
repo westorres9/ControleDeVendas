@@ -41,7 +41,10 @@ public class User implements Serializable, UserDetails {
 	private String imgUrl;
 	
 	@OneToMany(mappedBy = "seller")
-	private List<Sale> sales = new ArrayList<>();
+	private List<Sale> saleSeller = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "client")
+	private List<Sale> saleClient = new ArrayList<>();
 	
 	@ManyToMany(mappedBy = "managers")
 	private List<Team> teams = new ArrayList<>();
@@ -120,8 +123,12 @@ public class User implements Serializable, UserDetails {
 		return roles;
 	}
 	
-	public List<Sale> getSales() {
-		return sales;
+	public List<Sale> getSaleSeller() {
+		return saleSeller;
+	}
+
+	public List<Sale> getSaleClient() {
+		return saleClient;
 	}
 
 	public List<Team> getTeams() {

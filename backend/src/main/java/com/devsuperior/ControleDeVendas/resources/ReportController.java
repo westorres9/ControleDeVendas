@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.devsuperior.ControleDeVendas.dto.SaleDTO;
 import com.devsuperior.ControleDeVendas.dto.UserDtoToDownload;
-import com.devsuperior.ControleDeVendas.services.SaleService;
 import com.devsuperior.ControleDeVendas.services.SellerService;
 import com.devsuperior.ControleDeVendas.services.UploadService;
 import com.opencsv.CSVWriter;
@@ -29,15 +28,12 @@ import com.opencsv.exceptions.CsvException;
 public class ReportController {
 	
 	@Autowired
-	private SaleService service;
-	
-	@Autowired
 	private SellerService sellerService;
 	
 	@Autowired
 	private UploadService uploadService;
 
-	@GetMapping("/download/sales")
+	/*@GetMapping("/download/sales")
 	public void exportSalesCSV(HttpServletResponse response) throws Exception {
 		String filename = "sales.csv";
 		response.setContentType("text/csv");
@@ -46,7 +42,7 @@ public class ReportController {
 				.withQuotechar(CSVWriter.NO_QUOTE_CHARACTER).withSeparator(CSVWriter.DEFAULT_SEPARATOR)
 				.withOrderedResults(false).build();
 		writer.write(service.findAll());
-	}
+	}*/
 	
 	@GetMapping("/download/sellers")
 	public void exportSellerCSV(HttpServletResponse response) throws Exception {

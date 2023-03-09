@@ -1,11 +1,14 @@
 package com.devsuperior.ControleDeVendas.dto;
-
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.devsuperior.ControleDeVendas.entities.Sale;
+import com.devsuperior.ControleDeVendas.entities.SaleStatus;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
+import com.opencsv.bean.CsvIgnore;
 
 public class SaleDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -13,53 +16,51 @@ public class SaleDTO implements Serializable {
 	@CsvBindByName(column = "Id", required = true)
 	private Long id;
 	
-	@CsvBindByName(column = "Date", required = true)
+	@CsvBindByName(column = "Data", required = true)
 	@CsvDate("yyyy-MM-dd")
 	private LocalDate date;
-    
-	@CsvBindByName(column = "Visitas", required = true)
-	private Integer visited;
-	
-	@CsvBindByName(column = "Vendas", required = true)
-	private Integer deals;
-	
-	@CsvBindByName(column = "Total", required = true)
-	private Double amount;
 	
 	@CsvBindByName(column = "Status", required = true)
-	private String status;
+	private SaleStatus status;
 	
-	@CsvBindByName(column = "Id Vendedor", required = true)
-	private Long sellerId;
+	@CsvBindByName(column = "Chamadas", required = true)
+	private Integer calls;
 	
-	@CsvBindByName(column = "Nome Vendedor", required = true)
-	private String sellerName;
+	@CsvBindByName(column = "Id cliente", required = true)
+	private ClientDTO client;
+	
+	@CsvBindByName(column = "Total", required = true)
+	private Double total;
+	
+	@CsvIgnore
+	private PaymentDTO payment;
+	
+	@CsvIgnore
+	private List<SaleItemDTO> items = new ArrayList<>();
 	
 	public SaleDTO() {
 	}
 
-	public SaleDTO(Long id, LocalDate date, Integer visited, Integer deals, Double amount,String status, Long sellerId, String sellerName) {
+	public SaleDTO(Long id, LocalDate date, SaleStatus status,Integer calls, ClientDTO client, PaymentDTO payment ,Double total) {
 		this.id = id;
 		this.date = date;
-		this.visited = visited;
-		this.deals = deals;
-		this.amount = amount;
 		this.status = status;
-		this.sellerId = sellerId;
-		this.sellerName = sellerName;
+		this.calls = calls;
+		this.client = client;
+		this.payment = payment;
+		this.total = total;
 	}
-	
+
 	public SaleDTO(Sale entity) {
 		this.id = entity.getId();
 		this.date = entity.getDate();
-		this.visited = entity.getVisited();
-		this.deals = entity.getDeals();
-		this.amount = entity.getAmount();
-		this.status = entity.getStatus().toString();
-		this.sellerId = entity.getSeller().getId();
-		this.sellerName = entity.getSeller().getName();
+		this.status = entity.getStatus();
+		this.calls = entity.getCalls();
+		this.client = new ClientDTO(entity.getClient());
+		this.payment = (entity.getPayment() == null) ? null : new PaymentDTO(entity.getPayment());
+		this.total = entity.getTotal();
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -76,51 +77,56 @@ public class SaleDTO implements Serializable {
 		this.date = date;
 	}
 
-	public Integer getVisited() {
-		return visited;
-	}
-
-	public void setVisited(Integer visited) {
-		this.visited = visited;
-	}
-
-	public Integer getDeals() {
-		return deals;
-	}
-
-	public void setDeals(Integer deals) {
-		this.deals = deals;
-	}
-
-	public Double getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Double amount) {
-		this.amount = amount;
-	}
-
-	public String getStatus() {
+	public SaleStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(SaleStatus status) {
 		this.status = status;
 	}
-
-	public Long getSellerId() {
-		return sellerId;
+	
+	public Integer getCalls() {
+		return calls;
 	}
 
-	public void setSellerId(Long sellerId) {
-		this.sellerId = sellerId;
+	public void setCalls(Integer calls) {
+		this.calls = calls;
 	}
 
-	public String getSellerName() {
-		return sellerName;
+	public ClientDTO getClient() {
+		return client;
 	}
 
-	public void setSellerName(String sellerName) {
-		this.sellerName = sellerName;
+	public void setClient(ClientDTO client) {
+		this.client = client;
 	}
+
+	public PaymentDTO getPayment() {
+		return payment;
+	}
+
+	public void setPayment(PaymentDTO payment) {
+		this.payment = payment;
+	}
+
+	public List<SaleItemDTO> getItems() {
+		return items;
+	}
+	
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
+	@Override
+	public String toString() {
+		return "id=" + id + ", date=" + date + ", status=" + status + ", calls=" + calls + ", client=" + client
+				+ ", payment=" + payment + ", items=" + items;
+	}
+	
+	
+
 }

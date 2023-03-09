@@ -2,15 +2,21 @@ package com.devsuperior.ControleDeVendas.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name = "tb_sale")
@@ -20,27 +26,37 @@ public class Sale implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private LocalDate date;
-	private Integer visited;
-	private Integer deals;
-	private Double amount;
-	private SaleStatus status;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "seller_id")
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+	private LocalDate date;
+	private SaleStatus status;
+	private Integer calls;
+	
+	@OneToMany(mappedBy = "id.sale")
+	private Set<SaleItem> items = new HashSet<>();
+	
+	@ManyToOne
+    @JoinColumn(name = "seller_id")
 	private User seller;
 	
+	@ManyToOne
+    @JoinColumn(name = "client_id")
+    private User client;
+
+    @OneToOne(mappedBy = "sale", cascade = CascadeType.ALL)
+    private Payment payment;
+
 	public Sale() {
 	}
 
-	public Sale(Long id, LocalDate date, Integer visited, Integer deals, Double amount,SaleStatus status, User seller) {
+	public Sale(Long id, LocalDate date, SaleStatus status,Integer calls, User seller, User client, Payment payment) {
 		this.id = id;
 		this.date = date;
-		this.visited = visited;
-		this.deals = deals;
-		this.amount = amount;
 		this.status = status;
+		this.calls = calls;
 		this.seller = seller;
+		this.client = client;
+		this.payment = payment;
 	}
 
 	public Long getId() {
@@ -59,32 +75,16 @@ public class Sale implements Serializable {
 		this.date = date;
 	}
 
-	public Integer getVisited() {
-		return visited;
-	}
-
-	public void setVisited(Integer visited) {
-		this.visited = visited;
-	}
-
-	public Integer getDeals() {
-		return deals;
-	}
-
-	public void setDeals(Integer deals) {
-		this.deals = deals;
-	}
-
-	public Double getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Double amount) {
-		this.amount = amount;
-	}
-
 	public SaleStatus getStatus() {
 		return status;
+	}
+	
+	public Integer getCalls() {
+		return calls;
+	}
+
+	public void setCalls(Integer calls) {
+		this.calls = calls;
 	}
 
 	public void setStatus(SaleStatus status) {
@@ -98,6 +98,38 @@ public class Sale implements Serializable {
 	public void setSeller(User seller) {
 		this.seller = seller;
 	}
+
+	public User getClient() {
+		return client;
+	}
+
+	public void setClient(User client) {
+		this.client = client;
+	}
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+
+	public Set<SaleItem> getItems() {
+		return items;
+	}
+	
+	public Double getTotal() {
+        double total = 0;
+        for (SaleItem item : items)  {
+            total += (item.getPrice() * item.getQuantity());
+        }
+        return total;
+    }
+	
+	 public List<Product> getProducts() {
+	        return items.stream().map(x -> x.getProduct()).toList();
+	  }
 
 	@Override
 	public int hashCode() {
@@ -115,18 +147,6 @@ public class Sale implements Serializable {
 		Sale other = (Sale) obj;
 		return Objects.equals(id, other.id);
 	}
-
-	@Override
-	public String toString() {
-		return id + "," + date + "," + visited + "," + deals + "," + amount
-				+ "," + status.toString() + "," + seller.getName();
-	}
-	
-	
-	
-	
-	
-	
 	
 	
 }
