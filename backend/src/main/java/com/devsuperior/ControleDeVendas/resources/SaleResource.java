@@ -22,6 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.devsuperior.ControleDeVendas.dto.SaleDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleTaxSuccessDTO;
 import com.devsuperior.ControleDeVendas.dto.SumBySellerDTO;
+import com.devsuperior.ControleDeVendas.dto.SumByTeamDTO;
 import com.devsuperior.ControleDeVendas.services.SaleService;
 
 @RestController
@@ -82,6 +83,13 @@ public class SaleResource {
 	@GetMapping(value = "/sum-by-seller")
 	public ResponseEntity<List<SumBySellerDTO>> sumBySeller() {
 		List<SumBySellerDTO> list = service.sumBySeller();
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+	@GetMapping(value = "/sum-by-team")
+	public ResponseEntity<List<SumByTeamDTO>> sumByTeam() {
+		List<SumByTeamDTO> list = service.sumByTeam();
 		return ResponseEntity.ok().body(list);
 	}
 }

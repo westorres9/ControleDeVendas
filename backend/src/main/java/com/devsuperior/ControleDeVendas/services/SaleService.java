@@ -20,6 +20,7 @@ import com.devsuperior.ControleDeVendas.dto.SaleDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleItemDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleTaxSuccessDTO;
 import com.devsuperior.ControleDeVendas.dto.SumBySellerDTO;
+import com.devsuperior.ControleDeVendas.dto.SumByTeamDTO;
 import com.devsuperior.ControleDeVendas.entities.Payment;
 import com.devsuperior.ControleDeVendas.entities.Sale;
 import com.devsuperior.ControleDeVendas.entities.SaleItem;
@@ -198,5 +199,11 @@ public class SaleService {
     public List<SumBySellerDTO> sumBySeller() {
     	User user = authService.authenticated();
     	return saleRepository.sumBySeller();
+    }
+    
+    @Transactional(readOnly = true)
+    public List<SumByTeamDTO> sumByTeam() {
+    	User user = authService.authenticated();
+    	return saleRepository.sumByTeam();
     }
 }

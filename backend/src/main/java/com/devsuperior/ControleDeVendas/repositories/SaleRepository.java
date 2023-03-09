@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.devsuperior.ControleDeVendas.dto.SaleTaxSuccessDTO;
 import com.devsuperior.ControleDeVendas.dto.SumBySellerDTO;
+import com.devsuperior.ControleDeVendas.dto.SumByTeamDTO;
 import com.devsuperior.ControleDeVendas.entities.Sale;
 
 
@@ -51,10 +52,25 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 			+ "FROM Sale as obj GROUP BY obj.seller")
 	List<SaleTaxSuccessDTO> taxSuccessBySeller();
 	
-	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SumBySellerDTO(obj.seller, SUM(saleItems.price * saleItems.quantity)) "
+	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SumBySellerDTO( "
+			+ "obj.seller, SUM(saleItems.price * saleItems.quantity)) "
 			+ "FROM Sale as obj "
 			+ "JOIN obj.items as saleItems "
 			+ "WHERE saleItems.id.sale.id = obj.id "
 			+ "GROUP BY obj.seller")
 	List<SumBySellerDTO> sumBySeller();
+	
+	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SumByTeamDTO( "
+			+ "team.id, user.team, SUM(saleItems.price * saleItems.quantity)) "
+			+ "FROM Sale as obj "
+			+ "JOIN obj.items as saleItems "
+			+ "ON saleItems.id.sale.id = obj.id "
+			+ "JOIN User as user "
+			+ "ON user.id = obj.seller.id "
+			+ "JOIN Team as team "
+			+ "ON user.team.id = team.id "
+			+ "GROUP BY team.id, user.team.id ")
+	List<SumByTeamDTO> sumByTeam();
+	
+	
 }
