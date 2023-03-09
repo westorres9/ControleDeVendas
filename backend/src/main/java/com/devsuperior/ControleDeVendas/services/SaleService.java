@@ -3,12 +3,12 @@ package com.devsuperior.ControleDeVendas.services;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -18,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.ControleDeVendas.dto.SaleDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleItemDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleTaxSuccessDTO;
+import com.devsuperior.ControleDeVendas.dto.SumBySellerDTO;
 import com.devsuperior.ControleDeVendas.entities.Payment;
 import com.devsuperior.ControleDeVendas.entities.Sale;
 import com.devsuperior.ControleDeVendas.entities.SaleItem;
@@ -67,8 +69,14 @@ public class SaleService {
     		Page<Sale> page = saleRepository.findByManager(user.getId(),name, min, max,pageable);
     		return page.map(x -> new SaleDTO(x));
     	}
-        Page<Sale> page = saleRepository.findAll(name, min, max,pageable);
-        return page.map(x -> new SaleDTO(x));
+    	else if(user.hasRole("ROLE_ADMIN")) {
+    		Page<Sale> page = saleRepository.findAll(name, min, max,pageable);
+            return page.map(x -> new SaleDTO(x));
+    	}
+    	else {
+    		throw new UnauthorizedException("access denied");
+    	}
+        
     }
 
     @Transactional(readOnly = true)
@@ -178,5 +186,17 @@ public class SaleService {
         catch (DataIntegrityViolationException e) {
             throw new DatabaseException("Integrity violation");
         }
+    }
+    
+    @Transactional(readOnly = true)
+    public List<SaleTaxSuccessDTO> taxSuccessGroupedBySeller() {
+    	User user = authService.authenticated();
+    	return saleRepository.taxSuccessBySeller();
+    }
+    
+    @Transactional(readOnly = true)
+    public List<SumBySellerDTO> sumBySeller() {
+    	User user = authService.authenticated();
+    	return saleRepository.sumBySeller();
     }
 }

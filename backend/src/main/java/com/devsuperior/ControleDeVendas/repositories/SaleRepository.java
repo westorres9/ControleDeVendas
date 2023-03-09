@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.devsuperior.ControleDeVendas.dto.SaleTaxSuccessDTO;
+import com.devsuperior.ControleDeVendas.dto.SumBySellerDTO;
 import com.devsuperior.ControleDeVendas.entities.Sale;
 
 
@@ -45,4 +47,14 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 			+ "AND tb_sale.date BETWEEN :minDate AND :maxDate order by tb_sale.date ASC")
 	Page<Sale> findAll(String name, LocalDate minDate,LocalDate maxDate,Pageable pageable);
 	
+	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleTaxSuccessDTO(obj.seller, COUNT(obj), SUM(obj.calls)) "
+			+ "FROM Sale as obj GROUP BY obj.seller")
+	List<SaleTaxSuccessDTO> taxSuccessBySeller();
+	
+	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SumBySellerDTO(obj.seller, SUM(saleItems.price * saleItems.quantity)) "
+			+ "FROM Sale as obj "
+			+ "JOIN obj.items as saleItems "
+			+ "WHERE saleItems.id.sale.id = obj.id "
+			+ "GROUP BY obj.seller")
+	List<SumBySellerDTO> sumBySeller();
 }

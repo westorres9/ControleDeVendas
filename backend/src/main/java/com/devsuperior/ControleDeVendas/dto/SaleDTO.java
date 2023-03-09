@@ -31,6 +31,9 @@ public class SaleDTO implements Serializable {
 	@CsvBindByName(column = "Id cliente", required = true)
 	private ClientDTO client;
 	
+	@CsvBindByName(column = "Id vendedor", required = true)
+	private SellerDTO seller;
+	
 	@CsvBindByName(column = "Total", required = true)
 	private Double total;
 	
@@ -43,12 +46,13 @@ public class SaleDTO implements Serializable {
 	public SaleDTO() {
 	}
 
-	public SaleDTO(Long id, LocalDate date, SaleStatus status,Integer calls, ClientDTO client, PaymentDTO payment ,Double total) {
+	public SaleDTO(Long id, LocalDate date, SaleStatus status,Integer calls, ClientDTO client,SellerDTO seller, PaymentDTO payment ,Double total) {
 		this.id = id;
 		this.date = date;
 		this.status = status;
 		this.calls = calls;
 		this.client = client;
+		this.seller = seller;
 		this.payment = payment;
 		this.total = total;
 	}
@@ -59,6 +63,7 @@ public class SaleDTO implements Serializable {
 		this.status = entity.getStatus();
 		this.calls = entity.getCalls();
 		this.client = new ClientDTO(entity.getClient());
+		this.seller = new SellerDTO(entity.getSeller());
 		this.payment = (entity.getPayment() == null) ? null : new PaymentDTO(entity.getPayment());
 		this.total = entity.getTotal();
 	}
@@ -106,6 +111,14 @@ public class SaleDTO implements Serializable {
 
 	public void setClient(ClientDTO client) {
 		this.client = client;
+	}
+
+	public SellerDTO getSeller() {
+		return seller;
+	}
+
+	public void setSeller(SellerDTO seller) {
+		this.seller = seller;
 	}
 
 	public PaymentDTO getPayment() {

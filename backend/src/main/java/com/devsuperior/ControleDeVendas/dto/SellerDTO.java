@@ -4,21 +4,21 @@ import java.io.Serializable;
 
 import com.devsuperior.ControleDeVendas.entities.User;
 
-public class ClientDTO implements Serializable{
+public class SellerDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
     private String name;
 
-    public ClientDTO(){
+    public SellerDTO(){
     }
 
-    public ClientDTO(Long id, String name) {
+    public SellerDTO(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public ClientDTO(User entity) {
+    public SellerDTO(User entity) {
         this.id = entity.getId();
         this.name = entity.getName();
     }
@@ -43,6 +43,4 @@ public class ClientDTO implements Serializable{
 	public String toString() {
 		return name ;
 	}
-    
-
 }
