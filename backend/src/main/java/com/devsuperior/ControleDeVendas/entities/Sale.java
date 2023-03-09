@@ -41,7 +41,7 @@ public class Sale implements Serializable {
 	
 	@ManyToOne
     @JoinColumn(name = "client_id")
-    private User client;
+    private Client client;
 
     @OneToOne(mappedBy = "sale", cascade = CascadeType.ALL)
     private Payment payment;
@@ -49,7 +49,7 @@ public class Sale implements Serializable {
 	public Sale() {
 	}
 
-	public Sale(Long id, LocalDate date, SaleStatus status,Integer calls, User seller, User client, Payment payment) {
+	public Sale(Long id, LocalDate date, SaleStatus status,Integer calls, User seller, Client client, Payment payment) {
 		this.id = id;
 		this.date = date;
 		this.status = status;
@@ -99,11 +99,11 @@ public class Sale implements Serializable {
 		this.seller = seller;
 	}
 
-	public User getClient() {
+	public Client getClient() {
 		return client;
 	}
 
-	public void setClient(User client) {
+	public void setClient(Client client) {
 		this.client = client;
 	}
 

@@ -28,10 +28,10 @@ public class SaleDTO implements Serializable {
 	@CsvBindByName(column = "Chamadas", required = true)
 	private Integer calls;
 	
-	@CsvBindByName(column = "Id cliente", required = true)
+	@CsvBindByName(column = "Cliente", required = true)
 	private ClientDTO client;
 	
-	@CsvBindByName(column = "Id vendedor", required = true)
+	@CsvBindByName(column = "Vendedor", required = true)
 	private SellerDTO seller;
 	
 	@CsvBindByName(column = "Total", required = true)
@@ -63,7 +63,7 @@ public class SaleDTO implements Serializable {
 		this.status = entity.getStatus();
 		this.calls = entity.getCalls();
 		this.client = new ClientDTO(entity.getClient());
-		this.seller = new SellerDTO(entity.getSeller());
+		this.seller = (entity.getSeller() == null) ? null : new SellerDTO(entity.getSeller());
 		this.payment = (entity.getPayment() == null) ? null : new PaymentDTO(entity.getPayment());
 		this.total = entity.getTotal();
 	}

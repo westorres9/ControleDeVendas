@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
@@ -26,8 +27,10 @@ import com.devsuperior.ControleDeVendas.entities.Sale;
 import com.devsuperior.ControleDeVendas.entities.SaleItem;
 import com.devsuperior.ControleDeVendas.entities.SaleStatus;
 import com.devsuperior.ControleDeVendas.entities.User;
+import com.devsuperior.ControleDeVendas.repositories.ClientRepository;
 import com.devsuperior.ControleDeVendas.repositories.PaymentRepository;
 import com.devsuperior.ControleDeVendas.repositories.ProductRepository;
+import com.devsuperior.ControleDeVendas.repositories.SaleItemRepository;
 import com.devsuperior.ControleDeVendas.repositories.SaleRepository;
 import com.devsuperior.ControleDeVendas.repositories.TeamRepository;
 import com.devsuperior.ControleDeVendas.repositories.UserRepository;
@@ -48,7 +51,13 @@ public class SaleService {
 	private UserRepository userRepository;
 	
 	@Autowired
+	private ClientRepository clientRepository;
+	
+	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private SaleItemRepository saleItemRepository;
 	
 	@Autowired
 	private TeamRepository teamRepository;
@@ -90,7 +99,7 @@ public class SaleService {
     @Transactional
     public SaleDTO insert(SaleDTO dto) {
     	User user = authService.authenticated();
-    	if(user.hasRole("ROLE_CLIENT")) {
+    	if(user.hasRole("ROLE_SELLER")) {
     		Sale entity = new Sale();
             entity.setDate(LocalDate.now());
             entity.getItems().clear();
@@ -99,18 +108,20 @@ public class SaleService {
             	saleItem.setProduct(productRepository.getOne(saleItemDto.getProductId()));
             	saleItem.setQuantity(saleItemDto.getQuantity());
             	saleItem.setPrice(saleItemDto.getPrice());
+            	saleItem.setSale(entity);
             	saleItemDto.getSubTotal();
             	entity.getItems().add(saleItem);
             }
             entity.setStatus(SaleStatus.PENDING);
-            entity.setClient(userRepository.getOne(user.getId()));
+            entity.setClient(clientRepository.getOne(dto.getClient().getId()));
+            entity.setSeller(user);
             entity = saleRepository.save(entity);
+            saleItemRepository.saveAll(entity.getItems());
             return new SaleDTO(entity);
     	}
     	else {
     		throw new UnauthorizedException("Only client insert a new sale");
      	}
-        
     }
 
     @Transactional
@@ -205,5 +216,11 @@ public class SaleService {
     public List<SumByTeamDTO> sumByTeam() {
     	User user = authService.authenticated();
     	return saleRepository.sumByTeam();
+    }
+    
+    @Transactional(readOnly = true)
+	public List<SaleDTO> findAllToExport() {
+		List<Sale> listSale = saleRepository.findAll();
+		return listSale.stream().map(x -> new SaleDTO(x)).collect(Collectors.toList());
     }
 }

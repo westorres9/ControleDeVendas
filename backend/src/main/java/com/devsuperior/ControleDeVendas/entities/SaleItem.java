@@ -58,5 +58,7 @@ public class SaleItem implements Serializable {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+	
+	
 
 }

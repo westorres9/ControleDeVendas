@@ -1,6 +1,7 @@
 package com.devsuperior.ControleDeVendas.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
@@ -41,8 +42,21 @@ public class SaleItemPK implements Serializable {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
-	
-	
-	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(product, sale);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SaleItemPK other = (SaleItemPK) obj;
+		return Objects.equals(product, other.product) && Objects.equals(sale, other.sale);
+	}
 }
