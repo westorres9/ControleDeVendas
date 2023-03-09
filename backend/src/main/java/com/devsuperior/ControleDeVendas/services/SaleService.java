@@ -75,7 +75,7 @@ public class SaleService {
     public SaleDTO findById(Long id) {
         Optional<Sale> obj = saleRepository.findById(id);
         Sale entity = obj.orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
-        return new SaleDTO(entity);
+        return new SaleDTO(entity, entity.getItems());
     }
 
     @Transactional
@@ -90,6 +90,7 @@ public class SaleService {
             	saleItem.setProduct(productRepository.getOne(saleItemDto.getProductId()));
             	saleItem.setQuantity(saleItemDto.getQuantity());
             	saleItem.setPrice(saleItemDto.getPrice());
+            	saleItemDto.getSubTotal();
             	entity.getItems().add(saleItem);
             }
             entity.setStatus(SaleStatus.PENDING);
@@ -108,7 +109,7 @@ public class SaleService {
     	User user = authService.authenticated();
     	if(user.hasRole("ROLE_SELLER")) {
     		try {
-                Sale entity = saleRepository.getOne(id);
+    			Sale entity = saleRepository.getOne(id);
                 Payment payment = new Payment();
                 payment.setMoment(LocalDate.now());
                 payment.setSale(entity);
@@ -120,15 +121,6 @@ public class SaleService {
                     entity.setStatus(SaleStatus.FINISH);
                     entity.setSeller(user);
                     entity.setPayment(payment);
-                    entity.getItems().clear();
-                    for(SaleItemDTO saleItemDto : dto.getItems()) {
-                    	SaleItem saleItem  = new SaleItem();
-                    	saleItem.setProduct(productRepository.getOne(saleItemDto.getProductId()));
-                    	saleItem.setQuantity(saleItemDto.getQuantity());
-                    	saleItem.setPrice(saleItemDto.getPrice());
-                    	saleItemDto.getSubTotal();
-                    	entity.getItems().add(saleItem);
-                    }
                     saleRepository.save(entity);
                     return new SaleDTO(entity);
                 }

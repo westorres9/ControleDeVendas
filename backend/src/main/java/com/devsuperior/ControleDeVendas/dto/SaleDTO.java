@@ -3,8 +3,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.devsuperior.ControleDeVendas.entities.Sale;
+import com.devsuperior.ControleDeVendas.entities.SaleItem;
 import com.devsuperior.ControleDeVendas.entities.SaleStatus;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
@@ -61,6 +63,11 @@ public class SaleDTO implements Serializable {
 		this.total = entity.getTotal();
 	}
 	
+	public SaleDTO(Sale entity, Set<SaleItem> items) {
+		this(entity);
+		items.forEach(item -> this.items.add(new SaleItemDTO(item)));
+	}
+
 	public Long getId() {
 		return id;
 	}
