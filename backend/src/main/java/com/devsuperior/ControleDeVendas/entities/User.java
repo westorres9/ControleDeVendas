@@ -43,8 +43,8 @@ public class User implements Serializable, UserDetails {
 	@OneToMany(mappedBy = "seller")
 	private List<Sale> saleSeller = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "client")
-	private List<Sale> saleClient = new ArrayList<>();
+	@OneToMany(mappedBy = "customer")
+	private List<Sale> saleCustomer = new ArrayList<>();
 	
 	@ManyToMany(mappedBy = "managers")
 	private List<Team> teams = new ArrayList<>();
@@ -127,8 +127,8 @@ public class User implements Serializable, UserDetails {
 		return saleSeller;
 	}
 
-	public List<Sale> getSaleClient() {
-		return saleClient;
+	public List<Sale> getSaleCustomer() {
+		return saleCustomer;
 	}
 
 	public List<Team> getTeams() {

@@ -3,6 +3,6 @@ function AdminController() {
    
 }
 app.component("admin", {
-  templateUrl: "pages/admin/admin-component.html",
+  templateUrl: "pages/admin/admin.component.html",
   controller: AdminController
 })

@@ -1,4 +1,4 @@
-function SellerController(ReportService, Upload) {
+function SellerController(ReportService,SellerService, Upload) {
   var $ctrl = this;
 
    $ctrl.generateReportSellers = () => {
@@ -23,10 +23,22 @@ function SellerController(ReportService, Upload) {
     formdata.append('file', file);
     ReportService.uploadSellerCSV(formdata).then((response) => {
       console.log(response.data, "upload realizado com sucesso");
+      $ctrl.getSellers();
     })
     .catch((error) => {
       console.log(error.status, "erro ao fazer upload")
     })
+  }
+
+  $ctrl.getSellers = () => {
+    SellerService.getSellers().then((response) => {
+      console.log(response.data)
+      $ctrl.sellers = response.data;
+    })
+  }
+
+  $ctrl.$onInit = () => {
+    $ctrl.getSellers();
   }
 
 

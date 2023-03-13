@@ -56,6 +56,18 @@ function config($routeProvider) {
         template: '<update-user></update-user>',
         authenticated: true,
     })
+    .when('/admin/categories', {
+        template: '<categories></categories>',
+        authenticated: true
+    })
+    .when('/admin/products', {
+        template: '<products></products>',
+        authenticated: true
+    })
+    .when('/admin/customers', {
+        template: '<customers></customers>',
+        authenticated: true
+    })
     
 }])
 

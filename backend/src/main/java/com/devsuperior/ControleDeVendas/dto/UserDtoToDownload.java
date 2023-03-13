@@ -19,12 +19,11 @@ public class UserDtoToDownload implements Serializable{
 	@CsvBindByName(column = "Email", required = true)
 	private String email;
 	
-	@Email(message = "Favor insira um email valido")
-	@CsvBindByName(column = "imgUrl", required = true)
+	@CsvBindByName(column = "img_Url", required = true)
 	private String imgUrl;
 	
 	@Email(message = "Vendedor deve pertencer a uma equipe")
-	@CsvBindByName(column = "TeamId", required = true)
+	@CsvBindByName(column = "Team_Id", required = true)
 	private Long teamId;
 	
 	public UserDtoToDownload() {

@@ -3,9 +3,9 @@ package com.devsuperior.ControleDeVendas.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import com.devsuperior.ControleDeVendas.entities.Client;
+import com.devsuperior.ControleDeVendas.entities.Customer;
 
-public class ClientDTO implements Serializable {
+public class CustomerDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
@@ -15,10 +15,10 @@ public class ClientDTO implements Serializable {
 	private LocalDate birthDate;
 	private Double monthlyIncome;
 
-	public ClientDTO() {
+	public CustomerDTO() {
 	}
 
-	public ClientDTO(Long id, String firstName, String lastName, String email, LocalDate birthDate,
+	public CustomerDTO(Long id, String firstName, String lastName, String email, LocalDate birthDate,
 			Double monthlyIncome) {
 		this.id = id;
 		this.firstName = firstName;
@@ -28,7 +28,7 @@ public class ClientDTO implements Serializable {
 		this.monthlyIncome = monthlyIncome;
 	}
 
-	public ClientDTO(Client entity) {
+	public CustomerDTO(Customer entity) {
 		this.id = entity.getId();
 		this.firstName = entity.getFirstName();
 		this.lastName = entity.getLastName();

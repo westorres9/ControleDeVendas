@@ -78,7 +78,7 @@ function SalesBySellerChartController(SaleService) {
             }
             sales = [];
             deals = [];
-            visited = [];
+            calls = [];
             sales = response.data.content;
 
             sales.forEach(item => visited.push(

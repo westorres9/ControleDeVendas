@@ -30,7 +30,7 @@ function SuccessChartController(SaleService) {
             series: [
               {
                 name: "Visitas",
-                data: [$ctrl.success[0].visited],
+                data: [$ctrl.success[0].calls],
               },
               {
                 name: "Vendas",
@@ -39,7 +39,7 @@ function SuccessChartController(SaleService) {
               {
                 name: "Sucesso",
                 data: [
-                  (($ctrl.success[0].deals * 100) / $ctrl.success[0].visited)
+                  (($ctrl.success[0].deals * 100) / $ctrl.success[0].calls)
                 ],
               },
             ],

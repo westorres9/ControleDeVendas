@@ -14,8 +14,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 @Entity
-@Table(name = "tb_client")
-public class Client implements Serializable {
+@Table(name = "tb_customer")
+public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -36,10 +36,10 @@ public class Client implements Serializable {
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant updated_At;
 	
-	public Client() {
+	public Customer() {
 	}
 
-	public Client(Long id, String firstName, String lastName, String email, LocalDate birthDate, Double monthlyIncome) {
+	public Customer(Long id, String firstName, String lastName, String email, LocalDate birthDate, Double monthlyIncome) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -127,7 +127,7 @@ public class Client implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Client other = (Client) obj;
+		Customer other = (Customer) obj;
 		return Objects.equals(id, other.id);
 	}
 }

@@ -1,6 +1,6 @@
 function SalesSumTotalChartController(SaleService, $filter) {
   var $ctrl = this;
-  let visited = [];
+  let calls = [];
   let deals = [];
   let date = [];
   $ctrl.salesSumTotal = salesSumTotal;
@@ -18,11 +18,11 @@ function SalesSumTotalChartController(SaleService, $filter) {
             SaleService.searchDrilldown(e.point.info).then((response) => {
               sum = response.data;
               console.log('visited')
-              sum.forEach(x => visited.push(x.visited));
+              sum.forEach(x => calls.push(x.calls));
               console.log(visited)
               var series = {
-                name: 'visitas',
-                data: visited
+                name: 'calls',
+                data: calls
               }
               chart.addSeriesAsDrilldown(e.point, series)
             })
@@ -45,7 +45,7 @@ function SalesSumTotalChartController(SaleService, $filter) {
       }
     },
     title: {
-      text: 'Visitas x vendas'
+      text: 'Chamadas x vendas'
     },
     subtitle: {
       text: ''
@@ -92,12 +92,12 @@ function SalesSumTotalChartController(SaleService, $filter) {
         })
         chart.addAxis(({
           title: {
-            text: `Taxa de sucesso: ${(100 - (((sum.visited - sum.deals) / sum.visited) * 100)).toFixed(2)} % <br/><br/> Total de vendas em R$ ${sum.amount}`
+            text: `Taxa de sucesso: ${(100 - (((sum.calls - sum.deals) / sum.calls) * 100)).toFixed(2)} % <br/><br/> Total de vendas em R$ ${sum.amount}`
           }
         }))
         chart.addSeries({
           name: 'Visitas',
-          data: [{ y: sum.visited, info: 'visited', drilldown: true }]
+          data: [{ y: sum.calls, info: 'visited', drilldown: true }]
         })
         chart.addSeries({
           name: 'Vendas',

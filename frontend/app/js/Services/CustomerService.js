@@ -1,63 +1,62 @@
-app.service('SellerService', function($http) {
+app.service('CustomerService', function($http) {
 
     var $ctrl = this;
 
     const BASE_URL = 'http://localhost:8080'
 
-    $ctrl.getSellers = () => {
+    $ctrl.getCustomers = () => {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sellers`
+                url: `${BASE_URL}/customers`
             }
         )
         return request; 
     }
 
-    $ctrl.getSellerById = (id) => {
+    $ctrl.getCustomerById = (id) => {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sellers/${id}`
+                url: `${BASE_URL}/customers/${id}`
             }
         )
         return request; 
     }
 
-    $ctrl.insertSeller = (seller) => {
-        
+    $ctrl.insertCustomer = (customer) => {
+
         var request = $http(
             {
                 method: 'post',
-                url: `${BASE_URL}/sellers`,
-                data: seller
+                url: `${BASE_URL}/customers`,
+                data: `${customer}`
             }
         )
         return request; 
     }
 
-    $ctrl.updateSeller = (seller) => {
+    $ctrl.updateCustomer = (customer) => {
         
         var request = $http(
             {
                 method: 'put',
-                url: `${BASE_URL}/sellers/${seller.id}`,
-                data: seller
+                url: `${BASE_URL}/customers/${customer.id}`,
+                data: `${customer}`
             }
         )
         return request; 
     }
 
-    $ctrl.deleteSellerById = (seller) => {
+    $ctrl.deleteCustomerById =  (customer) => {
         
         var request = $http(
             {
                 method: 'delete',
-                url: `${BASE_URL}/sellers/${seller.id}`,
+                url: `${BASE_URL}/customers/${customer.id}`
             }
         )
         return request; 
     }
-
-
-})
+    
+} )

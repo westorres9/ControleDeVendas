@@ -1,63 +1,62 @@
-app.service('SellerService', function($http) {
+app.service('ProductService', function($http) {
 
     var $ctrl = this;
 
     const BASE_URL = 'http://localhost:8080'
 
-    $ctrl.getSellers = () => {
+    $ctrl.getProducts = () => {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sellers`
+                url: `${BASE_URL}/products`
             }
         )
         return request; 
     }
 
-    $ctrl.getSellerById = (id) => {
+    $ctrl.getProductsById = (id) => {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sellers/${id}`
+                url: `${BASE_URL}/products/${id}`
             }
         )
         return request; 
     }
 
-    $ctrl.insertSeller = (seller) => {
-        
+    $ctrl.insertProduct = (product) => {
+
         var request = $http(
             {
                 method: 'post',
-                url: `${BASE_URL}/sellers`,
-                data: seller
+                url: `${BASE_URL}/products`,
+                data: `${product}`
             }
         )
         return request; 
     }
 
-    $ctrl.updateSeller = (seller) => {
+    $ctrl.updateProduct = (product) => {
         
         var request = $http(
             {
                 method: 'put',
-                url: `${BASE_URL}/sellers/${seller.id}`,
-                data: seller
+                url: `${BASE_URL}/products/${product.id}`,
+                data: `${product}`
             }
         )
         return request; 
     }
 
-    $ctrl.deleteSellerById = (seller) => {
+    $ctrl.deleteProductById =  (product) => {
         
         var request = $http(
             {
                 method: 'delete',
-                url: `${BASE_URL}/sellers/${seller.id}`,
+                url: `${BASE_URL}/products/${product.id}`
             }
         )
         return request; 
     }
-
-
-})
+    
+} )

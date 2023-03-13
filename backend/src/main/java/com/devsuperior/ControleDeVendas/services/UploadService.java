@@ -56,7 +56,6 @@ public class UploadService {
 		} catch (Exception e) {
 			throw new IOException("error " + e.getMessage());
 		}
-
 	}
 
 	public List<UserDtoToDownload> uploadSellers(MultipartFile file) throws IOException {

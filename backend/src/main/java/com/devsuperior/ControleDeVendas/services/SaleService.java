@@ -27,7 +27,7 @@ import com.devsuperior.ControleDeVendas.entities.Sale;
 import com.devsuperior.ControleDeVendas.entities.SaleItem;
 import com.devsuperior.ControleDeVendas.entities.SaleStatus;
 import com.devsuperior.ControleDeVendas.entities.User;
-import com.devsuperior.ControleDeVendas.repositories.ClientRepository;
+import com.devsuperior.ControleDeVendas.repositories.CustomerRepository;
 import com.devsuperior.ControleDeVendas.repositories.PaymentRepository;
 import com.devsuperior.ControleDeVendas.repositories.ProductRepository;
 import com.devsuperior.ControleDeVendas.repositories.SaleItemRepository;
@@ -51,7 +51,7 @@ public class SaleService {
 	private UserRepository userRepository;
 	
 	@Autowired
-	private ClientRepository clientRepository;
+	private CustomerRepository customerRepository;
 	
 	@Autowired
 	private ProductRepository productRepository;
@@ -113,7 +113,7 @@ public class SaleService {
             	entity.getItems().add(saleItem);
             }
             entity.setStatus(SaleStatus.PENDING);
-            entity.setClient(clientRepository.getOne(dto.getClient().getId()));
+            entity.setCustomer(customerRepository.getOne(dto.getCustomer().getId()));
             entity.setSeller(user);
             entity = saleRepository.save(entity);
             saleItemRepository.saveAll(entity.getItems());

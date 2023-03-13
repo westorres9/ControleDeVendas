@@ -25,7 +25,8 @@ public class TeamService {
 
 	@Autowired
 	private TeamRepository repository;
-		@Autowired
+	
+	@Autowired
     private AuthService authService;
 
     @Autowired

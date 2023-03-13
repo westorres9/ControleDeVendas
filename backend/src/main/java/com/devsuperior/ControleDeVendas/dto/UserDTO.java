@@ -69,7 +69,5 @@ public class UserDTO implements Serializable{
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}
-	
-	
 
 }

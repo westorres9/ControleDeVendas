@@ -1,63 +1,62 @@
-app.service('SellerService', function($http) {
+app.service('CategoryService', function($http) {
 
     var $ctrl = this;
 
     const BASE_URL = 'http://localhost:8080'
 
-    $ctrl.getSellers = () => {
+    $ctrl.getCategories = () => {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sellers`
+                url: `${BASE_URL}/categories`
             }
         )
         return request; 
     }
 
-    $ctrl.getSellerById = (id) => {
+    $ctrl.getCategoryById = (id) => {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sellers/${id}`
+                url: `${BASE_URL}/categories/${id}`
             }
         )
         return request; 
     }
 
-    $ctrl.insertSeller = (seller) => {
-        
+    $ctrl.insertCategory = (category) => {
+
         var request = $http(
             {
                 method: 'post',
-                url: `${BASE_URL}/sellers`,
-                data: seller
+                url: `${BASE_URL}/categories`,
+                data: `${category}`
             }
         )
         return request; 
     }
 
-    $ctrl.updateSeller = (seller) => {
+    $ctrl.updateCategory = (category) => {
         
         var request = $http(
             {
                 method: 'put',
-                url: `${BASE_URL}/sellers/${seller.id}`,
-                data: seller
+                url: `${BASE_URL}/categories/${category.id}`,
+                data: `${category}`
             }
         )
         return request; 
     }
 
-    $ctrl.deleteSellerById = (seller) => {
+    $ctrl.deleteCategoryById =  (category) => {
         
         var request = $http(
             {
                 method: 'delete',
-                url: `${BASE_URL}/sellers/${seller.id}`,
+                url: `${BASE_URL}/categories/${category.id}`
             }
         )
         return request; 
     }
-
-
-})
+    
+} )

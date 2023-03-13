@@ -18,5 +18,32 @@
           <button class="btn btn-secondary" ng-click="$ctrl.uploadFile()">Upload</button>
         </div>
       </div>
+      <a ng-href="#/admin/seller/new">
+        <button class="btn btn-primary btn-add-team">Adicionar novo Vendedor</button>
+      </a>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Id</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Equipe</th>
+            <th scope="col">#</th>
+            <th scope="col">#</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="seller in $ctrl.sellers">
+            <th scope="row"><img src="{{seller.imgUrl}}" alt=""></th>
+            <td>{{seller.id}}</td>
+            <td>{{seller.name}}</td>
+            <td>{{seller.email}}</td>
+            <td>{{seller.team_id}}</td>
+            <td><a ng-href="#/admin/sales/{{sale.id}}"><img src="/app/assets/img/edit.svg" alt=""></a></td>
+            <td><img src="/app/assets/img/delete.svg" alt=""></td>
+          </tr>
+        </tbody>
+      </table>
     </section>
   </div>

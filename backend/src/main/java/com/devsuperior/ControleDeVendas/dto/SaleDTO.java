@@ -29,7 +29,7 @@ public class SaleDTO implements Serializable {
 	private Integer calls;
 	
 	@CsvBindByName(column = "Cliente", required = true)
-	private ClientDTO client;
+	private CustomerDTO customer;
 	
 	@CsvBindByName(column = "Vendedor", required = true)
 	private SellerDTO seller;
@@ -46,12 +46,12 @@ public class SaleDTO implements Serializable {
 	public SaleDTO() {
 	}
 
-	public SaleDTO(Long id, LocalDate date, SaleStatus status,Integer calls, ClientDTO client,SellerDTO seller, PaymentDTO payment ,Double total) {
+	public SaleDTO(Long id, LocalDate date, SaleStatus status,Integer calls, CustomerDTO customer,SellerDTO seller, PaymentDTO payment ,Double total) {
 		this.id = id;
 		this.date = date;
 		this.status = status;
 		this.calls = calls;
-		this.client = client;
+		this.customer = customer;
 		this.seller = seller;
 		this.payment = payment;
 		this.total = total;
@@ -62,7 +62,7 @@ public class SaleDTO implements Serializable {
 		this.date = entity.getDate();
 		this.status = entity.getStatus();
 		this.calls = entity.getCalls();
-		this.client = new ClientDTO(entity.getClient());
+		this.customer = new CustomerDTO(entity.getCustomer());
 		this.seller = (entity.getSeller() == null) ? null : new SellerDTO(entity.getSeller());
 		this.payment = (entity.getPayment() == null) ? null : new PaymentDTO(entity.getPayment());
 		this.total = entity.getTotal();
@@ -105,12 +105,12 @@ public class SaleDTO implements Serializable {
 		this.calls = calls;
 	}
 
-	public ClientDTO getClient() {
-		return client;
+	public CustomerDTO getCustomer() {
+		return customer;
 	}
 
-	public void setClient(ClientDTO client) {
-		this.client = client;
+	public void setCustomer(CustomerDTO customer) {
+		this.customer = customer;
 	}
 
 	public SellerDTO getSeller() {
@@ -143,7 +143,7 @@ public class SaleDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "id=" + id + ", date=" + date + ", status=" + status + ", calls=" + calls + ", client=" + client
+		return "id=" + id + ", date=" + date + ", status=" + status + ", calls=" + calls + ", client=" + customer
 				+ ", payment=" + payment + ", items=" + items;
 	}
 	
