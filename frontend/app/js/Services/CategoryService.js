@@ -30,7 +30,7 @@ app.service('CategoryService', function($http) {
             {
                 method: 'post',
                 url: `${BASE_URL}/categories`,
-                data: `${category}`
+                data: category
             }
         )
         return request; 
@@ -42,7 +42,7 @@ app.service('CategoryService', function($http) {
             {
                 method: 'put',
                 url: `${BASE_URL}/categories/${category.id}`,
-                data: `${category}`
+                data: category
             }
         )
         return request; 

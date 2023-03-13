@@ -60,6 +60,14 @@ function config($routeProvider) {
         template: '<categories></categories>',
         authenticated: true
     })
+    .when('/admin/categories/new', {
+        template: '<new-category></new-category>',
+        authenticated: true
+    })
+    .when('/admin/categories/:id', {
+        template: '<update-category></update-category>',
+        authenticated: true
+    })
     .when('/admin/products', {
         template: '<products></products>',
         authenticated: true

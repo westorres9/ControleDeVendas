@@ -1,0 +1,26 @@
+<div class="admin-container">
+    <aside-bar></aside-bar>
+    <div class="update-sale-form-container ds-container">
+        <h2>Cadastrar Nova Categoria</h2>
+        <div class="ds-form-card">
+            <form action="">
+                <div class="form-input">
+                    <input 
+                    type="text"
+                    class="form-control base-input" 
+                    placeholder="Nome da Categoria"  
+                    name="name" 
+                    id="name"
+                    value="name"
+                    ng-model="$ctrl.category.name" 
+                    required
+                    />
+                </div>
+                <div class="form-input">
+
+                <button class="btn btn-success" ng-click="$ctrl.insertCategory($ctrl.category)" type="submit">Salvar</button>
+                <button class="btn btn-danger" ng-click="$ctrl.returnToPageCategories()">Cancelar</button>
+            </form>
+        </div>
+    </div>
+</div>

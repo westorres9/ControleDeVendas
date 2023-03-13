@@ -1,0 +1,20 @@
+.ds-form-card {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.form-input {
+    margin-bottom: 15px;
+}
+
+@media (min-width:992px) {
+    .ds-form-card {
+        max-width: 600px;
+    }
+}
