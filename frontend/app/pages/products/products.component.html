@@ -3,7 +3,7 @@
     <section class="ds-container">
         <h1>Tela Products</h1>
         <div class="new-sale-container">
-            <a ng-href="#/admin/categories/new"><button class="btn btn-primary">Adicionar Novo Produto</button></a>
+            <a ng-href="#/admin/products/new"><button class="btn btn-primary">Adicionar Novo Produto</button></a>
           </div>
           <div>
             <table class="table table-hover">
@@ -23,10 +23,21 @@
                   <td>{{product.id}}</td>
                   <td>{{product.name}}</td>
                   <td>{{product.price}}</td>
-                  <td><a ng-href="#/admin/sales/{{sale.id}}"><img src="/app/assets/img/edit.svg" alt=""></a></td>
-                  <td><img src="/app/assets/img/delete.svg" alt=""></td>
+                  <td><a ng-href="#/admin/products/{{product.id}}"><img src="/app/assets/img/edit.svg" alt=""></a></td>
+                  <td><img src="/app/assets/img/delete.svg" alt="" ng-click="$ctrl.selectToDelete(product)"></td>
                 </tr>
               </tbody>
             </table>
+            <div class="dialog-background" ng-hide="$ctrl.warningVisible !== true">
+              <div class="dialog-box">
+                <div class="ds-form-card">
+                  <h2>Tem certeza?</h2>
+                  <div class="form-buttons">
+                    <button class="btn btn-warning" ng-click="$ctrl.closeWarning()">Não</button>
+                    <button class="btn btn-danger" ng-click="$ctrl.deleteProduct($ctrl.product)">Sim</button>
+                  </div>
+                </div>
+              </div>
+            </div>
     </section>
   </div>

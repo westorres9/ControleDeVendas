@@ -11,6 +11,31 @@ function ProductsController(ProductService) {
     $ctrl.$onInit = () => {
       $ctrl.getProducts();
     }
+
+    $ctrl.selectToDelete = (product) => {
+      $ctrl.showWarning();
+      $ctrl.product = product
+      console.log($ctrl.product);
+      return $ctrl.product;
+    }
+
+    $ctrl.showWarning = () => {
+      $ctrl.warningVisible = true;
+    }
+
+    $ctrl.closeWarning = () => {
+      $ctrl.warningVisible = false;
+    }
+
+    $ctrl.deleteProduct = (product) => {
+      ProductService.deleteProductById(product).then((response) => {
+        console.log(response.data);
+        $ctrl.getProducts();
+        $ctrl.closeWarning();
+      }).catch((error) => {
+        console.log(error.status)
+      })
+    }
   }
   app.component("products", {
     templateUrl: "pages/products/products.component.html",

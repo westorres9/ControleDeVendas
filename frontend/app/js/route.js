@@ -72,11 +72,18 @@ function config($routeProvider) {
         template: '<products></products>',
         authenticated: true
     })
+    .when('/admin/products/new', {
+        template: '<new-product></new-product>',
+        authenticated: true
+    })
+    .when('/admin/products/:id', {
+        template: '<update-product></update-product>',
+        authenticated: true
+    })
     .when('/admin/customers', {
         template: '<customers></customers>',
         authenticated: true
     })
-    
 }])
 
 app.run(["$rootScope", "$location", "AuthService", function($rootScope, $location, AuthService) {
