@@ -41,6 +41,31 @@ function SellerController(ReportService,SellerService, Upload) {
     $ctrl.getSellers();
   }
 
+  $ctrl.selectToDelete = (seller) => {
+    $ctrl.showWarning();
+    $ctrl.seller = seller
+    console.log($ctrl.seller);
+    return $ctrl.seller;
+  }
+
+  $ctrl.deleteSeller = (seller) => {
+    SellerService.deleteSellerById(seller).then((response) => {
+      console.log(response.data);
+      $ctrl.getSellers();
+      $ctrl.closeWarning();
+    }).catch((error) => {
+      console.log(error.status)
+    })
+  }
+
+  $ctrl.showWarning = () => {
+    $ctrl.warningVisible = true;
+  }
+
+  $ctrl.closeWarning = () => {
+    $ctrl.warningVisible = false;
+  }
+
 
 }
 

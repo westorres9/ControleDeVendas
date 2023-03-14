@@ -4,11 +4,10 @@ function NewCategoryComponentController(CategoryService, $window) {
     $ctrl.insertCategory = () => {
         CategoryService.insertCategory($ctrl.category).then((response) => {
             console.log(response.data);
+            $ctrl.returnToPageCategories();
         }).catch((error) => {
             console.log(error.status);
         })
-
-        $ctrl.returnToPageCategories();
     }
 
     $ctrl.returnToPageCategories = () => {

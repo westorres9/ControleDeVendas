@@ -27,7 +27,9 @@ import com.devsuperior.ControleDeVendas.entities.Team;
 import com.devsuperior.ControleDeVendas.entities.User;
 import com.devsuperior.ControleDeVendas.repositories.PasswordResetTokenRepository;
 import com.devsuperior.ControleDeVendas.repositories.RoleRepository;
+import com.devsuperior.ControleDeVendas.repositories.TeamRepository;
 import com.devsuperior.ControleDeVendas.repositories.UserRepository;
+import com.devsuperior.ControleDeVendas.services.exceptions.ForbiddenException;
 import com.devsuperior.ControleDeVendas.services.exceptions.InvalidTokenException;
 import com.devsuperior.ControleDeVendas.services.exceptions.ResourceNotFoundException;
 
@@ -36,6 +38,8 @@ public class SellerService {
 	
 	@Autowired
 	private PasswordResetTokenRepository passwordResetTokenRepository;
+	
+	private static String standardPassword = "123456";
 	
 	@Autowired
 	private JavaMailSender mailSender;
@@ -48,6 +52,9 @@ public class SellerService {
 	
 	@Autowired
 	private UserRepository repository;
+	
+	@Autowired
+	private TeamRepository teamRepository;
 	
 	@Autowired
 	private RoleRepository roleRepository;
@@ -129,21 +136,34 @@ public class SellerService {
 		entity.getRoles().clear();
 		entity.getRoles().add(roleRepository.findByAuthority(RoleType.SELLER));
 		entity = repository.save(entity);
-		List<Team> teams = new ArrayList<>();
-		teams.addAll(loggedUser.getTeams());
-		Team team = teams.get(0);
-		entity.setTeam(team);
-		return new UserDTO(entity);
+		if(loggedUser.hasRole("ROLE_MANAGER")) {
+			List<Team> teams = new ArrayList<>();
+			teams.addAll(loggedUser.getTeams());
+			Team team = teams.get(0);
+			entity.setTeam(team);
+			return new UserDTO(entity);
+		}
+		else if(loggedUser.hasRole("ROLE_ADMIN")) {
+			Team team = teamRepository.getOne(1L);
+			entity.setTeam(team);
+			return new UserDTO(entity);
+		}
+		else {
+			throw new ForbiddenException("Access denied");
+		}	
 	}
 	
 	@Transactional
 	public UserDTO update(Long id, UserUpdateDTO dto) {
 		try {
+			User loggedUser = authService.authenticated();
 			User entity = repository.getOne(id);
-			entity.setName(dto.getName());
-			entity.setImgUrl(dto.getImgUrl());
-			entity.setPassword(passwordEncoder.encode(dto.getPassword()));
+			entity.setPassword(passwordEncoder.encode(standardPassword));
 			entity = repository.save(entity);
+			List<Team> teams = new ArrayList<>();
+			teams.addAll(loggedUser.getTeams());
+			Team team = teams.get(0);
+			entity.setTeam(team);
 			return new UserDTO(entity);
 		}
 		catch (EntityNotFoundException e) {

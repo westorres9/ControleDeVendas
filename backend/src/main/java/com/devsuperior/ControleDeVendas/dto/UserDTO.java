@@ -37,7 +37,6 @@ public class UserDTO implements Serializable{
 		this.imgUrl = entity.getImgUrl();
 	}
 	
-
 	public Long getId() {
 		return id;
 	}
