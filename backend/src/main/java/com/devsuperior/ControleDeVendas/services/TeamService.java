@@ -68,6 +68,7 @@ public class TeamService {
 	public TeamDTO insert(TeamDTO dto) {
 		Team entity = new Team();
 		entity.setName(dto.getName());
+		entity.setImgUrl(dto.getImgUrl());
 		entity = repository.save(entity);
 		return new TeamDTO(entity);
 	}
@@ -77,6 +78,7 @@ public class TeamService {
 		try {
 			Team entity = repository.getOne(id);
 			entity.setName(dto.getName());
+			entity.setImgUrl(dto.getImgUrl());
 			entity = repository.save(entity);
 			return new TeamDTO(entity);
 		}

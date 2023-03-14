@@ -30,7 +30,19 @@ app.service('TeamService', function($http) {
             {
                 method: 'post',
                 url: `${BASE_URL}/teams`,
-                data: `${team}`
+                data: team
+            }
+        )
+        return request; 
+    }
+
+    $ctrl.updateTeam = (team) => {
+
+        var request = $http(
+            {
+                method: 'put',
+                url: `${BASE_URL}/teams/${team.id}`,
+                data: team
             }
         )
         return request; 

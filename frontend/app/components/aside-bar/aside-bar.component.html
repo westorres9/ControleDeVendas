@@ -7,6 +7,7 @@
     </a>
     <profile-user></profile-user>
     <div class="ds-aside-menu navbar nav">
+      <a href="#admin/dashboard"><button class="btn btn-primary">Dashboard</button></a>
       <a href="#admin/sales"><button class="btn btn-primary">Vendas</button></a>
       <a href="#admin/teams" ng-hide="$ctrl.loggedUser.authority !== 'ROLE_ADMIN' && $ctrl.loggedUser.authority !== 'ROLE_MANAGER'"><button class="btn btn-primary">Equipes</button></a>
       <a href="#admin/sellers" ng-hide="$ctrl.loggedUser.authority !== 'ROLE_ADMIN'"><button class="btn btn-primary">Usuários</button></a>

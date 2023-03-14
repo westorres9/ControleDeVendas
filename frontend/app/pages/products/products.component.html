@@ -22,7 +22,7 @@
                   <th scope="row" class="productList"><img src="{{product.imgUrl}}" alt=""></th>
                   <td>{{product.id}}</td>
                   <td>{{product.name}}</td>
-                  <td>{{product.price}}</td>
+                  <td>{{product.price | currency: 'R$'}}</td>
                   <td><a ng-href="#/admin/products/{{product.id}}"><img src="/app/assets/img/edit.svg" alt=""></a></td>
                   <td><img src="/app/assets/img/delete.svg" alt="" ng-click="$ctrl.selectToDelete(product)"></td>
                 </tr>

@@ -1,20 +1,17 @@
 <div class="admin-container">
     <aside-bar></aside-bar>
     <section class="ds-container sales-container">
-      <h1>Tela Sales</h1>
+      <h1>Dashboard</h1>
       <md-content layout-padding="" ng-cloak="" class="datepickerdemoBasicUsage">
         <date-picker mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></date-picker>
         <button class="btn btn-primary btn-search" ng-click="$ctrl.onChangeDate()">Buscar</button>
       </md-content>
-      <div class="report" ng-hide="$ctrl.loggedUser.authority !== ROLE_ADMIN">
-        <button ng-click="$ctrl.generateReport()" class="btn btn-success">Gerar Relatório</button>
+      <div class="charts-content" ng-hide="$ctrl.loggedUser.authority !== ROLE_ADMIN || $ctrl.loggedUser.authority !== ROLE_MANAGER">
+        <pie-chart-team-seller ></pie-chart-team-seller>
       </div>
       <div class="charts-container">
         <div class="charts-content">
           <sales-sum-total-chart mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></sales-sum-total-chart>
-        </div>
-        <div class="charts-content" ng-hide="$ctrl.loggedUser.authority !== ROLE_ADMIN || $ctrl.loggedUser.authority !== ROLE_MANAGER">
-          <pie-chart-team-seller ></pie-chart-team-seller>
         </div>
         <br>
       </div>

@@ -45,7 +45,7 @@ function config($routeProvider) {
         authenticated: true
     })
     .when('/admin/teams/:id', {
-        template: '<team-details></team-details>',
+        template: '<update-team></update-team>',
         authenticated: true,
     })
     .when('/admin/teams/:id/new-user', {

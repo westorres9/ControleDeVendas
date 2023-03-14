@@ -27,7 +27,7 @@ function TeamController(TeamService, SellerService) {
   $ctrl.deleteTeam = (team) => {
    TeamService.deleteTeamById(team).then((response) => {
       console.log(response.data);
-      $ctrl.getAllTeams(page, size);
+      $ctrl.getAllTeams();
       $ctrl.closeWarning();
     }).catch((error) => {
       console.log(error.status)

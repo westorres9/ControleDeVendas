@@ -1,6 +1,5 @@
 function UpdateCustomerComponentController(CustomerService, $routeParams) {
     var $ctrl = this;
-
     $ctrl.updateCustomer = () => {
         CustomerService.updateCustomer($ctrl.customer).then((response) => {
             console.log(response.data);

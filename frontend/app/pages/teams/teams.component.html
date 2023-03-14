@@ -20,8 +20,8 @@
                 <th scope="row"><img src="{{team.imgUrl}}" alt=""></th>
                 <td>{{team.id}}</td>
                 <td>{{team.name}}</td>
-                <td><a ng-href="#/admin/sales/{{sale.id}}"><img src="/app/assets/img/edit.svg" alt=""></a></td>
-                <td><img src="/app/assets/img/delete.svg" alt=""></td>
+                <td><a ng-href="#/admin/teams/{{team.id}}"><img src="/app/assets/img/edit.svg" alt=""></a></td>
+                <td><img src="/app/assets/img/delete.svg" alt="" ng-click="$ctrl.selectToDelete(team)"></td>
               </tr>
             </tbody>
           </table>
