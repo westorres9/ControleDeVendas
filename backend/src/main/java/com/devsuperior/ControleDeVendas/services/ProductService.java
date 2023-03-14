@@ -53,6 +53,7 @@ public class ProductService {
 			Category cat = categoryRepository.getOne(catDto.getId());
 			entity.getCategories().add(cat);
 		}
+		entity.getCategories().add(categoryRepository.getOne(2L));
 		entity = productRepository.save(entity);
 		return new ProductDTO(entity);
 	}

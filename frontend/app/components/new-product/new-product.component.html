@@ -6,32 +6,34 @@
             <form action="">
                 <div class="form-input">
                     <input type="text" class="form-control base-input" placeholder="Nome do Produto" name="name"
-                        id="name" value="name" ng-model="$ctrl.product.name" required />
+                        id="name" value="$ctrl.product.name" ng-model="$ctrl.product.name" required />
                 </div>
                 <div class="form-input">
                     <input type="text" class="form-control base-input" placeholder="Descrição" name="Descrição"
-                        id="description" value="description" ng-model="$ctrl.product.description" required />
+                        id="description" value="$ctrl.product.description" ng-model="$ctrl.product.description"
+                        required />
                 </div>
                 <div class="form-input">
                     <input type="number" class="form-control base-input" placeholder="Preço" name="price" id="price"
-                        value="price" ng-model="$ctrl.product.price" required />
+                        value="$ctrl.product.price" ng-model="$ctrl.product.price" required />
                 </div>
                 <div class="form-input">
                     <input type="text" class="form-control base-input" placeholder="Url da Imagem do Produto"
-                        name="imgUrl" id="imgUrl" value="imgUrl" ng-model="$ctrl.product.imgUrl" required />
+                        name="imgUrl" id="imgUrl" value="$ctrl.product.imgUrl" ng-model="$ctrl.product.imgUrl"
+                        required />
                 </div>
-                
+
 
                 <div class="form-input">
-                    <label for="category">Escolha uma categoria:</label>
-                    <select name="categories" id="category">
-                        <option ng-repeat="category in $ctrl.categories" value="category" ng-model="$ctrl.category">{{category.name}}</option>
+                    <label for="CategorySelect">Selecione uma categoria:</label>
+                    <select ng-model="category" ng-click="$ctrl.selectCategory(category)">
+                        <option ng-selected="!category">Default</option>
+                        <option ng-repeat="category in $ctrl.categories" ng-value="category.id">{{category.name}}</option>
                     </select>
                 </div>
-                
-                    <button class="btn btn-success" ng-click="$ctrl.insertProduct($ctrl.product)"
-                        type="submit">Salvar</button>
-                    <button class="btn btn-danger" ng-click="$ctrl.returnToPageProducts()">Cancelar</button>
+                <button class="btn btn-success" ng-click="$ctrl.insertProduct($ctrl.product)"
+                    type="submit">Salvar</button>
+                <button class="btn btn-danger" ng-click="$ctrl.returnToPageProducts()">Cancelar</button>
             </form>
         </div>
     </div>

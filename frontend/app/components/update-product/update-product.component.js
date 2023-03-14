@@ -4,7 +4,7 @@ function UpdateProductComponentController(ProductService, CategoryService, $rout
     $ctrl.updateProduct = () => {
         ProductService.updateProduct($ctrl.product).then((response) => {
             console.log(response.data);
-            window.location = "index.html#/admin/categories"
+            window.location = "index.html#/admin/products"
         }).catch((error) => {
             console.log(error)
         });
@@ -17,7 +17,7 @@ function UpdateProductComponentController(ProductService, CategoryService, $rout
         })
     }
 
-    $ctrl.returnToPageCategories = () => {
+    $ctrl.returnToPageProducts = () => {
         window.location.href = "index.html#/admin/products"
     }
 

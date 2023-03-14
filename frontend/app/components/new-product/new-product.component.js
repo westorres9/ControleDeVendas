@@ -1,10 +1,11 @@
 function NewProductComponentController(ProductService,CategoryService, $window) {
     var $ctrl = this;
 
-    $ctrl.insertProduct = (product) => {
-        $ctrl.product = product;
+    $ctrl.insertProduct = () => {
         ProductService.insertProduct($ctrl.product).then((response) => {
             console.log(response.data);
+        }).catch((error) => {
+            console.log(error);
         })
     }
 
@@ -23,7 +24,7 @@ function NewProductComponentController(ProductService,CategoryService, $window) 
         $ctrl.category = category
         console.log($ctrl.category);
         return $ctrl.category;
-      }
+    }
 
     $ctrl.$onInit = () => {
         $ctrl.getCategories();
