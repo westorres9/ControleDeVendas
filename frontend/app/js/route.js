@@ -84,6 +84,26 @@ function config($routeProvider) {
         template: '<customers></customers>',
         authenticated: true
     })
+    .when('/admin/customers/new', {
+        template: '<new-customer></new-customer>',
+        authenticated: true
+    })
+    .when('/admin/customers/:id', {
+        template: '<update-customer></update-customer>',
+        authenticated: true
+    })
+    .when('/admin/sellers/new', {
+        template: '<new-seller></new-seller>',
+        authenticated: true
+    })
+    .when('/admin/sellers/:id', {
+        template: '<update-seller></update-seller>',
+        authenticated: true
+    })
+    .when('/admin/reports', {
+        template: '<reports></reports>',
+        authenticated: true
+    })
 }])
 
 app.run(["$rootScope", "$location", "AuthService", function($rootScope, $location, AuthService) {

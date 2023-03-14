@@ -1,49 +1,44 @@
 <div class="admin-container">
-    <aside-bar></aside-bar>
-    <section class="ds-container">
-      <h1>Tela Sellers</h1>
-      <div class="download-container">
-        <h2>Relatorio Vendedores</h2>
-        <div class="col-md-4 upload-box">
-          <button ng-click="$ctrl.generateReportSellers()" class="btn btn-success">Gerar Relatório</button>
+  <aside-bar></aside-bar>
+  <section class="ds-container">
+    <h1>Vendedores</h1>
+    <a ng-href="#/admin/sellers/new">
+      <button class="btn btn-primary btn-add-team">Adicionar novo Vendedor</button>
+    </a>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Id</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Email</th>
+          <th scope="col">Equipe</th>
+          <th scope="col">#</th>
+          <th scope="col">#</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="seller in $ctrl.sellers">
+          <th scope="row"><img src="{{seller.imgUrl}}" alt=""></th>
+          <td>{{seller.id}}</td>
+          <td>{{seller.name}}</td>
+          <td>{{seller.email}}</td>
+          <td>{{seller.team_id}}</td>
+          <td><a ng-href="#/admin/sellers/{{seller.id}}"><img src="/app/assets/img/edit.svg" alt=""></a></td>
+          <td><img src="/app/assets/img/delete.svg" alt="" ng-click="$ctrl.selectToDelete(seller)"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="dialog-background" ng-hide="$ctrl.warningVisible !== true">
+      <div class="dialog-box">
+        <div class="ds-form-card">
+          <h2>Tem certeza?</h2>
+          <div class="form-buttons">
+            <button class="btn btn-warning" ng-click="$ctrl.closeWarning()">Não</button>
+            <button class="btn btn-danger" ng-click="$ctrl.deleteSeller($ctrl.seller)">Sim</button>
+          </div>
         </div>
       </div>
-
-      <div class="upload-container">
-        <h2>Importar Vendedores</h2>
-        <div class="col-md-4 upload-box" >
-          <input type="file" name="file" id="file" ng-model="file" ngf-select="$ctrl.selectFile(file)" accept=".csv">
-        </div>
-        <div class="col-md-6 upload-button">
-          <button class="btn btn-secondary" ng-click="$ctrl.uploadFile()">Upload</button>
-        </div>
-      </div>
-      <a ng-href="#/admin/seller/new">
-        <button class="btn btn-primary btn-add-team">Adicionar novo Vendedor</button>
-      </a>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Id</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Email</th>
-            <th scope="col">Equipe</th>
-            <th scope="col">#</th>
-            <th scope="col">#</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="seller in $ctrl.sellers">
-            <th scope="row"><img src="{{seller.imgUrl}}" alt=""></th>
-            <td>{{seller.id}}</td>
-            <td>{{seller.name}}</td>
-            <td>{{seller.email}}</td>
-            <td>{{seller.team_id}}</td>
-            <td><a ng-href="#/admin/sales/{{sale.id}}"><img src="/app/assets/img/edit.svg" alt=""></a></td>
-            <td><img src="/app/assets/img/delete.svg" alt=""></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  </div>
+    </div>
+  </section>
+</div>

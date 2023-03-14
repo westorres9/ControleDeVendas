@@ -30,7 +30,7 @@ app.service('CustomerService', function($http) {
             {
                 method: 'post',
                 url: `${BASE_URL}/customers`,
-                data: `${customer}`
+                data: customer
             }
         )
         return request; 
@@ -42,7 +42,7 @@ app.service('CustomerService', function($http) {
             {
                 method: 'put',
                 url: `${BASE_URL}/customers/${customer.id}`,
-                data: `${customer}`
+                data: customer
             }
         )
         return request; 

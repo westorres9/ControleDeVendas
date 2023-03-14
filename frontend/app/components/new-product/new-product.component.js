@@ -4,6 +4,7 @@ function NewProductComponentController(ProductService,CategoryService, $window) 
     $ctrl.insertProduct = () => {
         ProductService.insertProduct($ctrl.product).then((response) => {
             console.log(response.data);
+            $ctrl.returnToPageProducts();
         }).catch((error) => {
             console.log(error);
         })
@@ -14,7 +15,7 @@ function NewProductComponentController(ProductService,CategoryService, $window) 
           console.log(response.data)
           $ctrl.categories = response.data;
         })
-      }
+    }
 
     $ctrl.returnToPageProducts = () => {
         $window.location.href = "index.html#/admin/products"

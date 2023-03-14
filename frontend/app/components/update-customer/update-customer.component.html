@@ -1,0 +1,30 @@
+<div class="admin-container">
+    <aside-bar></aside-bar>
+    <div class="update-sale-form-container ds-container">
+        <h2>Atualizar Cliente</h2>
+        <div class="ds-form-card">
+            <form action="">
+                <div class="form-input">
+                    <input type="text" class="form-control base-input" placeholder="Nome" name="firstName"
+                        id="firstName" value="$ctrl.customer.firstName" ng-model="$ctrl.customer.firstName" required />
+                </div>
+                <div class="form-input">
+                    <input type="text" class="form-control base-input" placeholder="Sobrenome" name="lastName"
+                        id="lastName" value="$ctrl.customer.lastName" ng-model="$ctrl.customer.lastName" required />
+                </div>
+                <div class="form-input">
+                    <input type="text" class="form-control base-input" placeholder="Email" name="email" id="email"
+                        value="$ctrl.customer.email" ng-model="$ctrl.customer.email" required disabled/>
+                </div>
+                <div class="form-input">
+                    <input type="number" class="form-control base-input" placeholder="Renda mensal" name="monthlyIncome"
+                        id="monthlyIncome" value="$ctrl.customer.monthlyIncome" ng-model="$ctrl.customer.monthlyIncome"
+                        required />
+                </div>
+                <button class="btn btn-primary" ng-click="$ctrl.updateCustomer($ctrl.customer)"
+                    type="submit">Atualizar</button>
+                <button class="btn btn-danger" ng-click="$ctrl.returnToPageCustomers()">Cancelar</button>
+            </form>
+        </div>
+    </div>
+</div>

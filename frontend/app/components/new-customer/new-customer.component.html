@@ -1,0 +1,34 @@
+<div class="admin-container">
+    <aside-bar></aside-bar>
+    <div class="update-sale-form-container ds-container">
+        <h2>Cadastrar Novo Cliente</h2>
+        <div class="ds-form-card">
+            <form action="">
+                <div class="form-input">
+                    <input type="text" class="form-control base-input" placeholder="Nome" name="firstName"
+                        id="firstName" value="$ctrl.customer.firstName" ng-model="$ctrl.customer.firstName" required />
+                </div>
+                <div class="form-input">
+                    <input type="text" class="form-control base-input" placeholder="Sobrenome" name="lastName"
+                        id="lastName" value="$ctrl.customer.lastName" ng-model="$ctrl.customer.lastName" required />
+                </div>
+                <div class="form-input">
+                    <input type="text" class="form-control base-input" placeholder="Email" name="email" id="email"
+                        value="$ctrl.customer.email" ng-model="$ctrl.customer.email" required />
+                </div>
+                <div class="form-input">
+                    <input type="number" class="form-control base-input" placeholder="Renda mensal" name="monthlyIncome"
+                        id="monthlyIncome" value="$ctrl.customer.monthlyIncome" ng-model="$ctrl.customer.monthlyIncome"
+                        required />
+                </div>
+                <div class="form-input">
+                    <input type="date" id="birthDate" name="birthDate" value="$ctrl.customer.birthDate" ng-model="$ctrl.customer.birthDate" min="1910-01-01"
+                        max="Date.now()" required>
+                </div>
+                <button class="btn btn-success" ng-click="$ctrl.insertCustomer($ctrl.customer)"
+                    type="submit">Salvar</button>
+                <button class="btn btn-danger" ng-click="$ctrl.returnToPageCustomers()">Cancelar</button>
+            </form>
+        </div>
+    </div>
+</div>
