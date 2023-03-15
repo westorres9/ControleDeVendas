@@ -9,7 +9,6 @@ function NewProductComponentController(ProductService,CategoryService, $location
     $ctrl.insertProduct = () => {
         $ctrl.product.categories.push($ctrl.category);
         ProductService.insertProduct($ctrl.product).then((response) => {
-            console.log(response.data);
             $ctrl.returnToPageProducts();
         }).catch((error) => {
             console.log(error)
@@ -18,7 +17,6 @@ function NewProductComponentController(ProductService,CategoryService, $location
 
     $ctrl.getCategories = () => {
         CategoryService.getCategories().then((response) => {
-          console.log(response.data)
           $ctrl.categories = response.data;
         })
     }

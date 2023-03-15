@@ -1,4 +1,4 @@
-function NewTeamController(TeamService, $window) {
+function NewTeamController(TeamService, $location) {
     var $ctrl = this;
 
     $ctrl.insertNewTeam = () => {
@@ -14,7 +14,7 @@ function NewTeamController(TeamService, $window) {
     }
 
     $ctrl.returnToPageTeams = () => {
-        $window.location.href = "index.html#/admin/teams"
+        $location.path("/admin/customers")
     }
 }
 

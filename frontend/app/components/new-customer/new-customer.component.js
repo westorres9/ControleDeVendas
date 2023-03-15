@@ -1,4 +1,4 @@
-function NewCustomerComponentController(CustomerService, $window) {
+function NewCustomerComponentController(CustomerService, $location) {
     var $ctrl = this;
 
     $ctrl.insertCustomer = () => {
@@ -12,7 +12,7 @@ function NewCustomerComponentController(CustomerService, $window) {
     }
 
     $ctrl.returnToPageCustomers = () => {
-        $window.location.href = "index.html#/admin/customers"
+        $location.path("/admin/customers")
     }
 }
 

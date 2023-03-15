@@ -3,7 +3,6 @@ function CustomerController(CustomerService) {
 
     $ctrl.getCustomers = () => {
       CustomerService.getCustomers().then((response) => {
-        console.log(response.data);
         $ctrl.customers = response.data;
       })
     }
@@ -15,13 +14,11 @@ function CustomerController(CustomerService) {
     $ctrl.selectToDelete = (customer) => {
       $ctrl.showWarning();
       $ctrl.customer = customer
-      console.log($ctrl.customer);
       return $ctrl.customer;
     }
   
     $ctrl.deleteCustomer = (customer) => {
       CustomerService.deleteCustomerById(customer).then((response) => {
-        console.log(response.data);
         $ctrl.getCustomers();
         $ctrl.closeWarning();
       }).catch((error) => {

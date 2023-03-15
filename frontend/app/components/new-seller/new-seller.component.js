@@ -1,4 +1,4 @@
-function NewSellerComponentController(SellerService, $window) {
+function NewSellerComponentController(SellerService, $location) {
   var $ctrl = this;
 
   $ctrl.insertSeller = () => {
@@ -11,7 +11,7 @@ function NewSellerComponentController(SellerService, $window) {
   }
 
   $ctrl.returnToPageSellers = () => {
-    $window.location.href = "index.html#/admin/sellers"
+    $location.path("/admin/sellers")
   } 
 }
 

@@ -1,9 +1,10 @@
-function UpdateCustomerComponentController(CustomerService, $routeParams) {
+function UpdateCustomerComponentController(CustomerService, $routeParams, $location) {
     var $ctrl = this;
     $ctrl.updateCustomer = () => {
         CustomerService.updateCustomer($ctrl.customer).then((response) => {
             console.log(response.data);
-            window.location = "index.html#/admin/customers"
+            $location.url();
+            $ctrl.returnToPageCustomers();
         }).catch((error) => {
             console.log(error)
         });
@@ -17,7 +18,7 @@ function UpdateCustomerComponentController(CustomerService, $routeParams) {
     }
 
     $ctrl.returnToPageCustomers = () => {
-        window.location.href = "index.html#/admin/customers"
+        $location.path("/admin/customers")
     }
 
     $ctrl.$onInit = () => {

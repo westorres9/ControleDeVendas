@@ -1,4 +1,4 @@
-function NewSaleController(SaleService, $window) {
+function NewSaleController(SaleService, $location) {
     var $ctrl = this;
 
     $ctrl.insertNewSale = () => {
@@ -14,7 +14,7 @@ function NewSaleController(SaleService, $window) {
     }
 
     $ctrl.returnToPageSales = () => {
-        $window.location.href = "index.html#/admin/sales"
+        $location.path("/admin/customers")
     }
 }
 

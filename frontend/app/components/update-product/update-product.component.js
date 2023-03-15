@@ -1,4 +1,4 @@
-function UpdateProductComponentController(ProductService, CategoryService, $routeParams) {
+function UpdateProductComponentController(ProductService, $routeParams, $location) {
     var $ctrl = this;
 
     $ctrl.updateProduct = () => {
@@ -18,7 +18,7 @@ function UpdateProductComponentController(ProductService, CategoryService, $rout
     }
 
     $ctrl.returnToPageProducts = () => {
-        window.location.href = "index.html#/admin/products"
+        $location.path("/admin/products")
     }
 
     $ctrl.$onInit = () => {

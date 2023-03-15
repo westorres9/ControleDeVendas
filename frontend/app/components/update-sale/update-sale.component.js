@@ -23,7 +23,7 @@ function UpdateSaleController(SaleService, $location) {
     $ctrl.updateSale = () => {   
         SaleService.updateSale($ctrl.sale).then((response) => {
             console.log(response.data);
-            window.location = "index.html#/admin/sales"
+            $location.path("/admin/sales")
         }).catch((error) => {
             console.log(error.status)
         })

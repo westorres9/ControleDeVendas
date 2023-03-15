@@ -1,10 +1,11 @@
-function UpdateCategoryComponentController(CategoryService, $routeParams) {
+function UpdateCategoryComponentController(CategoryService, $routeParams,$location) {
   var $ctrl = this;
 
   $ctrl.updateCategory = () => {  
     CategoryService.updateCategory($ctrl.category).then((response) => {
         console.log(response.data);
-        window.location = "index.html#/admin/categories"
+        $location.url();
+        $ctrl.returnToPageCategories();
     }).catch((error) => {
         console.log(error)
     });
@@ -18,7 +19,7 @@ $ctrl.getCategoryById = (id) => {
 } 
 
 $ctrl.returnToPageCategories = () => {
-    window.location.href = "index.html#/admin/categories"
+  $location.path("/admin/categories");
 }
 
 $ctrl.$onInit = () => {

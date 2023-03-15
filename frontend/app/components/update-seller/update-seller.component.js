@@ -1,4 +1,4 @@
-function UpdateSellerComponentController(SellerService, $routeParams) {
+function UpdateSellerComponentController(SellerService, $routeParams, $location) {
   var $ctrl = this;
 
   $ctrl.updateSeller = () => {
@@ -22,7 +22,7 @@ $ctrl.$onInit = () => {
 }
 
   $ctrl.returnToPageSellers = () => {
-    $window.location.href = "index.html#/admin/sellers"
+    $location.path("/admin/sellers")
   } 
 }
 

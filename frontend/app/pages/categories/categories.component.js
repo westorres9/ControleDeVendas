@@ -3,7 +3,6 @@ function CategoryController(CategoryService){
 
   $ctrl.getCategories = () => {
     CategoryService.getCategories().then((response) => {
-      console.log(response.data)
       $ctrl.categories = response.data;
     })
   }
@@ -11,13 +10,11 @@ function CategoryController(CategoryService){
   $ctrl.selectToDelete = (category) => {
     $ctrl.showWarning();
     $ctrl.category = category
-    console.log($ctrl.category);
     return $ctrl.category;
   }
 
   $ctrl.deleteCategory = (category) => {
     CategoryService.deleteCategoryById(category).then((response) => {
-      console.log(response.data);
       $ctrl.getCategories();
       $ctrl.closeWarning();
     }).catch((error) => {

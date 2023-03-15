@@ -1,4 +1,4 @@
-function UpdateTeamComponentController(TeamService, $routeParams) {
+function UpdateTeamComponentController(TeamService, $routeParams, $location) {
     var $ctrl = this;
   
     $ctrl.updateTeam = () => {
@@ -22,7 +22,7 @@ function UpdateTeamComponentController(TeamService, $routeParams) {
   }
   
     $ctrl.returnToPageTeams = () => {
-      window.location.href = "index.html#/admin/teams"
+      $location.path("/admin/teams")
     } 
   }
   

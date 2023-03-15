@@ -7,14 +7,12 @@ function TeamController(TeamService, SellerService) {
 
   $ctrl.getAllTeams = () => {
     TeamService.getAllTeams().then((response) => {
-      console.log(response.data);
       $ctrl.teams = response.data;
     })
   }
 
   $ctrl.getAllSellers = () => {
     SellerService.getAllSellers().then((response) => {
-      console.log(response.data);
       $ctrl.sellers = response.data;
     })
   }
@@ -26,7 +24,6 @@ function TeamController(TeamService, SellerService) {
 
   $ctrl.deleteTeam = (team) => {
    TeamService.deleteTeamById(team).then((response) => {
-      console.log(response.data);
       $ctrl.getAllTeams();
       $ctrl.closeWarning();
     }).catch((error) => {

@@ -1,4 +1,4 @@
-function NewCategoryComponentController(CategoryService, $window) {
+function NewCategoryComponentController(CategoryService, $location) {
     var $ctrl = this;
 
     $ctrl.insertCategory = () => {
@@ -11,7 +11,7 @@ function NewCategoryComponentController(CategoryService, $window) {
     }
 
     $ctrl.returnToPageCategories = () => {
-        window.location.href = "index.html#/admin/categories"
+        $location.path("/admin/categories")
     }
 }
 

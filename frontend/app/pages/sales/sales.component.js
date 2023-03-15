@@ -35,7 +35,6 @@ function SalesController(SaleService, ReportService) {
     // $ctrl.maxDate
     SaleService.getAllSales($ctrl.page, $ctrl.size, $ctrl.mindate, $ctrl.maxdate).then((response) => {
         $ctrl.AllSales = response.data.content;
-        console.log('sales', $ctrl.AllSales);
     });
   };
 
@@ -50,14 +49,12 @@ function SalesController(SaleService, ReportService) {
 
   $ctrl.selectSale = (sale) => {
     $ctrl.sale = sale;
-    console.log($ctrl.sale);
     window.location.href = `index.html#/admin/sales/${sale.id}`;
     return $ctrl.sale;
   }
 
   $ctrl.deleteSale = (sale) => {
     SaleService.deleteSale(sale).then((response) => {
-      console.log(response.data);
       $ctrl.getAllSales(page, size);
       $ctrl.closeWarning();
     }).catch((error) => {
@@ -76,7 +73,6 @@ function SalesController(SaleService, ReportService) {
   $ctrl.selectToDelete = (sale) => {
     $ctrl.showWarning();
     $ctrl.sale = sale;
-    console.log($ctrl.sale);
     return $ctrl.sale
   }
 
@@ -86,9 +82,7 @@ function SalesController(SaleService, ReportService) {
         const username = AuthService.getUsername();
         const authority = AuthService.getAuthority();
         const role = authority[0].authority;
-        console.log(role)
         $ctrl.loggedUser = {name: username, authority: role}
-        console.log($ctrl.loggedUser);
   }
   
   $ctrl.generateReport = () => {

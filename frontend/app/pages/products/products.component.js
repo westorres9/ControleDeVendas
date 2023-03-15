@@ -3,7 +3,6 @@ function ProductsController(ProductService) {
 
     $ctrl.getProducts = () => {
       ProductService.getProducts().then((response) => {
-        console.log(response.data);
         $ctrl.products = response.data;
       })
     }
@@ -15,7 +14,6 @@ function ProductsController(ProductService) {
     $ctrl.selectToDelete = (product) => {
       $ctrl.showWarning();
       $ctrl.product = product
-      console.log($ctrl.product);
       return $ctrl.product;
     }
 
@@ -29,7 +27,6 @@ function ProductsController(ProductService) {
 
     $ctrl.deleteProduct = (product) => {
       ProductService.deleteProductById(product).then((response) => {
-        console.log(response.data);
         $ctrl.getProducts();
         $ctrl.closeWarning();
       }).catch((error) => {
