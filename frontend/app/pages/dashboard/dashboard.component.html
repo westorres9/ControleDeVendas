@@ -2,5 +2,14 @@
     <aside-bar></aside-bar>
     <section class="ds-container">
       <h1>Dashboard</h1>
+      <md-content layout-padding="" ng-cloak="" class="datepickerdemoBasicUsage">
+        <date-picker mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></date-picker>
+        <button class="btn btn-primary btn-search" ng-click="$ctrl.onChangeDate()">Buscar</button>
+      </md-content>
+      <div class="charts-container">
+        <div class="charts-content">
+          <chart-success-by-seller mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></chart-success-by-seller>
+        </div>
+      </div>
     </section>
   </div>

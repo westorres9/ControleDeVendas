@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devsuperior.ControleDeVendas.dto.SaleDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleTaxSuccessDTO;
 import com.devsuperior.ControleDeVendas.dto.SumBySellerDTO;
 import com.devsuperior.ControleDeVendas.dto.SumByTeamDTO;
@@ -91,5 +92,15 @@ public class SaleResource {
 	public ResponseEntity<List<SumByTeamDTO>> sumByTeam() {
 		List<SumByTeamDTO> list = service.sumByTeam();
 		return ResponseEntity.ok().body(list);
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SELLER')")
+	@GetMapping(value = "/sale-sum-total")
+	public ResponseEntity<SaleSumTotalDTO> saleSumTotalOfDeals(
+			@RequestParam(value = "minDate", defaultValue = "")String minDate,
+			@RequestParam(value = "maxDate", defaultValue = "")String maxDate
+			) {
+		SaleSumTotalDTO total = service.saleSumTotalOfDeals(minDate, maxDate);
+		return ResponseEntity.ok().body(total);
 	}
 }

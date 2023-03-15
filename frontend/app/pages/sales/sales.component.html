@@ -1,28 +1,7 @@
 <div class="admin-container">
     <aside-bar></aside-bar>
     <section class="ds-container sales-container">
-      <h1>Dashboard</h1>
-      <md-content layout-padding="" ng-cloak="" class="datepickerdemoBasicUsage">
-        <date-picker mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></date-picker>
-        <button class="btn btn-primary btn-search" ng-click="$ctrl.onChangeDate()">Buscar</button>
-      </md-content>
-      <div class="charts-content" ng-hide="$ctrl.loggedUser.authority !== ROLE_ADMIN || $ctrl.loggedUser.authority !== ROLE_MANAGER">
-        <pie-chart-team-seller ></pie-chart-team-seller>
-      </div>
-      <div class="charts-container">
-        <div class="charts-content">
-          <sales-sum-total-chart mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></sales-sum-total-chart>
-        </div>
-        <br>
-      </div>
-      <div  class="sum-chart-bar">
-        <br>
-        <sum-chart-bar mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></sum-chart-bar>
-      </div>
-      <div  class="sum-chart-bar">
-        <sales-by-seller-chart mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></sales-by-seller-chart>
-      </div>
-     
+      <h1>Vendas</h1>
       <div class="new-sale-container">
         <a ng-href="#/admin/sales/new"><button class="btn btn-primary">Adicionar Nova Venda</button></a>
       </div>
@@ -39,8 +18,10 @@
               <th scope="col">#</th>
               <th scope="col">Id</th>
               <th scope="col">Vendedor</th>
-              <th scope="col">Total</th>
+              <th scope="col">Status</th>
+              <th scope="col">Cliente</th>
               <th scope="col">Data</th>
+              <th scope="col">Total</th>
               <th scope="col">#</th>
               <th scope="col">#</th>
             </tr>
@@ -49,9 +30,11 @@
             <tr ng-repeat="sale in $ctrl.AllSales">
               <th scope="row"><img src="/app/assets/img/sales.png" alt="" ></th>
               <td>{{sale.id}}</td>
-              <td>{{sale.sellerName}}</td>
-              <td>{{sale.amount}}</td>
-              <td>{{sale.date}}</td>
+              <td>{{sale.seller.name}}</td>
+              <td>{{sale.status}}</td>
+              <td>{{sale.customer.firstName}}</td>
+              <td>{{sale.date  |  date:'dd/MM/yyyy'}}</td>
+              <td>{{sale.total  | currency: 'R$'}}</td>
               <td><a ng-href="#/admin/sales/{{sale.id}}"><img src="/app/assets/img/edit.svg" alt=""></a></td>
               <td><img src="/app/assets/img/delete.svg" alt="" ng-click="$ctrl.selectToDelete(sale)"></td>
             </tr>

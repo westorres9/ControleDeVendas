@@ -1,5 +1,5 @@
 
-function SuccessChartController(SaleService) {
+function ChartSuccessBySellerController(SaleService) {
     var $ctrl = this;
     $ctrl.success = []
     $ctrl.Highcharts = {};
@@ -9,7 +9,7 @@ function SuccessChartController(SaleService) {
         SaleService.salesSuccessBySeller().then((response) => {
           console.log(response.data);
           $ctrl.success = response.data;
-          Highcharts.chart("success", {
+          Highcharts.chart("success-by-seller", {
             chart: {
               type: "bar",
             },
@@ -53,9 +53,9 @@ function SuccessChartController(SaleService) {
         }
 }
 
-app.component('successChart', {
-    templateUrl: 'components/success-chart/success-chart.component.html',
-    controller: SuccessChartController,
+app.component('chartSuccessBySeller', {
+    templateUrl: 'components/chart-success-by-seller/chart-success-by-seller.component.html',
+    controller: ChartSuccessBySellerController,
     bindings: {
       minDate: '=',
       maxDate: '=',

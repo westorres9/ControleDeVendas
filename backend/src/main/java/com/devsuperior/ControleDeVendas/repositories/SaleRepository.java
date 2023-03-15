@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleTaxSuccessDTO;
 import com.devsuperior.ControleDeVendas.dto.SumBySellerDTO;
 import com.devsuperior.ControleDeVendas.dto.SumByTeamDTO;
@@ -72,5 +73,36 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 			+ "GROUP BY team.id, user.team.id ")
 	List<SumByTeamDTO> sumByTeam();
 	
+	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO(SUM(obj.calls), "
+			+ "COUNT(obj), "
+			+ "SUM(saleItems.price * saleItems.quantity)) "
+			+ "FROM Sale as obj "
+			+ "JOIN obj.items as saleItems "
+			+ "ON saleItems.id.sale.id = obj.id "
+			+ "WHERE obj.date BETWEEN :minDate AND :maxDate")
+	SaleSumTotalDTO saleSumTotalForAdmin(LocalDate minDate, LocalDate maxDate);
+	
+	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO(SUM(obj.calls), "
+			+ "COUNT(obj), "
+			+ "SUM(saleItems.price * saleItems.quantity)) "
+			+ "FROM Sale as obj "
+			+ "JOIN obj.items as saleItems "
+			+ "ON saleItems.id.sale.id = obj.id "
+			+ "WHERE obj.seller.id = :id "
+			+ "AND obj.date BETWEEN :minDate AND :maxDate")
+	SaleSumTotalDTO saleSumTotalForSeller(Long id, LocalDate minDate, LocalDate maxDate);
+	
+	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO(SUM(obj.calls), "
+			+ "COUNT(obj), "
+			+ "SUM(saleItems.price * saleItems.quantity)) "
+			+ "FROM Sale as obj "
+			+ "JOIN obj.items as saleItems "
+			+ "ON saleItems.id.sale.id = obj.id "
+			+ "JOIN obj.seller as seller "
+			+ "JOIN seller.team as sellerTeam "
+			+ "JOIN sellerTeam.managers as sellerManagers "
+			+ "WHERE sellerManagers.id = :id "
+			+ "AND obj.date BETWEEN :minDate AND :maxDate")
+	SaleSumTotalDTO saleSumTotalForManager(Long id, LocalDate minDate, LocalDate maxDate);
 	
 }

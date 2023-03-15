@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.ControleDeVendas.dto.SaleDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleItemDTO;
+import com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleTaxSuccessDTO;
 import com.devsuperior.ControleDeVendas.dto.SumBySellerDTO;
 import com.devsuperior.ControleDeVendas.dto.SumByTeamDTO;
@@ -222,5 +223,26 @@ public class SaleService {
 	public List<SaleDTO> findAllToExport() {
 		List<Sale> listSale = saleRepository.findAll();
 		return listSale.stream().map(x -> new SaleDTO(x)).collect(Collectors.toList());
+    }
+    
+    @Transactional(readOnly = true)
+    public SaleSumTotalDTO saleSumTotalOfDeals(String minDate, String  maxDate) {
+    	User user = authService.authenticated();
+    	LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
+		LocalDate min = minDate.equals("") ? today.minusDays(365) : LocalDate.parse(minDate);
+		LocalDate max = maxDate.equals("") ? today : LocalDate.parse(maxDate);
+    	if(user.hasRole("ROLE_MANAGER")) {
+    		SaleSumTotalDTO total = saleRepository.saleSumTotalForManager(user.getId(),min, max);
+        	return total;
+    	}
+    	else if (user.hasRole("ROLE_SELLER")) {
+    		SaleSumTotalDTO total = saleRepository.saleSumTotalForSeller(user.getId(),min, max);
+        	return total;
+    	}
+    	else {
+    		SaleSumTotalDTO total = saleRepository.saleSumTotalForAdmin(min, max);
+        	return total;
+    	}
+    	
     }
 }
