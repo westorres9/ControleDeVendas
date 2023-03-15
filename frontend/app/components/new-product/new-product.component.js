@@ -1,12 +1,13 @@
-function NewProductComponentController(ProductService,CategoryService, $window) {
+function NewProductComponentController(ProductService,CategoryService, $location) {
     var $ctrl = this;
+    $ctrl.category = "";
 
     $ctrl.insertProduct = () => {
         ProductService.insertProduct($ctrl.product).then((response) => {
             console.log(response.data);
             $ctrl.returnToPageProducts();
         }).catch((error) => {
-            console.log(error);
+            console.log(error)
         })
     }
 
@@ -18,15 +19,13 @@ function NewProductComponentController(ProductService,CategoryService, $window) 
     }
 
     $ctrl.returnToPageProducts = () => {
-        $window.location.href = "index.html#/admin/products"
+        $location.path("/admin/products")
     }
 
-    $ctrl.selectCategory = (category) => {
-        $ctrl.category = category
-        console.log($ctrl.category);
-        return $ctrl.category;
+    $ctrl.addCategory = () => {
+        var product = $ctrl.product.categories[0].push($ctrl.category);
+        return product;
     }
-
     $ctrl.$onInit = () => {
         $ctrl.getCategories();
     }

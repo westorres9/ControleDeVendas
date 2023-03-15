@@ -31,7 +31,7 @@ public class ProductService {
 	@Transactional(readOnly = true)
 	public List<ProductDTO> findAll() {
 		List<Product> list = productRepository.findAll();
-		return list.stream().map(x -> new ProductDTO(x)).collect(Collectors.toList());
+		return list.stream().map(x -> new ProductDTO(x, x.getCategories())).collect(Collectors.toList());
 	}
 	
 	@Transactional(readOnly = true)
@@ -53,7 +53,6 @@ public class ProductService {
 			Category cat = categoryRepository.getOne(catDto.getId());
 			entity.getCategories().add(cat);
 		}
-		entity.getCategories().add(categoryRepository.getOne(2L));
 		entity = productRepository.save(entity);
 		return new ProductDTO(entity);
 	}
@@ -66,7 +65,7 @@ public class ProductService {
 			entity.setDescription(dto.getDescription());
 			entity.setPrice(dto.getPrice());
 			entity.setImgUrl(dto.getImgUrl());
-			entity = productRepository.save(entity);
+			entity.getCategories().clear();
 			for(CategoryDTO catDto : dto.getCategories()) {
 				Category cat = categoryRepository.getOne(catDto.getId());
 				entity.getCategories().add(cat);

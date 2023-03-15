@@ -9,7 +9,7 @@
                         id="name" value="$ctrl.product.name" ng-model="$ctrl.product.name" required />
                 </div>
                 <div class="form-input">
-                    <input type="text" class="form-control base-input" placeholder="Descrição" name="Descrição"
+                    <input type="text" class="form-control base-input" placeholder="Descrição" name="description"
                         id="description" value="$ctrl.product.description" ng-model="$ctrl.product.description"
                         required />
                 </div>
@@ -20,21 +20,18 @@
                 <div class="form-input">
                     <input type="text" class="form-control base-input" placeholder="Url da Imagem do Produto"
                         name="imgUrl" id="imgUrl" value="$ctrl.product.imgUrl" ng-model="$ctrl.product.imgUrl"
-                        required />
+                       />
                 </div>
-
-
-                <div class="form-input">
-                    <label for="CategorySelect">Selecione uma categoria:</label>
-                    <select ng-model="category" ng-click="$ctrl.selectCategory(category)">
-                        <option ng-selected="!category">Default</option>
-                        <option ng-repeat="category in $ctrl.categories" ng-value="category.id">{{category.name}}</option>
-                    </select>
-                </div>
+                {{$ctrl.category}}
+                <label>Categorias:
+                    <select  name="category" ng-model="$ctrl.product.categories[0]" value="$ctrl.product.categories[0]" ng-options="category.name for category in $ctrl.categories"></select>
+                  </label><br/>
                 <button class="btn btn-success" ng-click="$ctrl.insertProduct($ctrl.product)"
                     type="submit">Salvar</button>
                 <button class="btn btn-danger" ng-click="$ctrl.returnToPageProducts()">Cancelar</button>
             </form>
+            {{$ctrl.product}}
         </div>
     </div>
+
 </div>

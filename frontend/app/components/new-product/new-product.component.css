@@ -24,6 +24,10 @@ select {
     padding: 2px 5px;
 }
 
+.form-select {
+    margin-bottom: 20px;
+}
+
 
 @media (min-width:992px) {
     .ds-form-card {
