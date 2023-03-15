@@ -70,6 +70,7 @@ public class ProductService {
 				Category cat = categoryRepository.getOne(catDto.getId());
 				entity.getCategories().add(cat);
 			}
+			entity = productRepository.save(entity);
 			return new ProductDTO(entity);
 		}
 		catch(EntityNotFoundException e) {

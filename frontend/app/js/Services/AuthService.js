@@ -18,7 +18,6 @@ function AuthService() {
         },
         setAuthority: (token) => {
             window.localStorage.setItem('Authority', angular.toJson(token));
-            console.log('Authority', token)
         },
         getAuthority: () => {
             const token = window.localStorage.getItem('Authority');
@@ -31,7 +30,6 @@ function AuthService() {
         },
         setUsername: (user) => {
             window.localStorage.setItem('userName', angular.toJson(user));
-            console.log('Username', user);
         },
         getUsername: () => {
             const user = window.localStorage.getItem('userName');
@@ -39,7 +37,6 @@ function AuthService() {
         },
         setProfileImage: (token) => {
             window.localStorage.setItem('profileImage', angular.toJson(token));
-            console.log('profileImg', token);
         },
         getProfileImage: () => {
             const profileImage = window.localStorage.getItem('profileImage');

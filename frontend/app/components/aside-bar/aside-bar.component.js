@@ -12,9 +12,7 @@ function AsideBarComponentController(AuthService) {
         const username = AuthService.getUsername();
         const authority = AuthService.getAuthority();
         const role = authority[0].authority;
-        console.log(role)
         $ctrl.loggedUser = {name: username, authority: role}
-        console.log($ctrl.loggedUser);
     }
 
 

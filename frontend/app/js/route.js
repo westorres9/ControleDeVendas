@@ -113,7 +113,6 @@ app.run(["$rootScope", "$location", "AuthService", function($rootScope, $locatio
             var token = AuthService.getToken();
             var auth = AuthService.getAuthority();
             var authority = auth[0].authority;
-            console.log(authority)
             if(!token) {
                 window.localStorage.clear();
                 AuthService.removeToken();

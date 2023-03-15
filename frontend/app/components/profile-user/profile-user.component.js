@@ -8,8 +8,6 @@ function ProfileUserComponentController(AuthService) {
             'name': username,
             'profileImage': profileImage
         }
-    
-        console.log($ctrl.loggedUser);
     }
     
     $ctrl.$onInit = () => {

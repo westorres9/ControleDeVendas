@@ -39,8 +39,7 @@ public class CustomerService {
 	@Transactional
 	public CustomerDTO insert(CustomerDTO dto) {
 		Customer entity = new Customer();
-		entity.setFirstName(dto.getFirstName());
-		entity.setLastName(dto.getLastName());
+		entity.setName(dto.getName());
 		entity.setEmail(dto.getEmail());
 		entity.setBirthDate(dto.getBirthDate());
 		entity.setMonthlyIncome(dto.getMonthlyIncome());
@@ -52,8 +51,7 @@ public class CustomerService {
 	public CustomerDTO update(Long id, CustomerDTO dto) {
 		try {
 			Customer entity = customerRepository.getOne(id);
-			entity.setFirstName(dto.getFirstName());
-			entity.setLastName(dto.getLastName());
+			entity.setName(dto.getName());
 			entity.setEmail(dto.getEmail());
 			entity.setBirthDate(dto.getBirthDate());
 			entity.setMonthlyIncome(dto.getMonthlyIncome());

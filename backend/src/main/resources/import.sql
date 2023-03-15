@@ -23,10 +23,10 @@ INSERT INTO tb_user(name,email, password, team_id, img_url ) VALUES ('ralf','ral
 INSERT INTO tb_user(name,email, password, team_id, img_url ) VALUES ('vice','vice@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G',2, 'https://user-images.githubusercontent.com/91570669/216034765-65575bcd-452a-4666-9068-deea3345bf0e.png');
 INSERT INTO tb_user(name,email, password, team_id, img_url ) VALUES ('mature','mature@gmail.com', '$2a$10$sJTnsO99MufYDAZLbR59reee38qQoPZzlaYEXY2G8HKVdH0N6q52G',2, 'https://user-images.githubusercontent.com/91570669/216036010-5e7de539-cf40-4a49-a13a-81e73319ab4b.png');
 
-INSERT INTO tb_customer(first_name, last_name, email, birth_date, monthly_income, created_at ) VALUES ('Marta', 'Silva','marta@gmail.com', '1987-12-13', 2500.0, now());
-INSERT INTO tb_customer(first_name, last_name, email, birth_date, monthly_income, created_at  ) VALUES ('Roberto', 'Carlos','rcarlos@gmail.com', '1988-04-11', 2000.0, now());
-INSERT INTO tb_customer(first_name, last_name, email, birth_date, monthly_income, created_at  ) VALUES ('Jose','Carlos', 'jcarlos@gmail.com', '1994-06-12', 4000.0, now());
-INSERT INTO tb_customer(first_name, last_name, email, birth_date, monthly_income, created_at  ) VALUES ('Luis','Inacio', 'lula@gmail.com', '1957-12-13', 800000.0, now());
+INSERT INTO tb_customer(name, email, birth_date, monthly_income, created_at ) VALUES ('Marta Silva','marta@gmail.com', '1987-12-13', 2500.0, now());
+INSERT INTO tb_customer(name, email, birth_date, monthly_income, created_at ) VALUES ('Roberto Carlos','rcarlos@gmail.com', '1988-04-11', 2000.0, now());
+INSERT INTO tb_customer(name, email, birth_date, monthly_income, created_at ) VALUES ('Jose Carlos', 'jcarlos@gmail.com', '1994-06-12', 4000.0, now());
+INSERT INTO tb_customer(name, email, birth_date, monthly_income, created_at ) VALUES ('Luis Inacio', 'lula@gmail.com', '1957-12-13', 800000.0, now());
 
 INSERT INTO tb_role(authority) VALUES ('ROLE_SELLER');
 INSERT INTO tb_role(authority) VALUES ('ROLE_MANAGER');

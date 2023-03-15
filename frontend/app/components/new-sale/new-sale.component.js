@@ -1,4 +1,4 @@
-function NewSaleController(SaleService, $location) {
+function NewSaleController(SaleService, CustomerService,ProductService, $location) {
     var $ctrl = this;
 
     $ctrl.insertNewSale = () => {
@@ -11,6 +11,25 @@ function NewSaleController(SaleService, $location) {
         }).finally(() => {
             $ctrl.returnToPageSales();
         })
+    }
+
+    $ctrl.getCustomers = () => {
+        CustomerService.getCustomers().then((response) => {
+            $ctrl.customers = response.data;
+            console.log($ctrl.customers)
+        })
+    }
+
+    $ctrl.getProducts = () => {
+        ProductService.getProducts().then((response) => {
+            $ctrl.products = response.data;
+            console.log($ctrl.products);
+        })
+    }
+
+    $ctrl.$onInit = () => {
+        $ctrl.getCustomers();
+        $ctrl.getProducts();
     }
 
     $ctrl.returnToPageSales = () => {

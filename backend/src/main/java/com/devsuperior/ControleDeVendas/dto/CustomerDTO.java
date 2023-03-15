@@ -9,8 +9,7 @@ public class CustomerDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	private String firstName;
-	private String lastName;
+	private String name;
 	private String email;
 	private LocalDate birthDate;
 	private Double monthlyIncome;
@@ -18,11 +17,10 @@ public class CustomerDTO implements Serializable {
 	public CustomerDTO() {
 	}
 
-	public CustomerDTO(Long id, String firstName, String lastName, String email, LocalDate birthDate,
+	public CustomerDTO(Long id, String name, String email, LocalDate birthDate,
 			Double monthlyIncome) {
 		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.name = name;
 		this.email = email;
 		this.birthDate = birthDate;
 		this.monthlyIncome = monthlyIncome;
@@ -30,8 +28,7 @@ public class CustomerDTO implements Serializable {
 
 	public CustomerDTO(Customer entity) {
 		this.id = entity.getId();
-		this.firstName = entity.getFirstName();
-		this.lastName = entity.getLastName();
+		this.name = entity.getName();
 		this.email = entity.getEmail();
 		this.birthDate = entity.getBirthDate();
 		this.monthlyIncome = entity.getMonthlyIncome();
@@ -45,20 +42,12 @@ public class CustomerDTO implements Serializable {
 		this.id = id;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
@@ -87,6 +76,6 @@ public class CustomerDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return getFirstName() +" "+ getLastName();
+		return getName();
 	}
 }

@@ -40,6 +40,15 @@
                     ng-model="$ctrl.sale.amount" 
                     required>
                 </div>
+                <div>
+                    <label for="customer">Selecione o Cliente:</label>
+                    <select class="form-select" aria-label="Selecione o cliente" name="customer" ng-model="$ctrl.customer" value="$ctrl.customer" ng-options="customer.name for customer in $ctrl.customers" required></select>
+                </div>
+                <div>
+                    <label for="product">Selecione um Produto</label>
+                    <select class="form-select" aria-label="Selecione o cliente" name="product" ng-model="$ctrl.product" value="$ctrl.product" ng-options="product.name for product in $ctrl.products" required></select>
+                </div>
+
                 <button class="btn btn-success" ng-click="$ctrl.insertNewSale($ctrl.sale)" type="submit">Salvar</button>
                 <button class="btn btn-danger" ng-click="$ctrl.returnToPageSales()">Cancelar</button>
             </form>

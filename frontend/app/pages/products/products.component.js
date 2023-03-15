@@ -29,8 +29,6 @@ function ProductsController(ProductService) {
       ProductService.deleteProductById(product).then((response) => {
         $ctrl.getProducts();
         $ctrl.closeWarning();
-      }).catch((error) => {
-        console.log(error.status)
       })
     }
   }

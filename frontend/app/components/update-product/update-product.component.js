@@ -1,19 +1,31 @@
-function UpdateProductComponentController(ProductService, $routeParams, $location) {
+function UpdateProductComponentController(ProductService,CategoryService, $routeParams, $location) {
     var $ctrl = this;
+    $ctrl.product = {};
+    $ctrl.categories = [];
+    $ctrl.category = {};
+    $ctrl.product.categories = [];
 
     $ctrl.updateProduct = () => {
-        ProductService.updateProduct($ctrl.product).then((response) => {
-            console.log(response.data);
-            window.location = "index.html#/admin/products"
-        }).catch((error) => {
-            console.log(error)
-        });
+        $ctrl.product.categories.pop();    
+        $ctrl.product.categories.push($ctrl.category);
+            ProductService.updateProduct($ctrl.product).then((response) => {
+                console.log(response.data);
+                $location.path("/admin/products")
+            })  
     }
 
     $ctrl.getProductById = (id) => {
         ProductService.getProductsById(id).then((response) => {
             console.log(response.data);
-            $ctrl.product = response.data;  
+            $ctrl.product = response.data;
+            $ctrl.category = $ctrl.product.categories[0];
+            console.log($ctrl.category);
+        })
+    }
+
+    $ctrl.getCategories = () => {
+        CategoryService.getCategories().then((response) => {
+          $ctrl.categories = response.data;
         })
     }
 
@@ -23,6 +35,7 @@ function UpdateProductComponentController(ProductService, $routeParams, $locatio
 
     $ctrl.$onInit = () => {
         $ctrl.getProductById($routeParams.id);
+        $ctrl.getCategories();
     }
 }
 
