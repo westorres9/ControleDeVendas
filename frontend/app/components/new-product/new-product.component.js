@@ -1,8 +1,13 @@
 function NewProductComponentController(ProductService,CategoryService, $location) {
+    
     var $ctrl = this;
-    $ctrl.category = "";
+    $ctrl.product = {};
+    $ctrl.categories = [];
+    $ctrl.category = {};
+    $ctrl.product.categories = [];
 
     $ctrl.insertProduct = () => {
+        $ctrl.product.categories.push($ctrl.category);
         ProductService.insertProduct($ctrl.product).then((response) => {
             console.log(response.data);
             $ctrl.returnToPageProducts();
@@ -23,7 +28,7 @@ function NewProductComponentController(ProductService,CategoryService, $location
     }
 
     $ctrl.addCategory = () => {
-        var product = $ctrl.product.categories[0].push($ctrl.category);
+        var product = $ctrl.product.categories.push($ctrl.category);
         return product;
     }
     $ctrl.$onInit = () => {

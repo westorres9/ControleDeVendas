@@ -24,7 +24,7 @@
                 </div>
                 {{$ctrl.category}}
                 <label>Categorias:
-                    <select  name="category" ng-model="$ctrl.product.categories[0]" value="$ctrl.product.categories[0]" ng-options="category.name for category in $ctrl.categories"></select>
+                    <select  name="category" ng-model="$ctrl.category" value="$ctrl.category" ng-options="category.name for category in $ctrl.categories" required></select>
                   </label><br/>
                 <button class="btn btn-success" ng-click="$ctrl.insertProduct($ctrl.product)"
                     type="submit">Salvar</button>

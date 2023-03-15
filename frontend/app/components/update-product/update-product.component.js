@@ -13,7 +13,7 @@ function UpdateProductComponentController(ProductService, CategoryService, $rout
     $ctrl.getProductById = (id) => {
         ProductService.getProductsById(id).then((response) => {
             console.log(response.data);
-            $ctrl.product = response.data;
+            $ctrl.product = response.data;  
         })
     }
 
