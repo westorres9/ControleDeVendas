@@ -1,15 +1,9 @@
-function SalesController(SaleService, ReportService) {
+function SalesController(SaleService, ReportService, $location) {
   var $ctrl = this;
-  $ctrl.AllSales = [];
+  $ctrl.sales = [];
   $ctrl.isOpen = false;
   $ctrl.warningVisible = false;
-
-  $ctrl.size = 12;
   $ctrl.page = 0;
-  let mindate = '2022-01-01';
-  let maxdate = '2022-12-31';
-  $ctrl.mindate = mindate;
-  $ctrl.maxdate = maxdate;
 
   $ctrl.resetPage = () => {
     $ctrl.page = 0;
@@ -30,11 +24,9 @@ function SalesController(SaleService, ReportService) {
     $ctrl.getAllSales($ctrl.page, $ctrl.size);
   }
 
-  $ctrl.getAllSales = () => {
-    // $ctrl.minDate
-    // $ctrl.maxDate
-    SaleService.getAllSales($ctrl.page, $ctrl.size, $ctrl.mindate, $ctrl.maxdate).then((response) => {
-        $ctrl.AllSales = response.data.content;
+  $ctrl.getSales = () => {
+    SaleService.getSales($ctrl.page).then((response) => {
+        $ctrl.sales = response.data.content;
     });
   };
 
@@ -43,13 +35,13 @@ function SalesController(SaleService, ReportService) {
   }
 
   $ctrl.$onInit = () => {
-    $ctrl.getAllSales($ctrl.page, $ctrl.size,$ctrl.mindate, $ctrl.maxdate);
+    $ctrl.getSales();
   }
 
 
   $ctrl.selectSale = (sale) => {
     $ctrl.sale = sale;
-    window.location.href = `index.html#/admin/sales/${sale.id}`;
+    $location(`index.html#/admin/sales/${sale.id}`);
     return $ctrl.sale;
   }
 

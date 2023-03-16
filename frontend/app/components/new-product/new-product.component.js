@@ -29,6 +29,7 @@ function NewProductComponentController(ProductService,CategoryService, $location
         var product = $ctrl.product.categories.push($ctrl.category);
         return product;
     }
+    
     $ctrl.$onInit = () => {
         $ctrl.getCategories();
     }

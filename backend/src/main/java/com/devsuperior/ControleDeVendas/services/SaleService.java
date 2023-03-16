@@ -113,6 +113,7 @@ public class SaleService {
             	saleItemDto.getSubTotal();
             	entity.getItems().add(saleItem);
             }
+            entity.setCalls(entity.getItems().size());
             entity.setStatus(SaleStatus.PENDING);
             entity.setCustomer(customerRepository.getOne(dto.getCustomer().getId()));
             entity.setSeller(user);

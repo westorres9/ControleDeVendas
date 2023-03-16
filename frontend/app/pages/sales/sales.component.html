@@ -7,7 +7,6 @@
       </div>
       <div>
         <table class="table table-hover">
-
           <div class="dsvendas-pagination-container">
             <img class="btn-page-previous" ng-click="$ctrl.previousPage()" src="/app/assets/img/arrow.svg" alt="">
             <p>Pagina {{$ctrl.page + 1}}</p>
@@ -27,7 +26,7 @@
             </tr>
           </thead>
           <tbody >
-            <tr ng-repeat="sale in $ctrl.AllSales">
+            <tr ng-repeat="sale in $ctrl.sales">
               <th scope="row"><img src="/app/assets/img/sales.png" alt="" ></th>
               <td>{{sale.id}}</td>
               <td>{{sale.seller.name}}</td>

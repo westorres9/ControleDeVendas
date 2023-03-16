@@ -4,6 +4,19 @@ app.service('SaleService', function($http) {
 
     const BASE_URL = 'http://localhost:8080'
 
+    $ctrl.getSales = (page) => {
+        var request = $http(
+            {
+                method: 'get',
+                url: `${BASE_URL}/sales`,
+                params: {
+                    'page': page
+                }
+            }
+        )
+        return request;
+    }
+
     $ctrl.getAllSales = ( page, size, mindate, maxdate) => {
         
         var request = $http(
