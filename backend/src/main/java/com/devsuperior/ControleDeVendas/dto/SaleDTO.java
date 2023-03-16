@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.constraints.NotEmpty;
+
 import com.devsuperior.ControleDeVendas.entities.Sale;
 import com.devsuperior.ControleDeVendas.entities.SaleItem;
 import com.devsuperior.ControleDeVendas.entities.SaleStatus;
@@ -29,6 +31,7 @@ public class SaleDTO implements Serializable {
 	private Integer calls;
 	
 	@CsvBindByName(column = "Cliente", required = true)
+	@NotEmpty(message = "Cliente deve ser informado")
 	private CustomerDTO customer;
 	
 	@CsvBindByName(column = "Vendedor", required = true)
@@ -41,6 +44,7 @@ public class SaleDTO implements Serializable {
 	private PaymentDTO payment;
 	
 	@CsvIgnore
+	@NotEmpty(message = "Deve conter pelo menos um item de pedido na venda")
 	private List<SaleItemDTO> items = new ArrayList<>();
 	
 	public SaleDTO() {

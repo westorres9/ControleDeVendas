@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
 
 import com.devsuperior.ControleDeVendas.entities.Category;
 import com.devsuperior.ControleDeVendas.entities.Product;
@@ -15,9 +16,14 @@ public class ProductDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	@NotEmpty(message = "nome do produto deve ser preenchido")
 	private String name;
+	@NotEmpty(message = "Descrição deve ser preenchido")
 	private String description;
+	@Positive(message = "Preço do produto nao pode ser negativo")
+	@NotEmpty(message = "Preço deve ser preenchido")
 	private Double price;
+	@NotEmpty(message = "URL Imagem deve ser preenchido")
 	private String imgUrl;
 	
 	@NotEmpty(message = "produto deve ter uma categoria")

@@ -3,6 +3,8 @@ package com.devsuperior.ControleDeVendas.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -49,7 +51,7 @@ public class SaleResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<SaleDTO> insert(@RequestBody SaleDTO dto) {
+	public ResponseEntity<SaleDTO> insert(@Valid @RequestBody SaleDTO dto) {
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);

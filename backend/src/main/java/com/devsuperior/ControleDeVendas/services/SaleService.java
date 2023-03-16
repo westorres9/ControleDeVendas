@@ -145,8 +145,7 @@ public class SaleService {
                     entity.setPayment(payment);
                     saleRepository.save(entity);
                     return new SaleDTO(entity);
-                }
-                
+                } 
             }
             catch (EntityNotFoundException e) {
                 throw new ResourceNotFoundException("Id not found " + id);

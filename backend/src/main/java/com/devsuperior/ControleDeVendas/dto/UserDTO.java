@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 import com.devsuperior.ControleDeVendas.entities.Role;
 import com.devsuperior.ControleDeVendas.entities.User;
@@ -18,6 +19,7 @@ public class UserDTO implements Serializable{
 	private String name;
 	@Email(message = "Favor insira um email valido")
 	private String email;
+	@NotEmpty(message = "URL imagem do usuario deve ser preenchido")
 	private String imgUrl;
 	
 	public UserDTO() {

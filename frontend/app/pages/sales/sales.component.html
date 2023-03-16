@@ -31,7 +31,7 @@
               <td>{{sale.id}}</td>
               <td>{{sale.seller.name}}</td>
               <td>{{sale.status}}</td>
-              <td>{{sale.customer.firstName}}</td>
+              <td>{{sale.customer.name}}</td>
               <td>{{sale.date  |  date:'dd/MM/yyyy'}}</td>
               <td>{{sale.total  | currency: 'R$'}}</td>
               <td><a ng-href="#/admin/sales/{{sale.id}}"><img src="/app/assets/img/edit.svg" alt=""></a></td>

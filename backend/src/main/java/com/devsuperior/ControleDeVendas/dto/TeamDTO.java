@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
+
 import com.devsuperior.ControleDeVendas.entities.Team;
 import com.devsuperior.ControleDeVendas.entities.User;
 
@@ -11,7 +13,9 @@ public class TeamDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	@NotEmpty(message = "Nome da equipe deve ser preenchido")
 	private String name;
+	@NotEmpty(message = "Url da logo da equipe deve ser preenchido")
 	private String imgUrl;
 	private List<UserDTO> sellers = new ArrayList<>();
 	

@@ -2,12 +2,15 @@ package com.devsuperior.ControleDeVendas.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
 import com.devsuperior.ControleDeVendas.entities.Category;
 
 public class CategoryDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	@NotEmpty(message = "nome da categoria deve ser preenchido")
 	private String name;
 	
 	public CategoryDTO() {

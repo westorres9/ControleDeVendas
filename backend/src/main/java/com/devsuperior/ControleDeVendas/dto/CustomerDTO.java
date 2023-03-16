@@ -3,15 +3,25 @@ package com.devsuperior.ControleDeVendas.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.PositiveOrZero;
+
 import com.devsuperior.ControleDeVendas.entities.Customer;
 
 public class CustomerDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+	@NotEmpty(message = "nome da cliente deve ser preenchido")
 	private String name;
+	@Email(message = "Favor insira um email válido")
+	@NotEmpty(message = "Email deve ser preenchido")
 	private String email;
+	@NotEmpty(message = "Data de nascimento ser preenchido")
 	private LocalDate birthDate;
+	@PositiveOrZero(message = "Renda mensal deve ser 0 ou valor positivo")
+	@NotEmpty(message = "Renda mensal deve ser preenchido")
 	private Double monthlyIncome;
 
 	public CustomerDTO() {
