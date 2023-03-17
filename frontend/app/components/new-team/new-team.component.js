@@ -14,7 +14,7 @@ function NewTeamController(TeamService, $location) {
     }
 
     $ctrl.returnToPageTeams = () => {
-        $location.path("/admin/customers")
+        $location.path("/admin/teams")
     }
 }
 

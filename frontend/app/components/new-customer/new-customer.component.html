@@ -3,7 +3,7 @@
     <div class="update-sale-form-container ds-container">
         <h2>Cadastrar Novo Cliente</h2>
         <div class="ds-form-card">
-            <form action="">
+            <form>
                 <div class="form-input">
                     <input type="text" class="form-control base-input" placeholder="Nome" name="name"
                         id="name" value="$ctrl.customer.name" ng-model="$ctrl.customer.name" required />
@@ -20,8 +20,7 @@
                 <div class="form-input">
                     <input type="date" id="birthDate" name="birthDate" value="$ctrl.customer.birthDate" ng-model="$ctrl.customer.birthDate" min="1910-01-01" max="LocalDate.now()" required>
                 </div>
-                <button class="btn btn-success" ng-click="$ctrl.insertCustomer($ctrl.customer)"
-                    type="submit">Salvar</button>
+                <button class="btn btn-success" ng-click="$ctrl.insertCustomer($ctrl.customer)">Salvar</button>
                 <button class="btn btn-danger" ng-click="$ctrl.returnToPageCustomers()">Cancelar</button>
             </form>
         </div>

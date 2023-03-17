@@ -1,18 +1,26 @@
-function NewSaleController(SaleService, CustomerService,ProductService, $location) {
+function NewSaleController(SaleService, CustomerService,ProductService, $location, toaster) {
     var $ctrl = this;
     $ctrl.sale = {};
     $ctrl.customer = {};
     $ctrl.sale.customer = {};
     $ctrl.sale.items = [];
+    $ctrl.quantity = 1;
     $ctrl.saleItem = {};
+    $ctrl.total = 0;
 
     $ctrl.insertSale = () => {
+        $ctrl.sale.customer = $ctrl.customer;
         SaleService.insertSale($ctrl.sale).then((response) => {
-            console.log(response.data);
-            $ctrl.returnToPageSales();
+            console.log(response.data); 
+            $ctrl.popSuccess();
+            toaster.clear($ctrl.popSuccess);        
         }).catch((error) => {
-            console.log(error)
-        })
+            console.log(error);
+            $ctrl.popError();
+            toaster.clear($ctrl.popError)
+        }).finally(
+            $ctrl.returnToPageSales()
+        )
     }
 
     $ctrl.getCustomers = () => {
@@ -35,19 +43,40 @@ function NewSaleController(SaleService, CustomerService,ProductService, $locatio
             productId: $ctrl.product.id,
             name: $ctrl.product.name,
             price: $ctrl.product.price,
-            quantity: 1,
+            quantity: $ctrl.quantity,
             imgUrl: $ctrl.product.imgUrl
         }
-        $ctrl.sale.items.push($ctrl.saleItem);
+        $ctrl.total += $ctrl.saleItem.price * $ctrl.saleItem.quantity;
+        const item = $ctrl.sale.items.find(x => x.productId === $ctrl.saleItem.productId);
+        if (!item) {
+            $ctrl.sale.items.push($ctrl.saleItem);
+        }
+        else {
+            $ctrl.increaseCartQuantity();
+        }
+        $ctrl.quantity = 1;
     }
 
-    $ctrl.increaseQuantity = () => {
+    $ctrl.increaseProductQuantity = () => {
+        $ctrl.quantity++
+    }
+
+    $ctrl.decreaseProductQuantity = () => {
+        if($ctrl.quantity > 1) {
+            $ctrl.quantity --;
+        }
+        else {
+            $ctrl.quantity = 1;
+        }
+    }
+
+    $ctrl.increaseCartQuantity = () => {
         $ctrl.saleItem.quantity++
     }
 
-    $ctrl.decreaseQuantity = () => {
+    $ctrl.decreaseCartQuantity = () => {
         if($ctrl.saleItem.quantity > 1) {
-            $ctrl.saleItem.quantity--;
+            $ctrl.saleItem.quantity --;
         }
         else {
             $ctrl.sale.items.pop();
@@ -61,6 +90,14 @@ function NewSaleController(SaleService, CustomerService,ProductService, $locatio
 
     $ctrl.returnToPageSales = () => {
         $location.path("/admin/sales")
+    }
+
+    $ctrl.popSuccess = function () {
+        toaster.pop({ type: 'success', body: 'Venda cadastrada com sucesso', toasterId: 1 });
+    }
+          
+    $ctrl.popError = function () {
+        toaster.pop({ type: 'error', body: 'Erro ao cadastrar venda', toasterId: 2 });
     }
 }
 

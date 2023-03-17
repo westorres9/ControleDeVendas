@@ -18,7 +18,6 @@ public class CustomerDTO implements Serializable {
 	@Email(message = "Favor insira um email válido")
 	@NotEmpty(message = "Email deve ser preenchido")
 	private String email;
-	@NotEmpty(message = "Data de nascimento ser preenchido")
 	private LocalDate birthDate;
 	@PositiveOrZero(message = "Renda mensal deve ser 0 ou valor positivo")
 	@NotEmpty(message = "Renda mensal deve ser preenchido")

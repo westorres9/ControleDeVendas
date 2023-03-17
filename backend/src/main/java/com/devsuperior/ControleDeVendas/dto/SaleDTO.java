@@ -31,7 +31,6 @@ public class SaleDTO implements Serializable {
 	private Integer calls;
 	
 	@CsvBindByName(column = "Cliente", required = true)
-	@NotEmpty(message = "Cliente deve ser informado")
 	private CustomerDTO customer;
 	
 	@CsvBindByName(column = "Vendedor", required = true)

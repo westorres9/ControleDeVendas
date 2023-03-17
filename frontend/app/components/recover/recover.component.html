@@ -1,21 +1,23 @@
-
 <div class="ds-recover-card-container">
     <toaster-container toaster-options="{'toaster-id': 1, 
-    'animation-class': 'toast-top-right'}"></toaster-container>
-<toaster-container toaster-options="{'toaster-id': 2, 
-'animation-class': 'toast-top-right'}"></toaster-container>
-
+    'animation-class': 'toast-top-right'}">
+    </toaster-container>
+    <toaster-container toaster-options="{'toaster-id': 2, 
+    'animation-class': 'toast-top-right'}">
+    </toaster-container>
     <div class="ds-recover-card-form">
         <h1>Redefinição de senha</h1>
         <form ng-submit="$ctrl.RecoverAccount(email)" required>
             <div class="input-container">
-                <label for="email" class="form-label">Nós lhe enviaremos um email com instruções sobre como redefiní-la.</label>
-                <input type="text" class="form-control base-input" name="email" placeholder="Informe o seu email" ng-model="email" required>
+                <label for="email" class="form-label">Nós lhe enviaremos um email com instruções sobre como
+                    redefiní-la.</label>
+                <input type="text" class="form-control base-input" name="email" placeholder="Informe o seu email"
+                    ng-model="email" required>
                 <div class="valid-feedback">
                     Looks good
                 </div>
             </div>
-                <button class="btn btn-primary text-white ds-btn-primary recover-btn" type="submit">Enviar</button>
+            <button class="btn btn-primary text-white ds-btn-primary recover-btn" type="submit">Enviar</button>
         </form>
     </div>
 </div>

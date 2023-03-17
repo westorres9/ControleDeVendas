@@ -12,7 +12,7 @@ function NewCustomerComponentController(CustomerService, $location) {
     }
 
     $ctrl.returnToPageCustomers = () => {
-        $location.path("/admin/customers")
+        $location.path("/admin/sales/new")
     }
 }
 
