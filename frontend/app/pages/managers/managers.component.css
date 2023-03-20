@@ -1,0 +1,35 @@
+.ds-container {
+    margin: 0 auto;
+    padding: 20px 200px;
+}
+.manager-card {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.manager-card-list {
+    background-color: #FFF;
+    width: 900px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.manager-card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+}
+
+.manager-profile-image img {
+    height: 50px;
+    width: 50px;
+}

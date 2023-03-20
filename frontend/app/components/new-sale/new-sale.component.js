@@ -13,10 +13,7 @@ function NewSaleController(SaleService, CustomerService,ProductService, $locatio
         SaleService.insertSale($ctrl.sale).then((response) => {
             console.log(response.data); 
             $ctrl.popSuccess();
-            toaster.clear($ctrl.popSuccess);
-            setTimeout(() => {
-                $ctrl.returnToPageSales();
-            }, 3);     
+            toaster.clear($ctrl.popSuccess);   
         }).catch((error) => {
             console.log(error);
             $ctrl.popError();

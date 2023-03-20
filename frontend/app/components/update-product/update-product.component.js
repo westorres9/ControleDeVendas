@@ -1,4 +1,4 @@
-function UpdateProductComponentController(ProductService,CategoryService, $routeParams, $location) {
+function UpdateProductComponentController(ProductService,CategoryService, $routeParams, $location, toaster) {
     var $ctrl = this;
     $ctrl.product = {};
     $ctrl.categories = [];
@@ -10,8 +10,11 @@ function UpdateProductComponentController(ProductService,CategoryService, $route
         $ctrl.product.categories.push($ctrl.category);
             ProductService.updateProduct($ctrl.product).then((response) => {
                 console.log(response.data);
-                $location.path("/admin/products")
-            })  
+                $ctrl.popSuccess();
+            }).catch((error) => {
+                console.log(error);
+                $ctrl.popError();
+            }) 
     }
 
     $ctrl.getProductById = (id) => {
@@ -36,6 +39,14 @@ function UpdateProductComponentController(ProductService,CategoryService, $route
     $ctrl.$onInit = () => {
         $ctrl.getProductById($routeParams.id);
         $ctrl.getCategories();
+    }
+
+    $ctrl.popSuccess = function () {
+        toaster.pop({ type: 'note', body: 'Produto atualizado com sucesso', toasterId: 1 });
+    }
+
+    $ctrl.popError = function () {
+        toaster.pop({ type: 'error', body: 'Erro ao atualizar Produto', toasterId: 2 });
     }
 }
 

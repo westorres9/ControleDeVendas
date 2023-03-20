@@ -20,6 +20,10 @@ function config($routeProvider) {
         template: '<admin></admin>',
         authenticated: true
     })
+    .when('/admin/dashboard', {
+        template: '<dashboard></dashboard>',
+        authenticated: true
+    })
     .when('/admin/sales', {
         template: '<sales></sales>',
         authenticated: true,
@@ -98,6 +102,14 @@ function config($routeProvider) {
     })
     .when('/admin/sellers/:id', {
         template: '<update-seller></update-seller>',
+        authenticated: true
+    })
+    .when('/admin/managers', {
+        template: '<managers></managers>',
+        authenticated: true
+    })
+    .when('/admin/managers/new', {
+        template: '<new-manager></new-manager>',
         authenticated: true
     })
     .when('/admin/reports', {

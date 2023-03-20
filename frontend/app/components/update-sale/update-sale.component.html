@@ -2,45 +2,40 @@
     <aside-bar></aside-bar>
     <div class="update-sale-form-container ds-container">
         <h2>Atualizar Nova Venda</h2>
-        <div class="ds-form-card">
-            <form action="">
-                <div class="form-input">
-                    <input 
-                    type="text"
-                    class="form-control base-input" 
-                    placeholder="Visitas"  
-                    name="visited" 
-                    id="visited"
-                    value="$ctrl.sale.visited"
-                    ng-model="$ctrl.sale.visited" 
-                    required
-                    />
-                </div>
-                <div class="form-input">
-                    <input 
-                    type="text" 
-                    class="form-control base-input" 
-                    placeholder="Vendas"  
-                    name="deals" 
-                    id="deals"
-                    value="$ctrl.sale.deals"
-                    ng-model="$ctrl.sale.deals" 
-                    required>
-                </div>
-                <div class="form-input">
-                    <input 
-                    type="text" 
-                    class="form-control base-input" 
-                    placeholder="Total"  
-                    name="amount"
-                    id="amount"
-                    value="$ctrl.sale.amount"
-                    ng-model="$ctrl.sale.amount" 
-                    required>
-                </div>
-                <button class="btn btn-primary" ng-click="$ctrl.updateSale($ctrl.sale)" type="submit">Atualizar</button>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Vendedor</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Pago ?</th>
+                    <th scope="col">#</th>
+                  </tr>
+                </thead>
+                <tbody >
+                  <tr>
+                    <th scope="row"><img src="/app/assets/img/sales.png" alt="" ></th>
+                    <td>{{$ctrl.sale.id}}</td>
+                    <td>{{$ctrl.sale.seller.name}}</td>
+                    <td>{{$ctrl.sale.status}}</td>
+                    <td>{{$ctrl.sale.customer.name}}</td>
+                    <td>{{$ctrl.sale.date  |  date:'dd/MM/yyyy'}}</td>
+                    <td>{{$ctrl.sale.total  | currency: 'R$'}}</td>
+                    <td>{{$ctrl.sale.payment === null ? 'Não': 'Sim' }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+                <button class="btn btn-primary" ng-click="$ctrl.registryPayment()">Registrar pagamento</button>
+                
+                <div class="update-sale-button">
+                    <button class="btn btn-primary" ng-click="$ctrl.updateSale($ctrl.sale)" type="submit">Salvar Alterações</button>
                 <button class="btn btn-danger" ng-click="$ctrl.returnToPageSales()">Cancelar</button>
-            </form>
-        </div>
+                </div>
     </div>
 </div>

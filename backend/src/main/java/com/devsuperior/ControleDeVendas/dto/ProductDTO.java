@@ -20,8 +20,6 @@ public class ProductDTO implements Serializable {
 	private String name;
 	@NotEmpty(message = "Descrição deve ser preenchido")
 	private String description;
-	@Positive(message = "Preço do produto nao pode ser negativo")
-	@NotEmpty(message = "Preço deve ser preenchido")
 	private Double price;
 	@NotEmpty(message = "URL Imagem deve ser preenchido")
 	private String imgUrl;

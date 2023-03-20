@@ -1,12 +1,12 @@
-function UpdateCustomerComponentController(CustomerService, $routeParams, $location) {
+function UpdateCustomerComponentController(CustomerService, $routeParams, $location, toaster) {
     var $ctrl = this;
     $ctrl.updateCustomer = () => {
         CustomerService.updateCustomer($ctrl.customer).then((response) => {
             console.log(response.data);
-            $location.url();
-            $ctrl.returnToPageCustomers();
+            $ctrl.popSuccess();
         }).catch((error) => {
-            console.log(error)
+            console.log(error);
+            $ctrl.popError();
         });
     }
 
@@ -19,6 +19,14 @@ function UpdateCustomerComponentController(CustomerService, $routeParams, $locat
 
     $ctrl.returnToPageCustomers = () => {
         $location.path("/admin/customers")
+    }
+
+    $ctrl.popSuccess = function () {
+        toaster.pop({ type: 'note', body: 'Cliente atualizado com sucesso', toasterId: 1 });
+    }
+
+    $ctrl.popError = function () {
+        toaster.pop({ type: 'error', body: 'Erro ao atualizar Cliente', toasterId: 2 });
     }
 
     $ctrl.$onInit = () => {

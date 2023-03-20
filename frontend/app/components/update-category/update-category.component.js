@@ -1,13 +1,13 @@
-function UpdateCategoryComponentController(CategoryService, $routeParams,$location) {
+function UpdateCategoryComponentController(CategoryService, $routeParams,$location, toaster) {
   var $ctrl = this;
 
   $ctrl.updateCategory = () => {  
     CategoryService.updateCategory($ctrl.category).then((response) => {
         console.log(response.data);
-        $location.url();
-        $ctrl.returnToPageCategories();
+        $ctrl.popSuccess();
     }).catch((error) => {
-        console.log(error)
+        console.log(error);
+        $ctrl.popError();
     });
 }
 
@@ -20,6 +20,14 @@ $ctrl.getCategoryById = (id) => {
 
 $ctrl.returnToPageCategories = () => {
   $location.path("/admin/categories");
+}
+
+$ctrl.popSuccess = function () {
+  toaster.pop({ type: 'note', body: 'Categoria atualizada com sucesso', toasterId: 1 });
+}
+    
+$ctrl.popError = function () {
+  toaster.pop({ type: 'error', body: 'Erro ao atualizar categoria', toasterId: 2 });
 }
 
 $ctrl.$onInit = () => {

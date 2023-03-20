@@ -1,9 +1,10 @@
-function SalesController(SaleService, ReportService, $location) {
+function SalesController(SaleService, ReportService, $location, toaster) {
   var $ctrl = this;
   $ctrl.sales = [];
   $ctrl.isOpen = false;
   $ctrl.warningVisible = false;
   $ctrl.page = 0;
+  $ctrl.sale = {}
 
   $ctrl.resetPage = () => {
     $ctrl.page = 0;
@@ -46,11 +47,14 @@ function SalesController(SaleService, ReportService, $location) {
   }
 
   $ctrl.deleteSale = (sale) => {
-    SaleService.deleteSale(sale).then((response) => {
+    SaleService.deleteSale($ctrl.sale).then((response) => {
+      console.log(response.data)
       $ctrl.getAllSales(page, size);
       $ctrl.closeWarning();
+      $ctrl.popSuccess();
     }).catch((error) => {
-      console.log(error.status)
+      console.log(error.status);
+      $ctrl.popError();
     })
   }
 
@@ -63,8 +67,9 @@ function SalesController(SaleService, ReportService, $location) {
   }
 
   $ctrl.selectToDelete = (sale) => {
-    $ctrl.showWarning();
     $ctrl.sale = sale;
+    console.log($ctrl.sale)
+    $ctrl.showWarning();
     return $ctrl.sale
   }
 
@@ -86,6 +91,14 @@ function SalesController(SaleService, ReportService, $location) {
                     document.body.appendChild(archive);
                     archive.click();
     })
+  }
+
+  $ctrl.popSuccess = function () {
+    toaster.pop({ type: 'warning', body: 'Venda deletada com sucesso', toasterId: 1 });
+  }
+
+  $ctrl.popError = function () {
+    toaster.pop({ type: 'error', body: 'Erro ao deletar Venda', toasterId: 2 });
   }
 }
 

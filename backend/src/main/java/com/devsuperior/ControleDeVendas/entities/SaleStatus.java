@@ -1,5 +1,5 @@
 package com.devsuperior.ControleDeVendas.entities;
 
 public enum SaleStatus {
-    PENDING,FINISH,CANCELED
+    PENDING,PAID,CANCELED,DELIVERED,FINISH
 }

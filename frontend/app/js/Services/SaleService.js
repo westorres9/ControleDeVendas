@@ -56,12 +56,24 @@ app.service('SaleService', function($http) {
         return request; 
     }
 
-    $ctrl.updateSale = (sale) => {
+    $ctrl.updateSaleSetFinish = (sale) => {
         
         var request = $http(
             {
                 method: 'put',
-                url: `${BASE_URL}/sales/${sale.id}`,
+                url: `${BASE_URL}/sales/${sale.id}/finish`,
+                data: sale
+            }
+        )
+        return request; 
+    }
+
+    $ctrl.updateSaleSetCanceled = (sale) => {
+        
+        var request = $http(
+            {
+                method: 'put',
+                url: `${BASE_URL}/sales/${sale.id}/canceled`,
                 data: sale
             }
         )
