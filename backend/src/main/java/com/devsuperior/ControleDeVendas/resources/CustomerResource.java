@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.devsuperior.ControleDeVendas.dto.AverageAgeCustomerDTO;
 import com.devsuperior.ControleDeVendas.dto.CustomerDTO;
 import com.devsuperior.ControleDeVendas.services.CustomerService;
 @RestController
@@ -54,5 +55,11 @@ public class CustomerResource {
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		customerService.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping("/average")
+	public ResponseEntity<AverageAgeCustomerDTO> averageAge() {
+		AverageAgeCustomerDTO avgAge = customerService.averageAgeCustomer();
+		return ResponseEntity.ok().body(avgAge);
 	}
 }

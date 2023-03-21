@@ -16,11 +16,11 @@ function NewCategoryComponentController(CategoryService, $location, toaster) {
     }
 
     $ctrl.popSuccess = function () {
-        toaster.pop({ type: 'success', body: 'Categoria cadastrada com sucesso', toasterId: 1 });
+        toaster.pop({ type: 'success', body: 'Nova Categoria cadastrada com sucesso', toasterId: 1 });
     }
           
     $ctrl.popError = function () {
-        toaster.pop({ type: 'error', body: 'Erro ao cadastrar categoria', toasterId: 2 });
+        toaster.pop({ type: 'error', body: 'Erro ao cadastrar Nova Categoria', toasterId: 2 });
     }
 }
 

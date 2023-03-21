@@ -112,6 +112,10 @@ function config($routeProvider) {
         template: '<new-manager></new-manager>',
         authenticated: true
     })
+    .when('/admin/managers/:id', {
+        template: '<update-manager></update-manager>',
+        authenticated: true
+    })
     .when('/admin/reports', {
         template: '<reports></reports>',
         authenticated: true

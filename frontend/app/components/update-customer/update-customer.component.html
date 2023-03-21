@@ -9,7 +9,7 @@
     <div class="update-sale-form-container ds-container">
         <h2>Atualizar Cliente</h2>
         <div class="ds-form-card">
-            <form action="">
+            <form>
                 <div class="form-input">
                     <input type="text" class="form-control base-input" placeholder="Nome" name="name"
                         id="name" value="$ctrl.customer.name" ng-model="$ctrl.customer.name" required />
@@ -23,8 +23,7 @@
                         id="monthlyIncome" value="$ctrl.customer.monthlyIncome" ng-model="$ctrl.customer.monthlyIncome"
                         required />
                 </div>
-                <button class="btn btn-primary" ng-click="$ctrl.updateCustomer($ctrl.customer)"
-                    type="submit">Atualizar</button>
+                <button class="btn btn-primary" ng-click="$ctrl.updateCustomer($ctrl.customer)">Atualizar</button>
                 <button class="btn btn-danger" ng-click="$ctrl.returnToPageCustomers()">Cancelar</button>
             </form>
         </div>
