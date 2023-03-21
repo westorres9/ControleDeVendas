@@ -1,4 +1,4 @@
-function CategoryController(CategoryService){
+function CategoryController(CategoryService, toaster){
   var $ctrl = this;
 
   $ctrl.getCategories = () => {
@@ -17,8 +17,10 @@ function CategoryController(CategoryService){
     CategoryService.deleteCategoryById(category).then((response) => {
       $ctrl.getCategories();
       $ctrl.closeWarning();
+      $ctrl.popSuccess();
     }).catch((error) => {
-      console.log(error.status)
+      console.log(error.status);
+      $ctrl.popError();
     })
   }
 
@@ -32,6 +34,14 @@ function CategoryController(CategoryService){
 
   $ctrl.$onInit = () => {
     $ctrl.getCategories();
+  }
+
+  $ctrl.popSuccess = function () {
+    toaster.pop({ type: 'warning', body: 'Categoria deletada com sucesso', toasterId: 1 });
+  }
+
+  $ctrl.popError = function () {
+    toaster.pop({ type: 'error', body: 'Erro ao deletar Categoria', toasterId: 2 });
   }
   
 }

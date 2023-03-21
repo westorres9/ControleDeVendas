@@ -1,0 +1,38 @@
+<toaster-container toaster-options="{'toaster-id': 1, 
+            'animation-class': 'toast-top-right', 'time-out': 5000}">
+</toaster-container>
+<toaster-container toaster-options="{'toaster-id': 2, 
+            'animation-class': 'toast-top-right', 'time-out': 5000}">
+</toaster-container>
+<div class="admin-container">
+    <aside-bar></aside-bar>
+    <div class="update-sale-form-container ds-container">
+        <h2>Atualizar Manager</h2>
+        <div class="ds-form-card">
+            <div class="ds-form-card">
+                <form action="">
+                    <div class="form-input">
+                        <input type="text" class="form-control base-input" placeholder="Nome" name="name" id="name"
+                            value="$ctrl.manager.name" ng-model="$ctrl.manager.name" required />
+                    </div>
+                    <div class="form-input">
+                        <input type="text" class="form-control base-input" placeholder="Email" name="email" id="email"
+                            value="email" ng-model="$ctrl.manager.email" required>
+                    </div>
+                    <div class="form-input">
+                        <input type="password" class="form-control base-input" placeholder="Senha" name="password"
+                            id="password" value="password" ng-model="$ctrl.manager.password" required>
+                    </div>
+                    <div class="form-input">
+                        <input type="text" class="form-control base-input" placeholder="Url foto perfil" name="imgUrl"
+                            id="imgUrl" value="imgUrl" ng-model="$ctrl.manager.imgUrl" required>
+                    </div>
+                    <button class="btn btn-success" ng-click="$ctrl.updateManager($ctrl.manager)"
+                        type="submit">Salvar</button>
+                    <button class="btn btn-danger" ng-click="$ctrl.returnToPageManagers()">Cancelar</button>
+                </form>
+        </div>
+    </div>
+</div>
+
+{{$ctrl.manager}}

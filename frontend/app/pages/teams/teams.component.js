@@ -1,4 +1,4 @@
-function TeamController(TeamService, SellerService) {
+function TeamController(TeamService, SellerService, toaster) {
   var $ctrl = this;
 
   $ctrl.teams = [];
@@ -26,8 +26,10 @@ function TeamController(TeamService, SellerService) {
    TeamService.deleteTeamById(team).then((response) => {
       $ctrl.getAllTeams();
       $ctrl.closeWarning();
+      $ctrl.popSuccess();
     }).catch((error) => {
-      console.log(error.status)
+      console.log(error.status);
+      $ctrl.popError();
     })
   }
 
@@ -46,7 +48,13 @@ function TeamController(TeamService, SellerService) {
     return $ctrl.team
   }
 
-  
+  $ctrl.popSuccess = function () {
+    toaster.pop({ type: 'warning', body: 'Equipe deletada com sucesso', toasterId: 1 });
+  }
+
+  $ctrl.popError = function () {
+    toaster.pop({ type: 'error', body: 'Erro ao deletar Equipe', toasterId: 2 });
+  }
 }
 
 app.component("teams", {

@@ -11,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.devsuperior.ControleDeVendas.dto.AverageAgeCustomerDTO;
 import com.devsuperior.ControleDeVendas.dto.CustomerDTO;
 import com.devsuperior.ControleDeVendas.entities.Customer;
 import com.devsuperior.ControleDeVendas.repositories.CustomerRepository;
@@ -74,5 +75,11 @@ public class CustomerService {
             throw new DatabaseException("Integrity violation");
         }
     }
+	
+	@Transactional(readOnly = true)
+	public AverageAgeCustomerDTO averageAgeCustomer() {
+		AverageAgeCustomerDTO avgAge = customerRepository.averageAge();
+		return avgAge;	
+	}
 	
 }

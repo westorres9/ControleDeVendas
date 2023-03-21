@@ -1,3 +1,9 @@
+<toaster-container toaster-options="{'toaster-id': 1, 
+            'animation-class': 'toast-top-right', 'time-out': 5000}">
+</toaster-container>
+<toaster-container toaster-options="{'toaster-id': 2, 
+            'animation-class': 'toast-top-right', 'time-out': 5000}">
+</toaster-container>
 <div class="admin-container">
     <aside-bar></aside-bar>
     <div class="update-sale-form-container ds-container">
@@ -14,7 +20,7 @@
                 </div>
                 <div class="form-input">
                     <input type="number" class="form-control base-input" placeholder="Renda mensal" name="monthlyIncome"
-                        id="monthlyIncome" value="$ctrl.customer.monthlyIncome" ng-model="$ctrl.customer.monthlyIncome"
+                        id="monthlyIncome" value="$ctrl.customer.monthlyIncome" ng-model="$ctrl.customer.monthlyIncome" min=0
                         required />
                 </div>
                 <div class="form-input">
