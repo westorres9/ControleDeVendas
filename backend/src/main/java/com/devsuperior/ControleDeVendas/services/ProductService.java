@@ -1,5 +1,8 @@
 package com.devsuperior.ControleDeVendas.services;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -13,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.ControleDeVendas.dto.CategoryDTO;
 import com.devsuperior.ControleDeVendas.dto.ProductDTO;
+import com.devsuperior.ControleDeVendas.dto.ProductMostSoldDTO;
 import com.devsuperior.ControleDeVendas.entities.Category;
 import com.devsuperior.ControleDeVendas.entities.Product;
 import com.devsuperior.ControleDeVendas.repositories.CategoryRepository;
@@ -89,4 +93,14 @@ public class ProductService {
             throw new DatabaseException("Integrity violation");
         }
     }
+	
+	@Transactional(readOnly = true)
+	public List<ProductMostSoldDTO> productsMostSold(String minDate, String  maxDate) {
+		LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
+		LocalDate min = minDate.equals("") ? today.minusDays(365) : LocalDate.parse(minDate);
+		LocalDate max = maxDate.equals("") ? today : LocalDate.parse(maxDate);
+		List<ProductMostSoldDTO> listProductMostSold = productRepository.productsMostSold(min, max);
+		List<ProductMostSoldDTO> top10 = listProductMostSold.subList(0, 10);
+		return top10;
+	}
 }

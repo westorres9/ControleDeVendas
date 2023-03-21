@@ -11,7 +11,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Long>{
 	
 	Customer findByEmail(String email);
 	
-	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.AverageAgeCustomerDTO(AVG(YEAR(obj.birthDate))) "
+	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.AverageAgeCustomerDTO( "
+			+ "AVG(YEAR(obj.birthDate))) "
 			+ "FROM Customer obj")
 	AverageAgeCustomerDTO averageAge();
 }

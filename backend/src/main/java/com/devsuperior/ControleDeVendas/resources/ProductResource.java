@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devsuperior.ControleDeVendas.dto.ProductDTO;
+import com.devsuperior.ControleDeVendas.dto.ProductMostSoldDTO;
 import com.devsuperior.ControleDeVendas.services.ProductService;
 
 @RestController
@@ -57,5 +59,13 @@ public class ProductResource {
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		productService.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping("/most-sold")
+	public ResponseEntity<List<ProductMostSoldDTO>> productsMostSold(
+			@RequestParam(value = "minDate", defaultValue = "") String minDate,
+			@RequestParam(value = "maxDate", defaultValue = "") String maxDate) {
+		List<ProductMostSoldDTO> list = productService.productsMostSold(minDate, maxDate);
+		return ResponseEntity.ok().body(list);		
 	}
 }

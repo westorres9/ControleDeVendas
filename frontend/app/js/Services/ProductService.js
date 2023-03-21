@@ -58,5 +58,16 @@ app.service('ProductService', function($http) {
         )
         return request; 
     }
+
+    $ctrl.getMostSoldProducts = () => {
+        
+        var request = $http(
+            {
+                method: 'get',
+                url: `${BASE_URL}/products/most-sold`
+            }
+        )
+        return request; 
+    }
     
 } )
