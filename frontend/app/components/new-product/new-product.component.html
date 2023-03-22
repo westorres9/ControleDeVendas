@@ -1,9 +1,15 @@
+<toaster-container toaster-options="{'toaster-id': 1, 
+            'animation-class': 'toast-top-right', 'time-out': 5000}">
+</toaster-container>
+<toaster-container toaster-options="{'toaster-id': 2, 
+            'animation-class': 'toast-top-right', 'time-out': 5000}">
+</toaster-container>
 <div class="admin-container">
     <aside-bar></aside-bar>
     <div class="update-sale-form-container ds-container">
         <h2>Cadastrar Novo Produto</h2>
         <div class="ds-form-card">
-            <form action="">
+            <form>
                 <div class="form-input">
                     <input type="text" class="form-control base-input" placeholder="Nome do Produto" name="name"
                         id="name" value="$ctrl.product.name" ng-model="$ctrl.product.name" required />
@@ -20,15 +26,14 @@
                 <div class="form-input">
                     <input type="text" class="form-control base-input" placeholder="Url da Imagem do Produto"
                         name="imgUrl" id="imgUrl" value="$ctrl.product.imgUrl" ng-model="$ctrl.product.imgUrl"
-                       />
+                       required/>
                 </div>
                 <div>
                     <label for="categories">Selecione uma categoria:</label>
                     <select class="form-select" aria-label="Selecione uma categoria" name="category" ng-model="$ctrl.category" value="$ctrl.category" ng-options="category.name for category in $ctrl.categories" required></select>
                 </div>
                     <br/>
-                <button class="btn btn-success" ng-click="$ctrl.insertProduct($ctrl.product)"
-                    type="submit">Salvar</button>
+                <button class="btn btn-success" ng-click="$ctrl.insertProduct($ctrl.product)" type="submit">Salvar</button>
                 <button class="btn btn-danger" ng-click="$ctrl.returnToPageProducts()">Cancelar</button>
             </form>
         </div>

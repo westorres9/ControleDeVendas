@@ -2,16 +2,30 @@
     <aside-bar></aside-bar>
     <section class="ds-container">
       <h1>Dashboard</h1>
-      <md-content layout-padding="" ng-cloak="" class="datepickerdemoBasicUsage">
-        <date-picker mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></date-picker>
-        <button class="btn btn-primary btn-search" ng-click="$ctrl.onChangeDate()">Buscar</button>
-      </md-content>
+      <div class="date-picker-container">
+          <date-picker mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></date-picker>
+        <div>
+          <button class="btn btn-primary btn-search" ng-click="$ctrl.onChangeDate()">Buscar</button>
+        </div>
+        <div>
+          <average-monthly-income></average-monthly-income>
+        </div>
+        <div>
+          <average-age></average-age>
+        </div>
+      </div>
       <div class="charts-container">
         
       </div> 
       <div class="charts-container">
+        <div><chart-most-sold-products></chart-most-sold-products></div>
+        <div><chart-most-purchases-customers></chart-most-purchases-customers></div>
+      </div>
+      <div class="charts-container">
+        
+      </div>
+      <div class="charts-container">
         <pie-chart-team-seller mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></pie-chart-team-seller>
-        <chart-most-sold-products></chart-most-sold-products>
       </div>
       
     </section>

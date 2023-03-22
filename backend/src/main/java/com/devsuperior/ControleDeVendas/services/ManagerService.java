@@ -32,6 +32,8 @@ public class ManagerService {
 	@Autowired
     private BCryptPasswordEncoder passwordEncoder;
 	
+	private static String standardPassword = "123456";
+	
 	@Transactional(readOnly = true)
 	public List<UserDTO> findAll(String name){
 		List<User> list = repository.findManagers(name);
@@ -55,7 +57,7 @@ public class ManagerService {
 		User entity = new User();
 		entity.setName(dto.getName());
 		entity.setEmail(dto.getEmail());
-		entity.setPassword(passwordEncoder.encode(dto.getPassword()));
+		entity.setPassword(passwordEncoder.encode(standardPassword));
 		entity.setImgUrl(dto.getImgUrl());
 		entity.getRoles().clear();
 		entity.getRoles().add(roleRepository.findByAuthority(RoleType.MANAGER));
@@ -64,11 +66,12 @@ public class ManagerService {
 	}
 	
 	@Transactional
-	public UserDTO update(Long id, UserDTO dto) {
+	public UserDTO update(Long id, UserInsertDTO dto) {
 		try {
 			User entity = repository.getOne(id);
 			entity.setName(dto.getName());
 			entity = repository.save(entity);
+			entity.setPassword(dto.getPassword());
 			return new UserDTO(entity);
 		}
 		catch (EntityNotFoundException e) {

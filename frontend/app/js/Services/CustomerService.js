@@ -58,5 +58,35 @@ app.service('CustomerService', function($http) {
         )
         return request; 
     }
+
+    $ctrl.getMostPurchasesCustomers = () => {
+        var request = $http(
+            {
+                method: 'get',
+                url: `${BASE_URL}/customers/most-purchases`
+            }
+        )
+        return request; 
+    }
+
+    $ctrl.getAverageAge = () => {
+        var request = $http(
+            {
+                method: 'get',
+                url: `${BASE_URL}/customers/average-age`
+            }
+        )
+        return request
+    }
+
+    $ctrl.getAverageMonthlyIncome = () => {
+        var request = $http(
+            {
+                method: 'get',
+                url: `${BASE_URL}/customers/average-monthly-income`
+            }
+        )
+        return request;
+    }
     
 } )

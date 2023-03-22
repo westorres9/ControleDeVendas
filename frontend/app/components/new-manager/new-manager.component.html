@@ -9,7 +9,7 @@
     <div class="update-sale-form-container ds-container">
         <h2>Cadastrar Novo Manager</h2>
         <div class="ds-form-card">
-            <form action="">
+            <form>
                 <div class="form-input">
                     <input type="text" class="form-control base-input" placeholder="Nome" name="name" id="name"
                         value="name" ng-model="$ctrl.manager.name" required />
@@ -19,15 +19,10 @@
                         value="email" ng-model="$ctrl.manager.email" required>
                 </div>
                 <div class="form-input">
-                    <input type="password" class="form-control base-input" placeholder="Senha" name="password"
-                        id="password" value="password" ng-model="$ctrl.manager.password" required>
-                </div>
-                <div class="form-input">
                     <input type="text" class="form-control base-input" placeholder="Url foto perfil" name="imgUrl"
                         id="imgUrl" value="imgUrl" ng-model="$ctrl.manager.imgUrl" required>
                 </div>
-                <button class="btn btn-success" ng-click="$ctrl.insertManager($ctrl.manager)"
-                    type="submit">Salvar</button>
+                <button class="btn btn-success" ng-click="$ctrl.insertManager($ctrl.manager)" type="submit">Salvar</button>
                 <button class="btn btn-danger" ng-click="$ctrl.returnToPageManagers()">Cancelar</button>
             </form>
         </div>

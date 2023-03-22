@@ -12,7 +12,8 @@ function ChartMostSoldProductsComponentController(ProductService) {
         ProductService.getMostSoldProducts().then((response) => {
             $ctrl.mostSoldProducts = response.data;
             var data = [];
-            $ctrl.mostSoldProducts.map(item => data.push({name: item.name, y: item.quantity}))
+            $ctrl.mostSoldProducts.map(item => data.push({name: item.name, y: item.quantity}
+                ))
             chart = Highcharts.chart('most-sold-products', {
                 chart: {
                     type: 'bar'

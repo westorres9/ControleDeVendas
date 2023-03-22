@@ -56,7 +56,7 @@ public class ManagerResource {
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/{id}")
-	public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserUpdateDTO dto) {
+	public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserInsertDTO dto) {
 		UserDTO newDto = service.update(id, dto);
 		return ResponseEntity.ok().body(newDto);
 	}

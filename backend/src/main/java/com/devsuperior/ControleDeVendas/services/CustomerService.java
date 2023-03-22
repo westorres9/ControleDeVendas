@@ -1,5 +1,8 @@
 package com.devsuperior.ControleDeVendas.services;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,7 +15,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.ControleDeVendas.dto.AverageAgeCustomerDTO;
+import com.devsuperior.ControleDeVendas.dto.AverageMonthlyIncomeCustomerDTO;
 import com.devsuperior.ControleDeVendas.dto.CustomerDTO;
+import com.devsuperior.ControleDeVendas.dto.CustomersWithMostPurchasesDTO;
+import com.devsuperior.ControleDeVendas.dto.ProductMostSoldDTO;
 import com.devsuperior.ControleDeVendas.entities.Customer;
 import com.devsuperior.ControleDeVendas.repositories.CustomerRepository;
 import com.devsuperior.ControleDeVendas.services.exceptions.DatabaseException;
@@ -78,8 +84,23 @@ public class CustomerService {
 	
 	@Transactional(readOnly = true)
 	public AverageAgeCustomerDTO averageAgeCustomer() {
-		AverageAgeCustomerDTO avgAge = customerRepository.averageAge();
-		return avgAge;	
+		AverageAgeCustomerDTO averageAge = customerRepository.averageAge();
+		return averageAge;	
+	}
+	
+	@Transactional(readOnly = true)
+	public AverageMonthlyIncomeCustomerDTO averageMonthlyIncome() {
+		AverageMonthlyIncomeCustomerDTO averageMontlyIncome = customerRepository.averageMonthlyIncome();
+		return averageMontlyIncome;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<CustomersWithMostPurchasesDTO> customersMostPurchases(String minDate, String maxDate) {
+		LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
+		LocalDate min = minDate.equals("") ? today.minusDays(365) : LocalDate.parse(minDate);
+		LocalDate max = maxDate.equals("") ? today : LocalDate.parse(maxDate);
+		List<CustomersWithMostPurchasesDTO> listCustomerMostPurchase = customerRepository.customerMostPurchase(min, max);
+		return listCustomerMostPurchase;
 	}
 	
 }

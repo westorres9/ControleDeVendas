@@ -1,4 +1,4 @@
-function NewProductComponentController(ProductService,CategoryService, $location) {
+function NewProductComponentController(ProductService,CategoryService, $location, toaster) {
     
     var $ctrl = this;
     $ctrl.product = {};
@@ -9,9 +9,10 @@ function NewProductComponentController(ProductService,CategoryService, $location
     $ctrl.insertProduct = () => {
         $ctrl.product.categories.push($ctrl.category);
         ProductService.insertProduct($ctrl.product).then((response) => {
-            $ctrl.returnToPageProducts();
+            $ctrl.popSuccess();
         }).catch((error) => {
             console.log(error)
+            $ctrl.popError();
         })
     }
 
@@ -32,6 +33,14 @@ function NewProductComponentController(ProductService,CategoryService, $location
     
     $ctrl.$onInit = () => {
         $ctrl.getCategories();
+    }
+
+    $ctrl.popSuccess = function () {
+        toaster.pop({ type: 'success', body: 'Novo Produto cadastrado com sucesso', toasterId: 1 });
+    }
+          
+    $ctrl.popError = function () {
+        toaster.pop({ type: 'error', body: 'Erro ao cadastrar Novo Produto', toasterId: 2 });
     }
 }
 
