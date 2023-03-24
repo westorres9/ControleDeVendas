@@ -2,11 +2,11 @@
     <div layout-gt-xs="row">
       <div flex-gt-xs="col">
         <h4>Data inicial</h4>
-        <md-datepicker ng-model="mindate" ng-change="$ctrl.setMinDate(mindate)" md-placeholder="Data inicial"></md-datepicker>
+        <md-datepicker ng-model="$ctrl.mindate" ng-change="$ctrl.setMinDate($ctrl.mindate)" options="{timezone: 'UTC'}" md-placeholder="Data inicial"></md-datepicker>
       </div>
       <div flex-gt-xs="col">
         <h4>Data final</h4>
-        <md-datepicker ng-model="maxdate" ng-change="$ctrl.setMaxDate(maxdate)" md-placeholder="Data final"></md-datepicker>
+        <md-datepicker ng-model="$ctrl.maxdate" ng-change="$ctrl.setMaxDate($ctrl.maxdate)" options="{timezone: 'UTC'}" md-placeholder="Data final"></md-datepicker>
       </div>
     </div>
   </md-content>

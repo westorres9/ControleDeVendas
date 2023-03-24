@@ -1,17 +1,18 @@
 package com.devsuperior.ControleDeVendas.dto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class CustomersWithMostPurchasesDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String name;
-	private Long quantity;
+	private Double quantity;
 	
 	public CustomersWithMostPurchasesDTO() {
 	}
 
-	public CustomersWithMostPurchasesDTO(String name, Long quantity) {
+	public CustomersWithMostPurchasesDTO(String name, Double quantity) {
 		this.name = name;
 		this.quantity = quantity;
 	}
@@ -24,11 +25,11 @@ public class CustomersWithMostPurchasesDTO implements Serializable {
 		this.name = name;
 	}
 
-	public Long getQuantity() {
+	public Double getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(Long quantity) {
+	public void setQuantity(Double quantity) {
 		this.quantity = quantity;
-	}	
+	}
 }

@@ -5,7 +5,7 @@ function AverageAgeComponentController(CustomerService) {
 
     $ctrl.getAverageAge = () => {
         CustomerService.getAverageAge().then((response) => {
-            $ctrl.average = response.data.averageAge.toFixed(2);
+            $ctrl.average = response.data.averageAge.toFixed(0);
             console.log($ctrl.average)
         })
     }

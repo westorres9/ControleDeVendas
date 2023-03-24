@@ -26,7 +26,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long>{
 			+ "FROM Customer obj")
 	AverageMonthlyIncomeCustomerDTO averageMonthlyIncome();
 	
-	@Query("SELECT DISTINCT new com.devsuperior.ControleDeVendas.dto.CustomersWithMostPurchasesDTO(customer.name, COUNT(sale) as purchases) "
+	@Query("SELECT DISTINCT new com.devsuperior.ControleDeVendas.dto.CustomersWithMostPurchasesDTO(customer.name, SUM(saleItem.quantity * saleItem.price) as purchases) "
 			+ "FROM Customer customer "
 			+ "JOIN Sale sale "
 			+ "ON sale.customer.id = customer.id "

@@ -15,14 +15,19 @@ function ChartMostPurchasesCustomersComponentController(CustomerService) {
         },
         yAxis: {
             title: {
-                text:'Comprar efetuadas'
+                text:'Compras efetuadas'
             }
         },
         series: []
     })
 
     $ctrl.getMostPurchasesCustomers = () => {
-        CustomerService.getMostPurchasesCustomers().then((response) => {
+        CustomerService.getMostPurchasesCustomers($ctrl.mindate, $ctrl.maxdate).then((response) => {
+            if(chart.series.length > 0) {
+                while(chart.series.length > 0) {
+                    chart.series[0].remove()
+                }
+            }
             $ctrl.mostPurchasesCustomers = response.data;
             console.log(response.data);
             let customers = [];
@@ -32,18 +37,25 @@ function ChartMostPurchasesCustomersComponentController(CustomerService) {
 
             chart.xAxis[0].setCategories(customers);
             chart.addSeries({
-                name: 'Compras',
+                name: 'Compras efetuadas',
                 data: purchases
             })
         })
     }
 
-    $ctrl.$onInit = () => {
-        $ctrl.getMostPurchasesCustomers(); 
+    $ctrl.$onInit = () => {   
+    }
+
+    $ctrl.$onChanges = (mindate, maxdate) => {
+        $ctrl.getMostPurchasesCustomers(mindate, maxdate); 
     }
 }
 
 app.component('chartMostPurchasesCustomers', {
     templateUrl: 'components/chart-most-purchases-customers/chart-most-purchases-customers.component.html',
     controller: ChartMostPurchasesCustomersComponentController,
+    bindings: {
+        mindate: '<',
+        maxdate: '<'
+    }
 })

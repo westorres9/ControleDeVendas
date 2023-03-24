@@ -59,11 +59,15 @@ app.service('CustomerService', function($http) {
         return request; 
     }
 
-    $ctrl.getMostPurchasesCustomers = () => {
+    $ctrl.getMostPurchasesCustomers = (mindate, maxdate) => {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/customers/most-purchases`
+                url: `${BASE_URL}/customers/most-purchases`,
+                params: {
+                    'minDate': mindate,
+                    'maxDate': maxdate
+                }
             }
         )
         return request; 

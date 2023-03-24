@@ -1,7 +1,7 @@
 function DatePickerController(SaleService) {
     var $ctrl = this;
     $ctrl.isOpen = false;
-    moment.locale('en');
+    moment.locale('pt-br');
 
     $ctrl.setMinDate = (mindate) => {
         $ctrl.mindate =  moment(mindate).format('YYYY-MM-DD');

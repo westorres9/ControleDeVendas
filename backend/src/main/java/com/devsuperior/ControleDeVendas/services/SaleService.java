@@ -21,6 +21,7 @@ import com.devsuperior.ControleDeVendas.dto.SaleDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleItemDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleTaxSuccessDTO;
+import com.devsuperior.ControleDeVendas.dto.SalesByDateDTO;
 import com.devsuperior.ControleDeVendas.dto.SumBySellerDTO;
 import com.devsuperior.ControleDeVendas.dto.SumByTeamDTO;
 import com.devsuperior.ControleDeVendas.entities.Payment;
@@ -208,15 +209,21 @@ public class SaleService {
     }
     
     @Transactional(readOnly = true)
-    public List<SumBySellerDTO> sumBySeller() {
+    public List<SumBySellerDTO> sumBySeller(String minDate, String  maxDate) {
     	User user = authService.authenticated();
-    	return saleRepository.sumBySeller();
+    	LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
+		LocalDate min = minDate.equals("") ? today.minusDays(365) : LocalDate.parse(minDate);
+		LocalDate max = maxDate.equals("") ? today : LocalDate.parse(maxDate);
+    	return saleRepository.sumBySeller(min, max);
     }
     
     @Transactional(readOnly = true)
-    public List<SumByTeamDTO> sumByTeam() {
+    public List<SumByTeamDTO> sumByTeam(String minDate, String  maxDate) {
     	User user = authService.authenticated();
-    	return saleRepository.sumByTeam();
+    	LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
+		LocalDate min = minDate.equals("") ? today.minusDays(365) : LocalDate.parse(minDate);
+		LocalDate max = maxDate.equals("") ? today : LocalDate.parse(maxDate);
+    	return saleRepository.sumByTeam(min, max);
     }
     
     @Transactional(readOnly = true)
@@ -242,7 +249,16 @@ public class SaleService {
     	else {
     		SaleSumTotalDTO total = saleRepository.saleSumTotalForAdmin(min, max);
         	return total;
-    	}
-    	
+    	}	
+    }
+    
+    @Transactional(readOnly = true)
+    public Page<SalesByDateDTO> salesByDate(String minDate, String maxDate, Pageable pageable) {
+    	User user = authService.authenticated();
+    	LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
+		LocalDate min = minDate.equals("") ? today.minusDays(365) : LocalDate.parse(minDate);
+		LocalDate max = maxDate.equals("") ? today : LocalDate.parse(maxDate);
+		Page<SalesByDateDTO> salesByDate = saleRepository.salesByDate(min, max, pageable);
+		return salesByDate;
     }
 }

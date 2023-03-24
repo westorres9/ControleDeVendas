@@ -24,6 +24,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.devsuperior.ControleDeVendas.dto.SaleDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleTaxSuccessDTO;
+import com.devsuperior.ControleDeVendas.dto.SalesByDateDTO;
 import com.devsuperior.ControleDeVendas.dto.SumBySellerDTO;
 import com.devsuperior.ControleDeVendas.dto.SumByTeamDTO;
 import com.devsuperior.ControleDeVendas.services.SaleService;
@@ -84,15 +85,21 @@ public class SaleResource {
 	
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	@GetMapping(value = "/sum-by-seller")
-	public ResponseEntity<List<SumBySellerDTO>> sumBySeller() {
-		List<SumBySellerDTO> list = service.sumBySeller();
+	public ResponseEntity<List<SumBySellerDTO>> sumBySeller(
+			@RequestParam(value = "minDate", defaultValue = "")String minDate,
+			@RequestParam(value = "maxDate", defaultValue = "")String maxDate
+			) {
+		List<SumBySellerDTO> list = service.sumBySeller(minDate, maxDate);
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	@GetMapping(value = "/sum-by-team")
-	public ResponseEntity<List<SumByTeamDTO>> sumByTeam() {
-		List<SumByTeamDTO> list = service.sumByTeam();
+	public ResponseEntity<List<SumByTeamDTO>> sumByTeam(
+			@RequestParam(value = "minDate", defaultValue = "")String minDate,
+			@RequestParam(value = "maxDate", defaultValue = "")String maxDate
+			) {
+		List<SumByTeamDTO> list = service.sumByTeam(minDate, maxDate);
 		return ResponseEntity.ok().body(list);
 	}
 	
@@ -104,5 +111,16 @@ public class SaleResource {
 			) {
 		SaleSumTotalDTO total = service.saleSumTotalOfDeals(minDate, maxDate);
 		return ResponseEntity.ok().body(total);
+	}
+	
+	@GetMapping(value = "/sales-by-date")
+	public ResponseEntity<Page<SalesByDateDTO>> salesByDate(
+			@RequestParam(value = "minDate", defaultValue = "")String minDate,
+			@RequestParam(value = "maxDate", defaultValue = "")String maxDate,
+			Pageable pageable
+			) {
+		Page<SalesByDateDTO> salesByDate = service.salesByDate(minDate, maxDate, pageable);
+		return ResponseEntity.ok().body(salesByDate);
+		
 	}
 }
