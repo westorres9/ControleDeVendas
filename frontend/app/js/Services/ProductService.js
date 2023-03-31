@@ -59,12 +59,16 @@ app.service('ProductService', function($http) {
         return request; 
     }
 
-    $ctrl.getMostSoldProducts = () => {
+    $ctrl.getMostSoldProducts = (mindate, maxdate) => {
         
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/products/most-sold`
+                url: `${BASE_URL}/products/most-sold`,
+                params: {
+                    'minDate': mindate,
+                    'maxDate': maxdate
+                }
             }
         )
         return request; 

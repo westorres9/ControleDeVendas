@@ -1,0 +1,22 @@
+.return-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.return-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.return-container h4 {
+    margin-bottom: 0;
+}
+
+.return-container img {
+    margin-right: 10px;
+    rotate: calc(-180deg);
+}

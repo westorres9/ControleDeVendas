@@ -1,10 +1,23 @@
-
+<toaster-container toaster-options="{'toaster-id': 1, 
+            'animation-class': 'toast-top-right', 'time-out': 5000}">
+</toaster-container>
+<toaster-container toaster-options="{'toaster-id': 2, 
+            'animation-class': 'toast-top-right', 'time-out': 5000}">
+</toaster-container>
 <div class="admin-container">
     <aside-bar></aside-bar>
     <div class="update-sale-form-container ds-container">
-        <h2>Cadastrar Nova Equipe</h2>
+        <div class="return-area">
+            <a ng-href="#/admin/teams" class="return-container">
+              <img src="/app/assets/img/arrow.svg" alt="">
+              <h4>Voltar</h4>
+            </a>
+            <h2>Cadastrar Nova Equipe</h2>
+            <h2></h2>
+          </div>
+
         <div class="ds-form-card">
-            <form action="">
+            <form>
                 <div class="form-input">
                     <input 
                     type="text"
@@ -17,22 +30,8 @@
                     required
                     />
                 </div>
-                <div class="form-input">
-                    <input 
-                    type="text"
-                    class="form-control base-input" 
-                    placeholder="imgUrl da Equipe"  
-                    name="imgUrl" 
-                    id="imgUrl"
-                    value="imgUrl"
-                    ng-model="$ctrl.team.imgUrl" 
-                    required
-                    />
-                </div>
-                <div class="form-input">
-
-                <button class="btn btn-success" ng-click="$ctrl.insertNewTeam($ctrl.team)" type="submit">Salvar</button>
-                <button class="btn btn-danger" ng-click="$ctrl.returnToPageTeams()">Cancelar</button>
+                <button class="btn btn-success btn-update" ng-click="$ctrl.insertNewTeam($ctrl.team)" type="submit">Salvar</button>
+                <button class="btn btn-danger btn-cancel" ng-click="$ctrl.returnToPageTeams()">Cancelar</button>
             </form>
         </div>
     </div>

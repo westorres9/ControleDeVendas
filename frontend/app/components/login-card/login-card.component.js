@@ -23,6 +23,7 @@ function LoginCardComponentController($http, $httpParamSerializerJQLike, AuthSer
         const token = AuthService.getToken();
         AuthService.setUsername(loginResponse.userName);
         const username = AuthService.getUsername();
+        AuthService.setUserId(loginResponse.userId);
         AuthService.setProfileImage(loginResponse.profileImage);
         const profileImage = AuthService.getProfileImage();
         AuthService.setAuthority(loginResponse.Authority);

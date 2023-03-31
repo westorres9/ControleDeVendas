@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" ng-app="app">
-
+<html lang="en" ng-app="app">
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,14 +10,20 @@
   <link rel="stylesheet" href="/app/components/navbar/navbar.component.css" />
   <link rel="stylesheet" href="/app/components/login-card/login-card.component.css" />
   <link rel="stylesheet" href="/app/components/pie-chart-team-seller/pie-chart-team-seller.component.css">
+  <link rel="stylesheet" href="/app/components/chart-most-sold-products/chart-most-sold-products.component.css">
+  <link rel="stylesheet" href="/app/components/chart-most-purchases-customers/chart-most-purchases-customers.component.css">
+  <link rel="stylesheet" href="/app/components/average-monthly-income/average-monthly-income.component.css">
+  <link rel="stylesheet" href="/app/components/average-age/average-age.component.css">
   <link rel="stylesheet" href="/app/pages/sales/sales.component.css" />
   <link rel="stylesheet" href="/app/pages/teams/teams.component.css"/>
   <link rel="stylesheet" href="/app/pages/products/products.component.css"/>
   <link rel="stylesheet" href="/app/pages/sellers/sellers.component.css"/>
+  <link rel="stylesheet" href="/app/pages/categories/categories.component.css">
   <link rel="stylesheet" href="/app/pages/managers/managers.component.css">
   <link rel="stylesheet" href="/app/pages/reports/reports.component.css"/>
   <link rel="stylesheet" href="/app/pages/login/login.component.css" />
   <link rel="stylesheet" href="/app/pages/admin/admin.component.css" />
+  <link rel="stylesheet" href="/app/pages/profile/profile.component.css">
   <link rel="stylesheet" href="/app/pages/dashboard/dashboard.component.css">
   <link rel="stylesheet" href="/app/components/aside-bar/aside-bar.component.css" />
   <link rel="stylesheet" href="/app/components/pagination/pagination.component.css">
@@ -62,14 +67,21 @@
   <script src="/app/js/Services/CategoryService.js"></script>
   <script src="/app/js/Services/ProductService.js"></script>
   <script src="/app/js/Services/CustomerService.js"></script>
+  <script src="/app/js/Services/UserService.js"></script>
   <script src="/app/components/navbar/navbar.component.js"></script>
   <script src="/app/components/login-card/login-card.component.js"></script>
   <script src="/app/components/aside-bar/aside-bar.component.js"></script>
   <script src="/app/components/chart-success-by-seller/chart-success-by-seller.component.js"></script>
   <script src="/app/components/chart-most-sold-products/chart-most-sold-products.component.js"></script>
+  <script src="/app/components/chart-most-purchases-customers/chart-most-purchases-customers.component.js"></script>
+  <script src="/app/components/chart-sales-group-by-team/chart-sales-group-by-team.component.js"></script>
+  <script src="/app/components/chart-sales-group-by-seller/chart-sales-group-by-seller.component.js"></script>
+  <script src="/app/components/chart-sales-by-date/chart-sales-by-date.component.js"></script>
   <script src="/app/components/sales-by-seller-chart/sales-by-seller-chart.component.js"></script>
   <script src="/app/components/pie-chart-team-seller/pie-chart-team-seller.component.js"></script>
   <script src="/app/components/sum-chart-bar/sum-chart-bar.component.js"></script>
+  <script src="/app/components/average-monthly-income/average-monthly-income.component.js"></script>
+  <script src="/app/components/average-age/average-age.component.js"></script>
   <script src="/app/components/date-picker/date-picker.component.js"></script>
   <script src="/app/components/pagination/pagination.component.js"></script>
   <script src="/app/components/new-sale/new-sale.component.js"></script>
@@ -106,6 +118,7 @@
   <script src="/app/pages/customers/customers.component.js"></script>
   <script src="/app/pages/dashboard/dashboard.component.js"></script>
   <script src="/app/pages/reports/reports.component.js"></script>
+  <script src="/app/pages/profile/profile.component.js"></script>
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
   <script src="https://code.highcharts.com/modules/export-data.js"></script>
@@ -119,9 +132,11 @@
   <script src="/node_modules/moment/moment.js"></script>
   <script src="/node_modules/moment/package.js"></script>
   <script src="/node_modules/moment/locale/pt-br.js"></script>
+  <script src="/app/components/date-picker/date-picker.config.js"></script>
   <script src="/node_modules/file-saver/FileSaver.js"></script>
   <script src="/node_modules/blob-tmp/Blob.js"></script>
   <script src="/bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+  <script src="/bower_components/angular-file-upload/dist/angular-file-upload.js"></script>
   <script src="/bower_components/AngularJS-Toaster/toaster.js"></script>
 </body>
 </html>

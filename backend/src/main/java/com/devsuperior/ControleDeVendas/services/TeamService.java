@@ -66,12 +66,27 @@ public class TeamService {
 	
 	@Transactional
 	public TeamDTO insert(TeamDTO dto) {
+		User user = authService.authenticated();
 		Team entity = new Team();
-		entity.setName(dto.getName());
-		entity.setImgUrl(dto.getImgUrl());
-		entity = repository.save(entity);
-		return new TeamDTO(entity);
-	}
+		if(user.hasRole("ROLE_MANAGER")) {
+			
+			entity.setName(dto.getName());
+			entity.setImgUrl("https://user-images.githubusercontent.com/91570669/227974974-0aa117cf-b9d2-4787-a5dc-36b539d538c0.png");
+			entity = repository.save(entity);
+			entity.getManagers().add(user);
+			return new TeamDTO(entity);
+		}
+		else if(user.hasRole("ROLE_ADMIN")) {
+			entity.setName(dto.getName());
+			entity.setImgUrl("https://user-images.githubusercontent.com/91570669/227974974-0aa117cf-b9d2-4787-a5dc-36b539d538c0.png");
+			entity = repository.save(entity);
+			entity.getManagers().add(userRepository.getOne(6L));
+			return new TeamDTO(entity);
+		}
+		else {
+	            throw new ResourceNotFoundException("Bad Request");
+	        }
+		}
 	
 	@Transactional
 	public TeamDTO update(Long id, TeamDTO dto) {

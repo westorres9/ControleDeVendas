@@ -1,12 +1,13 @@
-function UpdateTeamComponentController(TeamService, $routeParams, $location) {
+function UpdateTeamComponentController(TeamService, $routeParams, $location, toaster) {
     var $ctrl = this;
   
     $ctrl.updateTeam = () => {
       TeamService.updateTeam($ctrl.team).then((response) => {
         console.log(response.data);
-        $ctrl.returnToPageTeams();
+        $ctrl.popSuccess();
       }).catch((error) => {
         console.log(error);
+        $ctrl.popError();
       })
     }
   
@@ -20,6 +21,14 @@ function UpdateTeamComponentController(TeamService, $routeParams, $location) {
   $ctrl.$onInit = () => {
     $ctrl.getTeamById($routeParams.id)
   }
+
+  $ctrl.popSuccess = function () {
+    toaster.pop({ type: 'note', body: 'Equipe atualizada com sucesso', toasterId: 1 });
+}
+
+$ctrl.popError = function () {
+    toaster.pop({ type: 'error', body: 'Erro ao atualizar Equipe', toasterId: 2 });
+}
   
     $ctrl.returnToPageTeams = () => {
       $location.path("/admin/teams")

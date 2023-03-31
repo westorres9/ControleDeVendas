@@ -11,6 +11,17 @@ function ReportController(ReportService,Upload) {
                       archive.click();
       })
     }
+
+    $ctrl.generateReportManagers = () => {
+      ReportService.generateReportManagers().then((response) => {
+        var archive =document.createElement("a");
+                      archive.href ='data:attachment/csv;charset=utf-8,' + encodeURI(response.data);
+                      archive.target ='_blank';
+                      archive.download ='managers.csv';
+                      document.body.appendChild(archive);
+                      archive.click();
+      })
+    }
   
     $ctrl.selectFile = (file) => {
       $ctrl.file = file;

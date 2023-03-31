@@ -1,4 +1,4 @@
-app.service('SaleService', function($http) {
+app.service('SaleService', function ($http) {
 
     var $ctrl = this;
 
@@ -17,8 +17,8 @@ app.service('SaleService', function($http) {
         return request;
     }
 
-    $ctrl.getAllSales = ( page, size, mindate, maxdate) => {
-        
+    $ctrl.getAllSales = (page, size, mindate, maxdate) => {
+
         var request = $http(
             {
                 method: 'get',
@@ -31,7 +31,7 @@ app.service('SaleService', function($http) {
                 }
             }
         )
-        return request; 
+        return request;
     }
 
     $ctrl.getSaleById = (id) => {
@@ -41,11 +41,11 @@ app.service('SaleService', function($http) {
                 url: `${BASE_URL}/sales/${id}`
             }
         )
-        return request; 
+        return request;
     }
 
     $ctrl.insertSale = (sale) => {
-        
+
         var request = $http(
             {
                 method: 'post',
@@ -53,11 +53,11 @@ app.service('SaleService', function($http) {
                 data: sale
             }
         )
-        return request; 
+        return request;
     }
 
     $ctrl.updateSaleSetFinish = (sale) => {
-        
+
         var request = $http(
             {
                 method: 'put',
@@ -65,11 +65,11 @@ app.service('SaleService', function($http) {
                 data: sale
             }
         )
-        return request; 
+        return request;
     }
 
     $ctrl.updateSaleSetCanceled = (sale) => {
-        
+
         var request = $http(
             {
                 method: 'put',
@@ -77,19 +77,71 @@ app.service('SaleService', function($http) {
                 data: sale
             }
         )
-        return request; 
+        return request;
     }
 
     $ctrl.deleteSale = (sale) => {
-        
+
         var request = $http(
             {
                 method: 'delete',
                 url: `${BASE_URL}/sales/${sale.id}`
             }
         )
-        return request; 
+        return request;
     }
+
+    $ctrl.getSalesGroupByTeam = (mindate, maxdate) => {
+
+        var request = $http(
+            {
+                method: 'get',
+                url: `${BASE_URL}/sales/sum-by-team`,
+                params: {
+                    'minDate': mindate,
+                    'maxDate': maxdate
+                }
+            }
+        )
+        return request;
+    }
+
+    $ctrl.getSalesGroupBySeller = (mindate, maxdate) => {
+
+        var request = $http(
+            {
+                method: 'get',
+                url: `${BASE_URL}/sales/sum-by-seller`,
+                params: {
+                    'minDate': mindate,
+                    'maxDate': maxdate
+                }
+            }
+        )
+        return request;
+    }
+
+    $ctrl.getSalesByDate = (mindate, maxdate) => {
+        var request = $http(
+            {
+                method: 'get',
+                url: `${BASE_URL}/sales/sales-by-date`,
+                params: {
+                    'minDate': mindate,
+                    'maxDate': maxdate
+                }
+            }
+        )
+        return request;
+
+    }
+
+
+
+
+
+
+
 
     $ctrl.salesSumBySeller = () => {
 
@@ -99,8 +151,10 @@ app.service('SaleService', function($http) {
                 url: `${BASE_URL}/sales/sum-by-seller`
             }
         )
-        return request; 
+        return request;
     }
+
+
 
     $ctrl.salesSumByTeam = (e) => {
 
@@ -108,12 +162,12 @@ app.service('SaleService', function($http) {
             {
                 method: 'get',
                 url: `${BASE_URL}/sales/sum-by-team`,
-                params : {
+                params: {
                     e
                 }
             }
         )
-        return request; 
+        return request;
     }
 
     $ctrl.sellersByTeam = (e) => {
@@ -124,7 +178,7 @@ app.service('SaleService', function($http) {
                 url: `${BASE_URL}/sales/sum-by-team/${e}`,
             }
         )
-        return request; 
+        return request;
     }
 
     $ctrl.salesSuccessBySeller = () => {
@@ -135,7 +189,7 @@ app.service('SaleService', function($http) {
                 url: `${BASE_URL}/sales/success-by-seller`
             }
         )
-        return request; 
+        return request;
     }
 
     $ctrl.salesSumTotal = (mindate, maxdate) => {
@@ -150,10 +204,10 @@ app.service('SaleService', function($http) {
                 }
             }
         )
-        return request; 
+        return request;
     }
 
-    $ctrl.salesSumTotalByMonth = (e,mindate, maxdate) => {
+    $ctrl.salesSumTotalByMonth = (e, mindate, maxdate) => {
 
         var request = $http(
             {
@@ -165,10 +219,10 @@ app.service('SaleService', function($http) {
                 }
             }
         )
-        return request; 
+        return request;
     }
 
-    $ctrl.searchDrilldown = (e,mindate, maxdate) => {
+    $ctrl.searchDrilldown = (e, mindate, maxdate) => {
 
         var request = $http(
             {
@@ -180,6 +234,6 @@ app.service('SaleService', function($http) {
                 }
             }
         )
-        return request; 
+        return request;
     }
 })

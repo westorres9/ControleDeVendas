@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleTaxSuccessDTO;
+import com.devsuperior.ControleDeVendas.dto.SalesByDateDTO;
 import com.devsuperior.ControleDeVendas.dto.SumBySellerDTO;
 import com.devsuperior.ControleDeVendas.dto.SumByTeamDTO;
 import com.devsuperior.ControleDeVendas.entities.Sale;
@@ -58,8 +59,9 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 			+ "FROM Sale as obj "
 			+ "JOIN obj.items as saleItems "
 			+ "WHERE saleItems.id.sale.id = obj.id "
+			+ "AND obj.date BETWEEN :minDate AND :maxDate "
 			+ "GROUP BY obj.seller")
-	List<SumBySellerDTO> sumBySeller();
+	List<SumBySellerDTO> sumBySeller(LocalDate minDate, LocalDate maxDate);
 	
 	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SumByTeamDTO( "
 			+ "team.id, user.team, SUM(saleItems.price * saleItems.quantity)) "
@@ -70,8 +72,9 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 			+ "ON user.id = obj.seller.id "
 			+ "JOIN Team as team "
 			+ "ON user.team.id = team.id "
+			+ "WHERE obj.date BETWEEN :minDate AND :maxDate "
 			+ "GROUP BY team.id, user.team.id ")
-	List<SumByTeamDTO> sumByTeam();
+	List<SumByTeamDTO> sumByTeam(LocalDate minDate, LocalDate maxDate);
 	
 	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SaleSumTotalDTO(SUM(obj.calls), "
 			+ "COUNT(obj), "
@@ -105,4 +108,12 @@ public interface SaleRepository extends JpaRepository<Sale, Long>{
 			+ "AND obj.date BETWEEN :minDate AND :maxDate")
 	SaleSumTotalDTO saleSumTotalForManager(Long id, LocalDate minDate, LocalDate maxDate);
 	
+	@Query("SELECT new com.devsuperior.ControleDeVendas.dto.SalesByDateDTO(obj.date, SUM(saleItem.quantity * saleItem.price)) "
+			+ "FROM Sale obj "
+			+ "JOIN obj.items as saleItem "
+			+ "ON saleItem.id.sale.id = obj.id "
+			+ "WHERE obj.date BETWEEN :minDate AND :maxDate "
+			+ "GROUP BY obj.date "
+			+ "ORDER BY obj.date ASC")
+	Page<SalesByDateDTO> salesByDate(LocalDate minDate, LocalDate maxDate, Pageable pageable);
 }

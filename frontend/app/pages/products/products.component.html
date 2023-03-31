@@ -7,9 +7,16 @@
 <div class="admin-container">
     <aside-bar></aside-bar>
     <section class="ds-container">
-        <h1>Produtos</h1>
+      <div class="return-area">
+        <a ng-href="#/admin" class="return-container">
+          <img src="/app/assets/img/arrow.svg" alt="">
+          <h4>Voltar</h4>
+        </a>
+        <h2>Produtos</h2>
+        <h2></h2>
+      </div>
         <div class="new-sale-container">
-            <a ng-href="#/admin/products/new"><button class="btn btn-primary">Adicionar Novo Produto</button></a>
+            <a ng-href="#/admin/products/new"><button class="btn btn-primary btn-update">Adicionar Novo Produto</button></a>
           </div>
           <div>
             <table class="table table-hover">
@@ -39,8 +46,8 @@
                 <div class="ds-form-card">
                   <h2>Tem certeza?</h2>
                   <div class="form-buttons">
-                    <button class="btn btn-warning" ng-click="$ctrl.closeWarning()">Não</button>
-                    <button class="btn btn-danger" ng-click="$ctrl.deleteProduct($ctrl.product)">Sim</button>
+                    <button class="btn btn-outline-primary" ng-click="$ctrl.closeWarning()">Não</button>
+                    <button class="btn btn-outline-danger" ng-click="$ctrl.deleteProduct($ctrl.product)">Sim</button>
                   </div>
                 </div>
               </div>

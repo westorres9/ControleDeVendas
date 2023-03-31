@@ -15,8 +15,8 @@ public class TeamDTO implements Serializable {
 	private Long id;
 	@NotEmpty(message = "Nome da equipe deve ser preenchido")
 	private String name;
-	@NotEmpty(message = "Url da logo da equipe deve ser preenchido")
 	private String imgUrl;
+	
 	private List<UserDTO> sellers = new ArrayList<>();
 	
 	public TeamDTO() {

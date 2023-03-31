@@ -3,6 +3,7 @@ package com.devsuperior.ControleDeVendas.services;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -100,7 +101,15 @@ public class ProductService {
 		LocalDate min = minDate.equals("") ? today.minusDays(365) : LocalDate.parse(minDate);
 		LocalDate max = maxDate.equals("") ? today : LocalDate.parse(maxDate);
 		List<ProductMostSoldDTO> listProductMostSold = productRepository.productsMostSold(min, max);
-		List<ProductMostSoldDTO> top10 = listProductMostSold.subList(0, 10);
+		List<ProductMostSoldDTO> top10 = new ArrayList<>();
+		try {
+			 top10 = listProductMostSold.subList(0, 10);
+		}
+		catch(IndexOutOfBoundsException e) {
+			return listProductMostSold;
+		}
 		return top10;
+		
 	}
 }
+ 

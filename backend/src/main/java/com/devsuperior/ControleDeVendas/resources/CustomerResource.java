@@ -12,11 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devsuperior.ControleDeVendas.dto.AverageAgeCustomerDTO;
+import com.devsuperior.ControleDeVendas.dto.AverageMonthlyIncomeCustomerDTO;
 import com.devsuperior.ControleDeVendas.dto.CustomerDTO;
+import com.devsuperior.ControleDeVendas.dto.CustomersWithMostPurchasesDTO;
+import com.devsuperior.ControleDeVendas.dto.ProductMostSoldDTO;
 import com.devsuperior.ControleDeVendas.services.CustomerService;
 @RestController
 @RequestMapping(value = "/customers")
@@ -57,9 +61,23 @@ public class CustomerResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@GetMapping("/average")
+	@GetMapping("/average-age")
 	public ResponseEntity<AverageAgeCustomerDTO> averageAge() {
-		AverageAgeCustomerDTO avgAge = customerService.averageAgeCustomer();
-		return ResponseEntity.ok().body(avgAge);
+		AverageAgeCustomerDTO averageAge = customerService.averageAgeCustomer();
+		return ResponseEntity.ok().body(averageAge);
+	}
+	
+	@GetMapping("/average-monthly-income")
+	public ResponseEntity<AverageMonthlyIncomeCustomerDTO> averageMonthlyIncome() {
+		AverageMonthlyIncomeCustomerDTO averageMonthlyIncome = customerService.averageMonthlyIncome();
+		return ResponseEntity.ok().body(averageMonthlyIncome);
+	}
+	
+	@GetMapping("/most-purchases")
+	public ResponseEntity<List<CustomersWithMostPurchasesDTO>> customerMostPurchase(
+			@RequestParam(value = "minDate", defaultValue = "") String minDate,
+			@RequestParam(value = "maxDate", defaultValue = "") String maxDate) {
+		List<CustomersWithMostPurchasesDTO> list = customerService.customersMostPurchases(minDate, maxDate);
+		return ResponseEntity.ok().body(list);		
 	}
 }

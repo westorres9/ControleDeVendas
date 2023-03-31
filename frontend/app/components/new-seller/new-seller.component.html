@@ -7,9 +7,16 @@
 <div class="admin-container">
     <aside-bar></aside-bar>
     <div class="update-sale-form-container ds-container">
-        <h2>Cadastrar Novo Vendedor</h2>
+        <div class="return-area">
+            <a ng-href="#/admin/products" class="return-container">
+              <img src="/app/assets/img/arrow.svg" alt="">
+              <h4>Voltar</h4>
+            </a>
+            <h2>Cadastrar Novo Vendedor</h2>
+            <h2></h2>
+          </div>
         <div class="ds-form-card">
-            <form action="">
+            <form>
                 <div class="form-input">
                     <input type="text" class="form-control base-input" placeholder="Nome" name="name" id="name"
                         value="name" ng-model="$ctrl.seller.name" required />
@@ -18,17 +25,9 @@
                     <input type="text" class="form-control base-input" placeholder="Email" name="email" id="email"
                         value="email" ng-model="$ctrl.seller.email" required>
                 </div>
-                <div class="form-input">
-                    <input type="password" class="form-control base-input" placeholder="Senha" name="password"
-                        id="password" value="password" ng-model="$ctrl.seller.password" required>
-                </div>
-                <div class="form-input">
-                    <input type="text" class="form-control base-input" placeholder="Url foto perfil" name="imgUrl"
-                        id="imgUrl" value="imgUrl" ng-model="$ctrl.seller.imgUrl" required>
-                </div>
-                <button class="btn btn-success" ng-click="$ctrl.insertSeller($ctrl.seller)"
+                <button class="btn btn-success btn-insert" ng-click="$ctrl.insertSeller($ctrl.seller)"
                     type="submit">Salvar</button>
-                <button class="btn btn-danger" ng-click="$ctrl.returnToPageSellers()">Cancelar</button>
+                <button class="btn btn-danger btn-cancel" ng-click="$ctrl.returnToPageSellers()">Cancelar</button>
             </form>
         </div>
     </div>

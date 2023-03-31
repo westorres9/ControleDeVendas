@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
 
@@ -20,6 +19,7 @@ public class ProductDTO implements Serializable {
 	private String name;
 	@NotEmpty(message = "Descrição deve ser preenchido")
 	private String description;
+	@Positive(message = "Preço deve ser positivo")
 	private Double price;
 	@NotEmpty(message = "URL Imagem deve ser preenchido")
 	private String imgUrl;

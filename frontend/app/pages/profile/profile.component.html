@@ -1,0 +1,51 @@
+<toaster-container toaster-options="{'toaster-id': 1, 
+            'animation-class': 'toast-top-right'}">
+</toaster-container>
+<toaster-container toaster-options="{'toaster-id': 2, 
+            'animation-class': 'toast-top-right'}">
+</toaster-container>
+<div class="admin-container">
+    <aside-bar></aside-bar>
+    <section class="ds-container">
+        <h1>Pagina Profile</h1>
+        <div class="profile-card profile-container">
+            <div class="profile-card-img">
+                <a href="">
+                    <img src="{{$ctrl.user.imgUrl}}" alt="">
+                </a>
+            </div>
+            <div class="profile-card-form">
+                <form>
+                    <div>
+                        <input type="file" value="file" ng-model="file"/>
+                        <button class="btn btn-primary" ng-click="$ctrl.upload()">Carregar arquivo</button>
+                    </div>
+                    <div class="form-input">
+                        <input type="text" class="form-control base-input" placeholder="Nome" name="name" id="name"
+                            value="name" ng-model="$ctrl.user.name" />
+                    </div>
+                    <div class="form-input">
+                        <input type="text" class="form-control base-input" placeholder="Email" name="email" id="email"
+                            value="email" ng-model="$ctrl.user.email" />
+                    </div>
+                    <div class="form-input">
+                        <input type="password" class="form-control base-input" placeholder="Informe a senha" name="password"
+                            id="password" value="password" ng-model="$ctrl.user.password" />
+                    </div>
+                    <div class="form-input">
+                        <input type="password" class="form-control base-input" placeholder="Confirme a senha" name="confirmpassword"
+                            id="confirm-password" value="$ctrl.confirmpassword" ng-model="$ctrl.confirmpassword" />
+                    </div>
+                    <div class="form-input">
+                        <input type="text" class="form-control base-input" placeholder="Imagem" name="imgUrl" id="imgUrl"
+                            value="imgUrl" ng-model="$ctrl.user.imgUrl" />
+                    </div>
+                    <button ng-disabled="$ctrl.user.password !== $ctrl.confirmpassword" class="btn btn-success btn-insert" ng-click="$ctrl.updateUser($ctrl.user)"
+                        type="submit">Atualizar</button>
+                    <button class="btn btn-danger btn-cancel" ng-click="$ctrl.returnToPageSellers()">Cancelar</button>
+                </form>
+            </div>
+        </div>
+</div>
+</section>
+</div>
