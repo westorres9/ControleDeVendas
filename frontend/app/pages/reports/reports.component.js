@@ -1,7 +1,19 @@
 function ReportController(ReportService,Upload) {
     var $ctrl = this;
+    $ctrl.generateReportSellers = generateReportSellers;
+
+    function generateReportSellers() {
+      ReportService.generateReportSellers().then((response) => {
+        var archive =document.createElement("a");
+                      archive.href ='data:attachment/csv;charset=utf-8,' + encodeURI(response.data);
+                      archive.target ='_blank';
+                      archive.download ='sellers.csv';
+                      document.body.appendChild(archive);
+                      archive.click();
+      })
+    }
   
-     $ctrl.generateReportSellers = () => {
+    $ctrl.generateReportSellers = () => {
       ReportService.generateReportSellers().then((response) => {
         var archive =document.createElement("a");
                       archive.href ='data:attachment/csv;charset=utf-8,' + encodeURI(response.data);

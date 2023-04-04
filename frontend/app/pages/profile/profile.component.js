@@ -1,7 +1,14 @@
-function ProfileController(AuthService, SellerService, ManagerService, UserService) {
+function ProfileController(AuthService, SellerService, ManagerService, UserService, ReportService,UploadService){
     var $ctrl = this;
     $ctrl.user = {};
     $ctrl.confirmpassword = "";
+    $ctrl.switchImage = false;
+    $ctrl.showUpdateNameInput = false;
+    $ctrl.showUpdateEmailInput = false;
+    var imageUpdated = "";
+    $ctrl.novoNome = "";
+    var novoEmail = "";
+
 
     $ctrl.GetLoggedUser = () => {
         const userId = AuthService.getUserId();
@@ -42,6 +49,81 @@ function ProfileController(AuthService, SellerService, ManagerService, UserServi
             console.log(error);
         })
     }
+
+    $ctrl.updateUserName = () => {
+        $ctrl.user.name = $ctrl.newName;
+        UserService.updateUserName($ctrl.user).then((response) => {
+            console.log(response.data);
+            $ctrl.popNameUpdated();
+        }).catch((error) => {
+            console.log(error);
+        }) 
+    }
+
+    $ctrl.updateEmail = () => {
+        $ctrl.user.email = $ctrl.newEmail;
+        UserService.updateUserEmail($ctrl.user).then((response) => {
+            console.log(response.data);
+            $ctrl.popEmailUpdated();
+        }).catch((error) => {
+            console.log(error);
+        }) 
+    }
+
+    $ctrl.updatePassword = () => {
+        $ctrl.user.password = $ctrl.newpassword;
+        UserService.updateUserPassword($ctrl.user).then((response) => {
+            console.log(response.data);
+        }).catch((error) => {
+            console.log(error);
+        }) 
+    }
+
+    $ctrl.uploadImage = () => {
+        var formData = new FormData();
+        var image = $ctrl.image
+        formData.append('file', image);
+        ReportService.uploadImage(formData).then((response) => {
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
+    $ctrl.selectFile = (file) => {
+        $ctrl.file = file;
+        return $ctrl.file;
+      }
+    
+      $ctrl.uploadFile = () => {
+        var file = $ctrl.selectFile($ctrl.file);
+        var formdata = new FormData();
+        formdata.append('file', file);
+        UploadService.uploadImage(formdata).then((response) => {
+          console.log(response.data, "upload realizado com sucesso");
+          $ctrl.user.imgUrl = response.data.pathFile;
+          console.log($ctrl.user.imgUrl)
+          setTimeout(() => {
+            UserService.updateUserImage($ctrl.user);
+          }, 3000);
+          $ctrl.ctrl.popImgUpdated();
+        })
+        .catch((error) => {
+          console.log(error.status, "erro ao fazer upload");
+        })
+      }
+    
+      $ctrl.updateImage = () => {
+        $ctrl.switchImage = !$ctrl.switchImage
+      }
+
+      $ctrl.editName = () => {
+        $ctrl.showUpdateNameInput = !$ctrl.showUpdateNameInput;
+      }
+
+      $ctrl.editEmail = () => {
+        $ctrl.showUpdateEmailInput = !$ctrl.showUpdateEmailInput;
+      }
 
     $ctrl.$onInit = () => {
         $ctrl.GetLoggedUser();

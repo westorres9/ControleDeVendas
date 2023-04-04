@@ -48,4 +48,17 @@ app.service('ReportService', function($http) {
         )
         return request; 
     }
+
+    $ctrl.uploadImage = (formdata) => {
+        var request = $http(
+            {
+                method: 'post',
+                url: `${BASE_URL}/report/upload/images`,
+                headers: { 'Content-Type': undefined},
+                data: formdata,
+                transformRequest: angular.identity
+            }
+        )
+        return request;
+    }
 });

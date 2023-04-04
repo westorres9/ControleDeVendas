@@ -1,48 +1,58 @@
-<toaster-container toaster-options="{'toaster-id': 1, 
-            'animation-class': 'toast-top-right'}">
-</toaster-container>
-<toaster-container toaster-options="{'toaster-id': 2, 
-            'animation-class': 'toast-top-right'}">
-</toaster-container>
 <div class="admin-container">
     <aside-bar></aside-bar>
     <section class="ds-container">
-        <h1>Pagina Profile</h1>
+        <h1>Configurações Gerais da conta</h1>
+        <hr>
         <div class="profile-card profile-container">
-            <div class="profile-card-img">
-                <a href="">
-                    <img src="{{$ctrl.user.imgUrl}}" alt="">
-                </a>
+
+            <h2>DADOS PESSOAIS</h2>
+            <hr>
+            <div class="profile-user-data">
+                <p>Nome:</p>
+                <h3>{{$ctrl.user.name}}<h3><button class="btn btn-outline-primary" ng-click="$ctrl.editName()">Editar</button>
             </div>
-            <div class="profile-card-form">
+            <form class="update-name-container" ng-show="$ctrl.showUpdateNameInput == true">
+                <label for="new-name">Novo Nome:</label>
+                <input id="new-name" class="base-input form-control" type="text" ng-model="$ctrl.newName" required>
+                <button class="btn btn-outline-success" ng-click="$ctrl.updateUserName()">Salvar</button>
+            </form>
+            <hr>
+            <div class="profile-user-data">
+                <p>Email:</p>
+                <h3>{{$ctrl.user.email}}<h3><button class="btn btn-outline-primary" ng-click="$ctrl.editEmail()">Editar</button>
+            </div>
+            <form class="update-email-container" ng-show="$ctrl.showUpdateEmailInput == true">
+                <label for="new-email">Novo Email:</label>
+                <input id="new-email" class="base-input form-control" type="text" ng-model="$ctrl.newEmail" required>
+                <button class="btn btn-outline-success" ng-click="$ctrl.updateEmail()">Salvar</button>
+            </form>
+            <hr>
+            <div>
+                <h2>ALTERAR SENHA</h2>
                 <form>
+                    <div class="update-password">
+                        <label for="new-password">Nova senha:</label>
+                        <input class="base-input form-control" type="password" ng-model="$ctrl.newpassword" required>
+                    </div>
+                    <div class="update-password">
+                        <label for="repeat-password">Confirme a nova senha:</label>
+                        <input class="base-input form-control" type="password" ng-model="$ctrl.confirmpassword" required>
+                    </div>
+                    <button class="btn btn-outline-success" ng-disabled="$ctrl.newpassword !== $ctrl.confirmpassword" ng-model="$ctrl.updatePassword()">Salvar</button>
+                </form>
+            </div>
+            <hr>
+            <div>
+                <h2>ALTERAR IMAGEM DE PERFIL</h2>
+                <button class="btn btn-outline-primary" ng-click="$ctrl.updateImage()">Alterar imagem</button>
+                <form ng-show="$ctrl.switchImage == true">
                     <div>
-                        <input type="file" value="file" ng-model="file"/>
-                        <button class="btn btn-primary" ng-click="$ctrl.upload()">Carregar arquivo</button>
+                        <div class="col-md-4 upload-box">
+                            <input type="file" name="file" id="file" ng-model="file" ngf-select="$ctrl.selectFile(file)"
+                                accept="image/*">
+                        </div>
+                        <button class="btn btn-outline-success" ng-click="$ctrl.uploadFile()">Enviar</button>
                     </div>
-                    <div class="form-input">
-                        <input type="text" class="form-control base-input" placeholder="Nome" name="name" id="name"
-                            value="name" ng-model="$ctrl.user.name" />
-                    </div>
-                    <div class="form-input">
-                        <input type="text" class="form-control base-input" placeholder="Email" name="email" id="email"
-                            value="email" ng-model="$ctrl.user.email" />
-                    </div>
-                    <div class="form-input">
-                        <input type="password" class="form-control base-input" placeholder="Informe a senha" name="password"
-                            id="password" value="password" ng-model="$ctrl.user.password" />
-                    </div>
-                    <div class="form-input">
-                        <input type="password" class="form-control base-input" placeholder="Confirme a senha" name="confirmpassword"
-                            id="confirm-password" value="$ctrl.confirmpassword" ng-model="$ctrl.confirmpassword" />
-                    </div>
-                    <div class="form-input">
-                        <input type="text" class="form-control base-input" placeholder="Imagem" name="imgUrl" id="imgUrl"
-                            value="imgUrl" ng-model="$ctrl.user.imgUrl" />
-                    </div>
-                    <button ng-disabled="$ctrl.user.password !== $ctrl.confirmpassword" class="btn btn-success btn-insert" ng-click="$ctrl.updateUser($ctrl.user)"
-                        type="submit">Atualizar</button>
-                    <button class="btn btn-danger btn-cancel" ng-click="$ctrl.returnToPageSellers()">Cancelar</button>
                 </form>
             </div>
         </div>
