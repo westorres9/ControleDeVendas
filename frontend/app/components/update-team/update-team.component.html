@@ -12,40 +12,31 @@
               <img src="/app/assets/img/arrow.svg" alt="">
               <h4>Voltar</h4>
             </a>
-            <h2>Atualizar Equipe</h2>
-            <h2></h2>
-          </div>
-        
-        <div class="ds-form-card">
-            <form>
-                <div class="form-input">
-                    <input 
-                    type="text"
-                    class="form-control base-input" 
-                    placeholder="Nome da Equipe"  
-                    name="name" 
-                    id="name"
-                    value="name"
-                    ng-model="$ctrl.team.name" 
-                    required
-                    />
+        </div>
+        <div><h2>ATUALIZAR EQUIPE</h2>
+            <hr>
+            <div class="profile-user-data">
+                <p>Nome:</p>
+                <h3>{{$ctrl.team.name}}<h3><button class="btn btn-outline-primary" ng-click="$ctrl.editName()">Editar</button>
+            </div>
+            <form class="update-name-container" ng-show="$ctrl.showUpdateNameInput == true">
+                <label for="new-name">Novo Nome:</label>
+                <input id="new-name" class="base-input form-control" type="text" ng-model="$ctrl.newName" required>
+                <button class="btn btn-outline-success" ng-click="$ctrl.updateTeamName()">Salvar</button>
+            </form>
+            <hr>
+        </div>
+        <div>
+            <h2>ALTERAR IMAGEM DA EQUIPE</h2>
+            <button class="btn btn-outline-primary" ng-click="$ctrl.updateImage()">Alterar imagem</button>
+            <form ng-show="$ctrl.switchImage == true">
+                <div>
+                    <div class="col-md-4 upload-box">
+                        <input type="file" name="file" id="file" ng-model="file" ngf-select="$ctrl.selectFile(file)"
+                            accept="image/*">
+                    </div>
+                    <button class="btn btn-outline-success" ng-click="$ctrl.uploadFile()">Enviar</button>
                 </div>
-                <div class="form-input">
-                    <input 
-                    type="text"
-                    class="form-control base-input" 
-                    placeholder="imgUrl da Equipe"  
-                    name="imgUrl" 
-                    id="imgUrl"
-                    value="imgUrl"
-                    ng-model="$ctrl.team.imgUrl" 
-                    required
-                    />
-                </div>
-                <div class="form-input">
-
-                <button class="btn btn-primary btn-insert" ng-click="$ctrl.updateTeam($ctrl.team)" type="submit">Atualizar</button>
-                <button class="btn btn-danger btn-cancel" ng-click="$ctrl.returnToPageTeams()">Cancelar</button>
             </form>
         </div>
     </div>

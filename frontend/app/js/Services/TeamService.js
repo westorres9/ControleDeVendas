@@ -59,4 +59,29 @@ app.service('TeamService', function($http) {
         return request; 
     }
     
+    $ctrl.updateTeamName = (team) => {
+        
+        var request = $http(
+            {
+                method: 'put',
+                url: `${BASE_URL}/teams/${team.id}`,
+                data: team
+            }
+        )
+        return request; 
+    }
+
+    $ctrl.updateTeamImage = (team, formdata) => {
+        
+        var request = $http(
+            {
+                method: 'post',
+                url: `${BASE_URL}/teams/${team.id}/image`,
+                headers: { 'Content-Type': undefined},
+                data: formdata,
+                transformRequest: angular.identity
+            }
+        )
+        return request;
+    }
 } )
