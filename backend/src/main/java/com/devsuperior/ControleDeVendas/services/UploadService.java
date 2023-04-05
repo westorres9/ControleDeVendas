@@ -1,9 +1,14 @@
 package com.devsuperior.ControleDeVendas.services;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +25,7 @@ import com.devsuperior.ControleDeVendas.entities.User;
 import com.devsuperior.ControleDeVendas.repositories.RoleRepository;
 import com.devsuperior.ControleDeVendas.repositories.TeamRepository;
 import com.devsuperior.ControleDeVendas.repositories.UserRepository;
+import com.devsuperior.ControleDeVendas.services.exceptions.ResourceNotFoundException;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.enums.CSVReaderNullFieldIndicator;
@@ -40,6 +46,9 @@ public class UploadService {
 
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	CloudinaryUploadImageService cloudinaryUploadService;
 
 	public List<SaleDTO> uploadSales(MultipartFile file) throws IOException {
 		InputStream archive = file.getInputStream();
@@ -138,6 +147,20 @@ public class UploadService {
 			return managers;
 		} catch (Exception e) {
 			throw new IOException("error " + e.getMessage());
+		}
+	}
+	
+	public String uploadImage(MultipartFile file) {
+		try {
+			System.out.println("DEBUG " + file.getOriginalFilename());
+			String caminho = "C:\\Users\\weste\\Documents\\images\\";
+			Path path= Paths.get(caminho + File.separator + file.getOriginalFilename());
+			Files.copy(file.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
+			System.out.println("DEBUG -- Arquivo copiado");
+			return cloudinaryUploadService.uploadImageService(caminho + File.separator + file.getOriginalFilename());
+		} catch (Exception ex) {
+			throw new ResourceNotFoundException("Ocorreu um erro ao carregar a imagem" + ex.getMessage() );
+			
 		}
 	}
 }

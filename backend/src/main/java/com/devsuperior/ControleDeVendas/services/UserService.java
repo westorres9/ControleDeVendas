@@ -1,7 +1,5 @@
 package com.devsuperior.ControleDeVendas.services;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -15,12 +13,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.devsuperior.ControleDeVendas.dto.UserDTO;
 import com.devsuperior.ControleDeVendas.dto.UserUpdateDTO;
-import com.devsuperior.ControleDeVendas.entities.Team;
 import com.devsuperior.ControleDeVendas.entities.User;
 import com.devsuperior.ControleDeVendas.repositories.UserRepository;
+import com.devsuperior.ControleDeVendas.services.exceptions.DatabaseException;
 import com.devsuperior.ControleDeVendas.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -34,6 +33,9 @@ public class UserService implements UserDetailsService {
 	
 	@Autowired
 	private AuthService authService;
+	
+	@Autowired
+	private UploadService uploadService;
 	
 	@Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -74,4 +76,66 @@ public class UserService implements UserDetailsService {
         }
 	}
 	
+	@Transactional
+	public UserDTO updateEmail(Long id, UserUpdateDTO dto) {
+		User entity = authService.authenticated();
+		try {
+			entity = repository.findByEmail(dto.getEmail());
+			if(entity == null) {
+				entity = repository.getOne(id);
+				entity.setEmail(dto.getEmail());
+				entity = repository.save(entity);
+				return new UserDTO(entity);
+			}
+			else {
+				throw new DatabaseException("Email exists");
+			}
+		}
+		catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Id not found " + id);
+        }
+	}
+	
+	@Transactional
+	public UserDTO updateUsername(Long id, UserUpdateDTO dto) {
+		User entity = authService.authenticated();
+		try {
+			entity = repository.getOne(id);
+			entity.setName(dto.getName());
+			entity = repository.save(entity);
+			return new UserDTO(entity);
+		}
+		catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Id not found " + id);
+        }
+	}
+	
+	@Transactional
+	public String updateUserImage(Long id, MultipartFile file){
+		User entity = authService.authenticated();
+		try {			
+			entity = repository.getOne(id);
+			String imgUrl = uploadService.uploadImage(file);
+			entity.setImgUrl(imgUrl);
+			entity = repository.save(entity);
+			return imgUrl;
+		}
+		catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Id not found " + id);
+        }
+	}
+	
+	@Transactional
+	public UserDTO updatePassowrd(Long id, UserUpdateDTO dto) {
+		User entity = authService.authenticated();
+		try {
+			entity = repository.getOne(id);
+			entity.setPassword(passwordEncoder.encode(dto.getPassword()));
+			entity = repository.save(entity);
+			return new UserDTO(entity);
+		}
+		catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Id not found " + id);
+        }
+	}
 }

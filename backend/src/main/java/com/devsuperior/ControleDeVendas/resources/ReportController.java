@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.devsuperior.ControleDeVendas.dto.ManagerToCsv;
+import com.devsuperior.ControleDeVendas.dto.PathDTO;
 import com.devsuperior.ControleDeVendas.dto.SaleDTO;
 import com.devsuperior.ControleDeVendas.dto.SellerToCsv;
 import com.devsuperior.ControleDeVendas.services.CloudinaryUploadImageService;
@@ -99,10 +100,15 @@ public class ReportController {
 	}
 	
 	@PostMapping(value = "/upload/images")
-	public ResponseEntity<String> uploadImage(@RequestParam(value = "image") String image) {
-		image = uploadImageService.uploadImageService(image);
-		return ResponseEntity.ok().body(image);
-	}
-	
-	
+	public ResponseEntity<PathDTO> uploadImage(@RequestParam MultipartFile file)throws IOException {
+		String path = uploadService.uploadImage(file);
+			if(path!= null) {
+				PathDTO pathDTO = new PathDTO();
+				pathDTO.setPathFile(path);
+				return ResponseEntity.status(201).body(pathDTO);
+				
+			}
+			
+			return ResponseEntity.badRequest().build();
+		}
 }

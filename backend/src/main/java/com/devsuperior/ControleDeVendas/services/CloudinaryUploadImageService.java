@@ -17,7 +17,6 @@ public class CloudinaryUploadImageService {
 	@Autowired
 	public UploadImageConfig cloudinary;
 	
-	@Transactional(readOnly = true)
 	public String uploadImageService(String image) {
 		try {
 			String randomName = UUID.randomUUID().toString();

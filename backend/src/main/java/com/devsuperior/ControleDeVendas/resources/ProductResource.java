@@ -1,5 +1,6 @@
 package com.devsuperior.ControleDeVendas.resources;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.devsuperior.ControleDeVendas.dto.PathDTO;
 import com.devsuperior.ControleDeVendas.dto.ProductDTO;
 import com.devsuperior.ControleDeVendas.dto.ProductMostSoldDTO;
 import com.devsuperior.ControleDeVendas.services.ProductService;
@@ -59,6 +62,17 @@ public class ProductResource {
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		productService.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@PostMapping("/{id}/image")
+	public ResponseEntity<PathDTO> updateImage(@PathVariable Long id, @RequestParam(value = "file") MultipartFile file)throws IOException{
+		String path = productService.updateProductImage(id, file);
+		if(path!= null) {
+			PathDTO pathDTO = new PathDTO();
+			pathDTO.setPathFile(path);
+			return ResponseEntity.status(201).body(pathDTO);			
+		}
+		return ResponseEntity.badRequest().build();
 	}
 	
 	@GetMapping("/most-sold")

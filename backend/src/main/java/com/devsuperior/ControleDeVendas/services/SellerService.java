@@ -160,7 +160,7 @@ public class SellerService {
 			User entity = repository.getOne(id);
 			entity.setName(dto.getName());
 			entity.setImgUrl(dto.getImgUrl());
-			entity.setPassword(passwordEncoder.encode(standardPassword));
+			entity.setPassword(passwordEncoder.encode(dto.getPassword()));
 			entity = repository.save(entity);
 			List<Team> teams = new ArrayList<>();
 			teams.addAll(loggedUser.getTeams());
