@@ -38,7 +38,7 @@
                         <label for="repeat-password">Confirme a nova senha:</label>
                         <input class="base-input form-control" type="password" ng-model="$ctrl.confirmpassword" required>
                     </div>
-                    <button class="btn btn-outline-success" ng-disabled="$ctrl.newpassword !== $ctrl.confirmpassword" ng-model="$ctrl.updatePassword()">Salvar</button>
+                    <button class="btn btn-outline-success" ng-disabled="$ctrl.newpassword !== $ctrl.confirmpassword" ng-click="$ctrl.updatePassword()">Salvar</button>
                 </form>
             </div>
             <hr>

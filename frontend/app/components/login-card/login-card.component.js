@@ -28,8 +28,15 @@ function LoginCardComponentController($http, $httpParamSerializerJQLike, AuthSer
         const profileImage = AuthService.getProfileImage();
         AuthService.setAuthority(loginResponse.Authority);
         const authority = AuthService.getAuthority();
+        console.log(authority[0].authority)
         if(token !== null) {
-          window.location.href = 'index.html#/admin';
+          if(authority[0].authority === "ROLE_SELLER") {
+            window.location.href = 'index.html#/admin/sales';
+          }
+          else {
+            window.location.href = 'index.html#/admin/dashboard'
+          }
+          
         }
       })
     }

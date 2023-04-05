@@ -1,4 +1,4 @@
-function ProfileController(AuthService, SellerService, ManagerService, UserService, ReportService,UploadService){
+function ProfileController(AuthService, SellerService, ManagerService, UserService, ReportService, UploadService) {
     var $ctrl = this;
     $ctrl.user = {};
     $ctrl.confirmpassword = "";
@@ -9,16 +9,20 @@ function ProfileController(AuthService, SellerService, ManagerService, UserServi
     $ctrl.novoNome = "";
     var novoEmail = "";
 
+    $ctrl.$onInit = () => {
+        $ctrl.GetLoggedUser();
+    }
+
 
     $ctrl.GetLoggedUser = () => {
         const userId = AuthService.getUserId();
         const username = AuthService.getUsername();
         const authority = AuthService.getAuthority();
         const role = authority[0].authority;
-        $ctrl.loggedUser = {id: userId, name: username, authority: role}
+        $ctrl.loggedUser = { id: userId, name: username, authority: role }
         console.log($ctrl.loggedUser)
 
-        if($ctrl.loggedUser.authority == 'ROLE_SELLER') {
+        if ($ctrl.loggedUser.authority == 'ROLE_SELLER') {
             SellerService.getSellerById(userId).then((response) => {
                 console.log(response.data);
                 $ctrl.user = response.data;
@@ -26,7 +30,7 @@ function ProfileController(AuthService, SellerService, ManagerService, UserServi
                 console.log(error)
             })
         }
-        else if($ctrl.loggedUser.authority == 'ROLE_MANAGER') {
+        else if ($ctrl.loggedUser.authority == 'ROLE_MANAGER') {
             ManagerService.getManagerById(userId).then((response) => {
                 console.log(response.data);
                 $ctrl.user = response.data;
@@ -54,20 +58,18 @@ function ProfileController(AuthService, SellerService, ManagerService, UserServi
         $ctrl.user.name = $ctrl.newName;
         UserService.updateUserName($ctrl.user).then((response) => {
             console.log(response.data);
-            $ctrl.popNameUpdated();
         }).catch((error) => {
             console.log(error);
-        }) 
+        })
     }
 
     $ctrl.updateEmail = () => {
         $ctrl.user.email = $ctrl.newEmail;
         UserService.updateUserEmail($ctrl.user).then((response) => {
             console.log(response.data);
-            $ctrl.popEmailUpdated();
         }).catch((error) => {
             console.log(error);
-        }) 
+        })
     }
 
     $ctrl.updatePassword = () => {
@@ -76,61 +78,42 @@ function ProfileController(AuthService, SellerService, ManagerService, UserServi
             console.log(response.data);
         }).catch((error) => {
             console.log(error);
-        }) 
-    }
-
-    $ctrl.uploadImage = () => {
-        var formData = new FormData();
-        var image = $ctrl.image
-        formData.append('file', image);
-        ReportService.uploadImage(formData).then((response) => {
-            console.log(response);
-        }).catch((error) => {
-            console.log(error);
         })
     }
 
     $ctrl.selectFile = (file) => {
         $ctrl.file = file;
         return $ctrl.file;
-      }
-    
-      $ctrl.uploadFile = () => {
+    }
+
+    $ctrl.uploadFile = () => {
         var file = $ctrl.selectFile($ctrl.file);
         var formdata = new FormData();
         formdata.append('file', file);
-        UploadService.uploadImage(formdata).then((response) => {
-          console.log(response.data, "upload realizado com sucesso");
-          $ctrl.user.imgUrl = response.data.pathFile;
-          console.log($ctrl.user.imgUrl)
-          setTimeout(() => {
-            UserService.updateUserImage($ctrl.user);
-          }, 3000);
-          $ctrl.ctrl.popImgUpdated();
+        UserService.updateUserImage($ctrl.user, formdata).then((response) => {
+            console.log(response.data, "upload realizado com sucesso");
+            $ctrl.user.imgUrl = response.data.pathFile;
+            console.log($ctrl.user.imgUrl);
         })
-        .catch((error) => {
-          console.log(error.status, "erro ao fazer upload");
-        })
-      }
-    
-      $ctrl.updateImage = () => {
+            .catch((error) => {
+                console.log(error.status, "erro ao fazer upload");
+            })
+    }
+
+    $ctrl.updateImage = () => {
         $ctrl.switchImage = !$ctrl.switchImage
-      }
+    }
 
-      $ctrl.editName = () => {
+    $ctrl.editName = () => {
         $ctrl.showUpdateNameInput = !$ctrl.showUpdateNameInput;
-      }
+    }
 
-      $ctrl.editEmail = () => {
+    $ctrl.editEmail = () => {
         $ctrl.showUpdateEmailInput = !$ctrl.showUpdateEmailInput;
-      }
-
-    $ctrl.$onInit = () => {
-        $ctrl.GetLoggedUser();
     }
 }
 
 app.component("profile", {
     templateUrl: "pages/profile/profile.component.html",
     controller: ProfileController
-  });
+});
