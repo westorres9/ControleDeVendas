@@ -9,43 +9,103 @@
     <div class="update-sale-form-container ds-container">
         <div class="return-area">
             <a ng-href="#/admin/products" class="return-container">
-              <img src="/app/assets/img/arrow.svg" alt="">
-              <h4>Voltar</h4>
+                <img src="/app/assets/img/arrow.svg" alt="">
+                <h4>Voltar</h4>
             </a>
-            <h2>Atualizar Produto</h2>
-            <h2></h2>
-          </div>
-        <div class="ds-form-card">
-            <form>
-                <div class="form-input">
-                    <input type="text" class="form-control base-input" placeholder="Nome do Produto" name="name"
-                        id="name" value="name" ng-model="$ctrl.product.name" required />
+            </div>
+            <div>
+                <h2>ATUALIZAR PRODUTO</h2>
+                <hr>
+                <div class="profile-user-data">
+                    <p>Nome:</p>
+                    <h3>{{$ctrl.product.name}}<h3><button class="btn btn-outline-primary"ng-click="$ctrl.editName()">Editar</button>
                 </div>
-                <div class="form-input">
-                    <input type="text" class="form-control base-input" placeholder="Descrição" name="description"
-                        id="description" value="description" ng-model="$ctrl.product.description" required />
-                </div>
-                <div class="form-input">
-                    <input type="number" class="form-control base-input" placeholder="Preço" name="price" id="price"
-                        value="price" ng-model="$ctrl.product.price" required />
-                </div>
-                <div class="form-input">
-                    <input type="text" class="form-control base-input" placeholder="Url da Imagem do Produto"
-                        name="imgUrl" id="imgUrl" value="$ctrl.product.imgUrl" ng-model="$ctrl.product.imgUrl" required />
-                </div>
-                
+                <form class="update-name-container" ng-show="$ctrl.showUpdateNameInput == true">
+                    <label for="new-name">Novo Nome:</label>
+                    <input id="new-name" class="base-input form-control" type="text" ng-model="$ctrl.newName" required>
+                    <button class="btn btn-outline-success" ng-click="$ctrl.updateProductName()">Salvar</button>
+                </form>
+                <hr>
+            </div>
+            <div  class="profile-user-data">
+                <p>Descrição:</p>
+                <h3>Descrição<h3><button class="btn btn-outline-primary"ng-click="$ctrl.editDescription()">Editar</button>
+            </div>
+            <form class="update-name-container" ng-show="$ctrl.showUpdateDescriptionInput == true">
+                <label for="new-name">Novo Nome:</label>
+                <input id="new-name" class="base-input form-control" type="text" ng-model="$ctrl.newDescription" required>
+                <button class="btn btn-outline-success" ng-click="$ctrl.updateProductDescription()">Salvar</button>
+            </form>
+            <hr>
+            <div  class="profile-user-data">
+                <p>Preço:</p>
+                <h3>{{$ctrl.product.price | currency: 'R$'}}<h3><button class="btn btn-outline-primary"ng-click="$ctrl.editPrice()">Editar</button>
+            </div>
+            <form class="update-name-container" ng-show="$ctrl.showUpdatePriceInput == true">
+                <label for="new-name">Novo Nome:</label>
+                <input id="new-name" class="base-input form-control" type="text" ng-model="$ctrl.newPrice" required>
+                <button class="btn btn-outline-success" ng-click="$ctrl.updateProductPrice()">Salvar</button>
+            </form>
+            <hr>
+            <div  class="profile-user-data">
+                <p>Categoria:</p>
+                <h3>{{$ctrl.product.categories[0].name}}<h3><button class="btn btn-outline-primary"ng-click="$ctrl.editCategory()">Editar</button>
+            </div>
+            <form class="update-name-container" ng-show="$ctrl.showUpdateCategoryInput == true">
+                <label for="category">Escolha uma categoria:</label>
+                        <select name="categories" id="category">
+                            <option ng-repeat="category in $ctrl.categories" ng-model="$ctrl.category"
+                                value="$ctrl.category">{{category.name}}</option>
+                        </select>
+                <button class="btn btn-outline-success" ng-click="$ctrl.updateProductName()">Salvar</button>
+            </form>
+            <hr>
+            <div>
+                <h2>ALTERAR IMAGEM DO PRODUTO</h2>
+                <button class="btn btn-outline-primary" ng-click="$ctrl.updateImage()">Alterar imagem</button>
+                <form ng-show="$ctrl.switchImage == true">
+                    <div>
+                        <div class="col-md-4 upload-box">
+                            <input type="file" name="file" id="file" ng-model="file" ngf-select="$ctrl.selectFile(file)"
+                                accept="image/*">
+                        </div>
+                        <button class="btn btn-outline-success" ng-click="$ctrl.uploadFile()">Enviar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="ds-form-card">
+                <form>
+                    <div class="form-input">
+                        <input type="text" class="form-control base-input" placeholder="Nome do Produto" name="name"
+                            id="name" value="name" ng-model="$ctrl.product.name" required />
+                    </div>
+                    <div class="form-input">
+                        <input type="text" class="form-control base-input" placeholder="Descrição" name="description"
+                            id="description" value="description" ng-model="$ctrl.product.description" required />
+                    </div>
+                    <div class="form-input">
+                        <input type="number" class="form-control base-input" placeholder="Preço" name="price" id="price"
+                            value="price" ng-model="$ctrl.product.price" required />
+                    </div>
+                    <div class="form-input">
+                        <input type="text" class="form-control base-input" placeholder="Url da Imagem do Produto"
+                            name="imgUrl" id="imgUrl" value="$ctrl.product.imgUrl" ng-model="$ctrl.product.imgUrl"
+                            required />
+                    </div>
 
-                <div class="form-input">
-                    <label for="category">Escolha uma categoria:</label>
-                    <select name="categories" id="category">
-                        <option ng-repeat="category in $ctrl.categories" ng-model="$ctrl.category" value="$ctrl.category">{{category.name}}</option>
-                    </select>
-                </div>
-                
+
+                    <div class="form-input">
+                        <label for="category">Escolha uma categoria:</label>
+                        <select name="categories" id="category">
+                            <option ng-repeat="category in $ctrl.categories" ng-model="$ctrl.category"
+                                value="$ctrl.category">{{category.name}}</option>
+                        </select>
+                    </div>
+
                     <button class="btn btn-primary btn-update" ng-click="$ctrl.updateProduct($ctrl.product)"
                         type="submit">Salvar</button>
                     <button class="btn btn-danger btn-cancel" ng-click="$ctrl.returnToPageProducts()">Cancelar</button>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
