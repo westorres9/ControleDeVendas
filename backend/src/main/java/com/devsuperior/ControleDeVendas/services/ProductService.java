@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.devsuperior.ControleDeVendas.dto.CategoryDTO;
 import com.devsuperior.ControleDeVendas.dto.ProductDTO;
@@ -32,6 +33,9 @@ public class ProductService {
 	
 	@Autowired
 	private CategoryRepository categoryRepository;
+	
+	@Autowired
+	private UploadService uploadService;
 	
 	@Transactional(readOnly = true)
 	public List<ProductDTO> findAll() {
@@ -110,6 +114,19 @@ public class ProductService {
 		}
 		return top10;
 		
+	}
+	
+	@Transactional
+	public String updateProductImage(Long id, MultipartFile file) {
+		try {
+			Product entity = productRepository.getOne(id);
+			String imgUrl = uploadService.uploadImage(file);
+			entity.setImgUrl(imgUrl);
+			entity = productRepository.save(entity);
+			return imgUrl;
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		}
 	}
 }
  

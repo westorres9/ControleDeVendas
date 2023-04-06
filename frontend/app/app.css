@@ -59,6 +59,23 @@ a ,a:hover {
     width: 500px;
 }
 
+.btn-insert {
+    border-radius: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.btn-cancel {
+    border-radius: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.btn-update {
+    border-radius: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
 
 @media (min-width:768px) {
     .ds-container {

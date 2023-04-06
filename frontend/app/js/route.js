@@ -120,6 +120,10 @@ function config($routeProvider) {
         template: '<reports></reports>',
         authenticated: true
     })
+    .when('/admin/profile', {
+        template: '<profile></profile>',
+        authenticated: true
+    })
 }])
 
 app.run(["$rootScope", "$location", "AuthService", function($rootScope, $location, AuthService) {

@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import com.devsuperior.ControleDeVendas.entities.User;
 import com.opencsv.bean.CsvBindByName;
 
-public class UserDtoToDownload implements Serializable{
+public class SellerToCsv implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@NotBlank(message = "campo requerido")
@@ -19,28 +19,23 @@ public class UserDtoToDownload implements Serializable{
 	@CsvBindByName(column = "Email", required = true)
 	private String email;
 	
-	@CsvBindByName(column = "img_Url", required = true)
-	private String imgUrl;
-	
 	@Email(message = "Vendedor deve pertencer a uma equipe")
-	@CsvBindByName(column = "Team_Id", required = true)
-	private Long teamId;
+	@CsvBindByName(column = "Team_Name", required = true)
+	private String teamName;
 	
-	public UserDtoToDownload() {
+	public SellerToCsv() {
 	}
 
-	public UserDtoToDownload(String name, String email, String password, String imgUrl, Long teamId) {
+	public SellerToCsv(String name, String email,String teamName) {
 		this.name = name;
 		this.email = email;
-		this.imgUrl = imgUrl;
-		this.teamId = teamId;
+		this.teamName = teamName;
 	}
 	
-	public UserDtoToDownload(User entity) {
+	public SellerToCsv(User entity) {
 		this.name = entity.getName();
 		this.email = entity.getEmail();
-		this.imgUrl = entity.getImgUrl();
-		this.teamId = entity.getTeam().getId();
+		this.teamName = entity.getTeam().getName();
 	}
 	
 	public String getName() {
@@ -59,20 +54,11 @@ public class UserDtoToDownload implements Serializable{
 		this.email = email;
 	}
 
-	public String getImgUrl() {
-		return imgUrl;
+	public String getTeamName() {
+		return teamName;
 	}
 
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
 	}
-
-	public Long getTeamId() {
-		return teamId;
-	}
-
-	public void setTeamId(Long teamId) {
-		this.teamId = teamId;
-	}
-	
 }

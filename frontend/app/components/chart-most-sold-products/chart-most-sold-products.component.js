@@ -34,10 +34,16 @@ function ChartMostSoldProductsComponentController(ProductService) {
             $ctrl.mostSoldProducts.map(item => data.push({name: item.name, y: item.quantity} 
              ))
              chart.addSeries({
+<<<<<<< HEAD
                 name: 'Un Vendidas',
                 data: data
              })
             
+=======
+                name: 'Unidades Vendidas',
+                data: data
+             })           
+>>>>>>> develop
         })
     }
 

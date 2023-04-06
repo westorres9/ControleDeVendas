@@ -11,8 +11,26 @@ function UpdateManagerComponentController(ManagerService,$routeParams, toaster) 
         })
     }
 
+    $ctrl.updateManager = () => {
+        ManagerService.updateManager($ctrl.manager).then((response) => {
+            console.log(response.data);
+            $ctrl.popSuccess();
+        }).catch((error) => {
+            console.log(error);
+            $ctrl.popError();
+        })
+    }
+
     $ctrl.$onInit = () => {
         $ctrl.getManagerById($routeParams.id);
+    }
+
+    $ctrl.popSuccess = function () {
+        toaster.pop({ type: 'note', body: 'Gestor atualizado com sucesso', toasterId: 1 });
+    }
+
+    $ctrl.popError = function () {
+        toaster.pop({ type: 'error', body: 'Erro ao atualizar Gestor', toasterId: 2 });
     }
 
 }

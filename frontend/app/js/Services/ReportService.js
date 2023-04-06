@@ -25,6 +25,17 @@ app.service('ReportService', function($http) {
         return request; 
     }
 
+    $ctrl.generateReportManagers = () => {
+
+        var request = $http(
+            {
+                method: 'get',
+                url: `${BASE_URL}/report/download/managers`
+            }
+        )
+        return request
+    }
+
     $ctrl.uploadSellerCSV = (formdata) => {
         var request = $http(
             {
@@ -36,5 +47,18 @@ app.service('ReportService', function($http) {
             }
         )
         return request; 
+    }
+
+    $ctrl.uploadImage = (formdata) => {
+        var request = $http(
+            {
+                method: 'post',
+                url: `${BASE_URL}/report/upload/images`,
+                headers: { 'Content-Type': undefined},
+                data: formdata,
+                transformRequest: angular.identity
+            }
+        )
+        return request;
     }
 });

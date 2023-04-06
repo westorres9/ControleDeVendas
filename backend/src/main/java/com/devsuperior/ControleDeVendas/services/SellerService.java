@@ -17,8 +17,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.devsuperior.ControleDeVendas.dto.SellerToCsv;
 import com.devsuperior.ControleDeVendas.dto.UserDTO;
-import com.devsuperior.ControleDeVendas.dto.UserDtoToDownload;
 import com.devsuperior.ControleDeVendas.dto.UserInsertDTO;
 import com.devsuperior.ControleDeVendas.dto.UserUpdateDTO;
 import com.devsuperior.ControleDeVendas.entities.PasswordResetToken;
@@ -63,15 +63,15 @@ public class SellerService {
     private BCryptPasswordEncoder passwordEncoder;
 	
 	@Transactional(readOnly = true)
-	public List<UserDtoToDownload> findAllSellers(){
+	public List<SellerToCsv> findAllSellers(){
 		User user = authService.authenticated();
 		if(user.hasRole("ROLE_MANAGER")) {
 			List<User> list = repository.findSellersByTeam(user.getId());
-			return list.stream().map(x -> new UserDtoToDownload(x)).collect(Collectors.toList());
+			return list.stream().map(x -> new SellerToCsv(x)).collect(Collectors.toList());
 		}
 		else {
 			List<User> list = repository.findSellers();
-			return list.stream().map(x -> new UserDtoToDownload(x)).collect(Collectors.toList());
+			return list.stream().map(x -> new SellerToCsv(x)).collect(Collectors.toList());
 		}
 	}
 	
@@ -131,8 +131,8 @@ public class SellerService {
 		User entity = new User();
 		entity.setName(dto.getName());
 		entity.setEmail(dto.getEmail());
-		entity.setPassword(passwordEncoder.encode(dto.getPassword()));
-		entity.setImgUrl(dto.getImgUrl());
+		entity.setPassword(passwordEncoder.encode(standardPassword));
+		entity.setImgUrl("https://user-images.githubusercontent.com/91570669/227945652-111c999f-a07c-4b1e-9eb8-24c83e90d2a4.png");
 		entity.getRoles().clear();
 		entity.getRoles().add(roleRepository.findByAuthority(RoleType.SELLER));
 		entity = repository.save(entity);
@@ -158,7 +158,9 @@ public class SellerService {
 		try {
 			User loggedUser = authService.authenticated();
 			User entity = repository.getOne(id);
-			entity.setPassword(passwordEncoder.encode(standardPassword));
+			entity.setName(dto.getName());
+			entity.setImgUrl(dto.getImgUrl());
+			entity.setPassword(passwordEncoder.encode(dto.getPassword()));
 			entity = repository.save(entity);
 			List<Team> teams = new ArrayList<>();
 			teams.addAll(loggedUser.getTeams());

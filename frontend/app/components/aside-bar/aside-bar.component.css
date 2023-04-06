@@ -54,25 +54,22 @@
     }
 
     .ds-logout {
-        margin-top: 20vh;
-    }
-
-    .ds-logout button {
-        background-color: #717171;
-        width: 180px;
-        border-radius: 10px;
-        color: #fff;
+        margin-top: 1vh;
     }
 
     .ds-logout button:hover {
-        background-color: #807f7f;
         color: #fff;
     }
 
     .ds-logout img {
-        width: 28px;
+        width: 32px;
         margin-right: 20px;
         color: #fff;
+        cursor: pointer;
+    }
+
+    .ds-logout a img {
+        width: 32px;
     }
 
     

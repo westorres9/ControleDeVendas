@@ -1,0 +1,86 @@
+.profile-container {
+    display: flex;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 200px;
+    margin: 0 auto;
+}
+
+.profile-user-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.profile-user-data p {
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: 0;
+    margin-right: 30px;
+    width: 300px;
+
+}
+
+.profile-user-data h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-right: 30px;
+    width: 300px;
+    text-align: start;
+}
+
+.profile-user-data button {
+    width: 80px;
+}
+
+.update-password input {
+    width: 300px;
+    margin-bottom: 10px;
+}
+
+.update-name-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.update-name-container label {
+    width: 150px;
+}
+
+.update-name-container input {
+    width: 350px;
+    margin-right: 60px;
+}
+
+.update-name-container button {
+    width: 80px;
+    margin-bottom: 0;
+}
+
+.update-email-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.update-email-container label {
+    width: 150px;
+}
+
+.update-email-container input {
+    width: 350px;
+    margin-right: 60px;
+}
+
+.update-email-container button {
+    width: 80px;
+    margin-bottom: 0;
+}

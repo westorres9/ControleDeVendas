@@ -1,0 +1,61 @@
+<div class="admin-container">
+    <aside-bar></aside-bar>
+    <section class="ds-container">
+        <h1>Configurações Gerais da conta</h1>
+        <hr>
+        <div class="profile-card profile-container">
+
+            <h2>DADOS PESSOAIS</h2>
+            <hr>
+            <div class="profile-user-data">
+                <p>Nome:</p>
+                <h3>{{$ctrl.user.name}}<h3><button class="btn btn-outline-primary" ng-click="$ctrl.editName()">Editar</button>
+            </div>
+            <form class="update-name-container" ng-show="$ctrl.showUpdateNameInput == true">
+                <label for="new-name">Novo Nome:</label>
+                <input id="new-name" class="base-input form-control" type="text" ng-model="$ctrl.newName" required>
+                <button class="btn btn-outline-success" ng-click="$ctrl.updateUserName()">Salvar</button>
+            </form>
+            <hr>
+            <div class="profile-user-data">
+                <p>Email:</p>
+                <h3>{{$ctrl.user.email}}<h3><button class="btn btn-outline-primary" ng-click="$ctrl.editEmail()">Editar</button>
+            </div>
+            <form class="update-email-container" ng-show="$ctrl.showUpdateEmailInput == true">
+                <label for="new-email">Novo Email:</label>
+                <input id="new-email" class="base-input form-control" type="text" ng-model="$ctrl.newEmail" required>
+                <button class="btn btn-outline-success" ng-click="$ctrl.updateEmail()">Salvar</button>
+            </form>
+            <hr>
+            <div>
+                <h2>ALTERAR SENHA</h2>
+                <form>
+                    <div class="update-password">
+                        <label for="new-password">Nova senha:</label>
+                        <input class="base-input form-control" type="password" ng-model="$ctrl.newpassword" required>
+                    </div>
+                    <div class="update-password">
+                        <label for="repeat-password">Confirme a nova senha:</label>
+                        <input class="base-input form-control" type="password" ng-model="$ctrl.confirmpassword" required>
+                    </div>
+                    <button class="btn btn-outline-success" ng-disabled="$ctrl.newpassword !== $ctrl.confirmpassword" ng-click="$ctrl.updatePassword()">Salvar</button>
+                </form>
+            </div>
+            <hr>
+            <div>
+                <h2>ALTERAR IMAGEM DE PERFIL</h2>
+                <button class="btn btn-outline-primary" ng-click="$ctrl.updateImage()">Alterar imagem</button>
+                <form ng-show="$ctrl.switchImage == true">
+                    <div>
+                        <div class="col-md-4 upload-box">
+                            <input type="file" name="file" id="file" ng-model="file" ngf-select="$ctrl.selectFile(file)"
+                                accept="image/*">
+                        </div>
+                        <button class="btn btn-outline-success" ng-click="$ctrl.uploadFile()">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>
+</section>
+</div>

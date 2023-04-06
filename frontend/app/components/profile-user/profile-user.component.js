@@ -13,7 +13,6 @@ function ProfileUserComponentController(AuthService) {
     $ctrl.$onInit = () => {
         $ctrl.GetLoggedUser();
     }
-
 }
 
 app.component('profileUser', {

@@ -17,6 +17,8 @@ public interface TeamRepository extends JpaRepository<Team, Long>{
 			+ "WHERE tb_team_manager.manager_id = :id")
 	List<Team> findByManagerId(Long id);
 	
+	Team findByName(String name);
+	
 	
 	
 }
