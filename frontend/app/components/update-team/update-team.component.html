@@ -9,17 +9,15 @@
     <div class="update-sale-form-container ds-container">
         <div class="return-area">
             <a ng-href="#/admin/teams" class="return-container">
-                <img src="/app/assets/img/arrow.svg" alt="">
-                <h4>Voltar</h4>
+              <img src="/app/assets/img/arrow.svg" alt="">
+              <h4>Voltar</h4>
             </a>
         </div>
-        <div>
-            <h2>ATUALIZAR EQUIPE</h2>
+        <div><h2>ATUALIZAR EQUIPE</h2>
             <hr>
             <div class="profile-user-data">
                 <p>Nome:</p>
-                <h3>{{$ctrl.team.name}}<h3><button class="btn btn-outline-primary"
-                            ng-click="$ctrl.editName()">Editar</button>
+                <h3>{{$ctrl.team.name}}<h3><button class="btn btn-outline-primary" ng-click="$ctrl.editName()">Editar</button>
             </div>
             <form class="update-name-container" ng-show="$ctrl.showUpdateNameInput == true">
                 <label for="new-name">Novo Nome:</label>

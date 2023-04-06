@@ -4,7 +4,6 @@ function UpdateProductComponentController(ProductService,CategoryService, $route
     $ctrl.categories = [];
     $ctrl.category = {};
     $ctrl.product.categories = [];
-    $ctrl.showUpdateNameInput = false;
 
     $ctrl.updateProduct = () => {
         $ctrl.product.categories.pop();    
@@ -49,10 +48,6 @@ function UpdateProductComponentController(ProductService,CategoryService, $route
     $ctrl.popError = function () {
         toaster.pop({ type: 'error', body: 'Erro ao atualizar Produto', toasterId: 2 });
     }
-
-    $ctrl.editName = () => {
-        $ctrl.showUpdateNameInput = !$ctrl.showUpdateNameInput;
-      }
 }
 
 app.component("updateProduct", {

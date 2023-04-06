@@ -61,8 +61,9 @@ public class UserService implements UserDetailsService {
 	
 	@Transactional
 	public UserDTO update(Long id, UserUpdateDTO dto) {
-		User entity = repository.getOne(id);
+		User entity = authService.authenticated();
 		try {
+			entity = repository.getOne(id);
 			entity.setName(dto.getName());
 			entity.setEmail(dto.getEmail());
 			entity.setImgUrl(dto.getImgUrl());
@@ -77,8 +78,9 @@ public class UserService implements UserDetailsService {
 	
 	@Transactional
 	public UserDTO updateEmail(Long id, UserUpdateDTO dto) {
-		User entity = repository.findByEmail(dto.getEmail());
+		User entity = authService.authenticated();
 		try {
+			entity = repository.findByEmail(dto.getEmail());
 			if(entity == null) {
 				entity = repository.getOne(id);
 				entity.setEmail(dto.getEmail());
