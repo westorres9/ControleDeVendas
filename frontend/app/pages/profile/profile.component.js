@@ -1,4 +1,4 @@
-function ProfileController(AuthService, SellerService, ManagerService, UserService, ReportService, UploadService) {
+function ProfileController(AuthService, SellerService, ManagerService, UserService, toaster, $scope) {
     var $ctrl = this;
     $ctrl.user = {};
     $ctrl.confirmpassword = "";
@@ -58,8 +58,13 @@ function ProfileController(AuthService, SellerService, ManagerService, UserServi
         $ctrl.user.name = $ctrl.newName;
         UserService.updateUserName($ctrl.user).then((response) => {
             console.log(response.data);
+            $scope.$broadcast('updateUserData', function() {
+                console.log('evento enviado')
+            }); 
+            $ctrl.popSuccess();
         }).catch((error) => {
             console.log(error);
+            $ctrl.popError();
         })
     }
 
@@ -67,8 +72,10 @@ function ProfileController(AuthService, SellerService, ManagerService, UserServi
         $ctrl.user.email = $ctrl.newEmail;
         UserService.updateUserEmail($ctrl.user).then((response) => {
             console.log(response.data);
+            $ctrl.popSuccess();
         }).catch((error) => {
             console.log(error);
+            $ctrl.popError();
         })
     }
 
@@ -76,8 +83,10 @@ function ProfileController(AuthService, SellerService, ManagerService, UserServi
         $ctrl.user.password = $ctrl.newpassword;
         UserService.updateUserPassword($ctrl.user).then((response) => {
             console.log(response.data);
+            $ctrl.popSuccess();
         }).catch((error) => {
             console.log(error);
+            $ctrl.popError();
         })
     }
 
@@ -94,10 +103,15 @@ function ProfileController(AuthService, SellerService, ManagerService, UserServi
             console.log(response.data, "upload realizado com sucesso");
             $ctrl.user.imgUrl = response.data.pathFile;
             console.log($ctrl.user.imgUrl);
+            $ctrl.popSuccess();
+            $scope.$broadcast('updateUserData', function() {
+                console.log('evento enviado')
+            }); 
         })
-            .catch((error) => {
-                console.log(error.status, "erro ao fazer upload");
-            })
+        .catch((error) => {
+             console.log(error.status, "erro ao fazer upload");
+             $ctrl.popError();
+        })
     }
 
     $ctrl.updateImage = () => {
@@ -111,6 +125,14 @@ function ProfileController(AuthService, SellerService, ManagerService, UserServi
     $ctrl.editEmail = () => {
         $ctrl.showUpdateEmailInput = !$ctrl.showUpdateEmailInput;
     }
+
+    $ctrl.popSuccess = function () {
+        toaster.pop({ type: 'note', body: 'Informação foi alterada com sucesso', toasterId: 1 });
+      }
+    
+      $ctrl.popError = function () {
+        toaster.pop({ type: 'error', body: 'Erro ao atualizar informação', toasterId: 2 });
+      }
 }
 
 app.component("profile", {

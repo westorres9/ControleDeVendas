@@ -15,12 +15,9 @@ function AsideBarComponentController(AuthService) {
         $ctrl.loggedUser = {name: username, authority: role}
     }
 
-
     $ctrl.$onInit = () => {
         $ctrl.GetLoggedUser();
     }
-
-
 }
 
 app.component('asideBar', {

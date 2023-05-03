@@ -1,4 +1,4 @@
-app.service('UserService', function($http) {
+app.service('UserService', function ($http) {
 
     var $ctrl = this;
 
@@ -11,11 +11,11 @@ app.service('UserService', function($http) {
                 url: `${BASE_URL}/users/${id}`
             }
         )
-        return request; 
+        return request;
     }
 
     $ctrl.updateUser = (user) => {
-        
+
         var request = $http(
             {
                 method: 'put',
@@ -23,16 +23,16 @@ app.service('UserService', function($http) {
                 data: user
             }
         )
-        return request; 
+        return request;
     }
 
     $ctrl.updateUserImage = (user, formdata) => {
-        
+
         var request = $http(
             {
                 method: 'post',
                 url: `${BASE_URL}/users/${user.id}/image`,
-                headers: { 'Content-Type': undefined},
+                headers: { 'Content-Type': undefined },
                 data: formdata,
                 transformRequest: angular.identity
             }
@@ -41,7 +41,7 @@ app.service('UserService', function($http) {
     }
 
     $ctrl.updateUserName = (user) => {
-        
+
         var request = $http(
             {
                 method: 'put',
@@ -49,11 +49,11 @@ app.service('UserService', function($http) {
                 data: user
             }
         )
-        return request; 
+        return request;
     }
 
     $ctrl.updateUserEmail = (user) => {
-        
+
         var request = $http(
             {
                 method: 'put',
@@ -61,11 +61,11 @@ app.service('UserService', function($http) {
                 data: user
             }
         )
-        return request; 
+        return request;
     }
 
     $ctrl.updateUserPassword = (user) => {
-        
+
         var request = $http(
             {
                 method: 'put',
@@ -73,7 +73,6 @@ app.service('UserService', function($http) {
                 data: user
             }
         )
-        return request; 
+        return request;
     }
-
 })

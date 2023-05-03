@@ -10,7 +10,7 @@ function DashboardController() {
   $ctrl.$onInit = () => {
 
     $ctrl.maxdate = moment(maxdate).format('YYYY-MM-DD');
-    var dateMinusOneMonth = moment(mindate).subtract(30, 'days');
+    var dateMinusOneMonth = moment(mindate).subtract(360, 'days');
     $ctrl.mindate = moment(dateMinusOneMonth).format('YYYY-MM-DD');
     console.log($ctrl.maxdate)
     console.log($ctrl.mindate)

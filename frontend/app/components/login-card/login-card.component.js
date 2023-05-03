@@ -1,5 +1,5 @@
 
-function LoginCardComponentController($http, $httpParamSerializerJQLike, AuthService) {
+function LoginCardComponentController($http, $httpParamSerializerJQLike, AuthService, $scope) {
     var $ctrl = this;
     $ctrl.user = { 'grant_type' : 'password' }
     $ctrl.Authenticate = Authenticate;
@@ -36,12 +36,12 @@ function LoginCardComponentController($http, $httpParamSerializerJQLike, AuthSer
           else {
             window.location.href = 'index.html#/admin/dashboard'
           }
-          
         }
       })
     }
-  
   }
+
+ 
 
 app.component('loginCard', {
     templateUrl:'components/login-card/login-card.component.html',
