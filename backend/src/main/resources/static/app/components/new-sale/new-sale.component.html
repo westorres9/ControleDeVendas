@@ -1,0 +1,110 @@
+<toaster-container toaster-options="{'toaster-id': 1, 
+            'animation-class': 'toast-top-right'}">
+</toaster-container>
+<toaster-container toaster-options="{'toaster-id': 2, 
+            'animation-class': 'toast-top-right'}">
+</toaster-container>
+<div class="admin-container">
+    <aside-bar></aside-bar>
+    <div class="update-sale-form-container ds-container">
+        <div class="return-area">
+            <a ng-href="#/admin/customers" class="return-container">
+              <img src="/app/assets/img/arrow.svg" alt="">
+              <h4>Voltar</h4>
+            </a>
+            <h2>Cadastrar Nova Venda</h2>
+            <h2></h2>
+          </div>
+        <div class="ds-form-sale">
+            <div class="product-list">
+                <label for="product">Selecione um Produto</label>
+                <select class="form-select" aria-label="Selecione o Produto" name="product" ng-model="$ctrl.product"
+                    value="product" ng-options="product.name for product in $ctrl.products" required></select>
+                <div class="sale-item-container">
+                    <div class="sale-item-image">
+                        <img src="{{$ctrl.product.imgUrl}}" alt="">
+                    </div>
+                    <div class="sale-item-content">
+                        <h4>{{$ctrl.product.name}}</h4>
+                        <h4 class="product-price text-primary">{{$ctrl.product.price | currency: 'R$'}}</h4>
+                        <p>{{$ctrl.product.description}}</p>
+                        <div>
+                            <button class="btn btn-secondary btn-category"
+                                ng-repeat="category in $ctrl.product.categories">{{category.name}}</button>
+                        </div>
+                        <div>
+                            <div class="cart-buttons">
+                                <button class="btn btn-danger" ng-click="$ctrl.decreaseProductQuantity()">-</button>
+                                <input type="number" class="item-quantity" value="$ctrl.quantity"
+                                    ng-model="$ctrl.quantity" min=1>
+                                <button class="btn btn-success" ng-click="$ctrl.increaseProductQuantity()">+</button>
+                                <button class="btn btn-primary btn-finish"
+                                    ng-click="$ctrl.addToCart($ctrl.product)">&#128722;</button>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sale-order">
+                <form>
+                    <div class="select-client">
+                        <label for="customer">Selecione o Cliente:</label>
+                        <div class="sale-select">
+                            <select class="form-select" aria-label="Selecione o cliente" name="customer"
+                                ng-model="$ctrl.customer" value="$ctrl.customer"
+                                ng-options="customer.name for customer in $ctrl.customers" required></select>
+                        </div>
+                        <div class="sale-button">
+                            <a class="btn btn-primary" ng-href="index.html#/admin/customers/new">Cadastrar cliente</a>
+                        </div>
+                    </div>
+                    <label for="Order">Pedidos</label>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Id produto</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Preço</th>
+                                <th scope="col">Quantidade</th>
+                                <th scope="col">subTotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="saleItem in $ctrl.sale.items">
+                                <th scope="row"><img src="{{saleItem.imgUrl}}" alt=""></th>
+                                <td>
+                                    <p>{{saleItem.productId}}</p>
+                                </td>
+                                <td>
+                                    <p>{{saleItem.name}}</p>
+                                </td>
+                                <td>
+                                    <p>{{saleItem.price | currency: 'R$'}}</p>
+                                </td>
+                                <td>
+                                    <input type="number" class="item-quantity" value="saleItem.quantity"
+                                        ng-model="saleItem.quantity" min=0>
+                                </td>
+                                <td>
+                                    <p>{{saleItem.quantity * saleItem.price | currency: 'R$'}}</p>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger btn-remove" ng-click="$ctrl.sale.items.pop()"><img
+                                            src="/app/assets/img/delete.svg" alt=""></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                    </div>
+                    <button class="btn btn-success" ng-click="$ctrl.insertSale($ctrl.sale)">Salvar</button>
+                    <button class="btn btn-danger" ng-click="$ctrl.returnToPageSales()">Cancelar</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>

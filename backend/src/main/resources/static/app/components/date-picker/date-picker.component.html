@@ -1,0 +1,12 @@
+<md-content layout-padding="" ng-cloak="" class="datepickerdemoBasicUsage">
+    <div layout-gt-xs="row">
+      <div flex-gt-xs="col">
+        <h4>Data inicial</h4>
+        <md-datepicker ng-model="$ctrl.mindate" ng-change="$ctrl.setMinDate($ctrl.mindate)" options="{timezone: 'UTC'}" md-placeholder="Data inicial"></md-datepicker>
+      </div>
+      <div flex-gt-xs="col">
+        <h4>Data final</h4>
+        <md-datepicker ng-model="$ctrl.maxdate" ng-change="$ctrl.setMaxDate($ctrl.maxdate)" options="{timezone: 'UTC'}" md-placeholder="Data final"></md-datepicker>
+      </div>
+    </div>
+  </md-content>

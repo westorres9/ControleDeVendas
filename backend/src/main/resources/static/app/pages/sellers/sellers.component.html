@@ -1,0 +1,57 @@
+<toaster-container toaster-options="{'toaster-id': 1, 
+            'animation-class': 'toast-top-right'}">
+</toaster-container>
+<toaster-container toaster-options="{'toaster-id': 2, 
+            'animation-class': 'toast-top-right'}">
+</toaster-container>
+<div class="admin-container">
+  <aside-bar></aside-bar>
+  <section class="ds-container">
+    <div class="return-area">
+      <a ng-href="#/admin" class="return-container">
+        <img src="/app/assets/img/arrow.svg" alt="">
+        <h4>Voltar</h4>
+      </a>
+      <h1>Vendedores</h1>
+      <h2></h2>
+    </div>
+    <a ng-href="#/admin/sellers/new">
+      <button class="btn btn-primary btn-add-team">Adicionar novo Vendedor</button>
+    </a>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Id</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Email</th>
+          <th scope="col">Equipe</th>
+          <th scope="col">#</th>
+          <th scope="col">#</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="seller in $ctrl.sellers">
+          <th scope="row"><img src="{{seller.imgUrl}}" alt=""></th>
+          <td>{{seller.id}}</td>
+          <td>{{seller.name}}</td>
+          <td>{{seller.email}}</td>
+          <td>{{seller.team_id}}</td>
+          <td><a ng-href="#/admin/sellers/{{seller.id}}"><img src="/app/assets/img/edit.svg" alt=""></a></td>
+          <td><img src="/app/assets/img/delete.svg" alt="" ng-click="$ctrl.selectToDelete(seller)"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="dialog-background" ng-hide="$ctrl.warningVisible !== true">
+      <div class="dialog-box">
+        <div class="ds-form-card">
+          <h2>Tem certeza?</h2>
+          <div class="form-buttons">
+            <button class="btn btn-outline-primary" ng-click="$ctrl.closeWarning()">Não</button>
+            <button class="btn btn-outline-danger" ng-click="$ctrl.deleteSeller($ctrl.seller)">Sim</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

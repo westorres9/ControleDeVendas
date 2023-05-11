@@ -1,0 +1,42 @@
+<toaster-container toaster-options="{'toaster-id': 1, 
+            'animation-class': 'toast-top-right', 'time-out': 5000}">
+</toaster-container>
+<toaster-container toaster-options="{'toaster-id': 2, 
+            'animation-class': 'toast-top-right', 'time-out': 5000}">
+</toaster-container>
+<div class="admin-container">
+    <aside-bar></aside-bar>
+    <div class="update-sale-form-container ds-container">
+        <div class="return-area">
+            <a ng-href="#/admin/customers" class="return-container">
+              <img src="/app/assets/img/arrow.svg" alt="">
+              <h4>Voltar</h4>
+            </a>
+            <h2>Cadastrar Novo Cliente</h2>
+            <h2></h2>
+          </div>
+        
+        <div class="ds-form-card">
+            <form>
+                <div class="form-input">
+                    <input type="text" class="form-control base-input" placeholder="Nome" name="name"
+                        id="name" value="$ctrl.customer.name" ng-model="$ctrl.customer.name" required />
+                </div>
+                <div class="form-input">
+                    <input type="text" class="form-control base-input" placeholder="Email" name="email" id="email"
+                        value="$ctrl.customer.email" ng-model="$ctrl.customer.email" required />
+                </div>
+                <div class="form-input">
+                    <input type="number" class="form-control base-input" placeholder="Renda mensal" name="monthlyIncome"
+                        id="monthlyIncome" value="$ctrl.customer.monthlyIncome" ng-model="$ctrl.customer.monthlyIncome" min=0
+                        required />
+                </div>
+                <div class="form-input">
+                    <input type="date" id="birthDate" name="birthDate" value="$ctrl.customer.birthDate" ng-model="$ctrl.customer.birthDate" min="1910-01-01" max="LocalDate.now()" required>
+                </div>
+                <button class="btn btn-success btn-update" ng-click="$ctrl.insertCustomer($ctrl.customer)" type="submit">Salvar</button>
+                <button class="btn btn-danger btn-cancel" ng-click="$ctrl.returnToPageCustomers()">Cancelar</button>
+            </form>
+        </div>
+    </div>
+</div>

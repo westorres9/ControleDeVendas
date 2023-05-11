@@ -1,0 +1,40 @@
+<toaster-container toaster-options="{'toaster-id': 1, 
+            'animation-class': 'toast-top-right', 'time-out': 5000}">
+</toaster-container>
+<toaster-container toaster-options="{'toaster-id': 2, 
+            'animation-class': 'toast-top-right', 'time-out': 5000}">
+</toaster-container>
+<div class="admin-container">
+    <aside-bar></aside-bar>
+    <div class="update-sale-form-container ds-container">
+      <h2>Atualizar Vendedor</h2>
+      <div class="ds-form-card">
+          <form>
+              <div class="form-input">
+                  <input 
+                  type="text"
+                  class="form-control base-input" 
+                  placeholder="Nome"  
+                  name="name" 
+                  id="name"
+                  value="name"
+                  ng-model="$ctrl.seller.name" 
+                  />
+              </div>
+              <div class="form-input">
+                <input 
+                type="text"
+                class="form-control base-input" 
+                placeholder="Email"  
+                name="email" 
+                id="email"
+                value="email"
+                ng-model="$ctrl.seller.email" />
+              </div>
+              
+              <button class="btn btn-primary btn-insert" ng-click="$ctrl.updateSeller($ctrl.seller)" type="submit">Atualizar</button>
+              <button class="btn btn-danger btn-cancel" ng-click="$ctrl.returnToPageSellers()">Cancelar</button>
+          </form>
+      </div>
+  </div>
+  </div>

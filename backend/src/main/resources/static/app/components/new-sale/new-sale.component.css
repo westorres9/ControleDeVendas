@@ -1,0 +1,154 @@
+.ds-form-sale {
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.product-list {
+    width: 600px;
+    margin-right: 10px;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.sale-item-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.sale-item-content p {
+    font-size: 12px;
+    color: #939993;
+}
+
+.btn-category {
+    margin-right: 10px;
+}
+
+.sale-item-content .product-price {
+    font-weight: bold;
+}
+
+
+.sale-item-image {
+    width: 300px;
+}
+
+.sale-item-image img {
+    width: 100%;
+}
+
+.sale-item-content {
+    width: 300px;
+}
+
+.sale-order {
+    flex: 1;
+    background-color: #fff;
+}
+.form-input {
+    margin-bottom: 15px;
+}
+
+.select-client {
+    display: flex;
+}
+
+.sale-select {
+    flex: 1;
+}
+
+.btn-cart {
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.btn-increase {
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+.btn-decrease {
+    border-radius: 50%;
+}
+
+.sale-button {
+    margin-left: 20px;
+}
+
+.item-quantity {
+    width: 50px;
+}
+
+.sale-order {
+    width: 700px;
+}
+
+.cart-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+td p {
+    font-size: 14px;
+}
+
+.cart-description {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.cart-description h4 {
+    margin-bottom: 0;
+    margin-right: 20px;
+    font-size: 20px;
+}
+
+.cart-description h2 {
+    margin-bottom: 0;
+    font-size: 22px;
+    margin-right: 20px;
+}
+
+.cart-price {
+    font-weight: bold;
+    margin: 0;
+}
+
+.cart-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+
+.cart-buttons .btn {
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 18px;
+    height: 40px;
+}
+
+.cart-buttons div input {
+    font-size: 22px;
+}
+
+@media (min-width:992px) {
+    .ds-form-card {
+        max-width: 600px;
+    }
+}

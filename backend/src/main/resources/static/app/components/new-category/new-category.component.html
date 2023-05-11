@@ -1,0 +1,39 @@
+<toaster-container toaster-options="{'toaster-id': 1, 
+            'animation-class': 'toast-top-right', 'time-out': 5000}">
+</toaster-container>
+<toaster-container toaster-options="{'toaster-id': 2, 
+            'animation-class': 'toast-top-right', 'time-out': 5000}">
+</toaster-container>
+<div class="admin-container">
+    <aside-bar></aside-bar>
+    <div class="update-sale-form-container ds-container">
+        <div class="return-area">
+            <a ng-href="#/admin/categories" class="return-container">
+              <img src="/app/assets/img/arrow.svg" alt="">
+              <h4>Voltar</h4>
+            </a>
+            <h1>Cadastrar Nova Categoria</h1>
+            <h2></h2>
+          </div>
+        <div class="ds-form-card">
+            <form>
+                <div class="form-input">
+                    <input 
+                    type="text"
+                    class="form-control base-input" 
+                    placeholder="Nome da Categoria"  
+                    name="name" 
+                    id="name"
+                    value="name"
+                    ng-model="$ctrl.category.name" 
+                    required
+                    />
+                </div>
+                <div class="form-input">
+
+                <button class="btn btn-success btn-insert" ng-click="$ctrl.insertCategory($ctrl.category)" type="submit">Salvar</button>
+                <button class="btn btn-danger btn-cancel" ng-click="$ctrl.returnToPageCategories()">Cancelar</button>
+            </form>
+        </div>
+    </div>
+</div>

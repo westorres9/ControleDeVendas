@@ -1,0 +1,26 @@
+<div class="admin-container">
+    <aside-bar></aside-bar>
+    <section class="ds-container">
+      <h1>Dashboard</h1>
+      <div class="date-picker-container">
+          <date-picker mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></date-picker>
+        
+        <div>
+          <average-monthly-income></average-monthly-income>
+        </div>
+        <div>
+          <average-age></average-age>
+        </div>
+      </div>
+      <div class="charts-container">
+        <div><chart-most-sold-products mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></chart-most-sold-products></div>
+        <div><chart-most-purchases-customers mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></chart-most-purchases-customers></div>
+      </div>
+      
+      <div class="charts-container">
+        <chart-sales-group-by-seller mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></chart-sales-group-by-seller>
+        <chart-sales-group-by-team mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></chart-sales-group-by-team>
+      </div>
+        <chart-sales-by-date  mindate="$ctrl.mindate" maxdate="$ctrl.maxdate"></chart-sales-by-date>
+    </section>
+  </div>

@@ -1,0 +1,25 @@
+<div class="ds-login-card-container">
+    <div class="ds-login-card-form">
+        <h1>Login</h1>
+        <form ng-submit="$ctrl.Authenticate()" ng-required="$ctrl.user.username && $ctrl.user.password" required>
+            <div class="input-container">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control base-input" name="email" placeholder="Informe o seu email" ng-model="$ctrl.user.username" required>
+                <div class="valid-feedback">
+                    Looks good
+                </div>
+            </div>
+            <div class="input-container">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control base-input" name="password" placeholder="Informe a sua senha" ng-model="$ctrl.user.password" required>
+                <div class="valid-feedback">
+                    Looks good
+                </div>
+            </div>
+                <button class="btn btn-primary text-white ds-btn-primary login-btn" type="submit">Entrar</button>
+            <div>
+                <a ng-href="index.html#/recover">Primeiro Acesso? <span class="recover text-primary">Redefinir Senha</span></a>
+            </div>
+        </form>
+    </div>
+</div>

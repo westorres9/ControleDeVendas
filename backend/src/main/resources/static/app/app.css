@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: 'Fira Sans';
+    font-weight: bold;
+}
+
+a ,a:hover {
+    text-decoration: none;
+    color: unset;
+    cursor: pointer;
+}
+
+.ds-container {
+    margin: 0 auto;
+    padding: 10px;
+    width: 100%;
+    max-width: 1600px;
+    border: 1px solid #e9e9e9;
+}
+
+.ds-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+
+}
+
+.ds-btn-primary {
+    border-radius: 8px;
+}
+
+.sales-by-seller-chart {
+    margin-top: 20px;
+}
+
+.dialog-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dialog-box {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 8px;
+    top: 20vw;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    width: 500px;
+}
+
+.btn-insert {
+    border-radius: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.btn-cancel {
+    border-radius: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.btn-update {
+    border-radius: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+@media (min-width:768px) {
+    .ds-container {
+        padding: 20px;    
+    }
+}
+
+
