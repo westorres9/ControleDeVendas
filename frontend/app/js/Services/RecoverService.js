@@ -2,7 +2,7 @@ app.service('RecoverService', function($http) {
 
     var $ctrl = this;
 
-    const BASE_URL = "http://localhost:8080"
+    const BASE_URL = 'http://localhost:8080'
 
     $ctrl.getUserEmail = (email) => {
 

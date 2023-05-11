@@ -153,7 +153,7 @@ public class UploadService {
 	public String uploadImage(MultipartFile file) {
 		try {
 			System.out.println("DEBUG " + file.getOriginalFilename());
-			String caminho = "C:\\Users\\weste\\Documents\\images\\";
+			String caminho = "C:\\Users\\44944_wester\\Documents\\images\\";
 			Path path= Paths.get(caminho + File.separator + file.getOriginalFilename());
 			Files.copy(file.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
 			System.out.println("DEBUG -- Arquivo copiado");

@@ -1,7 +1,7 @@
 app.service('ProductService', function($http) {
 
     var $ctrl = this;
-
+    
     const BASE_URL = 'http://localhost:8080'
 
     $ctrl.getProducts = () => {

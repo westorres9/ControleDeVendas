@@ -60,13 +60,5 @@ public class AuthService {
 		if(!user.hasRole("ROLE_ADMIN") || !user.hasRole("ROLE_MANAGER")) {
 			throw new ForbiddenException("Forbidden Exception");
 		}
-	}
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 }

@@ -27,7 +27,7 @@ INSERT INTO tb_user(name,email, password, team_id, img_url ) VALUES ('mature','m
 INSERT INTO tb_customer(name, email, birth_date, monthly_income, created_at ) VALUES ('Marta Silva','marta@gmail.com', '1987-12-13', 2500.0, now());
 INSERT INTO tb_customer(name, email, birth_date, monthly_income, created_at ) VALUES ('Roberto Carlos','rcarlos@gmail.com', '1988-04-11', 2000.0, now());
 INSERT INTO tb_customer(name, email, birth_date, monthly_income, created_at ) VALUES ('Jose Carlos', 'jcarlos@gmail.com', '1994-06-12', 4000.0, now());
-INSERT INTO tb_customer(name, email, birth_date, monthly_income, created_at ) VALUES ('Luis Inacio', 'lula@gmail.com', '1957-12-13', 800000.0, now());
+INSERT INTO tb_customer(name, email, birth_date, monthly_income, created_at ) VALUES ('Luis Inacio', 'lula@gmail.com', '1957-12-13', 8000.0, now());
 
 INSERT INTO tb_role(authority) VALUES ('ROLE_SELLER');
 INSERT INTO tb_role(authority) VALUES ('ROLE_MANAGER');
