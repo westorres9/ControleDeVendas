@@ -2,13 +2,11 @@ app.service('UserService', function ($http) {
 
     var $ctrl = this;
 
-    const BASE_URL = 'http://localhost:8080'
-
     $ctrl.getUserById = (id) => {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/users/${id}`
+                url: `/users/${id}`
             }
         )
         return request;
@@ -19,7 +17,7 @@ app.service('UserService', function ($http) {
         var request = $http(
             {
                 method: 'put',
-                url: `${BASE_URL}/users/${user.id}`,
+                url: `/users/${user.id}`,
                 data: user
             }
         )
@@ -31,7 +29,7 @@ app.service('UserService', function ($http) {
         var request = $http(
             {
                 method: 'post',
-                url: `${BASE_URL}/users/${user.id}/image`,
+                url: `/users/${user.id}/image`,
                 headers: { 'Content-Type': undefined },
                 data: formdata,
                 transformRequest: angular.identity
@@ -45,7 +43,7 @@ app.service('UserService', function ($http) {
         var request = $http(
             {
                 method: 'put',
-                url: `${BASE_URL}/users/${user.id}/username`,
+                url: `/users/${user.id}/username`,
                 data: user
             }
         )
@@ -57,7 +55,7 @@ app.service('UserService', function ($http) {
         var request = $http(
             {
                 method: 'put',
-                url: `${BASE_URL}/users/${user.id}/email`,
+                url: `/users/${user.id}/email`,
                 data: user
             }
         )
@@ -69,7 +67,7 @@ app.service('UserService', function ($http) {
         var request = $http(
             {
                 method: 'put',
-                url: `${BASE_URL}/users/${user.id}/password`,
+                url: `/users/${user.id}/password`,
                 data: user
             }
         )

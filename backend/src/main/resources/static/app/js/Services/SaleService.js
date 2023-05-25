@@ -2,13 +2,12 @@ app.service('SaleService', function ($http) {
 
     var $ctrl = this;
 
-    const BASE_URL = 'http://localhost:8080'
 
     $ctrl.getSales = (page) => {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sales`,
+                url: `/sales`,
                 params: {
                     'page': page
                 }
@@ -22,7 +21,7 @@ app.service('SaleService', function ($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sales`,
+                url: `/sales`,
                 params: {
                     'maxDate': maxdate,
                     'minDate': mindate,
@@ -38,7 +37,7 @@ app.service('SaleService', function ($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sales/${id}`
+                url: `/sales/${id}`
             }
         )
         return request;
@@ -49,7 +48,7 @@ app.service('SaleService', function ($http) {
         var request = $http(
             {
                 method: 'post',
-                url: `${BASE_URL}/sales`,
+                url: `/sales`,
                 data: sale
             }
         )
@@ -61,7 +60,7 @@ app.service('SaleService', function ($http) {
         var request = $http(
             {
                 method: 'put',
-                url: `${BASE_URL}/sales/${sale.id}/finish`,
+                url: `/sales/${sale.id}/finish`,
                 data: sale
             }
         )
@@ -73,7 +72,7 @@ app.service('SaleService', function ($http) {
         var request = $http(
             {
                 method: 'put',
-                url: `${BASE_URL}/sales/${sale.id}/canceled`,
+                url: `/sales/${sale.id}/canceled`,
                 data: sale
             }
         )
@@ -85,7 +84,7 @@ app.service('SaleService', function ($http) {
         var request = $http(
             {
                 method: 'delete',
-                url: `${BASE_URL}/sales/${sale.id}`
+                url: `/sales/${sale.id}`
             }
         )
         return request;
@@ -96,7 +95,7 @@ app.service('SaleService', function ($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sales/sum-by-team`,
+                url: `/sales/sum-by-team`,
                 params: {
                     'minDate': mindate,
                     'maxDate': maxdate
@@ -111,7 +110,7 @@ app.service('SaleService', function ($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sales/sum-by-seller`,
+                url: `/sales/sum-by-seller`,
                 params: {
                     'minDate': mindate,
                     'maxDate': maxdate
@@ -125,7 +124,7 @@ app.service('SaleService', function ($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sales/sales-by-date`,
+                url: `/sales/sales-by-date`,
                 params: {
                     'minDate': mindate,
                     'maxDate': maxdate
@@ -148,7 +147,7 @@ app.service('SaleService', function ($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sales/sum-by-seller`
+                url: `/sales/sum-by-seller`
             }
         )
         return request;
@@ -161,7 +160,7 @@ app.service('SaleService', function ($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sales/sum-by-team`,
+                url: `/sales/sum-by-team`,
                 params: {
                     e
                 }
@@ -175,7 +174,7 @@ app.service('SaleService', function ($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sales/sum-by-team/${e}`,
+                url: `/sales/sum-by-team/${e}`,
             }
         )
         return request;
@@ -186,7 +185,7 @@ app.service('SaleService', function ($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sales/success-by-seller`
+                url: `/sales/success-by-seller`
             }
         )
         return request;
@@ -197,7 +196,7 @@ app.service('SaleService', function ($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sales/sale-sum-total`,
+                url: `/sales/sale-sum-total`,
                 params: {
                     'maxDate': maxdate,
                     'minDate': mindate,
@@ -212,7 +211,7 @@ app.service('SaleService', function ($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sales/sum-by-month`,
+                url: `/sales/sum-by-month`,
                 params: {
                     'maxDate': maxdate,
                     'minDate': mindate,
@@ -227,7 +226,7 @@ app.service('SaleService', function ($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sales/sum-by-month`,
+                url: `/sales/sum-by-month`,
                 params: {
                     'maxDate': maxdate,
                     'minDate': mindate,

@@ -2,13 +2,11 @@ app.service('ManagerService', function($http) {
 
     var $ctrl = this;
 
-    const BASE_URL = 'http://localhost:8080'
-
     $ctrl.getManagers = () => {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/managers`
+                url: `/managers`
             }
         )
         return request; 
@@ -18,7 +16,7 @@ app.service('ManagerService', function($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/managers/${id}`
+                url: `/managers/${id}`
             }
         )
         return request; 
@@ -29,7 +27,7 @@ app.service('ManagerService', function($http) {
         var request = $http(
             {
                 method: 'post',
-                url: `${BASE_URL}/managers`,
+                url: `/managers`,
                 data: manager
             }
         )
@@ -41,7 +39,7 @@ app.service('ManagerService', function($http) {
         var request = $http(
             {
                 method: 'put',
-                url: `${BASE_URL}/managers/${manager.id}`,
+                url: `/managers/${manager.id}`,
                 data: manager
             }
         )
@@ -53,7 +51,7 @@ app.service('ManagerService', function($http) {
         var request = $http(
             {
                 method: 'delete',
-                url: `${BASE_URL}/managers/${manager.id}`,
+                url: `/managers/${manager.id}`,
             }
         )
         return request; 

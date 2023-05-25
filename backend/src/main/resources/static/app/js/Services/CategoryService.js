@@ -2,13 +2,11 @@ app.service('CategoryService', function($http) {
 
     var $ctrl = this;
 
-    const BASE_URL = 'http://localhost:8080'
-
     $ctrl.getCategories = () => {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/categories`
+                url: `/categories`
             }
         )
         return request; 
@@ -18,7 +16,7 @@ app.service('CategoryService', function($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/categories/${id}`
+                url: `/categories/${id}`
             }
         )
         return request; 
@@ -29,7 +27,7 @@ app.service('CategoryService', function($http) {
         var request = $http(
             {
                 method: 'post',
-                url: `${BASE_URL}/categories`,
+                url: `/categories`,
                 data: category
             }
         )
@@ -41,7 +39,7 @@ app.service('CategoryService', function($http) {
         var request = $http(
             {
                 method: 'put',
-                url: `${BASE_URL}/categories/${category.id}`,
+                url: `/categories/${category.id}`,
                 data: category
             }
         )
@@ -53,7 +51,7 @@ app.service('CategoryService', function($http) {
         var request = $http(
             {
                 method: 'delete',
-                url: `${BASE_URL}/categories/${category.id}`
+                url: `/categories/${category.id}`
             }
         )
         return request; 

@@ -2,13 +2,11 @@ app.service('TeamService', function($http) {
 
     var $ctrl = this;
 
-    const BASE_URL = 'http://localhost:8080'
-
     $ctrl.getAllTeams = () => {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/teams`
+                url: `/teams`
             }
         )
         return request; 
@@ -18,7 +16,7 @@ app.service('TeamService', function($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/teams/${id}`
+                url: `/teams/${id}`
             }
         )
         return request; 
@@ -29,7 +27,7 @@ app.service('TeamService', function($http) {
         var request = $http(
             {
                 method: 'post',
-                url: `${BASE_URL}/teams`,
+                url: `/teams`,
                 data: team
             }
         )
@@ -41,7 +39,7 @@ app.service('TeamService', function($http) {
         var request = $http(
             {
                 method: 'put',
-                url: `${BASE_URL}/teams/${team.id}`,
+                url: `/teams/${team.id}`,
                 data: team
             }
         )
@@ -53,7 +51,7 @@ app.service('TeamService', function($http) {
         var request = $http(
             {
                 method: 'delete',
-                url: `${BASE_URL}/teams/${team.id}`
+                url: `/teams/${team.id}`
             }
         )
         return request; 
@@ -64,7 +62,7 @@ app.service('TeamService', function($http) {
         var request = $http(
             {
                 method: 'put',
-                url: `${BASE_URL}/teams/${team.id}`,
+                url: `/teams/${team.id}`,
                 data: team
             }
         )
@@ -76,7 +74,7 @@ app.service('TeamService', function($http) {
         var request = $http(
             {
                 method: 'post',
-                url: `${BASE_URL}/teams/${team.id}/image`,
+                url: `/teams/${team.id}/image`,
                 headers: { 'Content-Type': undefined},
                 data: formdata,
                 transformRequest: angular.identity

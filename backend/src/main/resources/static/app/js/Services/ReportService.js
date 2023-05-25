@@ -2,14 +2,12 @@ app.service('ReportService', function($http) {
 
     var $ctrl = this;
 
-    const BASE_URL = 'http://localhost:8080'
-
     $ctrl.generateReportSales = () => {
         
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/report/download/sales`,
+                url: `/report/download/sales`,
             }
         )
         return request; 
@@ -20,7 +18,7 @@ app.service('ReportService', function($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/report/download/sellers`,
+                url: `/report/download/sellers`,
             }
         )
         return request; 
@@ -31,7 +29,7 @@ app.service('ReportService', function($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/report/download/managers`
+                url: `/report/download/managers`
             }
         )
         return request
@@ -41,7 +39,7 @@ app.service('ReportService', function($http) {
         var request = $http(
             {
                 method: 'post',
-                url: `${BASE_URL}/report/upload/sellers`,
+                url: `/report/upload/sellers`,
                 headers: { 'Content-Type': undefined},
                 data: formdata,
                 transformRequest: angular.identity
@@ -54,7 +52,7 @@ app.service('ReportService', function($http) {
         var request = $http(
             {
                 method: 'post',
-                url: `${BASE_URL}/report/upload/images`,
+                url: `/report/upload/images`,
                 headers: { 'Content-Type': undefined},
                 data: formdata,
                 transformRequest: angular.identity

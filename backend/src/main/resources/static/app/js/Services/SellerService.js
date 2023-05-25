@@ -2,13 +2,11 @@ app.service('SellerService', function($http) {
 
     var $ctrl = this;
 
-    const BASE_URL = 'http://localhost:8080'
-
     $ctrl.getSellers = () => {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sellers`
+                url: `/sellers`
             }
         )
         return request; 
@@ -18,7 +16,7 @@ app.service('SellerService', function($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/sellers/${id}`
+                url: `/sellers/${id}`
             }
         )
         return request; 
@@ -29,7 +27,7 @@ app.service('SellerService', function($http) {
         var request = $http(
             {
                 method: 'post',
-                url: `${BASE_URL}/sellers`,
+                url: `/sellers`,
                 data: seller
             }
         )
@@ -41,7 +39,7 @@ app.service('SellerService', function($http) {
         var request = $http(
             {
                 method: 'put',
-                url: `${BASE_URL}/sellers/${seller.id}`,
+                url: `/sellers/${seller.id}`,
                 data: seller
             }
         )
@@ -53,7 +51,7 @@ app.service('SellerService', function($http) {
         var request = $http(
             {
                 method: 'delete',
-                url: `${BASE_URL}/sellers/${seller.id}`,
+                url: `/sellers/${seller.id}`,
             }
         )
         return request; 

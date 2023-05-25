@@ -2,13 +2,11 @@ app.service('CustomerService', function($http) {
 
     var $ctrl = this;
 
-    const BASE_URL = 'http://localhost:8080'
-
     $ctrl.getCustomers = () => {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/customers`
+                url: `/customers`
             }
         )
         return request; 
@@ -18,7 +16,7 @@ app.service('CustomerService', function($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/customers/${id}`
+                url: `/customers/${id}`
             }
         )
         return request; 
@@ -29,7 +27,7 @@ app.service('CustomerService', function($http) {
         var request = $http(
             {
                 method: 'post',
-                url: `${BASE_URL}/customers`,
+                url: `/customers`,
                 data: customer
             }
         )
@@ -41,7 +39,7 @@ app.service('CustomerService', function($http) {
         var request = $http(
             {
                 method: 'put',
-                url: `${BASE_URL}/customers/${customer.id}`,
+                url: `/customers/${customer.id}`,
                 data: customer
             }
         )
@@ -53,7 +51,7 @@ app.service('CustomerService', function($http) {
         var request = $http(
             {
                 method: 'delete',
-                url: `${BASE_URL}/customers/${customer.id}`
+                url: `/customers/${customer.id}`
             }
         )
         return request; 
@@ -63,7 +61,7 @@ app.service('CustomerService', function($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/customers/most-purchases`,
+                url: `/customers/most-purchases`,
                 params: {
                     'minDate': mindate,
                     'maxDate': maxdate
@@ -77,7 +75,7 @@ app.service('CustomerService', function($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/customers/average-age`
+                url: `/customers/average-age`
             }
         )
         return request
@@ -87,7 +85,7 @@ app.service('CustomerService', function($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/customers/average-monthly-income`
+                url: `/customers/average-monthly-income`
             }
         )
         return request;

@@ -2,13 +2,11 @@ app.service('ProductService', function($http) {
 
     var $ctrl = this;
     
-    const BASE_URL = 'http://localhost:8080'
-
     $ctrl.getProducts = () => {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/products`
+                url: `/products`
             }
         )
         return request; 
@@ -18,7 +16,7 @@ app.service('ProductService', function($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/products/${id}`
+                url: `/products/${id}`
             }
         )
         return request; 
@@ -29,7 +27,7 @@ app.service('ProductService', function($http) {
         var request = $http(
             {
                 method: 'post',
-                url: `${BASE_URL}/products`,
+                url: `/products`,
                 data: product
             }
         )
@@ -41,7 +39,7 @@ app.service('ProductService', function($http) {
         var request = $http(
             {
                 method: 'put',
-                url: `${BASE_URL}/products/${product.id}`,
+                url: `/products/${product.id}`,
                 data: product
             }
         )
@@ -53,7 +51,7 @@ app.service('ProductService', function($http) {
         var request = $http(
             {
                 method: 'delete',
-                url: `${BASE_URL}/products/${product.id}`
+                url: `/products/${product.id}`
             }
         )
         return request; 
@@ -64,7 +62,7 @@ app.service('ProductService', function($http) {
         var request = $http(
             {
                 method: 'get',
-                url: `${BASE_URL}/products/most-sold`,
+                url: `/products/most-sold`,
                 params: {
                     'minDate': mindate,
                     'maxDate': maxdate
