@@ -8,9 +8,8 @@ function LoginCardComponentController($http, $httpParamSerializerJQLike, AuthSer
   
       const CLIENT_ID = 'dsvendas';
       const CLIENT_SECRET = 'dsvendas123';
-      const BASE_URL = 'http://localhost:8080';
   
-      $http.post('http://localhost:8080/oauth/token', $httpParamSerializerJQLike($ctrl.user), 
+      $http.post(`/oauth/token`, $httpParamSerializerJQLike($ctrl.user), 
       {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
